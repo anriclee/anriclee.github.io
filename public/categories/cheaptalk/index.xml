@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CHEAPTALK on AnricLee&#39;s House</title>
+    <link>http://example.org/categories/cheaptalk/</link>
+    <description>Recent content in CHEAPTALK on AnricLee&#39;s House</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 26 Jun 2019 16:16:49 +0800</lastBuildDate><atom:link href="http://example.org/categories/cheaptalk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hi</title>
+      <link>http://example.org/posts/hi/</link>
+      <pubDate>Wed, 26 Jun 2019 16:16:49 +0800</pubDate>
+      
+      <guid>http://example.org/posts/hi/</guid>
+      <description>Hi world!</description>
+    </item>
+    
+  </channel>
+</rss>

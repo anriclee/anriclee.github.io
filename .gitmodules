@@ -1,0 +1,3 @@
+[submodule "barn"]
+	path = barn
+	url = ./themes/barn

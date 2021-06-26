@@ -1,0 +1,8 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "AnricLee's House"
+theme = "barn"
+copyright = "&copy; <a href=\"https://github.com/anriclee\"> AnricLee </a>"
+
+# items num shown in every page
+paginate = 2

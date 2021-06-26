@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 node_modules/
 .cache/
 public
+=======
+.DS_Store
+node_modules
+>>>>>>> 3cd5a45 (pure content framework)

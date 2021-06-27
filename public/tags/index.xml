@@ -5,6 +5,7 @@
     <link>http://example.org/tags/</link>
     <description>Recent content in Tags on AnricLee&#39;s House</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/anriclee&#34;&gt; AnricLee &lt;/a&gt;</copyright><atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

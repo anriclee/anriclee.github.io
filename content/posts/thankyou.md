@@ -1,7 +1,7 @@
 ---
 title: "Thankyou"
 date: 2020-06-26T22:31:37+08:00
-draft: true
+draft: false
 categories:
 - BOOKS
 ---

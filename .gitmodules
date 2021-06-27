@@ -1,3 +1,3 @@
-[submodule "barn"]
-	path = barn
-	url = ./themes/barn
+[submodule "themes/barn"]
+	path = themes/barn
+	url = git@github.com:anriclee/barn.git

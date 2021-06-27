@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on AnricLee&#39;s House</title>
-    <link>http://example.org/tags/</link>
+    <link>https://anriclee.github.io/tags/</link>
     <description>Recent content in Tags on AnricLee&#39;s House</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/anriclee&#34;&gt; AnricLee &lt;/a&gt;</copyright><atom:link href="http://example.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/anriclee&#34;&gt; AnricLee &lt;/a&gt;</copyright><atom:link href="https://anriclee.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

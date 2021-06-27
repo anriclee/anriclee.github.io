@@ -6,6 +6,44 @@
     <description>Recent content on AnricLee&#39;s House</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/anriclee&#34;&gt; AnricLee &lt;/a&gt;</copyright><atom:link href="https://anriclee.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/anriclee&#34;&gt; AnricLee &lt;/a&gt;</copyright>
+    <lastBuildDate>Sat, 26 Jun 2021 16:00:21 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Examle Article</title>
+      <link>https://anriclee.github.io/posts/create-theme/</link>
+      <pubDate>Sat, 26 Jun 2021 16:00:21 +0800</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/create-theme/</guid>
+      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
+We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
+    </item>
+    
+    <item>
+      <title>Hello</title>
+      <link>https://anriclee.github.io/posts/hello/</link>
+      <pubDate>Sat, 26 Jun 2021 16:00:21 +0800</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/hello/</guid>
+      <description>Hello world!</description>
+    </item>
+    
+    <item>
+      <title>Thankyou</title>
+      <link>https://anriclee.github.io/posts/thankyou/</link>
+      <pubDate>Fri, 26 Jun 2020 22:31:37 +0800</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/thankyou/</guid>
+      <description>Thank you world !</description>
+    </item>
+    
+    <item>
+      <title>Hi</title>
+      <link>https://anriclee.github.io/posts/hi/</link>
+      <pubDate>Wed, 26 Jun 2019 16:16:49 +0800</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/hi/</guid>
+      <description>Hi world!</description>
+    </item>
+    
   </channel>
 </rss>

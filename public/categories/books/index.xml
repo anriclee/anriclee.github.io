@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>BOOKS on AnricLee&#39;s House</title>
-    <link>http://example.org/categories/books/</link>
+    <link>https://anriclee.github.io/categories/books/</link>
     <description>Recent content in BOOKS on AnricLee&#39;s House</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/anriclee&#34;&gt; AnricLee &lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 26 Jun 2020 22:31:37 +0800</lastBuildDate><atom:link href="http://example.org/categories/books/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Jun 2020 22:31:37 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/categories/books/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Thankyou</title>
-      <link>http://example.org/posts/thankyou/</link>
+      <link>https://anriclee.github.io/posts/thankyou/</link>
       <pubDate>Fri, 26 Jun 2020 22:31:37 +0800</pubDate>
       
-      <guid>http://example.org/posts/thankyou/</guid>
+      <guid>https://anriclee.github.io/posts/thankyou/</guid>
       <description>Thank you world !</description>
     </item>
     

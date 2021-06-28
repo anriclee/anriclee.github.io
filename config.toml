@@ -4,6 +4,9 @@ title = "AnricLee's House"
 theme = "barn"
 copyright = "&copy; <a href=\"https://github.com/anriclee\"> AnricLee </a>"
 
+[params.highlight]
+  style = "zenburn"
+
 # items num shown in every page
 paginate = 10
 

@@ -1,7 +1,6 @@
 +++
 author = "李雪寒"
 title = "基于 PostgreSQL 的群聊搜索实践"
-slug = "group-search-on-pg"
 date = "2022-01-13"
 description = "PostgreSQL 对全文搜索支持比较好，所以选择了 PostgreSQL 来实现群搜索需求。 在使用 PostgreSQL 做群搜索的过程中，也经历了由简单到复杂的迭代过程，中间也踩了不少坑。 下面的几个例子说明了方案的演进过程和我们的优化思路，希望能够对大家有所帮助。"
 tags = [

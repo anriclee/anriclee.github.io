@@ -23,7 +23,7 @@ categories = [
 
 提到模糊搜索，最简单的办法就是对搜索列进行 like 匹配： 在输入词的前后加上 `%` 即可,如下所示:
 
-```sql
+```
 SELECT * FROM groups WHERE name LIKE '%探探%';
 ```
 
@@ -31,7 +31,7 @@ SELECT * FROM groups WHERE name LIKE '%探探%';
 
 建一张简单的表进行测试，表结构如下：
 
-```sql
+```
 lixuehan=# \d groups;
                                    Table "public.groups"
  Column |         Type          | Collation | Nullable |              Default
@@ -45,7 +45,7 @@ Indexes:
 表中只有两列：主键 `id` 以及群名 `name`。
 
 
-```sql
+```
 create or replace function gen_hanzi(int) returns text as $$
 declare
     res text;
@@ -74,7 +74,7 @@ lixuehan=# select count(*) from groups;
 
 现在开始对上表根据 `name` 列进行 like 搜索。
 
-```sql
+```
 SELECT * FROM groups WHERE name LIKE '%探探%';
 ```
 
@@ -108,7 +108,7 @@ lixuehan=# explain analyze select * from groups where name like '%探探%';
 
 于是，我们尝试对 `name` 列构建 `btree` 索引。
 
-```sql
+```
 create index group_name_idx on groups using btree(name);
 ```
 
@@ -158,12 +158,12 @@ lixuehan=# explain analyze select * from groups where name like '%探探大群';
 
 不支持前模糊查询没有关系，再建一个反向索引即可：
 
-```sql
+```
 CREATE INDEX ON groups(reverse(name));
 ```
 执行搜索时，执行反向查询，如下：
 
-```sql
+```
 select * from groups where reverse(name) like reverse('%探探');
 ```
 
@@ -207,7 +207,7 @@ lixuehan=# \l+ lixuehan
 
 为此，再建一个 `Locale` 非 `C` 的数据库，重复上面的查询。
 
-```sql
+```
 create database lixuehan2 LC_COLLATE 'en_US.UTF-8' LC_CTYPE 'en_US.UTF-8' TEMPLATE template0;
 ```
 
@@ -664,13 +664,13 @@ PostgreSQL 官方文档推荐两种方法建立索引：
 
 1）直接对 `group_name_tokens` 建立函数索引，比如：
 
-```sql
+```
 CREATE INDEX group_idx ON groups USING GIN (to_tsvector(config_name, body));--to_tsvector 是PG内置的函数
 ```
 
 2）直接将该列设置为 `tsvector` 类型，直接对 `tsvector` 类型列建立索引。
 
-```sql
+```
 ALTER TABLE groups ADD column group_name_tokens tsvector;
 ```
 
@@ -692,7 +692,7 @@ ALTER TABLE groups ADD column group_name_tokens tsvector;
 
 最小编辑距离，需要使用到 PostgreSQL 的扩展：
 
-```sql
+```
 CREATE EXTENSION fuzzystrmatch;---依赖该扩展为搜索结果排序
 ```
 
@@ -715,7 +715,7 @@ levenshtein_less_equal(text source, text target, int max_d) returns int
 
    `GUMBO` 和 `GUMBOL`，后者相比前者，等价于插入了一个 `L` 字符。所以，影响最终结果的，只有 `ins_cost` 参数。
 
-    ```sql
+    ```
     --- 设置为 0，表示插入新字符带来的代价不影响
     lixuehan=# SELECT levenshtein('GUMBO', 'GUMBOL',0,1,1);
      levenshtein
@@ -735,7 +735,7 @@ levenshtein_less_equal(text source, text target, int max_d) returns int
 
    `GUMBO` 和 `GUMO`，后者相比前者，等价于删除了一个 `B` 字符。所以，影响最终比较结果的只有 `del_cost` 参数。
 
-    ```sql
+    ```
     --- 设置为 0，表示插入新字符带来的代价不影响
     lixuehan=# SELECT levenshtein('GUMBO', 'GUMO',1,0,1);
      levenshtein
@@ -755,7 +755,7 @@ levenshtein_less_equal(text source, text target, int max_d) returns int
 
    `GUMBO` 和 `GUMLO`，后者相比前者，等价于将 `B` 字符替换为 `L` 字符。所以，影响最终比较结果的只有 `sub_cost` 参数。
 
-    ```sql
+    ```
     --- 设置为 0，表示插入新字符带来的代价不影响
     lixuehan=# SELECT levenshtein('GUMBO', 'GUMLO',1,1,0);
      levenshtein
@@ -776,7 +776,7 @@ levenshtein_less_equal(text source, text target, int max_d) returns int
 
 `levenshtein_less_equal` 函数是一个加速版的 `levenshtein`。如果 `levenshtein` 距离大于 `max_id` ，则返回 `levenshtein` 距离值，反之，则返回 `max_id+1`。
 
-```sql
+```
 --- levenshtein 距离 ---
 lixuehan=# select levenshtein('extensive', 'exhaustive');
  levenshtein
@@ -818,7 +818,7 @@ levenshtein(text source, text target) returns int
 
 使用方式比较直观：
 
-```sql
+```
 SELECT id,levenshtein(name,?) AS distance FROM groups WHERE group_name_tokens @@ to_tsquery('探探') ORDER BY distance ASC
 ```
 

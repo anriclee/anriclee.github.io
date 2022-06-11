@@ -5,7 +5,7 @@ theme = "barn"
 copyright = "&copy; <a href=\"https://github.com/anriclee\"> AnricLee </a>"
 
 [params.highlight]
-  style = "zenburn"
+  style = "agate"
 
 # items num shown in every page
 paginate = 10

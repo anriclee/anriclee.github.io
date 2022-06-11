@@ -8,7 +8,7 @@ categories:
 
 # 什么是 Bot
 
-以下是官网的[链接](https://core.telegram.org/bots)
+Bot 的概念在官网的介绍稍微有点繁琐和复杂，详细可以了解[官网介绍](https://core.telegram.org/bots)，
 
 简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。
 
@@ -59,7 +59,7 @@ curl -X POST https://api.telegram.org/bot[token]/setWebhook -H "Content-type: ap
 使用这种方式，会比上一种稍微麻烦一点，需要你部署的服务能够支持 https（这也是为了安全起见）。
 
 
-## 响应指令
+### 响应指令
 
 收到 telegram 的指令后，如何发送消息到 telegram 频道呢？笔者对 golang 较为熟悉，所以采用了 golang 的方式进行响应。
 
@@ -80,7 +80,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 上面的代码使用到了一个[开源库](https://github.com/go-telegram-bot-api/telegram-bot-api)，他替我们封装好了api（当然也可以自己按照 telegram 的协议组装消息）。
 
 
-# 部署脚本
+## 部署脚本
 
 现在有了 bot，也有了响应 bot 的脚本逻辑，只剩部署脚本到服务器了。我们当然不能仅仅为了响应一条指令租一个个人服务器吧（土豪除外）。
 
@@ -91,7 +91,7 @@ https://vercel.com/
 
 部署好之后，可以先在本地执行下 curl 请求，测试没问题后，将该 url 设置为 telegram bot 的 callback 函数即可。
 
-# 使用
+## 使用
 
 学会一个东西的主要方法，就是疯狂的使用它。本人出入办公单位，都需要扫门禁二维码，不胜其烦，需要关注微信小程序，然后点击门禁二维码，全程既慢且麻烦。
 
@@ -102,7 +102,7 @@ https://vercel.com/
 渲染二维码使用到的[开源包](https://github.com/skip2/go-qrcode)
 
 
-# 请求安全性校验
+## 请求安全性校验
 
 为了安全起见，有人恶意调用你的脚本 url，可以将自己脚本服务的 api 的前缀设置为 token（token 没有人知道，所以也无法知道的 api）。vercel 平台支持通过 vercel.json 进行请求的重定向，可以通过正则表达式，将 12313afdsfadfsfsdfs[token 示例]/api 转发到 api。
 

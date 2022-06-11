@@ -2,17 +2,18 @@ baseURL = "https://anriclee.github.io/"
 languageCode = "en-us"
 title = "AnricLee's House"
 theme = "barn"
-copyright = "&copy; <a href=\"https://github.com/anriclee\"> AnricLee </a>"
+copyright = "Copyright &copy; <a href=\"https://github.com/anriclee\"> AnricLee's Blog </a>"
+# disqusShortname = 'yourDisqusShortname'
 
 [params.highlight]
-  style = "vs2015"
+  style = "agate"
+#   style = "vs2015"
+
+[params.share]
+  enabled = "true"
 
 # items num shown in every page
 paginate = 10
-
-[[ params.social ]]
-    url = "about"
-    fa_icon  = "fas fa-info"
 
 [[ params.social ]]
     url = "https://github.com/anriclee"
@@ -20,8 +21,12 @@ paginate = 10
 
 [[ params.social ]]
     url = "https://www.linkedin.com"
-    fa_icon  = "fab fa-weixin"
+    fa_icon  = "fab fa-telegram"
 
 [[ params.social ]]
     url = "https://twitter.com"
-    fa_icon  = "fab fa-weibo"
+    fa_icon  = "fab fa-twitter"
+
+[[ params.social ]]
+    url = "https://anriclee.github.io/index.xml"
+    fa_icon  = "fa fa-rss"

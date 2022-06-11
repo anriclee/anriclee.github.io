@@ -7327,6 +7327,9 @@ body {
       box-shadow: 0 0 0;
       padding: 1em 0; }
 
+.utterances {
+  max-width: 100%; }
+
 .content {
   font-weight: normal;
   color: #202020; }

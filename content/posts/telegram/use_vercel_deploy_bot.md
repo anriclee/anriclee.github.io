@@ -108,12 +108,12 @@ https://vercel.com/
 
 ```
 {
-	"routes": [
-		{
-			"src": "/random/(?<id>[^/]*)/api/hello/",
-			"dest": "/api/hello.go?id=$id"
-		}
-	]
+   "routes":[
+      {
+         "src":"/random/(?<id>[^/]*)/api/hello/",
+         "dest":"/api/hello.go?id=$id"
+      }
+   ]
 }
 ```
 

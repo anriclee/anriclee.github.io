@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>AnricLee&#39;s House</title>
-    <link>https://anriclee.github.io/</link>
-    <description>Recent content on AnricLee&#39;s House</description>
+    <title>PostgreSQL on AnricLee&#39;s House</title>
+    <link>https://anriclee.github.io/tags/postgresql/</link>
+    <description>Recent content in PostgreSQL on AnricLee&#39;s House</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/anriclee&#34;&gt; AnricLee &lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 13 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://anriclee.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 13 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://anriclee.github.io/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于 PostgreSQL 的群聊搜索实践</title>
       <link>https://anriclee.github.io/posts/pg/</link>
@@ -20,22 +20,6 @@ LIKE 模糊查询 提到模糊搜索，最简单的办法就是对搜索列进�
 SELECT * FROM groups WHERE name LIKE &amp;#39;%探探%&amp;#39;; 这种方案可行是可行了，但是实现过于简单粗暴。对此方案进行测试：
 建一张简单的表进行测试，表结构如下：
 lixuehan=# \d groups; Table &amp;#34;public.groups&amp;#34; Column | Type | Collation | Nullable | Default --------+-----------------------+-----------+----------+------------------------------------  id | bigint | | not null | nextval(&amp;#39;groups_id_seq&amp;#39;::regclass) name | character varying(50) | | | Indexes: &amp;#34;groups_pkey&amp;#34; PRIMARY KEY, btree (id) 表中只有两列：主键 id 以及群名 name。</description>
-    </item>
-    
-    <item>
-      <title>Hugo 中的命令行模式</title>
-      <link>https://anriclee.github.io/posts/hugo-%E4%B8%AD%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A8%A1%E5%BC%8F/</link>
-      <pubDate>Fri, 26 Jun 2020 22:31:37 +0800</pubDate>
-      
-      <guid>https://anriclee.github.io/posts/hugo-%E4%B8%AD%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A8%A1%E5%BC%8F/</guid>
-      <description>最近在用 hugo 构建了个人博客之后，便有兴趣想研究下其源码。但是源码的体量之大，逻辑之复杂出乎我的意料。不过好在源码的结构比较清晰，有许多地方值得借鉴。
-比如它的程序入口，非常简洁：
-func main() { resp := commands.Execute(os.Args[1:]) if resp.Err != nil { if resp.IsUserError() { resp.Cmd.Println(&amp;quot;&amp;quot;) resp.Cmd.Println(resp.Cmd.UsageString()) } os.Exit(-1) } } 它将所有根据命令行参数传入的指令统一封装到 commands 包中。后面有新命令需求时，只需要新建一个 cmd 文件即可。
-它是怎么做到的呢？
-简而言之，就是在程序入口处将所有的命令类汇总，然后再根据输入参数args，决定要执行哪个cmd，看似增加了代码的复杂度，但是对于后续命令的扩展显得非常方便。
-hugo 中使用了 builder 模式将所有的命令汇总，我这里简单起见，只初始化了一个数组，主要是体会其开闭原则的思想即可。
- Talk is cheap, show me the code
- 借鉴它的思路，我写了一个简化版，可以参看，代码链接.</description>
     </item>
     
   </channel>

@@ -6,6 +6,25 @@
     <description>Recent content in Tags on AnricLee&#39;s House</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/anriclee&#34;&gt; AnricLee &lt;/a&gt;</copyright><atom:link href="https://anriclee.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/anriclee&#34;&gt; AnricLee &lt;/a&gt;</copyright>
+    <lastBuildDate>Thu, 13 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://anriclee.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PostgreSQL</title>
+      <link>https://anriclee.github.io/tags/postgresql/</link>
+      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://anriclee.github.io/tags/postgresql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>模糊搜索</title>
+      <link>https://anriclee.github.io/tags/%E6%A8%A1%E7%B3%8A%E6%90%9C%E7%B4%A2/</link>
+      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://anriclee.github.io/tags/%E6%A8%A1%E7%B3%8A%E6%90%9C%E7%B4%A2/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

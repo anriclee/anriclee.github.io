@@ -7,44 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/anriclee&#34;&gt; AnricLee &lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 27 Mar 2022 10:29:12 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 13 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://anriclee.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Effective Go 之引言</title>
-      <link>https://anriclee.github.io/posts/effectivego-1/</link>
-      <pubDate>Sun, 27 Mar 2022 10:29:12 +0800</pubDate>
+      <title>基于 PostgreSQL 的群聊搜索实践</title>
+      <link>https://anriclee.github.io/posts/pg/</link>
+      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://anriclee.github.io/posts/effectivego-1/</guid>
-      <description>Golang 语言借鉴了很多其他语言的特性，但是其本身也有不同于其他语言的一些独特的特性。作者强调了，不能照搬写其他语言的模式到 Go 里面。
- In other words, to write Go well, it&amp;rsquo;s important to understand its properties and idioms.
- 如何写出地道的 Golang 语言，了解语言本身的特性和语言特性（idioms）很重要。</description>
-    </item>
-    
-    <item>
-      <title>Hugo</title>
-      <link>https://anriclee.github.io/posts/hugo/</link>
-      <pubDate>Tue, 29 Jun 2021 08:21:28 +0800</pubDate>
-      
-      <guid>https://anriclee.github.io/posts/hugo/</guid>
-      <description>Hugo</description>
-    </item>
-    
-    <item>
-      <title>Examle Article</title>
-      <link>https://anriclee.github.io/posts/create-theme/</link>
-      <pubDate>Sat, 26 Jun 2021 16:00:21 +0800</pubDate>
-      
-      <guid>https://anriclee.github.io/posts/create-theme/</guid>
-      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
-We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
-    </item>
-    
-    <item>
-      <title>Hello</title>
-      <link>https://anriclee.github.io/posts/hello/</link>
-      <pubDate>Sat, 26 Jun 2021 16:00:21 +0800</pubDate>
-      
-      <guid>https://anriclee.github.io/posts/hello/</guid>
-      <description>Hello world!</description>
+      <guid>https://anriclee.github.io/posts/pg/</guid>
+      <description>背景 2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。
+对于复杂场景的搜索，业界一般使用非常流行的 ElasticSearch。由于我们的群数据较少，截止到目前还没有达到千万级的量级，且搜索场景比较简单，而 PostgreSQL 对全文搜索又支持得比较好，所以选择了 PostgreSQL 来实现群搜索需求。 在使用 PostgreSQL 做群搜索的过程中，也经历了由简单到复杂的迭代过程，中间也踩了不少坑。 下面的几个例子说明了方案的演进过程和我们的优化思路，希望能够对大家有所帮助。
+LIKE 模糊查询 提到模糊搜索，最简单的办法就是对搜索列进行 like 匹配： 在输入词的前后加上 % 即可,如下所示:
+SELECT * FROM groups WHERE name LIKE &amp;#39;%探探%&amp;#39;; 这种方案可行是可行了，但是实现过于简单粗暴。对此方案进行测试：
+建一张简单的表进行测试，表结构如下：
+lixuehan=# \d groups; Table &amp;#34;public.groups&amp;#34; Column | Type | Collation | Nullable | Default --------+-----------------------+-----------+----------+------------------------------------  id | bigint | | not null | nextval(&amp;#39;groups_id_seq&amp;#39;::regclass) name | character varying(50) | | | Indexes: &amp;#34;groups_pkey&amp;#34; PRIMARY KEY, btree (id) 表中只有两列：主键 id 以及群名 name。</description>
     </item>
     
     <item>
@@ -61,15 +36,6 @@ func main() { resp := commands.Execute(os.Args[1:]) if resp.Err != nil { if resp
 hugo 中使用了 builder 模式将所有的命令汇总，我这里简单起见，只初始化了一个数组，主要是体会其开闭原则的思想即可。
  Talk is cheap, show me the code
  借鉴它的思路，我写了一个简化版，可以参看，代码链接.</description>
-    </item>
-    
-    <item>
-      <title>Hi</title>
-      <link>https://anriclee.github.io/posts/hi/</link>
-      <pubDate>Wed, 26 Jun 2019 16:16:49 +0800</pubDate>
-      
-      <guid>https://anriclee.github.io/posts/hi/</guid>
-      <description>Hi world!</description>
     </item>
     
   </channel>

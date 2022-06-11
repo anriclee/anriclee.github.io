@@ -12,6 +12,12 @@ copyright = "Copyright &copy; <a href=\"https://github.com/anriclee\"> AnricLee'
 [params.share]
   enabled = "true"
 
+[params.comment]
+  enabled = "true"
+  repo = "anriclee/diagramStorage"
+  theme = "github-dark-orange"
+#   theme = "github-dark"
+
 # items num shown in every page
 paginate = 10
 

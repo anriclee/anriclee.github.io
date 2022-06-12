@@ -1,7 +1,7 @@
 ---
 title: "Demo"
 date: 2022-06-11T14:38:42+08:00
-draft: true
+draft: false
 ---
 
 And in the naked light I saw ten thousand people, maybe more.
@@ -11,6 +11,18 @@ People writing songs that voices never shared, no one dared disturb the sound of
 — The sound of silence
 
 美利坚合众国，2015年，纽约。
+
+{{< youtube NVluiq7hLg8 >}}
+
+{{< bilibili 9953207>}}
+
+<div class="embed video-player">
+    <iframe class="youtube-player" type="text/html"
+        width="640" height="385"
+        src="https://www.youtube.com/embed/09jf3ow9jfw"
+        allowfullscreen frameborder="0"> 
+    </iframe>
+</div>
 
 当电话响起来的时候，阿瓦登正趴在电脑前面睡觉。电话铃声十分急促，尖锐，每一次振动都让他的耳膜难受好久。他揉了揉干涩的眼睛，十分不情愿地爬起来，觉得脑子沉滞无比。
 

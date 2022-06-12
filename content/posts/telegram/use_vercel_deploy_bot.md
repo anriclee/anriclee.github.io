@@ -16,7 +16,7 @@ Bot 的概念在官网的介绍稍微有点繁琐和复杂，详细可以了解[
 
 你、bot和你部署的脚本关系如下:
 
-![图](https://raw.githubusercontent.com/anriclee/diagramStorage/master/telegram.drawio.png)
+!["你、bot和你部署的脚本"](https://raw.githubusercontent.com/anriclee/diagramStorage/master/telegram.drawio.png "你、bot和你部署的脚本")
 
 # 脚本
 

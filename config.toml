@@ -26,11 +26,11 @@ paginate = 10
     fa_icon  = "fab fa-github"
 
 [[ params.social ]]
-    url = "https://www.linkedin.com"
+    url = "https://t.me/readbyword"
     fa_icon  = "fab fa-telegram"
 
 [[ params.social ]]
-    url = "https://twitter.com"
+    url = "https://twitter.com/anriclee"
     fa_icon  = "fab fa-twitter"
 
 [[ params.social ]]

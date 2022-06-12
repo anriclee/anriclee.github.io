@@ -5,9 +5,9 @@
 简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。
 申请 bot 需要找 BotFather（名字起的很形象），具体过程官网说的比较详细，此处不赘言。但是需要强调的一点是，bot 仅仅是你的代理人而已，真正执行你指令的是你自己部署的脚本，如果你不部署自己的脚本，在 bot 中输入指令，是没有任何响应的。
 你、bot和你部署的脚本关系如下:
-脚本 上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。
+你、bot和你部署的脚本 脚本 上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。
 接受指令 对于如何让脚本接受指令，官方提供了两种思路：推模式 、拉模式。
-拉模式 这种模式，官方不太推荐。 …<br><a class="button is-marginless is-paddingless" href=https://anriclee.github.io/posts/telegram/use_vercel_deploy_bot/><span class="icon-link is-small" style=line-height:100%><i class="fa fa-angle-double-right" aria-hidden=true></i></span><p style="padding:0 5px">more</p></a></div></h2></div></article><article class=columns><div class="column is-2"><h6 class=is-inline style=white-space:nowrap>Jan 13</h6></div><div class=column><h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><h1><a href=https://anriclee.github.io/posts/pg/>基于 PostgreSQL 的群聊搜索实践</a></h1><div class="content is-hidden-mobile">背景 2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。
+拉 …<br><a class="button is-marginless is-paddingless" href=https://anriclee.github.io/posts/telegram/use_vercel_deploy_bot/><span class="icon-link is-small" style=line-height:100%><i class="fa fa-angle-double-right" aria-hidden=true></i></span><p style="padding:0 5px">more</p></a></div></h2></div></article><article class=columns><div class="column is-2"><h6 class=is-inline style=white-space:nowrap>Jan 13</h6></div><div class=column><h2 class="subtitle is-inline is-size-4-mobile is-size-3-desktop"><h1><a href=https://anriclee.github.io/posts/pg/>基于 PostgreSQL 的群聊搜索实践</a></h1><div class="content is-hidden-mobile">背景 2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。
 对于复杂场景的搜索，业界一般使用非常流行的 ElasticSearch。由于我们的群数据较少，截止到目前还没有达到千万级的量级，且搜索场景比较简单，而 PostgreSQL 对全文搜索又支持得比较好，所以选择了 PostgreSQL 来实现群搜索需求。 在使用 PostgreSQL 做群搜索的过程中，也经历了由简单到复杂的迭代过程，中间也踩了不少坑。 下面的几个例子说明了方案的演进过程和我们的优化思路，希望能够对大家有所帮助。
 LIKE 模糊查询 提到模糊搜索，最简单的办法就是对搜索列进行 like 匹配： 在输入词的前后加上 % 即可,如下所示:
 SELECT * FROM groups WHERE name LIKE '%探探%'; 这种方案可行是可行了，但是实现过于简单粗暴。对此方案进行测试：

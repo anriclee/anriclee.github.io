@@ -104,7 +104,7 @@ https://vercel.com/
 
 ## 请求安全性校验
 
-为了安全起见，有人恶意调用你的脚本 url，可以将自己脚本服务的 api 的前缀设置为 token（token 没有人知道，所以也无法知道的 api）。vercel 平台支持通过 vercel.json 进行请求的重定向，可以通过正则表达式，将 12313afdsfadfsfsdfs[token 示例]/api 转发到 api。
+为了安全起见，有人恶意调用你的脚本 url，可以将自己脚本服务的 api 的前缀设置为 token（token 没有人知道，所以也无法知道的 api）。vercel 平台支持通过 vercel.json 进行请求的重定向，可以通过正则表达式，将 `randomwdocd23123123[token 示例]/api` 转发到 `/api`。
 
 ```
 {

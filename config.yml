@@ -1,7 +1,7 @@
 baseURL: "https://anriclee.github.io"
 title: ReadByWord
 paginate: 5
-theme: hugo-PaperModX
+theme: PaperModX
 
 enableInlineShortcodes: true
 enableRobotsTXT: true

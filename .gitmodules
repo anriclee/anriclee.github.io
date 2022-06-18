@@ -1,3 +1,6 @@
 [submodule "themes/barn"]
 	path = themes/barn
 	url = https://github.com/anriclee/barn.git
+[submodule "themes/PaperModX"]
+	path = themes/PaperModX
+	url = https://github.com/reorx/hugo-PaperModX.git

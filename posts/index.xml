@@ -1,29 +1,426 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on AnricLee's House</title><link>https://anriclee.github.io/posts/</link><description>Recent content in Posts on AnricLee's House</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>Copyright &amp;copy; &lt;a href="https://github.com/anriclee"> AnricLee's Blog &lt;/a></copyright><lastBuildDate>Sat, 11 Jun 2022 14:38:42 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Demo</title><link>https://anriclee.github.io/posts/demo/</link><pubDate>Sat, 11 Jun 2022 14:38:42 +0800</pubDate><guid>https://anriclee.github.io/posts/demo/</guid><description>And in the naked light I saw ten thousand people, maybe more. People talking without speaking, people hearing without listening. People writing songs that voices never shared, no one dared disturb the sound of silence.
-— The sound of silence
-美利坚合众国，2015年，纽约。
-.aspect-ratio { position: relative; width: 100%; height: 0; padding-bottom: 75%; } .aspect-ratio iframe { position: absolute; width: 100%; height: 100%; left: 0; top: 0; } 当电话响起来的时候，阿瓦登正趴在电脑前面睡觉。电话铃声十分急促，尖锐，每一次振动都让他的耳膜难受好久。他揉了揉干涩的眼睛，十分不情愿地爬起来，觉得脑子沉滞无比。</description></item><item><title>使用 Vercel 部署 telegram bot</title><link>https://anriclee.github.io/posts/telegram/use_vercel_deploy_bot/</link><pubDate>Sat, 11 Jun 2022 11:43:42 +0800</pubDate><guid>https://anriclee.github.io/posts/telegram/use_vercel_deploy_bot/</guid><description>什么是 Bot Bot 的概念在官网的介绍稍微有点繁琐和复杂，详细可以了解官网介绍，
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on ReadByWord</title>
+    <link>https://anriclee.github.io/posts/</link>
+    <description>Recent content in Posts on ReadByWord</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 11 Jun 2022 11:43:42 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Telegram_bot</title>
+      <link>https://anriclee.github.io/posts/telegram_bot/</link>
+      <pubDate>Sat, 11 Jun 2022 11:43:42 +0800</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/telegram_bot/</guid>
+      <description>什么是 Bot Bot 的概念在官网的介绍稍微有点繁琐和复杂，详细可以了解官网介绍，
 简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。
 申请 bot 需要找 BotFather（名字起的很形象），具体过程官网说的比较详细，此处不赘言。但是需要强调的一点是，bot 仅仅是你的代理人而已，真正执行你指令的是你自己部署的脚本，如果你不部署自己的脚本，在 bot 中输入指令，是没有任何响应的。
 你、bot和你部署的脚本关系如下:
-你、bot和你部署的脚本 脚本 上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。
+
+脚本 上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。
 接受指令 对于如何让脚本接受指令，官方提供了两种思路：推模式 、拉模式。
-拉模式 这种模式，官方不太推荐。简单而言，就是自己部署一个脚本，不断执行 get 请求，获取自己 bot 的更新信息，就好比一个仆人一直在问你：
+ 拉模式  这种模式，官方不太推荐。简单而言，就是自己部署一个脚本，不断执行 get 请求，获取自己 bot 的更新信息，就好比一个仆人一直在问你：
 有没有需要我做的？
 有没有需要我做的？
 有没有需要我做的？
 询问的方式也比较简单：
 curl -X GET https://api.telegram.org/bot[token]/getUpdates 这里的 token，就是上面申请 bot 完毕后，得到的 token， 出于脱敏，我使用 [token] 代替，下同。这种方法比较笨拙，轮询的频次太高和太低都不行，而且你在 bot 中发布一条指令后，可能并不能够马上得到执行，会有延迟。
 这种方式的好处是：可以让 bot 启在本地，不需要部署到服务器上，因为 telegram 不知道你的存在，他也不需要知道你的存在。
-推模式 这种方式是官方比较推荐的一种方式，这种类似事件驱动的原理。只有有任务了，才会通知脚本去做。但前提是：在向 bot 发号施令前，需要在 bot 中注册一个 callback url。</description></item><item><title>基于 PostgreSQL 的群聊搜索实践</title><link>https://anriclee.github.io/posts/pg/</link><pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate><guid>https://anriclee.github.io/posts/pg/</guid><description>背景 2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。
-对于复杂场景的搜索，业界一般使用非常流行的 ElasticSearch。由于我们的群数据较少，截止到目前还没有达到千万级的量级，且搜索场景比较简单，而 PostgreSQL 对全文搜索又支持得比较好，所以选择了 PostgreSQL 来实现群搜索需求。 在使用 PostgreSQL 做群搜索的过程中，也经历了由简单到复杂的迭代过程，中间也踩了不少坑。 下面的几个例子说明了方案的演进过程和我们的优化思路，希望能够对大家有所帮助。
-LIKE 模糊查询 提到模糊搜索，最简单的办法就是对搜索列进行 like 匹配： 在输入词的前后加上 % 即可,如下所示:
-SELECT * FROM groups WHERE name LIKE '%探探%'; 这种方案可行是可行了，但是实现过于简单粗暴。对此方案进行测试：
-建一张简单的表进行测试，表结构如下：
-lixuehan=# \d groups; Table &amp;quot;public.groups&amp;quot; Column | Type | Collation | Nullable | Default --------+-----------------------+-----------+----------+------------------------------------ id | bigint | | not null | nextval('groups_id_seq'::regclass) name | character varying(50) | | | Indexes: &amp;quot;groups_pkey&amp;quot; PRIMARY KEY, btree (id) 表中只有两列：主键 id 以及群名 name。</description></item><item><title>Hugo 中的命令行模式</title><link>https://anriclee.github.io/posts/hugo-%E4%B8%AD%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A8%A1%E5%BC%8F/</link><pubDate>Fri, 26 Jun 2020 22:31:37 +0800</pubDate><guid>https://anriclee.github.io/posts/hugo-%E4%B8%AD%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A8%A1%E5%BC%8F/</guid><description>最近在用 hugo 构建了个人博客之后，便有兴趣想研究下其源码。但是源码的体量之大，逻辑之复杂出乎我的意料。不过好在源码的结构比较清晰，有许多地方值得借鉴。
-比如它的程序入口，非常简洁：
-func main() { resp := commands.Execute(os.Args[1:]) if resp.Err != nil { if resp.IsUserError() { resp.Cmd.Println(&amp;quot;&amp;quot;) resp.Cmd.Println(resp.Cmd.UsageString()) } os.Exit(-1) } } 它将所有根据命令行参数传入的指令统一封装到 commands 包中。后面有新命令需求时，只需要新建一个 cmd 文件即可。
+ 推模式  这种方式是官方比较推荐的一种方式，这种类似事件驱动的原理。只有有任务了，才会通知脚本去做。但前提是：在向 bot 发号施令前，需要在 bot 中注册一个 callback url。</description>
+      <content:encoded><![CDATA[<h1 id="什么是-bot">什么是 Bot</h1>
+<p>Bot 的概念在官网的介绍稍微有点繁琐和复杂，详细可以了解<a href="https://core.telegram.org/bots">官网介绍</a>，</p>
+<p>简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。</p>
+<p>申请 bot 需要找 BotFather（名字起的很形象），具体过程官网说的比较详细，此处不赘言。但是需要强调的一点是，bot 仅仅是你的代理人而已，真正执行你指令的是你自己部署的脚本，如果你不部署自己的脚本，在 bot 中输入指令，是没有任何响应的。</p>
+<p>你、bot和你部署的脚本关系如下:</p>
+<p></p>
+<h1 id="脚本">脚本</h1>
+<p>上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。</p>
+<h2 id="接受指令">接受指令</h2>
+<p>对于如何让脚本接受指令，官方提供了两种思路：推模式 、拉模式。</p>
+<ul>
+<li>拉模式</li>
+</ul>
+<p>这种模式，官方不太推荐。简单而言，就是自己部署一个脚本，不断执行 get 请求，获取自己 bot 的更新信息，就好比一个仆人一直在问你：</p>
+<p>有没有需要我做的？</p>
+<p>有没有需要我做的？</p>
+<p>有没有需要我做的？</p>
+<p>询问的方式也比较简单：</p>
+<pre><code>curl -X GET https://api.telegram.org/bot[token]/getUpdates
+</code></pre><p>这里的 token，就是上面申请 bot 完毕后，得到的 token， 出于脱敏，我使用 [token] 代替，下同。这种方法比较笨拙，轮询的频次太高和太低都不行，而且你在 bot 中发布一条指令后，可能并不能够马上得到执行，会有延迟。</p>
+<p>这种方式的好处是：可以让 bot 启在本地，不需要部署到服务器上，因为 telegram 不知道你的存在，他也不需要知道你的存在。</p>
+<ul>
+<li>推模式</li>
+</ul>
+<p>这种方式是官方比较推荐的一种方式，这种类似事件驱动的原理。只有有任务了，才会通知脚本去做。但前提是：在向 bot 发号施令前，需要在 bot 中注册一个 callback url。</p>
+<p>bot 在接受你的指令后，会调用此 url，通知你的脚本，让他执行任务。</p>
+<p>注册方式也比较简单：</p>
+<pre><code>curl -X POST https://api.telegram.org/bot[token]/setWebhook -H &quot;Content-type: application/json&quot; -d '{&quot;url&quot;: &quot;[YOUR_URL]&quot;}
+</code></pre><p>使用这种方式，会比上一种稍微麻烦一点，需要你部署的服务能够支持 https（这也是为了安全起见）。</p>
+<h3 id="响应指令">响应指令</h3>
+<p>收到 telegram 的指令后，如何发送消息到 telegram 频道呢？笔者对 golang 较为熟悉，所以采用了 golang 的方式进行响应。</p>
+<pre><code>func Handler(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Printf(&quot;parse form values failed:%+v&quot;, err)
+	}
+	body, _ := r.GetBody()
+	bytes, _ := io.ReadAll(body)
+	msg := string(bytes)
+	// ...... 读取到 query 参数和 body 后，可以进行各种逻辑操作
+
+	fmt.Fprintf(w, &quot;result:&quot;+content)
+}
+</code></pre><p>上面的代码使用到了一个<a href="https://github.com/go-telegram-bot-api/telegram-bot-api">开源库</a>，他替我们封装好了api（当然也可以自己按照 telegram 的协议组装消息）。</p>
+<h2 id="部署脚本">部署脚本</h2>
+<p>现在有了 bot，也有了响应 bot 的脚本逻辑，只剩部署脚本到服务器了。我们当然不能仅仅为了响应一条指令租一个个人服务器吧（土豪除外）。</p>
+<p>笔者用的是 Vercel 平台，使用 Vercel 部署 ServeLess 的 Function 还是比较方便的，部署过程，跟随步骤指导一步一步来比较容易。</p>
+<p><a href="https://vercel.com/">https://vercel.com/</a></p>
+<p>部署好之后，可以先在本地执行下 curl 请求，测试没问题后，将该 url 设置为 telegram bot 的 callback 函数即可。</p>
+<h2 id="使用">使用</h2>
+<p>学会一个东西的主要方法，就是疯狂的使用它。本人出入办公单位，都需要扫门禁二维码，不胜其烦，需要关注微信小程序，然后点击门禁二维码，全程既慢且麻烦。</p>
+<p>在一次偶然抓包之后，发现获取二维码的请求是一个简单的 http post 请求，且密码为明文。</p>
+<p>这次体验到了 Serveless 的方便，出于 bot 练习之故，可以将该请求封装到 script 中，部署到 vercel 平台上，在 telegram 申请一个门禁机器人，打开之后，发送指令到 script，script 发起 post 调用，获取到结果后，渲染为二维码即可。</p>
+<p>渲染二维码使用到的<a href="https://github.com/skip2/go-qrcode">开源包</a></p>
+<h2 id="请求安全性校验">请求安全性校验</h2>
+<p>为了安全起见，有人恶意调用你的脚本 url，可以将自己脚本服务的 api 的前缀设置为 token（token 没有人知道，所以也无法知道的 api）。vercel 平台支持通过 vercel.json 进行请求的重定向，可以通过正则表达式，将 <code>randomwdocd23123123[token 示例]/api</code> 转发到 <code>/api</code>。</p>
+<pre><code>{
+   &quot;routes&quot;:[
+      {
+         &quot;src&quot;:&quot;/random/(?&lt;id&gt;[^/]*)/api/hello/&quot;,
+         &quot;dest&quot;:&quot;/api/hello.go?id=$id&quot;
+      }
+   ]
+}
+</code></pre><p>这是利用了官方提供的重定向的特性，详细可以参考<a href="https://vercel.com/docs/project-configuration#">官网</a></p>
+<h1 id="reference">reference</h1>
+<p>1.<a href="https://www.marclittlemore.com/serverless-telegram-chatbot-vercel/">Build a serverless Telegram chatbot deployed using Vercel</a></p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Hugo 中的命令行模式</title>
+      <link>https://anriclee.github.io/posts/hugo_cmd_pattern/</link>
+      <pubDate>Fri, 26 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/hugo_cmd_pattern/</guid>
+      <description>最近在用 hugo 构建了个人博客之后，便有兴趣想研究下其源码。但是源码的体量之大，逻辑之复杂出乎我的意料。不过好在源码的结构比较清晰，有许多地方值得借鉴。 s 比如它的程序入口，非常简洁：
+func main() { resp := commands.Execute(os.Args[1:]) if resp.Err != nil { if resp.IsUserError() { resp.Cmd.Println(&amp;#34;&amp;#34;) resp.Cmd.Println(resp.Cmd.UsageString()) } os.Exit(-1) } } 它将所有根据命令行参数传入的指令统一封装到 commands 包中。后面有新命令需求时，只需要新建一个 cmd 文件即可。
 它是怎么做到的呢？
 简而言之，就是在程序入口处将所有的命令类汇总，然后再根据输入参数args，决定要执行哪个cmd，看似增加了代码的复杂度，但是对于后续命令的扩展显得非常方便。
 hugo 中使用了 builder 模式将所有的命令汇总，我这里简单起见，只初始化了一个数组，主要是体会其开闭原则的思想即可。
-Talk is cheap, show me the code
-借鉴它的思路，我写了一个简化版，可以参看，代码链接.</description></item></channel></rss>
+ Talk is cheap, show me the code
+ 借鉴它的思路，我写了一个简化版，可以参看，代码链接.</description>
+      <content:encoded><![CDATA[<p>最近在用 hugo 构建了个人博客之后，便有兴趣想研究下其源码。但是源码的体量之大，逻辑之复杂出乎我的意料。不过好在源码的结构比较清晰，有许多地方值得借鉴。
+s
+比如它的程序入口，非常简洁：</p>
+<div class="highlight"><pre class="chroma"><code class="language-Golang" data-lang="Golang"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">resp</span> <span class="o">:=</span> <span class="nx">commands</span><span class="p">.</span><span class="nf">Execute</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Args</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+	<span class="k">if</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">Err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="nx">resp</span><span class="p">.</span><span class="nf">IsUserError</span><span class="p">()</span> <span class="p">{</span>
+			<span class="nx">resp</span><span class="p">.</span><span class="nx">Cmd</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">)</span>
+			<span class="nx">resp</span><span class="p">.</span><span class="nx">Cmd</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">resp</span><span class="p">.</span><span class="nx">Cmd</span><span class="p">.</span><span class="nf">UsageString</span><span class="p">())</span>
+		<span class="p">}</span>
+		<span class="nx">os</span><span class="p">.</span><span class="nf">Exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>它将所有根据命令行参数传入的指令统一封装到 <code>commands</code> 包中。后面有新命令需求时，只需要新建一个 cmd 文件即可。</p>
+<p>它是怎么做到的呢？</p>
+<p>简而言之，就是在程序入口处将所有的命令类汇总，然后再根据输入参数<code>args</code>，决定要执行哪个<code>cmd</code>，看似增加了代码的复杂度，但是对于后续命令的扩展显得非常方便。</p>
+<p>hugo 中使用了 builder 模式将所有的命令汇总，我这里简单起见，只初始化了一个数组，主要是体会其开闭原则的思想即可。</p>
+<blockquote>
+<p>Talk is cheap, show me the code</p>
+</blockquote>
+<p>借鉴它的思路，我写了一个简化版，可以参看，<a href="https://github.com/anriclee/GoPatterns/tree/main/cmdpattern">代码链接</a>.</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Markdown Syntax Guide</title>
+      <link>https://anriclee.github.io/posts/markdown-syntax/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/markdown-syntax/</guid>
+      <description>Sample article showcasing basic Markdown syntax and formatting for HTML elements.</description>
+      <content:encoded><![CDATA[<p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.</p>
+<h2 id="headings">Headings</h2>
+<p>The following HTML <code>&lt;h1&gt;</code>—<code>&lt;h6&gt;</code> elements represent six levels of section headings. <code>&lt;h1&gt;</code> is the highest section level while <code>&lt;h6&gt;</code> is the lowest.</p>
+<h1 id="h1">H1</h1>
+<h2 id="h2">H2</h2>
+<h3 id="h3">H3</h3>
+<h4 id="h4">H4</h4>
+<h5 id="h5">H5</h5>
+<h6 id="h6">H6</h6>
+<h2 id="paragraph">Paragraph</h2>
+<p>Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.</p>
+<p>Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.</p>
+<h2 id="blockquotes">Blockquotes</h2>
+<p>The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a <code>footer</code> or <code>cite</code> element, and optionally with in-line changes such as annotations and abbreviations.</p>
+<h4 id="blockquote-without-attribution">Blockquote without attribution</h4>
+<blockquote>
+<p>Tiam, ad mint andaepu dandae nostion secatur sequo quae.
+<strong>Note</strong> that you can use <em>Markdown syntax</em> within a blockquote.</p>
+</blockquote>
+<h4 id="blockquote-with-attribution">Blockquote with attribution</h4>
+<blockquote>
+<p>Don&rsquo;t communicate by sharing memory, share memory by communicating.</p>
+<p>— <cite>Rob Pike<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></cite></p>
+</blockquote>
+<h2 id="tables">Tables</h2>
+<p>Tables aren&rsquo;t part of the core Markdown spec, but Hugo supports them out-of-the-box.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bob</td>
+<td>27</td>
+</tr>
+<tr>
+<td>Alice</td>
+<td>23</td>
+</tr>
+</tbody>
+</table>
+<h4 id="inline-markdown-within-tables">Inline Markdown within tables</h4>
+<table>
+<thead>
+<tr>
+<th>Italics</th>
+<th>Bold</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>italics</em></td>
+<td><strong>bold</strong></td>
+<td><code>code</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="code-blocks">Code Blocks</h2>
+<h4 id="inline-code">Inline Code</h4>
+<p><code>This is Inline Code</code></p>
+<h4 id="only-pre">Only <code>pre</code></h4>
+<pre>
+This is pre text
+</pre>
+<h4 id="code-block-with-backticks">Code block with backticks</h4>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot; /&gt;
+        &lt;title&gt;Example HTML5 Document&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;Test&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h4 id="code-block-with-backticks-and-language-specified">Code block with backticks and language specified</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;utf-8&#34;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Example HTML5 Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;description&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;Sample article showcasing basic Markdown syntax and formatting for HTML elements.&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Test<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="code-block-indented-with-four-spaces">Code block indented with four spaces</h4>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;Example HTML5 Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Test&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4 id="code-block-with-hugos-internal-highlight-shortcode">Code block with Hugo&rsquo;s internal highlight shortcode</h4>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;utf-8&#34;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Example HTML5 Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Test<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span></code></pre></div>
+<h4 id="gist">Gist</h4>
+<script type="application/javascript" src="https://gist.github.com/spf13/7896402.js"></script>
+
+<h2 id="list-types">List Types</h2>
+<h4 id="ordered-list">Ordered List</h4>
+<ol>
+<li>First item</li>
+<li>Second item</li>
+<li>Third item</li>
+</ol>
+<h4 id="unordered-list">Unordered List</h4>
+<ul>
+<li>List item</li>
+<li>Another item</li>
+<li>And another item</li>
+</ul>
+<h4 id="nested-list">Nested list</h4>
+<ul>
+<li>Fruit
+<ul>
+<li>Apple</li>
+<li>Orange</li>
+<li>Banana</li>
+</ul>
+</li>
+<li>Dairy
+<ul>
+<li>Milk</li>
+<li>Cheese</li>
+</ul>
+</li>
+</ul>
+<h2 id="other-elements--abbr-sub-sup-kbd-mark">Other Elements — abbr, sub, sup, kbd, mark</h2>
+<p><abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.</p>
+<p>H<sub>2</sub>O</p>
+<p>X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup></p>
+<p>Press <kbd><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>Delete</kbd></kbd> to end the session.</p>
+<p>Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>The above quote is excerpted from Rob Pike&rsquo;s <a href="https://www.youtube.com/watch?v=PAAkCSZUG1c">talk</a> during Gopherfest, November 18, 2015.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Rich Content</title>
+      <link>https://anriclee.github.io/posts/rich-content/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/rich-content/</guid>
+      <description>A brief description of Hugo Shortcodes</description>
+      <content:encoded><![CDATA[<p>Hugo ships with several <a href="https://gohugo.io/content-management/shortcodes/#use-hugos-built-in-shortcodes">Built-in Shortcodes</a> for rich content, along with a <a href="https://gohugo.io/about/hugo-and-gdpr/">Privacy Config</a> and a set of Simple Shortcodes that enable static and no-JS versions of various social media embeds.</p>
+<hr>
+<h2 id="youtube-privacy-enhanced-shortcode">YouTube Privacy Enhanced Shortcode</h2>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/ZJthWmvUzzc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<br>
+<hr>
+<h2 id="twitter-simple-shortcode">Twitter Simple Shortcode</h2>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">“In addition to being more logical, asymmetry has the advantage that its complete appearance is far more optically effective than symmetry.”<br>— Jan Tschichold <a href="https://t.co/gcv7SrhvJb">pic.twitter.com/gcv7SrhvJb</a></p>&mdash; Graphic Design History (@DesignReviewed) <a href="https://twitter.com/DesignReviewed/status/1085870671291310081?ref_src=twsrc%5Etfw">January 17, 2019</a></blockquote>
+
+<br>
+<hr>
+<h2 id="vimeo-simple-shortcode">Vimeo Simple Shortcode</h2>
+
+
+
+
+
+
+<style>
+.__h_video {
+   position: relative;
+   padding-bottom: 56.23%;
+   height: 0;
+   overflow: hidden;
+   width: 100%;
+   background: #000;
+}
+.__h_video img {
+   width: 100%;
+   height: auto;
+   color: #000;
+}
+.__h_video .play {
+   height: 72px;
+   width: 72px;
+   left: 50%;
+   top: 50%;
+   margin-left: -36px;
+   margin-top: -36px;
+   position: absolute;
+   cursor: pointer;
+}
+</style>
+
+
+<div class="s_video_simple __h_video">
+<a href="https://vimeo.com/4.8912912e&#43;07" rel="noopener" target="_blank">
+
+
+<img src="https://i.vimeocdn.com/video/337401969-979f0cc9f55fdf305fb8984e90d92639ec9d7ecc4c9dfbc6536e28edb43784ce-d_640" srcset="https://i.vimeocdn.com/video/337401969-979f0cc9f55fdf305fb8984e90d92639ec9d7ecc4c9dfbc6536e28edb43784ce-d_640 1x, https://i.vimeocdn.com/video/337401969-979f0cc9f55fdf305fb8984e90d92639ec9d7ecc4c9dfbc6536e28edb43784ce-d_640 2x" alt="Sing Jan Swing - Kinetic Type">
+<div class="play"><svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 61 61"><circle cx="30.5" cy="30.5" r="30.5" opacity=".8" fill="#000"></circle><path d="M25.3 19.2c-2.1-1.2-3.8-.2-3.8 2.2v18.1c0 2.4 1.7 3.4 3.8 2.2l16.6-9.1c2.1-1.2 2.1-3.2 0-4.4l-16.6-9z" fill="#fff"></path></svg></div></a></div>]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Placeholder Text</title>
+      <link>https://anriclee.github.io/posts/placeholder-text/</link>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/placeholder-text/</guid>
+      <description>Lorem Ipsum Dolor Si Amet</description>
+      <content:encoded><![CDATA[<p>Lorem est tota propiore conpellat pectoribus de pectora summo.</p>
+<p>Redit teque digerit hominumque toris verebor lumina non cervice subde tollit usus habet Arctonque, furores quas nec ferunt. Quoque montibus nunc caluere tempus inhospita parcite confusaque translucet patri vestro qui optatis lumine cognoscere flos nubis! Fronde ipsamque patulos Dryopen deorum.</p>
+<ol>
+<li>Exierant elisi ambit vivere dedere</li>
+<li>Duce pollice</li>
+<li>Eris modo</li>
+<li>Spargitque ferrea quos palude</li>
+</ol>
+<p>Rursus nulli murmur; hastile inridet ut ab gravi sententia! Nomine potitus silentia flumen, sustinet placuit petis in dilapsa erat sunt. Atria tractus malis.</p>
+<ol>
+<li>Comas hunc haec pietate fetum procerum dixit</li>
+<li>Post torum vates letum Tiresia</li>
+<li>Flumen querellas</li>
+<li>Arcanaque montibus omnes</li>
+<li>Quidem et</li>
+</ol>
+<h1 id="vagus-elidunt">Vagus elidunt</h1>
+<p><svg class="canon" xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox="0 0 496 373" height="373" width="496"><g fill="none"><path stroke="#000" stroke-width=".75" d="M.599 372.348L495.263 1.206M.312.633l494.95 370.853M.312 372.633L247.643.92M248.502.92l246.76 370.566M330.828 123.869V1.134M330.396 1.134L165.104 124.515"></path><path stroke="#ED1C24" stroke-width=".75" d="M275.73 41.616h166.224v249.05H275.73zM54.478 41.616h166.225v249.052H54.478z"></path><path stroke="#000" stroke-width=".75" d="M.479.375h495v372h-495zM247.979.875v372"></path><ellipse cx="498.729" cy="177.625" rx=".75" ry="1.25"></ellipse><ellipse cx="247.229" cy="377.375" rx=".75" ry="1.25"></ellipse></g></svg></p>
+<p><a href="https://en.wikipedia.org/wiki/Canons_of_page_construction#Van_de_Graaf_canon">The Van de Graaf Canon</a></p>
+<h2 id="mane-refeci-capiebant-unda-mulcebat">Mane refeci capiebant unda mulcebat</h2>
+<p>Victa caducifer, malo vulnere contra dicere aurato, ludit regale, voca! Retorsit colit est profanae esse virescere furit nec; iaculi matertera et visa est, viribus. Divesque creatis, tecta novat collumque vulnus est, parvas. <strong>Faces illo pepulere</strong> tempus adest. Tendit flamma, ab opes virum sustinet, sidus sequendo urbis.</p>
+<p>Iubar proles corpore raptos vero auctor imperium; sed et huic: manus caeli Lelegas tu lux. Verbis obstitit intus oblectamina fixis linguisque ausus sperare Echionides cornuaque tenent clausit possit. Omnia putatur. Praeteritae refert ausus; ferebant e primus lora nutat, vici quae mea ipse. Et iter nil spectatae vulnus haerentia iuste et exercebat, sui et.</p>
+<p>Eurytus Hector, materna ipsumque ut Politen, nec, nate, ignari, vernum cohaesit sequitur. Vel <strong>mitis temploque</strong> vocatus, inque alis, <em>oculos nomen</em> non silvis corpore coniunx ne displicet illa. Crescunt non unus, vidit visa quantum inmiti flumina mortis facto sic: undique a alios vincula sunt iactata abdita! Suspenderat ego fuit tendit: luna, ante urbem Propoetides <strong>parte</strong>.</p>
+
+
+<style>
+.canon { background: white; width: 100%; height: auto; }
+</style>]]></content:encoded>
+    </item>
+    
+  </channel>
+</rss>

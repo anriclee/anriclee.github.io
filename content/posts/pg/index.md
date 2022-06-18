@@ -1,9 +1,9 @@
 ---
 title: "基于 PostgreSQL 的群聊搜索实践"
 date: "2022-01-13"
-draft: true
+draft: false
 tags:
-    - PostgreSQL
+  - PostgreSQL
 ---
 
 ## 背景

@@ -1,7 +1,9 @@
 ---
-title: "Telegram_bot"
+title: "Telegram bot 入门实践"
 date: 2022-06-11T11:43:42+08:00
 draft: false
+tags:
+  - telegram
 ---
 
 

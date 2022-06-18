@@ -1,10 +1,9 @@
 ---
-title: "使用 Vercel 部署 telegram bot"
+title: "Telegram_bot"
 date: 2022-06-11T11:43:42+08:00
 draft: false
-categories:
-- TECH
 ---
+
 
 # 什么是 Bot
 
@@ -16,7 +15,7 @@ Bot 的概念在官网的介绍稍微有点繁琐和复杂，详细可以了解[
 
 你、bot和你部署的脚本关系如下:
 
-!["你、bot和你部署的脚本"](https://raw.githubusercontent.com/anriclee/diagramStorage/master/telegram.drawio.png "你、bot和你部署的脚本")
+!["你、bot和你部署的脚本"](https://raw.githubusercontent.com/anriclee/diagramStorage/master/telegram.drawio.png)
 
 # 脚本
 

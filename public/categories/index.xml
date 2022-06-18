@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Categories on AnricLee&#39;s House</title>
+    <title>Categories on ReadByWord</title>
     <link>https://anriclee.github.io/categories/</link>
-    <description>Recent content in Categories on AnricLee&#39;s House</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/anriclee&#34;&gt; AnricLee &lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 11 Jun 2022 11:43:42 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>TECH</title>
-      <link>https://anriclee.github.io/categories/tech/</link>
-      <pubDate>Sat, 11 Jun 2022 11:43:42 +0800</pubDate>
-      
-      <guid>https://anriclee.github.io/categories/tech/</guid>
-      <description></description>
-    </item>
-    
+    <description>Recent content in Categories on ReadByWord</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://anriclee.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

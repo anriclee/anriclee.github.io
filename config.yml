@@ -41,12 +41,12 @@ params:
 
   commentSystems:
     disqus:
-      shortname: reorx
+      shortname: 
     remark42:
-      url: https://remark42.reorx.com
-      site: reorx.github.io
+      url: 
+      site: 
     telegramWidget:
-      channel: anricleeblog
+      channel: anricleeblog/10
       accentColor: "9077e1"
       limit: 20
   defaultCommentSystems:

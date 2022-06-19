@@ -96,7 +96,7 @@ lixuehan=# explain analyze select * from groups where name like '%探探%';
 在 PostgreSQL 官方网站上看到了这样一句话：
 
 > The optimizer can also use a B-tree index for queries involving the pattern matching operators LIKE and ~
-> if the pattern is a constant and is anchored to the beginning of the string — 
+> if the pattern is a constant and is anchored to the beginning of the string —
 > for example, col LIKE 'foo%' or col ~ '^foo', **but not col LIKE '%bar'**.
 
 官方推荐的做法是给搜索列建立 btree 索引，但是不支持前模糊查询（为避免歧义，这里的「前模糊查询」指的是前缀不确定的查询，「后模糊查询」指的是后缀不确定的查询，后面不再赘述）。
@@ -194,8 +194,8 @@ lixuehan=# \l+ lixuehan
 
 上面我们用来举例的数据库，正好 `Ctype` 和 `Collate` 均为 `C`，是支持模糊搜索的。对于这两个参数的设置，官网有如下描述：
 
-> Some locale categories must have their values fixed when the database is created. 
-> You can use different settings for different databases, but **once a database is created, you cannot change them for that database anymore**. 
+> Some locale categories must have their values fixed when the database is created.
+> You can use different settings for different databases, but **once a database is created, you cannot change them for that database anymore**.
 > LC_COLLATE and LC_CTYPE are these categories.
 
 这里说的很明白，一旦数据库被创建了，就不能更改其 `LC_COLLATE` 和 `LC_CTYPE` 设置了（这两个参数分别对应上面的 `Collate` 和 `Ctype`）。
@@ -235,7 +235,7 @@ lixuehan2=# explain analyze select * from groups where name like '探%';
 
 这里摘抄 PostgreSQL 官方给出的解释：
 
-> On all platforms, the collations named default, C, and POSIX are available. 
+> On all platforms, the collations named default, C, and POSIX are available.
 > Additional collations may be available depending on operating system support.
 > The default collation selects the LC_COLLATE and LC_CTYPE values specified at database creation time.
 > The C and POSIX collations both specify “traditional C” behavior, in which only the ASCII letters “A” through “Z” are treated as letters, and sorting is done strictly by character code byte values.
@@ -261,7 +261,7 @@ GIN，全称为通用倒排索引（Generalized Inverted Index）。倒排索引
 ```
 postgres=# select to_tsvector('There was a crooked man, and he walked a crooked mile');
 
-to_tsvector               
+to_tsvector
 -----------------------------------------
  'crook':4,10 'man':5 'mile':11 'walk':8
 (1 row)
@@ -275,14 +275,14 @@ to_tsvector
 
 其实看到这里，大家已经明白，将所有**待搜索内容**转换为 `tsvector`，其实就是一个预处理的过程，单纯是为了后面执行搜索方便。
 
-待搜索内容要处理，要匹配的搜索内容当然也需要处理。 
+待搜索内容要处理，要匹配的搜索内容当然也需要处理。
 
 在 PostgreSQL 中，`tsquery` 表示搜索词。一般而言，`tsquery` 由 `lexemes` 加上一些特殊符号组成，如下：
 
 ```
 postgres=# select to_tsquery('man & (walking | running)');
 
-         to_tsquery         
+         to_tsquery
 ----------------------------
  'man' & ( 'walk' | 'run' )
 (1 row)
@@ -474,7 +474,7 @@ postgres=# explain analyze select * from groups where name like '%探%';
 - 索引：在数据库中建立关键词到表记录的倒排索引
 - 查询：**将查询同样拆解为关键词**，然后利用查询关键词通过倒排索引找出相关的记录来。
 
-所以，我们打算采用业务代码分词 + PG查询的方式进行： 
+所以，我们打算采用业务代码分词 + PG查询的方式进行：
 
 ![搜索和查询架构](imgs/search_update.png)
 
@@ -498,14 +498,14 @@ postgres=# explain analyze select * from groups where name like '%探%';
 
 【单字模式】：我/ 来/ 到/ 北/ 京/ 清/ 华/ 大/ 学
 
-【全模式+精确模式+单字模式】：我/ 来到/ 北京/ 清华/ 清华大学/ 华大/ 大学/ 我/ 来/ 到/ 北/ 京/ 清/ 华/ 大/ 学 
+【全模式+精确模式+单字模式】：我/ 来到/ 北京/ 清华/ 清华大学/ 华大/ 大学/ 我/ 来/ 到/ 北/ 京/ 清/ 华/ 大/ 学
 
 ```
-上面的第四种模式，是在群聊业务中使用到的模式，在下面会介绍到。 
+上面的第四种模式，是在群聊业务中使用到的模式，在下面会介绍到。
 
 群聊业务中根据业务使用场景的不同，采用了不同的分词模式进行：
 
-在新增群或者群名变更时，由于对于群名要尽可能列举出来每一种分词的可能，所以采用了「全模式+精确模式+单字模式」结合的思路进行。 
+在新增群或者群名变更时，由于对于群名要尽可能列举出来每一种分词的可能，所以采用了「全模式+精确模式+单字模式」结合的思路进行。
 
 比如群名：「爱宠物的单身男女们」
 
@@ -554,7 +554,7 @@ go tool pprof -inuse_space http://127.0.0.1:6060/debug/pprof/heap
              0     0%   100%        2MB  1.71%  fmt.Fscanln
              0     0%   100%    50.04MB 42.90%  github.com/go-ego/cedar.(*Cedar).Insert
              0     0%   100%    50.04MB 42.90%  github.com/go-ego/cedar.(*Cedar).findPlaces
-    
+
     ```
 
    内存占用为 `116.65MB`。
@@ -717,7 +717,7 @@ levenshtein_less_equal(text source, text target, int max_d) returns int
     -------------
                0
     (1 row)
-    
+
     --- 设置为 1，表示插入新字符带来的代价为 1
     lixuehan=# SELECT levenshtein('GUMBO', 'GUMBOL',1,1,1);
      levenshtein
@@ -737,7 +737,7 @@ levenshtein_less_equal(text source, text target, int max_d) returns int
     -------------
                0
     (1 row)
-    
+
     --- 设置为 1，表示插入新字符带来的代价为 1
     lixuehan=# SELECT levenshtein('GUMBO', 'GUMO',1,1,1);
      levenshtein
@@ -757,7 +757,7 @@ levenshtein_less_equal(text source, text target, int max_d) returns int
     -------------
                0
     (1 row)
-    
+
     --- 设置为 1，表示插入新字符带来的代价为 1
     lixuehan=# SELECT levenshtein('GUMBO', 'GUMLO',1,1,1);
      levenshtein

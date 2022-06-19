@@ -64,7 +64,7 @@ curl -X POST https://api.telegram.org/bot[token]/setWebhook -H "Content-type: ap
 
 收到 telegram 的指令后，如何发送消息到 telegram 频道呢？笔者对 golang 较为熟悉，所以采用了 golang 的方式进行响应。
 
-```
+```Golang
 func Handler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
@@ -107,7 +107,7 @@ https://vercel.com/
 
 为了安全起见，有人恶意调用你的脚本 url，可以将自己脚本服务的 api 的前缀设置为 token（token 没有人知道，所以也无法知道的 api）。vercel 平台支持通过 vercel.json 进行请求的重定向，可以通过正则表达式，将 `randomwdocd23123123[token 示例]/api` 转发到 `/api`。
 
-```
+```Json
 {
    "routes":[
       {

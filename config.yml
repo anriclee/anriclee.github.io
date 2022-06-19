@@ -12,9 +12,9 @@ enableEmoji: true
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  description: "Theme PaperModX - https://github.com/reorx/hugo-PaperModX"
+  description: "ReadbyWord - https://anriclee.github.io"
   author:
-    - Reorx
+    - anriclee
   mainSections:
     - docs
     - posts
@@ -22,6 +22,8 @@ params:
   images: ["cover.png"]
   DateFormat: "2006-01-02"
   useCustomAnalytics: false
+  GoogleAnalytics: true
+  googleAnalytics: G-DQJ55QK2EE
 
   defaultTheme: auto
   # disableThemeToggle: true
@@ -41,10 +43,10 @@ params:
 
   commentSystems:
     disqus:
-      shortname: 
+      shortname:
     remark42:
-      url: 
-      site: 
+      url:
+      site:
     telegramWidget:
       channel: anricleeblog/10
       accentColor: "9077e1"

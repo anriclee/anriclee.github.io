@@ -134,14 +134,14 @@ The C and POSIX collations both specify “traditional C” behavior, in which o
 <code>Locale</code> 设置为 <code>en_US.UTF-8</code>，底层操作系统不支持，数据库自然也不会支持按照这种编码排序了。</p><h2 id=gin-索引>GIN 索引</h2><p>实际上，使用 PostgreSQL 进行模糊搜索时，除了使用 Btree 索引，还可以使用 GIN 索引。</p><p>什么是 GIN 索引呢？</p><p>GIN，全称为通用倒排索引（Generalized Inverted Index）。倒排索引也被称为反向索引，被用来存储在全文搜索下某个单词在一个文档或者一组文档中的存储位置的映射。
 也就是说，知道某个词，就可以知道这个词出现在文档的哪些位置。</p><p>在 GIN 中全文搜索的基本单元就是 <code>document</code>，在 GIN 中查询一个词，即查询出现这个词的所有 <code>document</code>。为了搜索方便，<code>document</code> 会被转化成一个特殊的类型：<code>tsvector</code>。</p><p><code>tsvector</code> 由 <code>lexemes</code>（语素） 和<code>lexemes</code> 出现在 <code>document</code> 中的位置组成。</p><p>这里出现的术语较多，举个例子就明白了：</p><pre><code>postgres=# select to_tsvector('There was a crooked man, and he walked a crooked mile');
 
-to_tsvector               
+to_tsvector
 -----------------------------------------
  'crook':4,10 'man':5 'mile':11 'walk':8
 (1 row)
 
 </code></pre><p>上面的查询利用 PostgreSQL 自带的 <code>to_tsvector</code> 函数将一句话转换为了多个 <code>tsvector</code>。</p><p>在上面的例子中，<code>'crook':4,10</code> 为第一个 <code>tsvector</code>，第一部分为语素：crook，第二部分为出现的位置：句中的第 <code>4</code> 个和第 <code>10</code> 个单词的位置（下标从 <code>1</code> 开始），以此类推。</p><p>这里的停用词（&ldquo;there&rdquo;, &ldquo;was&rdquo;, &ldquo;a&rdquo;, &ldquo;and&rdquo;, &ldquo;he&rdquo;）全部被去掉（因为这些词出现的频率太高了，对于搜索起到的作用非常有限）。</p><p>其实看到这里，大家已经明白，将所有<strong>待搜索内容</strong>转换为 <code>tsvector</code>，其实就是一个预处理的过程，单纯是为了后面执行搜索方便。</p><p>待搜索内容要处理，要匹配的搜索内容当然也需要处理。</p><p>在 PostgreSQL 中，<code>tsquery</code> 表示搜索词。一般而言，<code>tsquery</code> 由 <code>lexemes</code> 加上一些特殊符号组成，如下：</p><pre><code>postgres=# select to_tsquery('man &amp; (walking | running)');
 
-         to_tsquery         
+         to_tsquery
 ----------------------------
  'man' &amp; ( 'walk' | 'run' )
 (1 row)
@@ -255,7 +255,7 @@ postgres=# explain analyze select * from groups where name like '%探%';
 
 【单字模式】：我/ 来/ 到/ 北/ 京/ 清/ 华/ 大/ 学
 
-【全模式+精确模式+单字模式】：我/ 来到/ 北京/ 清华/ 清华大学/ 华大/ 大学/ 我/ 来/ 到/ 北/ 京/ 清/ 华/ 大/ 学 
+【全模式+精确模式+单字模式】：我/ 来到/ 北京/ 清华/ 清华大学/ 华大/ 大学/ 我/ 来/ 到/ 北/ 京/ 清/ 华/ 大/ 学
 
 </code></pre><p>上面的第四种模式，是在群聊业务中使用到的模式，在下面会介绍到。</p><p>群聊业务中根据业务使用场景的不同，采用了不同的分词模式进行：</p><p>在新增群或者群名变更时，由于对于群名要尽可能列举出来每一种分词的可能，所以采用了「全模式+精确模式+单字模式」结合的思路进行。</p><p>比如群名：「爱宠物的单身男女们」</p><p>使用分词包进行分词后，结果为：「爱、宠物、单身、男女」</p><p>这时，如果输入「女」进行查询，则由于在插入群数据时，没有对该群名分出来「女」这个语素，所以是无法查询出来的。</p><p>针对此缺陷，所以本次采用第四种的<strong>订制模式</strong>：「爱」「宠」「物」「的」「单」「身」「男」「女」「们」「宠物」「单身」「男女」。这样基本就把所有可能的模式尽可能列举出来了。</p><p>搜索群时对于用户输入的字符串采用了「分词模式」进行。</p><p>比如用户输入「女神经」，如果按照「全模式+分词模式」，结果就会为：「女」「神」「经」「神经」。</p><p>这样就会把所有只包含「女」或者「神」字的记录也查询出来，而只包含「神」的记录大概率是用户不想搜出来的，如果返回这些记录会让用户感觉莫名其妙，用户体验较差。</p><p>如果只采用「分词模式」，则会只搜索「女」或者「神经」，在体验上较好一些，匹配效率更高。</p><h3 id=分词包>分词包</h3><p>目前使用比较多的分词包主要有：gojieba 、 jiebago、sego、gse。</p><p>给定相同词典，大小为 9.2MB，让这四种分词包分别加载后，分析其指标（使用 pprof 方法分析）。</p><p>由于我们业务场景中使用的是对短句切分（不超过14个字），这几个包官方给出的分词效率都是 KB/s 级别，对于我们的使用场景，性能绰绰有余，所以我们重点放在了内存占用指标的对比上。</p><p>执行下面命令，查看这四个分词包内存情况：</p><div class=highlight><pre class=chroma><code class=language-go data-lang=go><span class=k>go</span> <span class=nx>tool</span> <span class=nx>pprof</span> <span class=o>-</span><span class=nx>inuse_space</span> <span class=nx>http</span><span class=p>:</span><span class=c1>//127.0.0.1:6060/debug/pprof/heap
 </span></code></pre></div><ol><li><p>gse 包</p><pre><code>(pprof) top

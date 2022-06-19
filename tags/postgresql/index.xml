@@ -191,7 +191,7 @@ The C and POSIX collations both specify “traditional C” behavior, in which o
 <p>这里出现的术语较多，举个例子就明白了：</p>
 <pre><code>postgres=# select to_tsvector('There was a crooked man, and he walked a crooked mile');
 
-to_tsvector               
+to_tsvector
 -----------------------------------------
  'crook':4,10 'man':5 'mile':11 'walk':8
 (1 row)
@@ -204,7 +204,7 @@ to_tsvector
 <p>在 PostgreSQL 中，<code>tsquery</code> 表示搜索词。一般而言，<code>tsquery</code> 由 <code>lexemes</code> 加上一些特殊符号组成，如下：</p>
 <pre><code>postgres=# select to_tsquery('man &amp; (walking | running)');
 
-         to_tsquery         
+         to_tsquery
 ----------------------------
  'man' &amp; ( 'walk' | 'run' )
 (1 row)
@@ -390,7 +390,7 @@ postgres=# explain analyze select * from groups where name like '%探%';
 
 【单字模式】：我/ 来/ 到/ 北/ 京/ 清/ 华/ 大/ 学
 
-【全模式+精确模式+单字模式】：我/ 来到/ 北京/ 清华/ 清华大学/ 华大/ 大学/ 我/ 来/ 到/ 北/ 京/ 清/ 华/ 大/ 学 
+【全模式+精确模式+单字模式】：我/ 来到/ 北京/ 清华/ 清华大学/ 华大/ 大学/ 我/ 来/ 到/ 北/ 京/ 清/ 华/ 大/ 学
 
 </code></pre><p>上面的第四种模式，是在群聊业务中使用到的模式，在下面会介绍到。</p>
 <p>群聊业务中根据业务使用场景的不同，采用了不同的分词模式进行：</p>

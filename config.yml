@@ -46,7 +46,7 @@ params:
       url: https://remark42.reorx.com
       site: reorx.github.io
     telegramWidget:
-      channel: readbyword
+      channel: anricleeblog
       accentColor: "9077e1"
       limit: 20
   defaultCommentSystems:

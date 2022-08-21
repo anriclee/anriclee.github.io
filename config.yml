@@ -66,6 +66,8 @@ params:
         url: /archives/
       - name: Tags
         url: /tags/
+      - name: BookList
+        url: /posts/readings/booklist/
 
   homeInfoParams:
     Title: "PaperModX"

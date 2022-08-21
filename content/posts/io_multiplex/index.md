@@ -1,8 +1,28 @@
 ---
-title: "当我们在谈IO多路复用我们在谈论什么"
+title: "当我们在谈IO多路复用我们在谈论什么系列之 SELECT"
 date: 2022-07-05T08:21:58+08:00
 draft: true
 tags:
     - IO
 ---
 
+# 0x00 多路复用是什么
+
+# 0x01 select 官方定义
+
+# 0x02
+
+
+
+
+
+
+
+
+
+
+
+
+视频清晰易懂地介绍了 IO 多路复用中的 select。
+
+https://www.youtube.com/watch?v=Y5PiHboUctw

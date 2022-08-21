@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Sat Jul 16 20:42:21 2022
+# Make data base, printed on Sun Aug 21 12:38:14 2022
 
 # Variables
 
@@ -17,6 +17,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 RUBY_VERSION = ruby-3.0.0
 # automatic
 ?F = $(notdir $?)
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+LC_CTYPE = UTF-8
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
@@ -36,11 +40,15 @@ _ = /usr/bin/make
 # makefile
 MAKEFILE_LIST := 
 # environment
+WARP_IS_LOCAL_SHELL_SESSION = 1
+# environment
 AUTOJUMP_SOURCED = 1
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_CWD = /
+VSCODE_CWD = /Users/lixuehan/blogs/anriclee.github.io
+# environment
+WARP_USE_SSH_WRAPPER = 1
 # environment
 PATH = /Users/lixuehan/.rvm/gems/ruby-3.0.0/bin:/Users/lixuehan/.rvm/gems/ruby-3.0.0@global/bin:/Users/lixuehan/.rvm/rubies/ruby-3.0.0/bin:/Library/PostgreSQL/10/bin:/Users/lixuehan/go/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Applications/Wireshark.app/Contents/MacOS:/Users/lixuehan/.cargo/bin:/Users/lixuehan/.rvm/bin:/Users/lixuehan/sonar/sonar-scanner-4.6.2.2472-macosx/bin/
 # environment
@@ -54,7 +62,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Qz8OIaAkSJ/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.VIRtXrbwTi/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -63,6 +71,8 @@ GOBIN = /Users/lixuehan/go/bin
 rvm_bin_path = /Users/lixuehan/.rvm/bin
 # environment
 PWD = /Users/lixuehan/blogs/anriclee.github.io
+# environment
+WARP_PS1 = %(?:%{[01;32m%}➜ :%{[01;31m%}➜ ) %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)
 # environment
 GEM_HOME = /Users/lixuehan/.rvm/gems/ruby-3.0.0
 # environment
@@ -73,6 +83,8 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 HOME = /Users/lixuehan
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+# environment
+VSCODE_CLI = 1
 # environment
 VSCODE_CODE_CACHE_PATH = /Users/lixuehan/Library/Application Support/Code/CachedData/92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9
 # environment
@@ -89,6 +101,8 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 GEM_PATH = /Users/lixuehan/.rvm/gems/ruby-3.0.0:/Users/lixuehan/.rvm/gems/ruby-3.0.0@global
 # environment
 XPC_FLAGS = 0x0
+# environment
+COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
 # default
@@ -96,7 +110,7 @@ MAKECMDGOALS := all
 # environment
 IRBRC = /Users/lixuehan/.rvm/rubies/ruby-3.0.0/.irbrc
 # environment
-SHLVL = 1
+SHLVL = 3
 # default
 MAKE_VERSION := 3.81
 # environment
@@ -113,6 +127,8 @@ LESS = -R
 %D = $(patsubst %/,%,$(dir $%))
 # default
 MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# environment
+TERM_PROGRAM = WarpTerminal
 # default
 .VARIABLES := 
 # environment
@@ -130,7 +146,9 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.113824453.113824459
+TERM_PROGRAM_VERSION = v0.2022.08.16.10.16.stable_02
+# environment
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.113824453.113824459.1F80EB18-F37D-42C1-A3C4-2640E46499A7
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
@@ -149,6 +167,8 @@ MAKEFILES :=
 PAGER = less
 # environment
 LC_ALL = C
+# environment
+CONDA_CHANGEPS1 = false
 # automatic
 ^F = $(notdir $^)
 # environment
@@ -164,15 +184,17 @@ MAKELEVEL := 0
 # environment
 AUTOJUMP_ERROR_PATH = /Users/lixuehan/Library/autojump/errors.log
 # environment
-GPG_TTY = not a tty
+GPG_TTY = /dev/ttys017
 # environment
 LANG = C
 # environment
-VSCODE_PID = 7000
+TERM = xterm-256color
+# environment
+VSCODE_PID = 31327
 # environment
 MY_RUBY_HOME = /Users/lixuehan/.rvm/rubies/ruby-3.0.0
 # variable set hash-table stats:
-# Load=80/1024=8%, Rehash=0, Collisions=2/101=2%
+# Load=91/1024=9%, Rehash=0, Collisions=2/112=2%
 
 # Pattern-specific Variable Values
 
@@ -254,7 +276,7 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Sat Jul 16 20:42:21 2022
+# Finished Make data base on Sun Aug 21 12:38:14 2022
 
  
 make: *** No rule to make target `all'.  Stop.

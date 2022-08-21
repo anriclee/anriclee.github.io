@@ -5,7 +5,7 @@
     <link>https://anriclee.github.io/</link>
     <description>Recent content on ReadByWord</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 21 Aug 2022 12:46:41 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jun 2022 11:43:42 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PaperModX New Features</title>
       <link>https://anriclee.github.io/docs/papermodx-new-features/</link>
@@ -104,36 +104,6 @@ to show all the icons, check it out at: <a href="https://reorx.github.io/hugo-Pa
       <guid>https://anriclee.github.io/docs/icons_preview/</guid>
       <description>Index of all icons in PaperModeX</description>
       <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>书单</title>
-      <link>https://anriclee.github.io/posts/readings/booklist/</link>
-      <pubDate>Sun, 21 Aug 2022 12:46:41 +0800</pubDate>
-      
-      <guid>https://anriclee.github.io/posts/readings/booklist/</guid>
-      <description>在读  《深入理解Java虚拟机》(二刷) 《Redis设计与实现》（黄建宏） 《张居正》（熊召政）  读完  《Unix传奇》（布莱恩·W·克尼汉） 《邓小平时代》(傅高义) 《置身事内》（兰小欢） 《富爸爸穷爸爸》（罗伯特·清崎）  想读  《数据库系统内幕》 《人生的智慧》   to be continued</description>
-      <content:encoded><![CDATA[<h3 id="在读">在读</h3>
-<ul>
-<li>《深入理解Java虚拟机》(二刷)</li>
-<li>《Redis设计与实现》（黄建宏）</li>
-<li>《张居正》（熊召政）</li>
-</ul>
-<h3 id="读完">读完</h3>
-<ul>
-<li>《Unix传奇》（布莱恩·W·克尼汉）</li>
-<li>《邓小平时代》(傅高义)</li>
-<li>《置身事内》（兰小欢）</li>
-<li>《富爸爸穷爸爸》（罗伯特·清崎）</li>
-</ul>
-<h3 id="想读">想读</h3>
-<ul>
-<li>《数据库系统内幕》</li>
-<li>《人生的智慧》</li>
-<li></li>
-</ul>
-<p>to be continued</p>
-]]></content:encoded>
     </item>
     
     <item>

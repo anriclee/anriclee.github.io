@@ -1,121 +1,367 @@
 <!DOCTYPE html>
-<html><div class="container">
-    <div id="navibarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-            <p>
-                <a class="navbar-item" href="/">Home</a>
-            </p>
-            
-                
-                    <p>
-                        <a class="navbar-item is-capitalized" href="/categories/tech">tech</a>
-                    </p>
-                
-            
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>基于 PostgreSQL 的群聊搜索实践 | ReadByWord</title>
+<meta name="keywords" content="PostgreSQL">
+<meta name="description" content="背景 2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。
+对于复杂场景的搜索，业界一般使用非常流行的 ElasticSearch。由于我们的群数据较少，截止到目前还没有达到千万级的量级，且搜索场景比较简单，而 PostgreSQL 对全文搜索又支持得比较好，所以选择了 PostgreSQL 来实现群搜索需求。 在使用 PostgreSQL 做群搜索的过程中，也经历了由简单到复杂的迭代过程，中间也踩了不少坑。 下面的几个例子说明了方案的演进过程和我们的优化思路，希望能够对大家有所帮助。
+LIKE 模糊查询 提到模糊搜索，最简单的办法就是对搜索列进行 like 匹配： 在输入词的前后加上 % 即可,如下所示:
+SELECT * FROM groups WHERE name LIKE &#39;%探探%&#39;; 这种方案可行是可行了，但是实现过于简单粗暴。对此方案进行测试：
+建一张简单的表进行测试，表结构如下：
+lixuehan=# \d groups; Table &quot;public.groups&quot; Column | Type | Collation | Nullable | Default --------&#43;-----------------------&#43;-----------&#43;----------&#43;------------------------------------ id | bigint | | not null | nextval(&#39;groups_id_seq&#39;::regclass) name | character varying(50) | | | Indexes: &quot;groups_pkey&quot; PRIMARY KEY, btree (id) 表中只有两列：主键 id 以及群名 name。">
+<meta name="author" content="anriclee">
+<link rel="canonical" href="https://anriclee.github.io/posts/pg/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.1a604fedec25e03e9fbf0fa84dfc2a185356369a0f7842f05d48cbb4e27cb258.css" integrity="sha256-GmBP7ewl4D6fvw&#43;oTfwqGFNWNpoPeELwXUjLtOJ8slg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://anriclee.github.io/favicon.ico">
+<link rel="apple-touch-icon" href="https://anriclee.github.io/apple-touch-icon.png">
+<link rel="alternate" hreflang="en" href="https://anriclee.github.io/posts/pg/">
+<meta name="twitter:image" content="https://anriclee.github.io/cover.png" />
+    <meta name="twitter:card" property="twitter:card" content="summary" />
+<meta name="twitter:title" content="基于 PostgreSQL 的群聊搜索实践 | ReadByWord" />
+<meta name="twitter:description" content="背景 2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。
+对于复杂场景的搜索，业界一般使用非常流行的 ElasticSearch。由于我们的群数据较少，截止到目前还没有达到千万级的量级，且搜索场景比较简单，而 PostgreSQL 对全文搜索又支持得比较好，所以选择了 PostgreSQL 来实现群搜索需求。 在使用 PostgreSQL 做群搜索的过程中，也经历了由简单到复杂的迭代过程，中间也踩了不少坑。 下面的几个例子说明了方案的演进过程和我们的优化思路，希望能够对大家有所帮助。
+LIKE 模糊查询 提到模糊搜索，最简单的办法就是对搜索列进行 like 匹配： 在输入词的前后加上 % 即可,如下所示:
+SELECT * FROM groups WHERE name LIKE &#39;%探探%&#39;; 这种方案可行是可行了，但是实现过于简单粗暴。对此方案进行测试：
+建一张简单的表进行测试，表结构如下：
+lixuehan=# \d groups; Table &quot;public.groups&quot; Column | Type | Collation | Nullable | Default --------&#43;-----------------------&#43;-----------&#43;----------&#43;------------------------------------ id | bigint | | not null | nextval(&#39;groups_id_seq&#39;::regclass) name | character varying(50) | | | Indexes: &quot;groups_pkey&quot; PRIMARY KEY, btree (id) 表中只有两列：主键 id 以及群名 name。" />
+<meta name="twitter:site" content="@novoreorx" />
+<meta name="twitter:creator" content="@novoreorx" />
+<meta property="og:title" content="基于 PostgreSQL 的群聊搜索实践 | ReadByWord" />
+<meta property="og:description" content="背景 2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。
+对于复杂场景的搜索，业界一般使用非常流行的 ElasticSearch。由于我们的群数据较少，截止到目前还没有达到千万级的量级，且搜索场景比较简单，而 PostgreSQL 对全文搜索又支持得比较好，所以选择了 PostgreSQL 来实现群搜索需求。 在使用 PostgreSQL 做群搜索的过程中，也经历了由简单到复杂的迭代过程，中间也踩了不少坑。 下面的几个例子说明了方案的演进过程和我们的优化思路，希望能够对大家有所帮助。
+LIKE 模糊查询 提到模糊搜索，最简单的办法就是对搜索列进行 like 匹配： 在输入词的前后加上 % 即可,如下所示:
+SELECT * FROM groups WHERE name LIKE &#39;%探探%&#39;; 这种方案可行是可行了，但是实现过于简单粗暴。对此方案进行测试：
+建一张简单的表进行测试，表结构如下：
+lixuehan=# \d groups; Table &quot;public.groups&quot; Column | Type | Collation | Nullable | Default --------&#43;-----------------------&#43;-----------&#43;----------&#43;------------------------------------ id | bigint | | not null | nextval(&#39;groups_id_seq&#39;::regclass) name | character varying(50) | | | Indexes: &quot;groups_pkey&quot; PRIMARY KEY, btree (id) 表中只有两列：主键 id 以及群名 name。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://anriclee.github.io/posts/pg/" />
+    <meta property="og:image" content="https://anriclee.github.io/cover.png"/>
+<meta property="article:section" content="posts" />
+  <meta property="article:published_time" content="2022-01-13T00:00:00&#43;00:00" />
+  <meta property="article:modified_time" content="2022-01-13T00:00:00&#43;00:00" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://anriclee.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "基于 PostgreSQL 的群聊搜索实践",
+      "item": "https://anriclee.github.io/posts/pg/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "基于 PostgreSQL 的群聊搜索实践 | ReadByWord",
+  "name": "基于 PostgreSQL 的群聊搜索实践",
+  "description": "背景 2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。\n对于复杂场景的搜索，业界一般使用非常流行的 ElasticSearch。由于我们的群数据较少，截止到目前还没有达到千万级的量级，且搜索场景比较简单，而 PostgreSQL 对全文搜索又支持得比较好，所以选择了 PostgreSQL 来实现群搜索需求。 在使用 PostgreSQL 做群搜索的过程中，也经历了由简单到复杂的迭代过程，中间也踩了不少坑。 下面的几个例子说明了方案的演进过程和我们的优化思路，希望能够对大家有所帮助。\nLIKE 模糊查询 提到模糊搜索，最简单的办法就是对搜索列进行 like 匹配： 在输入词的前后加上 % 即可,如下所示:\nSELECT * FROM groups WHERE name LIKE '%探探%'; 这种方案可行是可行了，但是实现过于简单粗暴。对此方案进行测试：\n建一张简单的表进行测试，表结构如下：\nlixuehan=# \\d groups; Table \u0026quot;public.groups\u0026quot; Column | Type | Collation | Nullable | Default --------+-----------------------+-----------+----------+------------------------------------ id | bigint | | not null | nextval('groups_id_seq'::regclass) name | character varying(50) | | | Indexes: \u0026quot;groups_pkey\u0026quot; PRIMARY KEY, btree (id) 表中只有两列：主键 id 以及群名 name。",
+  "keywords": [
+    "PostgreSQL"
+  ],
+  "wordCount" : "2415",
+  "inLanguage": "en",
+  "datePublished": "2022-01-13T00:00:00Z",
+  "dateModified": "2022-01-13T00:00:00Z",
+  "author":[{
+    "@type": "Person",
+    "name": "anriclee"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://anriclee.github.io/posts/pg/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ReadByWord",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://anriclee.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary-bg: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+</head>
+
+<body class="" id="top"><script data-no-instant>
+function switchTheme(theme) {
+  switch (theme) {
+    case 'light':
+      document.body.classList.remove('dark');
+      break;
+    case 'dark':
+      document.body.classList.add('dark');
+      break;
+    
+    default:
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+      }
+  }
+}
+
+function isDarkTheme() {
+  return document.body.className.includes("dark");
+}
+
+function getPrefTheme() {
+  return localStorage.getItem("pref-theme");
+}
+
+function setPrefTheme(theme) {
+  switchTheme(theme)
+  localStorage.setItem("pref-theme", theme);
+}
+
+const toggleThemeCallbacks = {}
+toggleThemeCallbacks['main'] = (isDark) => {
+  
+  if (isDark) {
+    setPrefTheme('light');
+  } else {
+    setPrefTheme('dark');
+  }
+}
+
+
+
+
+window.addEventListener('toggle-theme', function() {
+  
+  const isDark = isDarkTheme()
+  for (const key in toggleThemeCallbacks) {
+    toggleThemeCallbacks[key](isDark)
+  }
+});
+
+
+function toggleThemeListener() {
+  
+  window.dispatchEvent(new CustomEvent('toggle-theme'));
+}
+
+</script>
+<script>
+  
+  (function() {
+    const defaultTheme = 'auto';
+    const prefTheme = getPrefTheme();
+    const theme = prefTheme ? prefTheme : defaultTheme;
+
+    switchTheme(theme);
+  })();
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://anriclee.github.io" accesskey="h" title="ReadByWord (Alt + H)">ReadByWord</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
         </div>
-    </div>
-    <nav class="navbar level">
-        <div class="navbar-brand">
-            <a class="nav-item" href="https://anriclee.github.io/">
-                <h1 class="title is-3">AnricLee&#39;s House</h1>
-            </a>
-        </div>
-        <div class="navbar-menu has-text-centered is-active">
-            <div class="navbar-end is-centered">
-                
-                <a href="https://anriclee.github.io/about" rel="me">
-                    <span class="icon">
-                        <i class="fas fa-info"></i>
-                    </span>
+        <ul id="menu">
+            <li>
+                <a href="https://anriclee.github.io/docs/" title="Docs"
+                >Docs
                 </a>
-                
-                <a href="https://github.com/anriclee" rel="me">
-                    <span class="icon">
-                        <i class="fab fa-github"></i>
-                    </span>
+            </li>
+            <li>
+                <a href="https://anriclee.github.io/tags/" title="Tags"
+                >Tags
                 </a>
-                
-                <a href="https://www.linkedin.com" rel="me">
-                    <span class="icon">
-                        <i class="fab fa-weixin"></i>
-                    </span>
+            </li>
+            <li>
+                <a href="https://anriclee.github.io/archives/" title="Archive"
+                >Archive
                 </a>
-                
-                <a href="https://twitter.com" rel="me">
-                    <span class="icon">
-                        <i class="fab fa-weibo"></i>
-                    </span>
+            </li>
+            <li>
+                <a href="https://anriclee.github.io/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
+                >Search
                 </a>
-                
-            </div>
-        </div>
+            </li>
+            <li>
+                <a href="https://anriclee.github.io/" title="@Author" target="_blank"
+                >@Author<span class="external-link"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M11 7h-5a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-5" />
+  <line x1="10" y1="14" x2="20" y2="4" />
+  <polyline points="15 4 20 4 20 9" />
+</svg>
+</span>
+                </a>
+            </li>
+        </ul>
     </nav>
-</div><body><!DOCTYPE html>
-<html  lang="en-us" >
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+</header>
+<main class="main post">
 
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://anriclee.github.io">Home</a>&nbsp;»&nbsp;<a href="https://anriclee.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      基于 PostgreSQL 的群聊搜索实践
+    </h1>
+    <div class="post-meta"><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
+  <span>2022-01-13</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
+  <span class="post-tags"><a href="https://anriclee.github.io/tags/postgresql/">PostgreSQL</a></span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
+  <span>2415 words</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
+  <span>12 min</span></span>
 
+      
+      
+    </div>
+  </header> <div class="toc side right">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
 
-<title>基于 PostgreSQL 的群聊搜索实践 | AnricLee&#39;s House </title>
-<link rel="stylesheet" href="https://anriclee.github.io//css/styles.css">
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e8%83%8c%e6%99%af" aria-label="背景">背景</a></li>
+                <li>
+                    <a href="#like-%e6%a8%a1%e7%b3%8a%e6%9f%a5%e8%af%a2" aria-label="LIKE 模糊查询">LIKE 模糊查询</a><ul>
+                        
+                <li>
+                    <a href="#%e5%bb%ba-btree-%e7%b4%a2%e5%bc%95" aria-label="建 Btree 索引">建 Btree 索引</a></li></ul>
+                </li>
+                <li>
+                    <a href="#gin-%e7%b4%a2%e5%bc%95" aria-label="GIN 索引">GIN 索引</a></li>
+                <li>
+                    <a href="#%e4%b8%9a%e5%8a%a1%e5%88%86%e8%af%8d" aria-label="业务分词">业务分词</a><ul>
+                        
+                <li>
+                    <a href="#%e5%88%86%e8%af%8d%e6%96%b9%e6%a1%88" aria-label="分词方案">分词方案</a></li>
+                <li>
+                    <a href="#%e5%88%86%e8%af%8d%e5%8c%85" aria-label="分词包">分词包</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%80%92%e6%8e%92" aria-label="倒排">倒排</a><ul>
+                        
+                <li>
+                    <a href="#similarity" aria-label="similarity">similarity</a></li>
+                <li>
+                    <a href="#%e6%9c%80%e5%b0%8f%e7%bc%96%e8%be%91%e8%b7%9d%e7%a6%bb" aria-label="最小编辑距离">最小编辑距离</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%b8%8a%e7%ba%bf%e4%bc%98%e5%8c%96%e6%95%88%e6%9e%9c" aria-label="上线优化效果">上线优化效果</a></li>
+                <li>
+                    <a href="#%e6%9c%80%e5%90%8e" aria-label="最后">最后</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
 
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-    crossorigin="anonymous"></script>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/base16/zenburn.min.css"
-    crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"
-    integrity="sha512-W7EehcwtSbRF63FIQlXEOOd5mnq0Et0V0nUOvwcUvjnCKgOLLYbqriQxEQSp63sfrkryxIg/A/O8v8O18QwQCQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script src="https://anriclee.github.io//js/highlight.js"></script>
-
-
-
-
-<script type="text/javascript" src="https://anriclee.github.io//js/jssocials.js"></script>
-
-
-</html>
-
-</html><div id="content">
-<div class="container">
-    <h2 class="subtitle is-6">January 13,2022</h2>
-    <h1 class="subtitle is-size-4-mobile is-size-3-desktop">基于 PostgreSQL 的群聊搜索实践</h1>
-    <div class="content"><h2 id="背景">背景</h2>
+  <div class="post-content"><h2 id="背景">背景</h2>
 <p>2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。</p>
 <p>对于复杂场景的搜索，业界一般使用非常流行的 ElasticSearch。由于我们的群数据较少，截止到目前还没有达到千万级的量级，且搜索场景比较简单，而 PostgreSQL 对全文搜索又支持得比较好，所以选择了 PostgreSQL 来实现群搜索需求。
 在使用 PostgreSQL 做群搜索的过程中，也经历了由简单到复杂的迭代过程，中间也踩了不少坑。 下面的几个例子说明了方案的演进过程和我们的优化思路，希望能够对大家有所帮助。</p>
 <h2 id="like-模糊查询">LIKE 模糊查询</h2>
 <p>提到模糊搜索，最简单的办法就是对搜索列进行 like 匹配： 在输入词的前后加上 <code>%</code> 即可,如下所示:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> groups <span style="color:#66d9ef">WHERE</span> name <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%探探%&#39;</span>;
-</code></pre></div><p>这种方案可行是可行了，但是实现过于简单粗暴。对此方案进行测试：</p>
+<pre><code>SELECT * FROM groups WHERE name LIKE '%探探%';
+</code></pre><p>这种方案可行是可行了，但是实现过于简单粗暴。对此方案进行测试：</p>
 <p>建一张简单的表进行测试，表结构如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">lixuehan<span style="color:#f92672">=#</span> <span style="color:#960050;background-color:#1e0010">\</span>d groups;
-                                   <span style="color:#66d9ef">Table</span> <span style="color:#e6db74">&#34;public.groups&#34;</span>
- <span style="color:#66d9ef">Column</span> <span style="color:#f92672">|</span>         <span style="color:#66d9ef">Type</span>          <span style="color:#f92672">|</span> <span style="color:#66d9ef">Collation</span> <span style="color:#f92672">|</span> <span style="color:#66d9ef">Nullable</span> <span style="color:#f92672">|</span>              <span style="color:#66d9ef">Default</span>
-<span style="color:#75715e">--------+-----------------------+-----------+----------+------------------------------------
-</span><span style="color:#75715e"></span> id     <span style="color:#f92672">|</span> bigint                <span style="color:#f92672">|</span>           <span style="color:#f92672">|</span> <span style="color:#66d9ef">not</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">|</span> nextval(<span style="color:#e6db74">&#39;groups_id_seq&#39;</span>::regclass)
- name   <span style="color:#f92672">|</span> character varying(<span style="color:#ae81ff">50</span>) <span style="color:#f92672">|</span>           <span style="color:#f92672">|</span>          <span style="color:#f92672">|</span>
+<pre><code>lixuehan=# \d groups;
+                                   Table &quot;public.groups&quot;
+ Column |         Type          | Collation | Nullable |              Default
+--------+-----------------------+-----------+----------+------------------------------------
+ id     | bigint                |           | not null | nextval('groups_id_seq'::regclass)
+ name   | character varying(50) |           |          |
 Indexes:
-    <span style="color:#e6db74">&#34;groups_pkey&#34;</span> <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>, btree (id)
-</code></pre></div><p>表中只有两列：主键 <code>id</code> 以及群名 <code>name</code>。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">or</span> <span style="color:#66d9ef">replace</span> <span style="color:#66d9ef">function</span> gen_hanzi(int) <span style="color:#66d9ef">returns</span> text <span style="color:#66d9ef">as</span> <span style="color:#960050;background-color:#1e0010">$$</span>
-<span style="color:#66d9ef">declare</span>
+    &quot;groups_pkey&quot; PRIMARY KEY, btree (id)
+</code></pre><p>表中只有两列：主键 <code>id</code> 以及群名 <code>name</code>。</p>
+<pre><code>create or replace function gen_hanzi(int) returns text as $$
+declare
     res text;
-<span style="color:#66d9ef">begin</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">1</span> <span style="color:#66d9ef">then</span>
-        <span style="color:#66d9ef">select</span> string_agg(chr(<span style="color:#ae81ff">19968</span><span style="color:#f92672">+</span>(random()<span style="color:#f92672">*</span><span style="color:#ae81ff">20901</span>)::int), <span style="color:#e6db74">&#39;&#39;</span>) <span style="color:#66d9ef">into</span> res <span style="color:#66d9ef">from</span> generate_series(<span style="color:#ae81ff">1</span>,<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#ae81ff">1</span>);
-        <span style="color:#66d9ef">return</span> res;
-    <span style="color:#66d9ef">end</span> <span style="color:#66d9ef">if</span>;
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
-<span style="color:#66d9ef">end</span>;
-<span style="color:#960050;background-color:#1e0010">$$</span> <span style="color:#66d9ef">language</span> plpgsql <span style="color:#66d9ef">strict</span>;
+begin
+    if $1 &gt;=1 then
+        select string_agg(chr(19968+(random()*20901)::int), '') into res from generate_series(1,$1);
+        return res;
+    end if;
+    return null;
+end;
+$$ language plpgsql strict;
 
-</code></pre></div><p><code>gen_hanzi</code> 是一个随机生成汉字的函数，我们使用一个该函数构造 100w 条数据，插入到该表中。</p>
+</code></pre><p><code>gen_hanzi</code> 是一个随机生成汉字的函数，我们使用一个该函数构造 100w 条数据，插入到该表中。</p>
 <pre><code>lixuehan=# insert into groups(name) select gen_hanzi(20) from generate_series(1,1000000);
 INSERT 0 1000000
 lixuehan=# select count(*) from groups;
@@ -124,8 +370,8 @@ lixuehan=# select count(*) from groups;
  1000000
 (1 row)
 </code></pre><p>现在开始对上表根据 <code>name</code> 列进行 like 搜索。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> groups <span style="color:#66d9ef">WHERE</span> name <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%探探%&#39;</span>;
-</code></pre></div><p>查看其执行计划</p>
+<pre><code>SELECT * FROM groups WHERE name LIKE '%探探%';
+</code></pre><p>查看其执行计划</p>
 <pre><code>lixuehan=# explain analyze select * from groups where name like '%探探%';
                                                        QUERY PLAN
 ------------------------------------------------------------------------------------------------------------------------
@@ -147,8 +393,8 @@ for example, col LIKE &lsquo;foo%&rsquo; or col ~ &lsquo;^foo&rsquo;, <strong>bu
 </blockquote>
 <p>官方推荐的做法是给搜索列建立 btree 索引，但是不支持前模糊查询（为避免歧义，这里的「前模糊查询」指的是前缀不确定的查询，「后模糊查询」指的是后缀不确定的查询，后面不再赘述）。</p>
 <p>于是，我们尝试对 <code>name</code> 列构建 <code>btree</code> 索引。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">index</span> group_name_idx <span style="color:#66d9ef">on</span> groups <span style="color:#66d9ef">using</span> btree(name);
-</code></pre></div><p>然后再对该表执行查询，分别执行前模糊、后模糊和两边均模糊三种：</p>
+<pre><code>create index group_name_idx on groups using btree(name);
+</code></pre><p>然后再对该表执行查询，分别执行前模糊、后模糊和两边均模糊三种：</p>
 <pre><code>lixuehan=# explain analyze select * from groups where name like '%探探大群%';
                                                        QUERY PLAN
 -------------------------------------------------------------------------------------------------------------------------
@@ -188,10 +434,10 @@ lixuehan=# explain analyze select * from groups where name like '%探探大群';
 
 </code></pre><p>可以看到，<strong>只有在执行后模糊查询时</strong>，命中索引，耗时缩短到了 <code>0.829ms</code>。</p>
 <p>不支持前模糊查询没有关系，再建一个反向索引即可：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> <span style="color:#66d9ef">ON</span> groups(reverse(name));
-</code></pre></div><p>执行搜索时，执行反向查询，如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> groups <span style="color:#66d9ef">where</span> reverse(name) <span style="color:#66d9ef">like</span> reverse(<span style="color:#e6db74">&#39;%探探&#39;</span>);
-</code></pre></div><p>查看其执行计划：</p>
+<pre><code>CREATE INDEX ON groups(reverse(name));
+</code></pre><p>执行搜索时，执行反向查询，如下：</p>
+<pre><code>select * from groups where reverse(name) like reverse('%探探');
+</code></pre><p>查看其执行计划：</p>
 <pre><code>Bitmap Heap Scan on groups  (cost=292.93..10708.01 rows=5500 width=127)
    Filter: (reverse((name)::text) ~~ '探探%'::text)
    -&gt;  Bitmap Index Scan on groups_reverse_idx  (cost=0.00..291.55 rows=5500 width=0)
@@ -217,8 +463,8 @@ LC_COLLATE and LC_CTYPE are these categories.</p>
 </blockquote>
 <p>这里说的很明白，一旦数据库被创建了，就不能更改其 <code>LC_COLLATE</code> 和 <code>LC_CTYPE</code> 设置了（这两个参数分别对应上面的 <code>Collate</code> 和 <code>Ctype</code>）。</p>
 <p>为此，再建一个 <code>Locale</code> 非 <code>C</code> 的数据库，重复上面的查询。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> lixuehan2 LC_COLLATE <span style="color:#e6db74">&#39;en_US.UTF-8&#39;</span> LC_CTYPE <span style="color:#e6db74">&#39;en_US.UTF-8&#39;</span> <span style="color:#66d9ef">TEMPLATE</span> template0;
-</code></pre></div><pre><code>lixuehan2=# explain analyze select * from groups where name like '探%';
+<pre><code>create database lixuehan2 LC_COLLATE 'en_US.UTF-8' LC_CTYPE 'en_US.UTF-8' TEMPLATE template0;
+</code></pre><pre><code>lixuehan2=# explain analyze select * from groups where name like '探%';
                                                       QUERY PLAN
 -----------------------------------------------------------------------------------------------------------------------
  Gather  (cost=1000.00..20321.17 rows=110 width=69) (actual time=0.364..71.770 rows=59 loops=1)
@@ -258,7 +504,7 @@ The C and POSIX collations both specify “traditional C” behavior, in which o
 <p>这里出现的术语较多，举个例子就明白了：</p>
 <pre><code>postgres=# select to_tsvector('There was a crooked man, and he walked a crooked mile');
 
-to_tsvector               
+to_tsvector
 -----------------------------------------
  'crook':4,10 'man':5 'mile':11 'walk':8
 (1 row)
@@ -271,7 +517,7 @@ to_tsvector
 <p>在 PostgreSQL 中，<code>tsquery</code> 表示搜索词。一般而言，<code>tsquery</code> 由 <code>lexemes</code> 加上一些特殊符号组成，如下：</p>
 <pre><code>postgres=# select to_tsquery('man &amp; (walking | running)');
 
-         to_tsquery         
+         to_tsquery
 ----------------------------
  'man' &amp; ( 'walk' | 'run' )
 (1 row)
@@ -433,14 +679,14 @@ postgres=# explain analyze select * from groups where name like '%探%';
 <p>2.定制性太差，只能使用它自己定义的逻辑来定义字符串的相似度</p>
 <p>3.对 <code>LC_CTYPE</code> 有特殊的要求，可移植性较差 ，默认的 <code>LC_CTYPE</code> 无法正确对中文进行分词。</p>
 <p>于是，我们决定在业务中使用分词。</p>
-<p><img src="imgs/business_cut_words.png" alt="分词架构"></p>
+<p><img loading="lazy" src="/posts/pg/imgs/business_cut_words.png" type="" alt="分词架构"  /></p>
 <ul>
 <li>分词：在维护阶段，每一个被模糊搜索的字段（例如应用名称），在<strong>业务代码中使用分词包</strong>加工处理成一系列关键词。</li>
 <li>索引：在数据库中建立关键词到表记录的倒排索引</li>
 <li>查询：<strong>将查询同样拆解为关键词</strong>，然后利用查询关键词通过倒排索引找出相关的记录来。</li>
 </ul>
 <p>所以，我们打算采用业务代码分词 + PG查询的方式进行：</p>
-<p><img src="imgs/search_update.png" alt="搜索和查询架构"></p>
+<p><img loading="lazy" src="/posts/pg/imgs/search_update.png" type="" alt="搜索和查询架构"  /></p>
 <ul>
 <li>在业务表中新增一列，专门用来存放搜索列的分词结果</li>
 <li>更新或者新插入记录时，在业务代码中进行分词，将分词结果，以 <code>tsvector</code> 的形式存储到新增列中</li>
@@ -457,7 +703,7 @@ postgres=# explain analyze select * from groups where name like '%探%';
 
 【单字模式】：我/ 来/ 到/ 北/ 京/ 清/ 华/ 大/ 学
 
-【全模式+精确模式+单字模式】：我/ 来到/ 北京/ 清华/ 清华大学/ 华大/ 大学/ 我/ 来/ 到/ 北/ 京/ 清/ 华/ 大/ 学 
+【全模式+精确模式+单字模式】：我/ 来到/ 北京/ 清华/ 清华大学/ 华大/ 大学/ 我/ 来/ 到/ 北/ 京/ 清/ 华/ 大/ 学
 
 </code></pre><p>上面的第四种模式，是在群聊业务中使用到的模式，在下面会介绍到。</p>
 <p>群聊业务中根据业务使用场景的不同，采用了不同的分词模式进行：</p>
@@ -475,7 +721,7 @@ postgres=# explain analyze select * from groups where name like '%探%';
 <p>给定相同词典，大小为 9.2MB，让这四种分词包分别加载后，分析其指标（使用 pprof 方法分析）。</p>
 <p>由于我们业务场景中使用的是对短句切分（不超过14个字），这几个包官方给出的分词效率都是 KB/s 级别，对于我们的使用场景，性能绰绰有余，所以我们重点放在了内存占用指标的对比上。</p>
 <p>执行下面命令，查看这四个分词包内存情况：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">go</span> <span style="color:#a6e22e">tool</span> <span style="color:#a6e22e">pprof</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">inuse_space</span> <span style="color:#a6e22e">http</span>:<span style="color:#75715e">//127.0.0.1:6060/debug/pprof/heap
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="k">go</span> <span class="nx">tool</span> <span class="nx">pprof</span> <span class="o">-</span><span class="nx">inuse_space</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//127.0.0.1:6060/debug/pprof/heap
 </span></code></pre></div><ol>
 <li>
 <p>gse 包</p>
@@ -620,10 +866,10 @@ Showing nodes accounting for 520.04kB, 100% of 520.04kB total
 <p>如前所述，我们再业务表中新增一列存储分词结果：<code>group_name_tokens</code>。</p>
 <p>PostgreSQL 官方文档推荐两种方法建立索引：</p>
 <p>1）直接对 <code>group_name_tokens</code> 建立函数索引，比如：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">INDEX</span> group_idx <span style="color:#66d9ef">ON</span> groups <span style="color:#66d9ef">USING</span> GIN (to_tsvector(config_name, body));<span style="color:#75715e">--to_tsvector 是PG内置的函数
-</span></code></pre></div><p>2）直接将该列设置为 <code>tsvector</code> 类型，直接对 <code>tsvector</code> 类型列建立索引。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> groups <span style="color:#66d9ef">ADD</span> <span style="color:#66d9ef">column</span> group_name_tokens tsvector;
-</code></pre></div><p>我们选择方案2，出于以下考虑：</p>
+<pre><code>CREATE INDEX group_idx ON groups USING GIN (to_tsvector(config_name, body));--to_tsvector 是PG内置的函数
+</code></pre><p>2）直接将该列设置为 <code>tsvector</code> 类型，直接对 <code>tsvector</code> 类型列建立索引。</p>
+<pre><code>ALTER TABLE groups ADD column group_name_tokens tsvector;
+</code></pre><p>我们选择方案2，出于以下考虑：</p>
 <p>方案1，建立索引更简单一些，占用磁盘空间更小，因为 tsvector 并没有显式存储，但是每次查询都需要重新执行计算 <code>to_tsvector</code> 值，速度较慢;</p>
 <p>方案2，利用索引查询时，无需指定全文索引的配置（全文索引有一些跟 <code>Locale</code> 相关的配置），另外，由于在验证索引匹配时，无需重新计算 <code>to_tsvector</code> 值，所以查询速度更快。</p>
 <p>在群聊业务场景下，考虑到群的数量可控，所以占用空间不会增加太多，同时用户对于搜索速度的体验要求更高，所以采用了方案2。</p>
@@ -632,8 +878,8 @@ Showing nodes accounting for 520.04kB, 100% of 520.04kB total
 <p>这个是在 <code>pg_trgm</code> 扩展中包含的函数，其对中文分词支持不佳，所以业务中不采用。</p>
 <h3 id="最小编辑距离">最小编辑距离</h3>
 <p>最小编辑距离，需要使用到 PostgreSQL 的扩展：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> EXTENSION fuzzystrmatch;<span style="color:#75715e">---依赖该扩展为搜索结果排序
-</span></code></pre></div><p>levenshtein 函数的一些相关 API：</p>
+<pre><code>CREATE EXTENSION fuzzystrmatch;---依赖该扩展为搜索结果排序
+</code></pre><p>levenshtein 函数的一些相关 API：</p>
 <pre><code>levenshtein(text source, text target, int ins_cost, int del_cost, int sub_cost) returns int
 levenshtein(text source, text target) returns int
 levenshtein_less_equal(text source, text target, int ins_cost, int del_cost, int sub_cost, int max_d) returns int
@@ -645,93 +891,93 @@ levenshtein_less_equal(text source, text target, int max_d) returns int
 <li>
 <p>插入</p>
 <p><code>GUMBO</code> 和 <code>GUMBOL</code>，后者相比前者，等价于插入了一个 <code>L</code> 字符。所以，影响最终结果的，只有 <code>ins_cost</code> 参数。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">--- 设置为 0，表示插入新字符带来的代价不影响
-</span><span style="color:#75715e"></span>lixuehan<span style="color:#f92672">=#</span> <span style="color:#66d9ef">SELECT</span> levenshtein(<span style="color:#e6db74">&#39;GUMBO&#39;</span>, <span style="color:#e6db74">&#39;GUMBOL&#39;</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>);
+<pre><code>--- 设置为 0，表示插入新字符带来的代价不影响
+lixuehan=# SELECT levenshtein('GUMBO', 'GUMBOL',0,1,1);
  levenshtein
-<span style="color:#75715e">-------------
-</span><span style="color:#75715e"></span>           <span style="color:#ae81ff">0</span>
-(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span>)
+-------------
+           0
+(1 row)
 
-<span style="color:#75715e">--- 设置为 1，表示插入新字符带来的代价为 1
-</span><span style="color:#75715e"></span>lixuehan<span style="color:#f92672">=#</span> <span style="color:#66d9ef">SELECT</span> levenshtein(<span style="color:#e6db74">&#39;GUMBO&#39;</span>, <span style="color:#e6db74">&#39;GUMBOL&#39;</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>);
+--- 设置为 1，表示插入新字符带来的代价为 1
+lixuehan=# SELECT levenshtein('GUMBO', 'GUMBOL',1,1,1);
  levenshtein
-<span style="color:#75715e">-------------
-</span><span style="color:#75715e"></span>           <span style="color:#ae81ff">1</span>
-(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span>)
-</code></pre></div></li>
+-------------
+           1
+(1 row)
+</code></pre></li>
 <li>
 <p>删除</p>
 <p><code>GUMBO</code> 和 <code>GUMO</code>，后者相比前者，等价于删除了一个 <code>B</code> 字符。所以，影响最终比较结果的只有 <code>del_cost</code> 参数。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">--- 设置为 0，表示插入新字符带来的代价不影响
-</span><span style="color:#75715e"></span>lixuehan<span style="color:#f92672">=#</span> <span style="color:#66d9ef">SELECT</span> levenshtein(<span style="color:#e6db74">&#39;GUMBO&#39;</span>, <span style="color:#e6db74">&#39;GUMO&#39;</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>);
+<pre><code>--- 设置为 0，表示插入新字符带来的代价不影响
+lixuehan=# SELECT levenshtein('GUMBO', 'GUMO',1,0,1);
  levenshtein
-<span style="color:#75715e">-------------
-</span><span style="color:#75715e"></span>           <span style="color:#ae81ff">0</span>
-(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span>)
+-------------
+           0
+(1 row)
 
-<span style="color:#75715e">--- 设置为 1，表示插入新字符带来的代价为 1
-</span><span style="color:#75715e"></span>lixuehan<span style="color:#f92672">=#</span> <span style="color:#66d9ef">SELECT</span> levenshtein(<span style="color:#e6db74">&#39;GUMBO&#39;</span>, <span style="color:#e6db74">&#39;GUMO&#39;</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>);
+--- 设置为 1，表示插入新字符带来的代价为 1
+lixuehan=# SELECT levenshtein('GUMBO', 'GUMO',1,1,1);
  levenshtein
-<span style="color:#75715e">-------------
-</span><span style="color:#75715e"></span>           <span style="color:#ae81ff">1</span>
-(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span>)
-</code></pre></div></li>
+-------------
+           1
+(1 row)
+</code></pre></li>
 <li>
 <p>代替</p>
 <p><code>GUMBO</code> 和 <code>GUMLO</code>，后者相比前者，等价于将 <code>B</code> 字符替换为 <code>L</code> 字符。所以，影响最终比较结果的只有 <code>sub_cost</code> 参数。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">--- 设置为 0，表示插入新字符带来的代价不影响
-</span><span style="color:#75715e"></span>lixuehan<span style="color:#f92672">=#</span> <span style="color:#66d9ef">SELECT</span> levenshtein(<span style="color:#e6db74">&#39;GUMBO&#39;</span>, <span style="color:#e6db74">&#39;GUMLO&#39;</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>);
+<pre><code>--- 设置为 0，表示插入新字符带来的代价不影响
+lixuehan=# SELECT levenshtein('GUMBO', 'GUMLO',1,1,0);
  levenshtein
-<span style="color:#75715e">-------------
-</span><span style="color:#75715e"></span>           <span style="color:#ae81ff">0</span>
-(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span>)
+-------------
+           0
+(1 row)
 
-<span style="color:#75715e">--- 设置为 1，表示插入新字符带来的代价为 1
-</span><span style="color:#75715e"></span>lixuehan<span style="color:#f92672">=#</span> <span style="color:#66d9ef">SELECT</span> levenshtein(<span style="color:#e6db74">&#39;GUMBO&#39;</span>, <span style="color:#e6db74">&#39;GUMLO&#39;</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>);
+--- 设置为 1，表示插入新字符带来的代价为 1
+lixuehan=# SELECT levenshtein('GUMBO', 'GUMLO',1,1,1);
  levenshtein
-<span style="color:#75715e">-------------
-</span><span style="color:#75715e"></span>           <span style="color:#ae81ff">1</span>
-(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span>)
-</code></pre></div></li>
+-------------
+           1
+(1 row)
+</code></pre></li>
 </ol>
 <p>在实际的使用中，我们可以通过确定字符串这三种不同改变带来的权重来影响实际的比较结果。</p>
 <p><code>levenshtein_less_equal</code> 函数是一个加速版的 <code>levenshtein</code>。如果 <code>levenshtein</code> 距离大于 <code>max_id</code> ，则返回 <code>levenshtein</code> 距离值，反之，则返回 <code>max_id+1</code>。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">--- levenshtein 距离 ---
-</span><span style="color:#75715e"></span>lixuehan<span style="color:#f92672">=#</span> <span style="color:#66d9ef">select</span> levenshtein(<span style="color:#e6db74">&#39;extensive&#39;</span>, <span style="color:#e6db74">&#39;exhaustive&#39;</span>);
+<pre><code>--- levenshtein 距离 ---
+lixuehan=# select levenshtein('extensive', 'exhaustive');
  levenshtein
-<span style="color:#75715e">-------------
-</span><span style="color:#75715e"></span>           <span style="color:#ae81ff">4</span>
-(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span>)
+-------------
+           4
+(1 row)
 
-<span style="color:#75715e">--- max_id 为 2，时返回 3 ---
-</span><span style="color:#75715e"></span>lixuehan<span style="color:#f92672">=#</span> <span style="color:#66d9ef">SELECT</span> levenshtein_less_equal(<span style="color:#e6db74">&#39;extensive&#39;</span>, <span style="color:#e6db74">&#39;exhaustive&#39;</span>,<span style="color:#ae81ff">2</span>);
+--- max_id 为 2，时返回 3 ---
+lixuehan=# SELECT levenshtein_less_equal('extensive', 'exhaustive',2);
  levenshtein_less_equal
-<span style="color:#75715e">------------------------
-</span><span style="color:#75715e"></span>                      <span style="color:#ae81ff">3</span>
-(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span>)
+------------------------
+                      3
+(1 row)
 
-<span style="color:#75715e">--- max_id 为 1，时返回 2 ---
-</span><span style="color:#75715e"></span>lixuehan<span style="color:#f92672">=#</span> <span style="color:#66d9ef">SELECT</span> levenshtein_less_equal(<span style="color:#e6db74">&#39;extensive&#39;</span>, <span style="color:#e6db74">&#39;exhaustive&#39;</span>,<span style="color:#ae81ff">1</span>);
+--- max_id 为 1，时返回 2 ---
+lixuehan=# SELECT levenshtein_less_equal('extensive', 'exhaustive',1);
  levenshtein_less_equal
-<span style="color:#75715e">------------------------
-</span><span style="color:#75715e"></span>                      <span style="color:#ae81ff">2</span>
-(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span>)
+------------------------
+                      2
+(1 row)
 
-<span style="color:#75715e">--- max_id 大于 levenshtein 值时，返回真正的 levenshtein 距离 ---
-</span><span style="color:#75715e"></span>lixuehan<span style="color:#f92672">=#</span> <span style="color:#66d9ef">SELECT</span> levenshtein_less_equal(<span style="color:#e6db74">&#39;extensive&#39;</span>, <span style="color:#e6db74">&#39;exhaustive&#39;</span>,<span style="color:#ae81ff">7</span>);
+--- max_id 大于 levenshtein 值时，返回真正的 levenshtein 距离 ---
+lixuehan=# SELECT levenshtein_less_equal('extensive', 'exhaustive',7);
  levenshtein_less_equal
-<span style="color:#75715e">------------------------
-</span><span style="color:#75715e"></span>                      <span style="color:#ae81ff">4</span>
-(<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">row</span>)
-</code></pre></div><p>在我们的群搜索业务场景中，采取了简单的第二种 api ：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">levenshtein(text source, text target) returns <span style="color:#66d9ef">int</span>
+------------------------
+                      4
+(1 row)
+</code></pre><p>在我们的群搜索业务场景中，采取了简单的第二种 api ：</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="n">levenshtein</span><span class="p">(</span><span class="n">text</span> <span class="n">source</span><span class="p">,</span> <span class="n">text</span> <span class="n">target</span><span class="p">)</span> <span class="n">returns</span> <span class="kt">int</span>
 </code></pre></div><p>这种情况下，三种case带来的影响都默认是 1.</p>
 <p>更多介绍参见 <a href="https://www.postgresql.org/docs/9.1/fuzzystrmatch.html">官方文档</a>。</p>
 <p>使用方式比较直观：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> id,levenshtein(name,<span style="color:#f92672">?</span>) <span style="color:#66d9ef">AS</span> distance <span style="color:#66d9ef">FROM</span> groups <span style="color:#66d9ef">WHERE</span> group_name_tokens <span style="color:#f92672">@@</span> to_tsquery(<span style="color:#e6db74">&#39;探探&#39;</span>) <span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> distance <span style="color:#66d9ef">ASC</span>
-</code></pre></div><h2 id="上线优化效果">上线优化效果</h2>
+<pre><code>SELECT id,levenshtein(name,?) AS distance FROM groups WHERE group_name_tokens @@ to_tsquery('探探') ORDER BY distance ASC
+</code></pre><h2 id="上线优化效果">上线优化效果</h2>
 <p>利用分词+倒排的方案，实现了搜索功能与 PostgreSQL 的 <code>Locale_Ctype</code> 彻底解耦，同时提供了相似度排名特性，同时加快了搜索的速度，提升了性能，下面两张图就是上线前后的对比：</p>
-<p><img src="imgs/compare.png" alt="上线前后对比"></p>
+<p><img loading="lazy" src="/posts/pg/imgs/compare.png" type="" alt=""  /></p>
 <p>上线前后对比</p>
 <p>优化上线前，搜索查询最长耗时 <code>22.2ms</code>，最短耗时 <code>440us</code>，平均耗时：<code>6.6ms</code>。</p>
 <p>优化上线后，最短耗时：<code>456us</code>，最长耗时：<code>14ms</code>，平均耗时：<code>1.7ms</code>。</p>
@@ -745,12 +991,308 @@ levenshtein_less_equal(text source, text target, int max_d) returns int
 <li><a href="https://postgrespro.com/blog/pgsql/4261647">Indexes in PostgreSQL</a></li>
 <li><a href="https://postgrespro.com/blog/pgsql/4261647">https://postgrespro.com/blog/pgsql/4261647</a></li>
 </ol>
-</div>
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="prev" href="https://anriclee.github.io/posts/telegram_bot/">
+    <span class="title">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" style="user-select: text;"><line x1="19" y1="12" x2="5" y2="12" style="user-select: text;"></line><polyline points="12 19 5 12 12 5" style="user-select: text;"></polyline></svg>&nbsp;Prev Page</span>
+    <br>
+    <span>Telegram bot 入门实践</span>
+  </a>
+  <a class="next" href="https://anriclee.github.io/docs/icons/">
+    <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
+    </span>
+    <br>
+    <span>Icons</span>
+  </a>
+</nav>
+
+  </footer><div class="comments-box telegram-widget">
+  <div id="telegram-widget-container"></div>
 </div>
 
-        </div><section class="section">
-    <div class="container has-text-centered">
-        <p>&copy; <a href="https://github.com/anriclee"> AnricLee </a></p>
-    </div>
-</section></body>
+<script>
+  (function() {
+    
+    const key = 'telegram-widget'
+    if (!toggleThemeCallbacks.hasOwnProperty(key)) {
+      toggleThemeCallbacks[key] = (isDark) => {
+        
+        const telegram = window.Telegram
+        if (!telegram || !document.querySelector('#telegram-widget-container')) {
+          return;
+        }
+        if (isDark) {
+          telegram.setWidgetOptions({'nodark': 1})
+        } else {
+          telegram.setWidgetOptions({'dark': 1})
+        }
+      }
+    }
+
+    
+    const attrs = {
+      'data-telegram-discussion': "anricleeblog\/10",
+      'data-comments-limit': "20",
+      
+      'data-no-instant': '',
+    }
+    const accentColor = '9077e1';
+    if (accentColor) {
+      attrs['data-color'] = accentColor;
+    }
+    if (isDarkTheme()) {
+      attrs['data-dark'] = '1'
+    }
+
+    
+    
+    var d = document, s = d.createElement('script');
+    s.src = "https://telegram.org/js/telegram-widget.js?19";
+    for (const key in attrs) {
+      s.setAttribute(key, attrs[key]);
+    }
+
+    const container = document.querySelector('#telegram-widget-container')
+    container.innerHTML = '';
+    
+    container.appendChild(s);
+  })();
+</script>
+
+</article>
+    </main>
+    
+<footer class="footer">
+  <span>&copy; 2023 <a href="https://anriclee.github.io">ReadByWord</a></span><span style="display: inline-block; margin-left: 1em;">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
+  </span>
+  <span style="display: inline-block; margin-left: 1em;">
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://github.com/reorx/hugo-PaperModX/" rel="noopener" target="_blank">PaperModX</a>
+  </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+    <path d="M12 6H0l6-6z" />
+  </svg>
+</a>
+
+<script>
+  (function() {
+     
+    const disableThemeToggle = '' == '1';
+    if (disableThemeToggle) {
+      return;
+    }
+
+    let button = document.getElementById("theme-toggle")
+    
+    button.removeEventListener('click', toggleThemeListener)
+    
+    button.addEventListener('click', toggleThemeListener)
+  })();
+</script>
+
+<script>
+  (function () {
+    let menu = document.getElementById('menu')
+    if (menu) {
+      menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+      menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+      }
+    }
+
+    const disableSmoothScroll = '' == '1';
+    const enableInstantClick = '1' == '1';
+    
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || disableSmoothScroll || enableInstantClick) {
+      return;
+    }
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        var id = this.getAttribute("href").substr(1);
+        document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+          behavior: "smooth"
+        });
+        if (id === "top") {
+          history.replaceState(null, null, " ");
+        } else {
+          history.pushState(null, null, `#${id}`);
+        }
+      });
+    });
+  })();
+</script>
+<script>
+  var mybutton = document.getElementById("top-link");
+  window.onscroll = function () {
+    if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+      mybutton.style.visibility = "visible";
+      mybutton.style.opacity = "1";
+    } else {
+      mybutton.style.visibility = "hidden";
+      mybutton.style.opacity = "0";
+    }
+  };
+</script>
+<script>
+  if (window.scrollListeners) {
+    
+    for (const listener of scrollListeners) {
+      window.removeEventListener('scroll', listener)
+    }
+  }
+  window.scrollListeners = []
+</script>
+
+
+
+<script src="/js/medium-zoom.min.js" data-no-instant
+></script>
+<script>
+  document.querySelectorAll('pre > code').forEach((codeblock) => {
+    const container = codeblock.parentNode.parentNode;
+
+    const copybutton = document.createElement('button');
+    copybutton.classList.add('copy-code');
+    copybutton.innerText = 'copy';
+
+    function copyingDone() {
+      copybutton.innerText = 'copied!';
+      setTimeout(() => {
+        copybutton.innerText = 'copy';
+      }, 2000);
+    }
+
+    copybutton.addEventListener('click', (cb) => {
+      if ('clipboard' in navigator) {
+        navigator.clipboard.writeText(codeblock.textContent);
+        copyingDone();
+        return;
+      }
+
+      const range = document.createRange();
+      range.selectNodeContents(codeblock);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      try {
+        document.execCommand('copy');
+        copyingDone();
+      } catch (e) { };
+      selection.removeRange(range);
+    });
+
+    if (container.classList.contains("highlight")) {
+      container.appendChild(copybutton);
+    } else if (container.parentNode.firstChild == container) {
+      
+    } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+      
+      codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+    } else {
+      
+      codeblock.parentNode.appendChild(copybutton);
+    }
+  });
+</script>
+
+
+
+
+<script>
+  
+  
+  (function() {
+    const enableTocScroll = '1' == '1'
+    if (!enableTocScroll) {
+      return
+    }
+    if (!document.querySelector('.toc')) {
+      console.log('no toc found, ignore toc scroll')
+      return
+    }
+    
+
+    
+    const scrollListeners = window.scrollListeners
+    const headings = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id]');
+    const activeClass = 'active';
+
+    
+    let activeHeading = headings[0];
+    getLinkByHeading(activeHeading).classList.add(activeClass);
+
+    const onScroll = () => {
+      const passedHeadings = [];
+      for (const h of headings) {
+        
+        if (getOffsetTop(h) < 5) {
+          passedHeadings.push(h)
+        } else {
+          break;
+        }
+      }
+      if (passedHeadings.length > 0) {
+        newActiveHeading = passedHeadings[passedHeadings.length - 1];
+      } else {
+        newActiveHeading = headings[0];
+      }
+      if (activeHeading != newActiveHeading) {
+        getLinkByHeading(activeHeading).classList.remove(activeClass);
+        activeHeading = newActiveHeading;
+        getLinkByHeading(activeHeading).classList.add(activeClass);
+      }
+    }
+
+    let timer = null;
+    const scrollListener = () => {
+      if (timer !== null) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(onScroll, 50)
+    }
+    window.addEventListener('scroll', scrollListener, false);
+    scrollListeners.push(scrollListener)
+
+    function getLinkByHeading(heading) {
+      const id = encodeURI(heading.getAttribute('id')).toLowerCase();
+      return document.querySelector(`.toc ul li a[href="#${id}"]`);
+    }
+
+    function getOffsetTop(heading) {
+      if (!heading.getClientRects().length) {
+        return 0;
+      }
+      let rect = heading.getBoundingClientRect();
+      return rect.top
+    }
+  })();
+  </script>
+<script>
+  mediumZoom('.entry-cover img');
+  mediumZoom('.post-content img:not([no-zoom])');
+</script>
+
+<script src="/js/instantclick.min.js" data-no-instant
+></script>
+<script data-no-instant>
+  
+  
+  
+  
+  
+  
+  InstantClick.init();
+</script>
+</body>
+
 </html>

@@ -8,7 +8,7 @@
 <title>Posts | ReadByWord</title>
 <meta name="keywords" content="">
 <meta name="description" content="Posts - ReadByWord">
-<meta name="author" content="Reorx">
+<meta name="author" content="anriclee">
 <link rel="canonical" href="https://anriclee.github.io/posts/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.1a604fedec25e03e9fbf0fa84dfc2a185356369a0f7842f05d48cbb4e27cb258.css" integrity="sha256-GmBP7ewl4D6fvw&#43;oTfwqGFNWNpoPeELwXUjLtOJ8slg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://anriclee.github.io/favicon.ico">
@@ -19,11 +19,11 @@
 <meta name="twitter:image" content="https://anriclee.github.io/cover.png" />
     <meta name="twitter:card" property="twitter:card" content="summary" />
 <meta name="twitter:title" content="Posts | ReadByWord" />
-<meta name="twitter:description" content="Theme PaperModX - https://github.com/reorx/hugo-PaperModX" />
+<meta name="twitter:description" content="ReadbyWord - https://anriclee.github.io" />
 <meta name="twitter:site" content="@novoreorx" />
 <meta name="twitter:creator" content="@novoreorx" />
 <meta property="og:title" content="Posts | ReadByWord" />
-<meta property="og:description" content="Theme PaperModX - https://github.com/reorx/hugo-PaperModX" />
+<meta property="og:description" content="ReadbyWord - https://anriclee.github.io" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://anriclee.github.io/posts/" />
     <meta property="og:image" content="https://anriclee.github.io/cover.png"/>
@@ -226,12 +226,99 @@ function toggleThemeListener() {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>再读《红楼梦》
+    </h2>
+  </header>
+  <section class="entry-content">
+    
+      <p>再读《红楼梦》之碎碎念。</p>
+    
+  </section>
+  <footer class="entry-footer"><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
+  <span>2023-05-07</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
+  <span>word</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
+  <span>1 min</span></span>
+</footer>
+  <a class="entry-link" aria-label="post link to 再读《红楼梦》" href="https://anriclee.github.io/posts/stone/1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Telegram bot 入门实践
+    </h2>
+  </header>
+  <section class="entry-content">
+    
+      <p>什么是 Bot Bot 的概念在官网的介绍稍微有点繁琐和复杂，详细可以了解官网介绍，
+简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。
+申请 bot 需要找 BotFather（名字起的很形象），具体过程官网说的比较详细，此处不赘言。但是需要强调的一点是，bot 仅仅是你的代理人而已，真正执行你指令的是你自己部署的脚本，如果你不部署自己的脚本，在 bot 中输入指令，是没有任何响应的。
+你、bot和你部署的脚本关系如下:
+
+脚本 上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。
+接受指令 对于如何让脚本接受指令，官方提供了两种思路：推模式 、拉模式。
+ 拉模式  这种模式，官方不太推荐。简单而言，就是自己部署一个脚本，不断执行 get 请求，获取自己 bot 的更新信息，就好比一个仆人一直在问你：
+有没有需要我做的？
+有没有需要我做的？
+有没有需要我做的？
+询问的方式也比较简单：
+curl -X GET https://api.telegram.org/bot[token]/getUpdates 这里的 token，就是上面申请 bot 完毕后，得到的 token， 出于脱敏，我使用 [token] 代替，下同。这种方法比较笨拙，轮询的频次太高和太低都不行，而且你在 bot 中发布一条指令后，可能并不能够马上得到执行，会有延迟。
+这种方式的好处是：可以让 bot 启在本地，不需要部署到服务器上，因为 telegram 不知道你的存在，他也不需要知道你的存在。
+ 推模式  这种方式是官方比较推荐的一种方式，这种类似事件驱动的原理。只有有任务了，才会通知脚本去做。但前提是：在向 bot 发号施令前，需要在 bot 中注册一个 callback url。...</p>
+    
+  </section>
+  <footer class="entry-footer"><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
+  <span>2022-06-11</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
+  <span class="post-tags"><a href="https://anriclee.github.io/tags/telegram/">telegram</a></span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
+  <span>216 words</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
+  <span>2 min</span></span>
+</footer>
+  <a class="entry-link" aria-label="post link to Telegram bot 入门实践" href="https://anriclee.github.io/posts/telegram_bot/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>基于 PostgreSQL 的群聊搜索实践
+    </h2>
+  </header>
+  <section class="entry-content">
+    
+      <p>背景 2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。
+对于复杂场景的搜索，业界一般使用非常流行的 ElasticSearch。由于我们的群数据较少，截止到目前还没有达到千万级的量级，且搜索场景比较简单，而 PostgreSQL 对全文搜索又支持得比较好，所以选择了 PostgreSQL 来实现群搜索需求。 在使用 PostgreSQL 做群搜索的过程中，也经历了由简单到复杂的迭代过程，中间也踩了不少坑。 下面的几个例子说明了方案的演进过程和我们的优化思路，希望能够对大家有所帮助。
+LIKE 模糊查询 提到模糊搜索，最简单的办法就是对搜索列进行 like 匹配： 在输入词的前后加上 % 即可,如下所示:
+SELECT * FROM groups WHERE name LIKE &#39;%探探%&#39;; 这种方案可行是可行了，但是实现过于简单粗暴。对此方案进行测试：
+建一张简单的表进行测试，表结构如下：
+lixuehan=# \d groups; Table &#34;public.groups&#34; Column | Type | Collation | Nullable | Default --------&#43;-----------------------&#43;-----------&#43;----------&#43;------------------------------------ id | bigint | | not null | nextval(&#39;groups_id_seq&#39;::regclass) name | character varying(50) | | | Indexes: &#34;groups_pkey&#34; PRIMARY KEY, btree (id) 表中只有两列：主键 id 以及群名 name。...</p>
+    
+  </section>
+  <footer class="entry-footer"><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
+  <span>2022-01-13</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
+  <span class="post-tags"><a href="https://anriclee.github.io/tags/postgresql/">PostgreSQL</a></span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
+  <span>2415 words</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
+  <span>12 min</span></span>
+</footer>
+  <a class="entry-link" aria-label="post link to 基于 PostgreSQL 的群聊搜索实践" href="https://anriclee.github.io/posts/pg/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Hugo 中的命令行模式
     </h2>
   </header>
   <section class="entry-content">
     
-      <p>最近在用 hugo 构建了个人博客之后，便有兴趣想研究下其源码。但是源码的体量之大，逻辑之复杂出乎我的意料。不过好在源码的结构比较清晰，有许多地方值得借鉴。 s 比如它的程序入口，非常简洁：
+      <p>最近在用 hugo 构建了个人博客之后，便有兴趣想研究下其源码。但是源码的体量之大，逻辑之复杂出乎我的意料。不过好在源码的结构比较清晰，有许多地方值得借鉴。
+比如它的程序入口，非常简洁：
 func main() { resp := commands.Execute(os.Args[1:]) if resp.Err != nil { if resp.IsUserError() { resp.Cmd.Println(&#34;&#34;) resp.Cmd.Println(resp.Cmd.UsageString()) } os.Exit(-1) } } 它将所有根据命令行参数传入的指令统一封装到 commands 包中。后面有新命令需求时，只需要新建一个 cmd 文件即可。
 它是怎么做到的呢？
 简而言之，就是在程序入口处将所有的命令类汇总，然后再根据输入参数args，决定要执行哪个cmd，看似增加了代码的复杂度，但是对于后续命令的扩展显得非常方便。
@@ -244,7 +331,7 @@ hugo 中使用了 builder 模式将所有的命令汇总，我这里简单起见
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
   <span>2020-06-26</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>44 words</span></span><span class="meta-item">
+  <span>43 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
   <span>1 min</span></span>
 </footer>
@@ -277,46 +364,15 @@ hugo 中使用了 builder 模式将所有的命令汇总，我这里简单起见
 </footer>
   <a class="entry-link" aria-label="post link to Markdown Syntax Guide" href="https://anriclee.github.io/posts/markdown-syntax/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Rich Content
-    </h2>
-  </header>
-  <section class="entry-content">
-    
-      <p>A brief description of Hugo Shortcodes</p>
-    
-  </section>
-  <footer class="entry-footer"><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
-  <span>2019-03-10</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
-  <span class="post-tags"><a href="https://anriclee.github.io/tags/shortcodes/">shortcodes</a><a href="https://anriclee.github.io/tags/privacy/">privacy</a><a href="https://anriclee.github.io/tags/example/">example</a></span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>119 words</span></span><span class="meta-item">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
-  <span>1 min</span></span>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://anriclee.github.io/posts/page/2/">Next Page »</a>
+  </nav>
 </footer>
-  <a class="entry-link" aria-label="post link to Rich Content" href="https://anriclee.github.io/posts/rich-content/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Placeholder Text
-    </h2>
-  </header>
-  <section class="entry-content">
-    
-      <p>Lorem Ipsum Dolor Si Amet</p>
-    
-  </section>
-  <a class="entry-link" aria-label="post link to Placeholder Text" href="https://anriclee.github.io/posts/placeholder-text/"></a>
-</article>
     </main>
     
 <footer class="footer">
-  <span>&copy; 2022 <a href="https://anriclee.github.io">ReadByWord</a></span><span style="display: inline-block; margin-left: 1em;">
+  <span>&copy; 2023 <a href="https://anriclee.github.io">ReadByWord</a></span><span style="display: inline-block; margin-left: 1em;">
     <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
   </span>
   <span style="display: inline-block; margin-left: 1em;">

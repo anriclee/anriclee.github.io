@@ -17,7 +17,9 @@ author: 乌江亭长
 - 《Redis设计与实现》（黄建宏）
 - 《张居正》（熊召政）
 - 《红楼梦》
-	- 二刷
+	- [二刷](https://anriclee.github.io/posts/stone/1)
+- 《金瓶梅》
+	- 
 
 
 ### 读完

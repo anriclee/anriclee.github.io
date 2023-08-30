@@ -18,6 +18,60 @@
     <loc>https://anriclee.github.io/docs/icons_preview/</loc>
     <lastmod>2022-04-13T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://anriclee.github.io/posts/gold_bottle/1/</loc>
+    <lastmod>2023-05-07T23:38:33+08:00</lastmod>
+  </url><url>
+    <loc>https://anriclee.github.io/posts/</loc>
+    <lastmod>2023-05-07T23:38:33+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://anriclee.github.io/zh/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://anriclee.github.io/posts/"
+                />
+  </url><url>
+    <loc>https://anriclee.github.io/</loc>
+    <lastmod>2023-05-07T23:38:33+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://anriclee.github.io/zh/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://anriclee.github.io/"
+                />
+  </url><url>
+    <loc>https://anriclee.github.io/posts/stone/summary/</loc>
+    <lastmod>2023-05-07T23:15:53+08:00</lastmod>
+  </url><url>
+    <loc>https://anriclee.github.io/booklist/</loc>
+    <lastmod>2022-08-21T12:46:41+08:00</lastmod>
+  </url><url>
+    <loc>https://anriclee.github.io/tags/</loc>
+    <lastmod>2022-06-11T11:43:42+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://anriclee.github.io/zh/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://anriclee.github.io/tags/"
+                />
+  </url><url>
+    <loc>https://anriclee.github.io/tags/telegram/</loc>
+    <lastmod>2022-06-11T11:43:42+08:00</lastmod>
+  </url><url>
+    <loc>https://anriclee.github.io/posts/telegram_bot/</loc>
+    <lastmod>2022-06-11T11:43:42+08:00</lastmod>
+  </url><url>
     <loc>https://anriclee.github.io/tags/example/</loc>
     <lastmod>2022-04-13T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -44,36 +98,16 @@
                 href="https://anriclee.github.io/docs/"
                 />
   </url><url>
-    <loc>https://anriclee.github.io/</loc>
-    <lastmod>2022-04-13T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://anriclee.github.io/zh/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://anriclee.github.io/"
-                />
+    <loc>https://anriclee.github.io/tags/postgresql/</loc>
+    <lastmod>2022-01-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://anriclee.github.io/tags/</loc>
-    <lastmod>2022-04-13T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://anriclee.github.io/zh/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://anriclee.github.io/tags/"
-                />
-  </url><url>
-    <loc>https://anriclee.github.io/docs/icons/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
+    <loc>https://anriclee.github.io/posts/pg/</loc>
+    <lastmod>2022-01-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://anriclee.github.io/tags/icons/</loc>
+    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://anriclee.github.io/docs/icons/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://anriclee.github.io/docs/installation/</loc>
@@ -84,19 +118,6 @@
   </url><url>
     <loc>https://anriclee.github.io/posts/hugo_cmd_pattern/</loc>
     <lastmod>2020-06-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://anriclee.github.io/posts/</loc>
-    <lastmod>2020-06-26T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://anriclee.github.io/zh/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://anriclee.github.io/posts/"
-                />
   </url><url>
     <loc>https://anriclee.github.io/tags/markdown/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
@@ -136,15 +157,6 @@
                 hreflang="en"
                 href="https://anriclee.github.io/tags/syntax/"
                 />
-  </url><url>
-    <loc>https://anriclee.github.io/tags/privacy/</loc>
-    <lastmod>2019-03-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://anriclee.github.io/posts/rich-content/</loc>
-    <lastmod>2019-03-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://anriclee.github.io/tags/shortcodes/</loc>
-    <lastmod>2019-03-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://anriclee.github.io/posts/placeholder-text/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>

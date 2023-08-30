@@ -5,6 +5,7 @@
     <link>https://anriclee.github.io/tags/icons/</link>
     <description>Recent content in icons on ReadByWord</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
     <lastBuildDate>Wed, 20 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://anriclee.github.io/tags/icons/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Icons</title>
@@ -16,11 +17,11 @@
       <content:encoded><![CDATA[<h2 id="social-icons">Social Icons</h2>
 <p>Go to <a href="icons_preview">Icons Preview</a> to see a complete list of icons</p>
 <p>Usage :</p>
-<pre><code>socialIcons:
-    - name: &quot;kofi&quot;
-        url: &quot;https://kofi.com&quot;
-    - name: &quot;twitter&quot;
-        url: &quot;https://twitter.com&quot;
+<pre tabindex="0"><code>socialIcons:
+    - name: &#34;kofi&#34;
+        url: &#34;https://kofi.com&#34;
+    - name: &#34;twitter&#34;
+        url: &#34;https://twitter.com&#34;
 </code></pre><hr>
 <h2 id="share-icons">Share Icons</h2>
 <table>
@@ -58,9 +59,9 @@
 </tbody>
 </table>
 <p>Usage:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">params</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">ShowShareButtons</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></code></pre></div>]]></content:encoded>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">params</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ShowShareButtons</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></div>]]></content:encoded>
     </item>
     
   </channel>

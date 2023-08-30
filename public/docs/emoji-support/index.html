@@ -10,16 +10,13 @@
 <meta name="description" content="Guide to emoji usage in Hugo">
 <meta name="author" content="Hugo Authors">
 <link rel="canonical" href="https://anriclee.github.io/docs/emoji-support/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.1a604fedec25e03e9fbf0fa84dfc2a185356369a0f7842f05d48cbb4e27cb258.css" integrity="sha256-GmBP7ewl4D6fvw&#43;oTfwqGFNWNpoPeELwXUjLtOJ8slg=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.b26459e5b8cd390644cd9b4eff07eed4a55f23e6f577854e9e1259d9a22ee150.css" integrity="sha256-smRZ5bjNOQZEzZtO/wfu1KVfI&#43;b1d4VOnhJZ2aIu4VA=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://anriclee.github.io/favicon.ico">
 <link rel="apple-touch-icon" href="https://anriclee.github.io/apple-touch-icon.png">
 <link rel="alternate" hreflang="en" href="https://anriclee.github.io/docs/emoji-support/">
-<meta name="twitter:image" content="https://anriclee.github.io/cover.png" />
-    <meta name="twitter:card" property="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Emoji Support | ReadByWord" />
 <meta name="twitter:description" content="Guide to emoji usage in Hugo" />
-<meta name="twitter:site" content="@novoreorx" />
-<meta name="twitter:creator" content="@novoreorx" />
 <meta property="og:title" content="Emoji Support | ReadByWord" />
 <meta property="og:description" content="Guide to emoji usage in Hugo" />
 <meta property="og:type" content="article" />
@@ -60,7 +57,7 @@
   "keywords": [
     "example"
   ],
-  "wordCount" : "164",
+  "wordCount" : "129",
   "inLanguage": "en",
   "datePublished": "2019-03-05T00:00:00Z",
   "dateModified": "2019-03-05T00:00:00Z",
@@ -103,15 +100,15 @@
                 --border: rgb(51, 51, 51);
             }
 
-            .list {
+            .list-page {
                 background: var(--theme);
             }
 
-            .list:not(.dark)::-webkit-scrollbar-track {
+            .list-page:not(.dark)::-webkit-scrollbar-track {
                 background: 0 0;
             }
 
-            .list:not(.dark)::-webkit-scrollbar-thumb {
+            .list-page:not(.dark)::-webkit-scrollbar-thumb {
                 border-color: var(--theme);
             }
         }
@@ -121,7 +118,7 @@
 
 </head>
 
-<body class="" id="top"><script data-no-instant>
+<body class=" type-docs kind-page layout-" id="top"><script data-no-instant>
 function switchTheme(theme) {
   switch (theme) {
     case 'light':
@@ -219,7 +216,7 @@ function toggleThemeListener() {
         </div>
         <ul id="menu">
             <li>
-                <a href="https://anriclee.github.io/docs/" title="Docs"
+                <a href="https://anriclee.github.io/docs/" title="Docs" class="active"
                 >Docs
                 </a>
             </li>
@@ -239,7 +236,7 @@ function toggleThemeListener() {
                 </a>
             </li>
             <li>
-                <a href="https://anriclee.github.io/" title="@Author" target="_blank"
+                <a href="https://anriclee.github.io/" title="@Author" class="active" target="_blank"
                 >@Author<span class="external-link"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M11 7h-5a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-5" />
@@ -256,20 +253,15 @@ function toggleThemeListener() {
 
 <article class="post-single">
   <header class="post-header">
-    
-    <h1 class="post-title">
-      Emoji Support
-    </h1>
-    <div class="post-description">
-      Guide to emoji usage in Hugo
-    </div>
+    <h1 class="post-title">Emoji Support</h1>
+    <div class="post-description">Guide to emoji usage in Hugo</div>
     <div class="post-meta"><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
   <span>2019-03-05</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
   <span class="post-tags"><a href="https://anriclee.github.io/tags/example/">example</a></span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
-  <span>164 words</span></span><span class="meta-item">
+  <span>129 words</span></span><span class="meta-item">
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
   <span>1 min</span></span>
 
@@ -285,9 +277,9 @@ function toggleThemeListener() {
 <p>The <a href="http://www.emoji-cheat-sheet.com/">Emoji cheat sheet</a> is a useful reference for emoji shorthand codes.</p>
 <hr>
 <p><strong>N.B.</strong> The above steps enable Unicode Standard emoji characters and sequences in Hugo, however the rendering of these glyphs depends on the browser and the platform. To style the emoji you can either use a third party emoji font or a font stack; e.g.</p>
-<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">.emoji {
-font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
-}</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">.emoji {
+</span></span><span class="line"><span class="cl">font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
+</span></span><span class="line"><span class="cl">}</span></span></code></pre></div>
 
 
 <style>
@@ -315,7 +307,8 @@ font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol,
   </a>
 </nav>
 
-  </footer><div class="comments-box telegram-widget">
+  </footer>
+    <div class="comments-separator"></div><div class="comments-box telegram-widget">
   <div id="telegram-widget-container"></div>
 </div>
 

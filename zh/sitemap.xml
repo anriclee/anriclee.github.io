@@ -41,84 +41,6 @@
                 href="https://anriclee.github.io/zh/docs/"
                 />
   </url><url>
-    <loc>https://anriclee.github.io/zh/tags/example/</loc>
-    <lastmod>2022-04-12T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://anriclee.github.io/tags/example/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://anriclee.github.io/zh/tags/example/"
-                />
-  </url><url>
-    <loc>https://anriclee.github.io/zh/tags/markdown/</loc>
-    <lastmod>2022-04-12T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://anriclee.github.io/tags/markdown/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://anriclee.github.io/zh/tags/markdown/"
-                />
-  </url><url>
-    <loc>https://anriclee.github.io/zh/posts/markdown-syntax/</loc>
-    <lastmod>2022-04-12T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://anriclee.github.io/posts/markdown-syntax/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://anriclee.github.io/zh/posts/markdown-syntax/"
-                />
-  </url><url>
-    <loc>https://anriclee.github.io/zh/tags/syntax/</loc>
-    <lastmod>2022-04-12T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://anriclee.github.io/tags/syntax/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://anriclee.github.io/zh/tags/syntax/"
-                />
-  </url><url>
-    <loc>https://anriclee.github.io/zh/tags/</loc>
-    <lastmod>2022-04-12T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://anriclee.github.io/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://anriclee.github.io/zh/tags/"
-                />
-  </url><url>
-    <loc>https://anriclee.github.io/zh/posts/</loc>
-    <lastmod>2022-04-12T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://anriclee.github.io/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://anriclee.github.io/zh/posts/"
-                />
-  </url><url>
     <loc>https://anriclee.github.io/zh/categories/</loc>
     <xhtml:link
                 rel="alternate"
@@ -143,6 +65,18 @@
                 href="https://anriclee.github.io/zh/series/"
                 />
   </url><url>
+    <loc>https://anriclee.github.io/zh/tags/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://anriclee.github.io/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://anriclee.github.io/zh/tags/"
+                />
+  </url><url>
     <loc>https://anriclee.github.io/zh/archives/</loc>
     <xhtml:link
                 rel="alternate"
@@ -165,6 +99,18 @@
                 rel="alternate"
                 hreflang="zh"
                 href="https://anriclee.github.io/zh/search/"
+                />
+  </url><url>
+    <loc>https://anriclee.github.io/zh/posts/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://anriclee.github.io/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://anriclee.github.io/zh/posts/"
                 />
   </url>
 </urlset>

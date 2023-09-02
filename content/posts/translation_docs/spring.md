@@ -8,4 +8,8 @@ tags:
 
 以下为本系列的目录归档：
 
-- [概述](/posts/translation_docs/spring_framework_overview)
+[概述](/posts/translation_docs/spring_framework_overview)
+
+[核心技术]()
+
+- [IOC 容器]()

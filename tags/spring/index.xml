@@ -7,11 +7,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 02 Sep 2023 23:12:31 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/tags/spring/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>[译]Spring IOC 容器</title>
-      <link>https://anriclee.github.io/posts/translation_docs/spring_framework_ioc_container/</link>
+      <title>[译] Spring IOC 容器</title>
+      <link>https://anriclee.github.io/posts/springframework/core/the_ioc_container/container_and_beans/</link>
       <pubDate>Sat, 02 Sep 2023 23:12:31 +0800</pubDate>
       
-      <guid>https://anriclee.github.io/posts/translation_docs/spring_framework_ioc_container/</guid>
+      <guid>https://anriclee.github.io/posts/springframework/core/the_ioc_container/container_and_beans/</guid>
       <description>Spring IOC 和 bean 的简介 本章涵盖了 SpringFramework 中的控制反转原则（Ioc）的实现。IoC 也被称为依赖注入（DI）。它是这样的一种过程，在此期间对象仅通过构造函数参数、工厂方法的参数或者当对象实例被构造后或者通过工厂方法返回时在它上面设置的属性定义自己的依赖（即对象必须合作的其他对象）。
 当容器创建这些 bean 后，再注入这些依赖。
 这个过程本质上与bean 通过使用直接的类构造函数进行直接实例化或者通过类似 Service Locator模式来寻找依赖的位置是相反的（这也是 IoC 名字的由来）。
@@ -31,13 +31,29 @@ org.springframework.beans 和 org.springframework.context 包是 SpringFramework
 </ul>
 <p>总而言之，<code>BeanFactory</code> 提供了配置的框架和基本的功能。<code>ApplicationContext</code> 增加了更多的企业特定的功能。<code>ApplicationContext</code> 完全是 <code>BeanFactory</code> 的超集。在本章关于 Spring IoC 容器做专门描述时会用到。想要获取更多的关于使用 <code>ApplicationContext</code> 而非 <code>BeanFactory</code> 的信息，参见介绍 <a href="https://docs.spring.io/spring-framework/reference/core/beans/beanfactory.html">BeanFactory</a> API 的部分。</p>
 <p>在 Spring 中，作为你应用基石同时可以被 Spring IoC 容器所操控的对象就被称之为 bean。bean 就是被 Spring IoC 容器实例化、组装和设置的对象。否则，一个 bean 就是你应用程序中诸多对象中的一个。 Beans 以及他们依赖关系，反映在容器使用的配置元数据中。</p>
-<h1 id="容器概述">容器概述</h1>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[译] 容器概述</title>
+      <link>https://anriclee.github.io/posts/springframework/core/the_ioc_container/container_overview/</link>
+      <pubDate>Sat, 02 Sep 2023 23:12:31 +0800</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/springframework/core/the_ioc_container/container_overview/</guid>
+      <description>容器概述 org.springframework.context.ApplicationContext 接口代表了 Spring IoC 容器，它主要负责通过读取配置文件对 bean 进行实例化、配置和组装。 容器通过读取配置元数据来获知要实例化、配置和组装那些对象。配置的元数据一般为 XML、Java 注解和 Java 代码的形式，它让你能够表达组成你应用程序的对象以及对象之间的丰富的相互依赖关系。
+Spring 提供了 ApplicationContext 接口的若干实现。在单体应用中，创建一个 ClassPathXmlApplicationContext 或者 FileSystemXmlApplicationContext 是很常见的。虽然 XML 是定义配置元数据的传统形式，但是你还可以通过在 XML 文件里面进行声明配置来告诉容器对于 Java 注解或者Java代码格式的支持。
+在大多数的应用场景中，并不需要显式的代码来实例化 Spring IoC 容器。例如，在 Web 应用的场景中，在 web.xml 文件中仅用简单的 8 行代码左右的样板 Web XML 描述符即可满足需要（参考 Convenient ApplicationContext Instantiation for Web Applications）。如果你使 Eclipse 中的 Spring 工具（在 Eclipse 开发环境中），你可以通过几下鼠标点击或者按键的敲击就能轻松创建这样一个样板配置文件。
+下图展示了关于 Spring 工作机制的一个全局视角。在 ApplicationContext 被创建和初始化后，你的应用类和配置元数据已经捆绑在一起了，这样一来，你就有一个充分配置并且可执行的系统或者应用程序。
+配置元数据 如上图所示，Spring Ioc 容器接收到一种格式的配置元数据。这个配置元数据代表了，作为一个应用开发者你告诉 Spring 容器在应用程序中，如何实例化、配置和组装对象。
+传统的配置元数据是一种简单并且符合直觉的 XML 形式，在本章的大部分地方，也用此来表达关键的概念和 Spring IoC 容器的特性。
+基于 XML 的元数据不是配置元数据的唯一允许的形式。Spring IoC 容器自身与配置元数据实际上是什么格式完全解耦。目前许多开发者在应用程序中选择基于Java 的配置。</description>
+      <content:encoded><![CDATA[<h1 id="容器概述">容器概述</h1>
 <p><code>org.springframework.context.ApplicationContext</code> 接口代表了 Spring IoC 容器，它主要负责通过读取配置文件对 bean 进行实例化、配置和组装。
 容器通过读取配置元数据来获知要实例化、配置和组装那些对象。配置的元数据一般为 XML、Java 注解和 Java 代码的形式，它让你能够表达组成你应用程序的对象以及对象之间的丰富的相互依赖关系。</p>
 <p>Spring 提供了 <code>ApplicationContext</code> 接口的若干实现。在单体应用中，创建一个 <code>ClassPathXmlApplicationContext</code> 或者 <code>FileSystemXmlApplicationContext</code> 是很常见的。虽然 XML 是定义配置元数据的传统形式，但是你还可以通过在 XML 文件里面进行声明配置来告诉容器对于 Java 注解或者Java代码格式的支持。</p>
 <p>在大多数的应用场景中，并不需要显式的代码来实例化 Spring IoC 容器。例如，在 Web 应用的场景中，在 <code>web.xml</code> 文件中仅用简单的 8 行代码左右的样板 Web XML 描述符即可满足需要（参考 <a href="https://docs.spring.io/spring-framework/reference/core/beans/context-introduction.html#context-create">Convenient ApplicationContext Instantiation for Web Applications</a>）。如果你使 Eclipse 中的 Spring 工具（在 Eclipse 开发环境中），你可以通过几下鼠标点击或者按键的敲击就能轻松创建这样一个样板配置文件。</p>
 <p>下图展示了关于 Spring 工作机制的一个全局视角。在 <code>ApplicationContext</code> 被创建和初始化后，你的应用类和配置元数据已经捆绑在一起了，这样一来，你就有一个充分配置并且可执行的系统或者应用程序。</p>
-<p></p>
+<p><img loading="lazy" src="/posts/springframework/core/the_ioc_container/container_overview/imgs/ioc.png" type="" alt="Spring"  /></p>
 <h1 id="配置元数据">配置元数据</h1>
 <p>如上图所示，Spring Ioc 容器接收到一种格式的配置元数据。这个配置元数据代表了，作为一个应用开发者你告诉 Spring 容器在应用程序中，如何实例化、配置和组装对象。</p>
 <p>传统的配置元数据是一种简单并且符合直觉的 XML 形式，在本章的大部分地方，也用此来表达关键的概念和 Spring IoC 容器的特性。</p>
@@ -49,16 +65,128 @@ org.springframework.beans 和 org.springframework.context 包是 SpringFramework
 <li><a href="https://docs.spring.io/spring-framework/reference/core/beans/annotation-config.html">基于注解的配置</a>：通过基于注解的配置元数据定义 beans</li>
 <li><a href="https://docs.spring.io/spring-framework/reference/core/beans/java.html">基于Java的配置</a>：通过使用 Java 而不是 XML 文件来定义你应用类之外的 beans。使用这些特性可以参考 <a href="https://docs.spring.io/spring-framework/docs/6.0.11/javadoc-api/org/springframework/context/annotation/Configuration.html">@Configuration</a>, <a href="https://docs.spring.io/spring-framework/docs/6.0.11/javadoc-api/org/springframework/context/annotation/Bean.html">@Bean</a>, <a href="https://docs.spring.io/spring-framework/docs/6.0.11/javadoc-api/org/springframework/context/annotation/Import.html">@Import</a>, <a href="https://docs.spring.io/spring-framework/docs/6.0.11/javadoc-api/org/springframework/context/annotation/DependsOn.html">@DependsOn</a> 注解。</li>
 </ul>
+<p>Spring 的配置由至少一个，通常为1个以上容器可以操作的 bean 组成。基于 XML 的配置元数据，配置顶部根元素 <beans/> 里面的 <bean/> 元素。Java 配置通常在一个 @Configuration 类里面使用 @Bean 注解方法。</p>
+<p>这些 bean 的定义与组成你应用的实际对象相对应。通常地，你需要定义服务层对象，持久化层对象例如仓库或者数据接入对象（DAOs），例如 Web Controller 的表现层对象，例如一个 JPA EntityManagerFactory 的基础层对象，JMS 队列等等。通常不在容器里面对一个领域层对象进行精细化配置，因为创建和加载领域对象，通常是存储层和业务层的逻辑。</p>
+<p>下面的例子，展示了基于 XML 的配置元数据的基本结构：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&#34;http://www.springframework.org/schema/beans&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://www.springframework.org/schema/beans
+</span></span></span><span class="line"><span class="cl"><span class="s">		https://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;...&#34;</span> <span class="na">class=</span><span class="s">&#34;...&#34;</span><span class="nt">&gt;</span> [1][2]
+</span></span><span class="line"><span class="cl">		<span class="c">&lt;!-- collaborators and configuration for this bean go here --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/bean&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;...&#34;</span> <span class="na">class=</span><span class="s">&#34;...&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="c">&lt;!-- collaborators and configuration for this bean go here --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/bean&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- more bean definitions go here --&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/beans&gt;</span>
+</span></span></code></pre></div><p>[1]：id 属性唯一标识一个独立的 bean 定义
+[2]：class 属性定义了 bean的类型，并且使用类的全限定名</p>
+<p>id 属性的值可以被用来引用互相协作的对象。引用协作的对象的 XML并不在此例中，参考<a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies.html">依赖</a>部分获取更多的信息。</p>
+<h1 id="初始化一个容器">初始化一个容器</h1>
+<p>提供给 <code>ApplicationContext</code> 构造器的位置路径是一些表示资源的字符串，这些字符串可以让容器从各种外部资源加载配置元数据，例如本地文件系统，Java 类路径等等。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="n">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;services.xml&#34;</span><span class="o">,</span> <span class="s">&#34;daos.xml&#34;</span><span class="o">);</span>
+</span></span></code></pre></div><p>在你了解了 Spring 的 IoC 容器后，你也许想对 Spring 的“资源：抽象了解更多，这提供了一种方便的从 URI 语法标识中读取输入流的机制。特别是 Resource 路径用于构建应用的上下文。</p>
+<p>下面的例子展示了服务层的对象(services.xml)的配置文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&#34;http://www.springframework.org/schema/beans&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://www.springframework.org/schema/beans
+</span></span></span><span class="line"><span class="cl"><span class="s">		https://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- services --&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;petStore&#34;</span> <span class="na">class=</span><span class="s">&#34;org.springframework.samples.jpetstore.services.PetStoreServiceImpl&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;accountDao&#34;</span> <span class="na">ref=</span><span class="s">&#34;accountDao&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;itemDao&#34;</span> <span class="na">ref=</span><span class="s">&#34;itemDao&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="c">&lt;!-- additional collaborators and configuration for this bean go here --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/bean&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- more bean definitions for services go here --&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/beans&gt;</span>
+</span></span></code></pre></div><p>下面的例子展示了数据接入层(daos.xml)文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&#34;http://www.springframework.org/schema/beans&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://www.springframework.org/schema/beans
+</span></span></span><span class="line"><span class="cl"><span class="s">		https://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;accountDao&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="na">class=</span><span class="s">&#34;org.springframework.samples.jpetstore.dao.jpa.JpaAccountDao&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="c">&lt;!-- additional collaborators and configuration for this bean go here --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/bean&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;itemDao&#34;</span> <span class="na">class=</span><span class="s">&#34;org.springframework.samples.jpetstore.dao.jpa.JpaItemDao&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="c">&lt;!-- additional collaborators and configuration for this bean go here --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/bean&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- more bean definitions for data access objects go here --&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/beans&gt;</span>
+</span></span></code></pre></div><p>在上面的例子中，服务层由 <code>PetStoreServiceImpl</code> 类和两种类型分别为 <code>JpaAccountDao</code> 和 <code>JpaItemDao</code>(基于JPA对象关系映射标准) 的数据接入对象。<code>property name</code> 元素引用 JavaBean 属性的名字，<code>ref</code> 元素引用另外一个 bean 定义的名字。<code>id</code> 和 <code>ref</code> 元素之间的联系，表达了两个互相协作对象之间的依赖关系。想了解更多配置对象依赖的细节，参考 <a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies.html">依赖</a>。</p>
 <p>TO BE CONTINUED &hellip;..</p>
 ]]></content:encoded>
     </item>
     
     <item>
-      <title>[译] SpringFramework 概述</title>
-      <link>https://anriclee.github.io/posts/translation_docs/spring_framework_overview/</link>
+      <title>[译] SpringFramework 文档</title>
+      <link>https://anriclee.github.io/posts/springframework/directory/</link>
       <pubDate>Sat, 02 Sep 2023 11:46:07 +0800</pubDate>
       
-      <guid>https://anriclee.github.io/posts/translation_docs/spring_framework_overview/</guid>
+      <guid>https://anriclee.github.io/posts/springframework/directory/</guid>
+      <description>概述 历史，设计哲学，反馈，开始
+核心 IoC容器，事件，资源，i18n，验证，数据绑定，类型转换，SpEL，AOP，AOT
+测试 对象 Mock，测试上下文框架，Spring MVC 测试，Web 测试客户端
+数据接入 事务，DAO 支持，JDBC，R2DBC，O/R 映射，XML 编码
+Web Servlet SpringMVC,WebSocket,SockJS,STOMP 通信
+Web 响应式 Spring WebFlux, WebClient, WebSocket, RSocket.
+[集成] REST 客户端, JMS, JCA, JMX, Email, 任务, 调度, 缓存, 可见性.
+语言 Kotlin, Groovy, Dynamic 语言.
+附录 Spring 属性</description>
+      <content:encoded><![CDATA[<ul>
+<li>
+<p><a href="Overview">概述</a> 历史，设计哲学，反馈，开始</p>
+</li>
+<li>
+<p><a href="">核心</a> IoC容器，事件，资源，i18n，验证，数据绑定，类型转换，SpEL，AOP，AOT</p>
+</li>
+<li>
+<p><a href="">测试</a> 对象 Mock，测试上下文框架，Spring MVC 测试，Web 测试客户端</p>
+</li>
+<li>
+<p><a href="">数据接入</a> 事务，DAO 支持，JDBC，R2DBC，O/R 映射，XML 编码</p>
+</li>
+<li>
+<p><a href="">Web Servlet</a> SpringMVC,WebSocket,SockJS,STOMP 通信</p>
+</li>
+<li>
+<p><a href="">Web 响应式</a> Spring WebFlux, WebClient, WebSocket, RSocket.</p>
+</li>
+<li>
+<p>[集成] REST 客户端, JMS, JCA, JMX, Email, 任务, 调度, 缓存, 可见性.</p>
+</li>
+<li>
+<p><a href="">语言</a> Kotlin, Groovy, Dynamic 语言.</p>
+</li>
+<li>
+<p><a href="">附录</a> Spring 属性</p>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[译] SpringFramework 概述</title>
+      <link>https://anriclee.github.io/posts/springframework/overview/</link>
+      <pubDate>Sat, 02 Sep 2023 11:46:07 +0800</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/springframework/overview/</guid>
       <description>概述 Spring 使得创建 Java 企业级应用更加容易。它提供了你在企业环境下拥抱 Java 语言所需要的一切，支持 JVM 平台上的 Groovy 和 Kotlin 作为备选语言，并且提供了根据应用程序的需求创建多种架构的灵活性。从 SpringFramework 6.0 开始，Spring 需要 Java 17 以上的版本。
 Spring 支持广泛的应用场景。在一个大型企业里，应用程序经常会存在很长时间，并且必须运行在一个开发者不能控制升级周期的 JDK 和应用服务器上。 另外一些可能会作为一个内嵌服务器的单独 jar 包，运行在一个云环境里，还有一些可能是一个不需要服务器的独立应用程序（例如批处理或者集成处理工作）。
 Spring 是开源的。它有一个庞大而活跃的社群，基于各种实际用例，提供持续反馈。这也帮助了 Spring 在相当长一段时间内成功发展。。
@@ -134,25 +262,6 @@ Spring 的编程模型不会拥抱 Jakarta EE 平台的规范，相反，它从�
 <p>如果你刚开始接触 Spring，你也许会从创建一个基于 SpringBoot 应用开始使用 SpringFramework。SpringBoot 提供了一个快速（固定）的方式来创建可部署生产环境的基于 Spring 的应用。它基于 SpringFramework，喜欢约定优于配置的风格，设计它就是为了让你能够尽可能快地启动和运行。</p>
 <p>你可以使用<a href="https://start.spring.io/">start.spring.io</a>来生成一个基本的项目，或者遵循<a href="https://spring.io/guides">&ldquo;Getting Started&rdquo; 指南</a> 例如 <a href="https://spring.io/guides/gs/rest-service/">Getting Started Building a RESTful Web Service</a>。</p>
 <p>这些指南都是任务导向且易于理解的，他们中的大部分是基于 SpringBoot。它同时也涵盖了 Spring 产品中的其他项目，这些你可能会在解决某个具体的问题时会使用到。</p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>[译]SpringFramework</title>
-      <link>https://anriclee.github.io/posts/translation_docs/spring/</link>
-      <pubDate>Sat, 02 Sep 2023 11:43:42 +0800</pubDate>
-      
-      <guid>https://anriclee.github.io/posts/translation_docs/spring/</guid>
-      <description>以下为本系列的目录归档：
-概述
-核心技术
-IOC 容器 </description>
-      <content:encoded><![CDATA[<p>以下为本系列的目录归档：</p>
-<p><a href="/posts/translation_docs/spring_framework_overview">概述</a></p>
-<p><a href="">核心技术</a></p>
-<ul>
-<li><a href="">IOC 容器</a></li>
-</ul>
 ]]></content:encoded>
     </item>
     

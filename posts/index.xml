@@ -5,7 +5,25 @@
     <link>https://anriclee.github.io/posts/</link>
     <description>Recent content in Posts on ReadByWord</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 02 Sep 2023 23:12:31 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Sep 2023 23:14:19 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>中秋绝句</title>
+      <link>https://anriclee.github.io/posts/essays/poems/</link>
+      <pubDate>Wed, 06 Sep 2023 23:14:19 +0800</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/essays/poems/</guid>
+      <description>中秋绝句
+癸卯秋夜，虽炎热潮湿，开窗无月，然心情大好，咏志抒怀，无碍也，是为序。
+自来霜雪映吴钩 半生浮云半生幽 未有三旬寂寞守 何能一夜照清秋</description>
+      <content:encoded><![CDATA[<p>中秋绝句</p>
+<p>癸卯秋夜，虽炎热潮湿，开窗无月，然心情大好，咏志抒怀，无碍也，是为序。</p>
+<p>自来霜雪映吴钩
+半生浮云半生幽
+未有三旬寂寞守
+何能一夜照清秋</p>
+]]></content:encoded>
+    </item>
+    
     <item>
       <title>[译] Spring IOC 容器</title>
       <link>https://anriclee.github.io/posts/springframework/core/the_ioc_container/container_and_beans/</link>
@@ -130,7 +148,65 @@ Spring 提供了 ApplicationContext 接口的若干实现。在单体应用中�
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nt">&lt;/beans&gt;</span>
 </span></span></code></pre></div><p>在上面的例子中，服务层由 <code>PetStoreServiceImpl</code> 类和两种类型分别为 <code>JpaAccountDao</code> 和 <code>JpaItemDao</code>(基于JPA对象关系映射标准) 的数据接入对象。<code>property name</code> 元素引用 JavaBean 属性的名字，<code>ref</code> 元素引用另外一个 bean 定义的名字。<code>id</code> 和 <code>ref</code> 元素之间的联系，表达了两个互相协作对象之间的依赖关系。想了解更多配置对象依赖的细节，参考 <a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies.html">依赖</a>。</p>
-<p>TO BE CONTINUED &hellip;..</p>
+<h1 id="组装基于-xml-的配置元数据">组装基于 XML 的配置元数据</h1>
+<p>一个 bean 的定义跨越多个 XML 文件中有时候会非常有用。通常，每一个 XML 的配置文件代表你架构里面的一个逻辑层或者模块。</p>
+<p>你可以使用应用的上下文构造器从这些 XML 的片段中加载 bean 定义。这个构造器可以接受多 Resource 加载位置，就如前面表示的那样。你也可以使用一个或者多个 <code>&lt;import/&gt;</code> 元素去加载另一个（或者一些）文件中的 bean 定义。下面的例子展示了如何去做到这一点：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;beans&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&#34;services.xml&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&#34;resources/messageSource.xml&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;import</span> <span class="na">resource=</span><span class="s">&#34;/resources/themeSource.xml&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;bean1&#34;</span> <span class="na">class=</span><span class="s">&#34;...&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;bean2&#34;</span> <span class="na">class=</span><span class="s">&#34;...&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/beans&gt;</span>
+</span></span></code></pre></div><p>在上面的例子中，外部的 bean 定义从三个文件中加载到：<code>services.xml</code>,<code>messageSource.xml</code>,<code>themeSource.xml</code> 。所有的位置路径都是做引入的 bean 定义文件的相对路径。所以，services.xml 必须和正在引入的文件在相同的目录下或者类路径下。虽然 <code>messageSource.xml</code> 和 <code>themeSource.xml</code> 必须在导入文件的下面的路径的 resource 路径里。如你所见，前导的 <code>/</code> 符号被忽略了。然而，既然这些路径都是相对的，所以，最好不适用 <code>/</code> 。被引入文件的内容，必须是一个依据 Spring Schema 的有效 XML bean 定义，最外层是 <code>&lt;beans/&gt;</code> 元素。</p>
+<p>注意：
+使用 <code>../</code> 路径引用父目录中的文件虽然是可以的，但是并不推荐。这样做，会使得当前的应用程序对外部的文件造成依赖。特别是，这个引用对类路径不推荐，例如：<code>classpath:../services.xml</code>，这样的情形下，运行时的进程会选择离 classpath 根路径最近的地方，然后去找它的父目录。类路径配置的修改，很可能会导致一个完全不同的错误的目录被选中。</p>
+<p>你可以永远选择一个全限定的资源路径而不是相对路径，例如 <code>file:C:/config/services.xml</code> 或者 <code>classpath:/config/services.xml</code>。然而，需要知道的是，你正在使你的应用配置和特定的绝对路径耦合。通常会选择对这样的绝对路径做一个间接地引用，例如，通过运行时，根据 JVM 的系统属性解析的<code>${...}</code> 占位符。</p>
+<p>名空间提供了引入原语的特性。在普通 bean 定义之外的特性可以在 Spring 提供的名空间————例如， <code>context</code> 和 <code>util</code> 中获取到。</p>
+<h1 id="grooy-bean-定义的-dsl">Grooy Bean 定义的 DSL</h1>
+<p>另外一个外部配置元数据的例子，同样可以使用 Spring 的 Groovy Bean 定义 DSL 来表达，如 Grails 框架所示。通常，在 <code>.groovy</code> 文件会采用下面的配置结构：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Groovy" data-lang="Groovy"><span class="line"><span class="cl"><span class="n">beans</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">dataSource</span><span class="o">(</span><span class="n">BasicDataSource</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">driverClassName</span> <span class="o">=</span> <span class="s2">&#34;org.hsqldb.jdbcDriver&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;jdbc:hsqldb:mem:grailsDB&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">username</span> <span class="o">=</span> <span class="s2">&#34;sa&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">password</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">settings</span> <span class="o">=</span> <span class="o">[</span><span class="nl">mynew:</span><span class="s2">&#34;setting&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">sessionFactory</span><span class="o">(</span><span class="n">SessionFactory</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">dataSource</span> <span class="o">=</span> <span class="n">dataSource</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">myService</span><span class="o">(</span><span class="n">MyService</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">nestedBean</span> <span class="o">=</span> <span class="o">{</span> <span class="n">AnotherBean</span> <span class="n">bean</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">dataSource</span> <span class="o">=</span> <span class="n">dataSource</span>
+</span></span><span class="line"><span class="cl">		<span class="o">}</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>这样的配置风格基本和 Spring XML 配置名空间中的 bean 定义和事件相同。同样，通过 importBeans 指令引入 XML bean 定义也是可以的。</p>
+<h1 id="容器的使用">容器的使用</h1>
+<p><code>ApplicationContext</code> 是一个高级的工厂接口，它可以保存一个包含不同的 bean 和他们的依赖。通过使用方法 <code>T getBean(String name, Class&lt;T&gt; requiredType)</code>，你可以获取到你 bean 的实例。</p>
+<p><code>ApplicationContext</code> 让你可以读取并获取 bean 定义，如下面的例子所示：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="c1">// create and configure beans
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;services.xml&#34;</span><span class="o">,</span> <span class="s">&#34;daos.xml&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// retrieve configured instance
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">PetStoreService</span> <span class="n">service</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;petStore&#34;</span><span class="o">,</span> <span class="n">PetStoreService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// use configured instance
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">userList</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">getUsernameList</span><span class="o">();</span>
+</span></span></code></pre></div><p>使用 Groovy 配置，启动过程也类似。它有一个不同的上下文可以感知 Groovy 的实现类（同时也可以理解 XML 的 bean 定义）。下面的例子展示了 Groovy 的配置：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="n">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GenericGroovyApplicationContext</span><span class="o">(</span><span class="s">&#34;services.groovy&#34;</span><span class="o">,</span> <span class="s">&#34;daos.groovy&#34;</span><span class="o">);</span>
+</span></span></code></pre></div><p>最灵活的变化就是 <code>GenericApplicationContext</code> 和读取代理————例如，使用  <code>XmlBeanDefinitionReader</code> 读取 XML 文件中：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="n">GenericApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GenericApplicationContext</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">new</span> <span class="n">XmlBeanDefinitionReader</span><span class="o">(</span><span class="n">context</span><span class="o">).</span><span class="na">loadBeanDefinitions</span><span class="o">(</span><span class="s">&#34;services.xml&#34;</span><span class="o">,</span> <span class="s">&#34;daos.xml&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="na">refresh</span><span class="o">();</span>
+</span></span></code></pre></div><p>你也可以使用 <code>GroovyBeanDefinitionReader</code> 读取 Groovy 文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="n">GenericApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GenericApplicationContext</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">new</span> <span class="n">GroovyBeanDefinitionReader</span><span class="o">(</span><span class="n">context</span><span class="o">).</span><span class="na">loadBeanDefinitions</span><span class="o">(</span><span class="s">&#34;services.groovy&#34;</span><span class="o">,</span> <span class="s">&#34;daos.groovy&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="na">refresh</span><span class="o">();</span>
+</span></span></code></pre></div><p>你可以在 <code>ApplicationContext</code> 中混合匹配这样的读取代理，来分别兑取不同的配置文件源里面的 bean 定义。</p>
+<p>你也可以使用 <code>getBean</code> 来获取你的 bean 实例对象。<code>ApplicationContext</code> 接口有一些其他的方法用来获取 bean。但是，理想情况下，你的应用代码不会用到它。确实，你的应用代码如果没有对 Spring API 的任何依赖，就不应该调用 <code>getBean()</code> 方法。例如，Spring 和 Web 框架的整合提供了对各种 web 框架元组件的依赖注入，例如 Controller 和 JSF 的bean，这些都可以让你能够通过元数据（例如自动装配）来声明依赖。</p>
 ]]></content:encoded>
     </item>
     

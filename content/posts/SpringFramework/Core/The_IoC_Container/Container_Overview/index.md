@@ -126,4 +126,104 @@ ApplicationContext context = new ClassPathXmlApplicationContext("services.xml", 
 
 在上面的例子中，服务层由 `PetStoreServiceImpl` 类和两种类型分别为 `JpaAccountDao` 和 `JpaItemDao`(基于JPA对象关系映射标准) 的数据接入对象。`property name` 元素引用 JavaBean 属性的名字，`ref` 元素引用另外一个 bean 定义的名字。`id` 和 `ref` 元素之间的联系，表达了两个互相协作对象之间的依赖关系。想了解更多配置对象依赖的细节，参考 [依赖](https://docs.spring.io/spring-framework/reference/core/beans/dependencies.html)。
 
-TO BE CONTINUED .....
+
+# 组装基于 XML 的配置元数据
+
+一个 bean 的定义跨越多个 XML 文件中有时候会非常有用。通常，每一个 XML 的配置文件代表你架构里面的一个逻辑层或者模块。
+
+你可以使用应用的上下文构造器从这些 XML 的片段中加载 bean 定义。这个构造器可以接受多 Resource 加载位置，就如前面表示的那样。你也可以使用一个或者多个 `<import/>` 元素去加载另一个（或者一些）文件中的 bean 定义。下面的例子展示了如何去做到这一点：
+
+```XML
+<beans>
+	<import resource="services.xml"/>
+	<import resource="resources/messageSource.xml"/>
+	<import resource="/resources/themeSource.xml"/>
+
+	<bean id="bean1" class="..."/>
+	<bean id="bean2" class="..."/>
+</beans>
+```
+在上面的例子中，外部的 bean 定义从三个文件中加载到：`services.xml`,`messageSource.xml`,`themeSource.xml` 。所有的位置路径都是做引入的 bean 定义文件的相对路径。所以，services.xml 必须和正在引入的文件在相同的目录下或者类路径下。虽然 `messageSource.xml` 和 `themeSource.xml` 必须在导入文件的下面的路径的 resource 路径里。如你所见，前导的 `/` 符号被忽略了。然而，既然这些路径都是相对的，所以，最好不适用 `/` 。被引入文件的内容，必须是一个依据 Spring Schema 的有效 XML bean 定义，最外层是 `<beans/>` 元素。
+
+注意：
+使用 `../` 路径引用父目录中的文件虽然是可以的，但是并不推荐。这样做，会使得当前的应用程序对外部的文件造成依赖。特别是，这个引用对类路径不推荐，例如：`classpath:../services.xml`，这样的情形下，运行时的进程会选择离 classpath 根路径最近的地方，然后去找它的父目录。类路径配置的修改，很可能会导致一个完全不同的错误的目录被选中。
+
+你可以永远选择一个全限定的资源路径而不是相对路径，例如 `file:C:/config/services.xml` 或者 `classpath:/config/services.xml`。然而，需要知道的是，你正在使你的应用配置和特定的绝对路径耦合。通常会选择对这样的绝对路径做一个间接地引用，例如，通过运行时，根据 JVM 的系统属性解析的`${...}` 占位符。
+
+
+名空间提供了引入原语的特性。在普通 bean 定义之外的特性可以在 Spring 提供的名空间————例如， `context` 和 `util` 中获取到。
+
+
+# Grooy Bean 定义的 DSL
+
+另外一个外部配置元数据的例子，同样可以使用 Spring 的 Groovy Bean 定义 DSL 来表达，如 Grails 框架所示。通常，在 `.groovy` 文件会采用下面的配置结构：
+
+```Groovy
+beans {
+	dataSource(BasicDataSource) {
+		driverClassName = "org.hsqldb.jdbcDriver"
+		url = "jdbc:hsqldb:mem:grailsDB"
+		username = "sa"
+		password = ""
+		settings = [mynew:"setting"]
+	}
+	sessionFactory(SessionFactory) {
+		dataSource = dataSource
+	}
+	myService(MyService) {
+		nestedBean = { AnotherBean bean ->
+			dataSource = dataSource
+		}
+	}
+}
+
+```
+
+这样的配置风格基本和 Spring XML 配置名空间中的 bean 定义和事件相同。同样，通过 importBeans 指令引入 XML bean 定义也是可以的。
+
+# 容器的使用
+
+`ApplicationContext` 是一个高级的工厂接口，它可以保存一个包含不同的 bean 和他们的依赖。通过使用方法 `T getBean(String name, Class<T> requiredType)`，你可以获取到你 bean 的实例。
+
+`ApplicationContext` 让你可以读取并获取 bean 定义，如下面的例子所示：
+
+```Java
+// create and configure beans
+ApplicationContext context = new ClassPathXmlApplicationContext("services.xml", "daos.xml");
+
+// retrieve configured instance
+PetStoreService service = context.getBean("petStore", PetStoreService.class);
+
+// use configured instance
+List<String> userList = service.getUsernameList();
+```
+
+使用 Groovy 配置，启动过程也类似。它有一个不同的上下文可以感知 Groovy 的实现类（同时也可以理解 XML 的 bean 定义）。下面的例子展示了 Groovy 的配置：
+
+```Java
+ApplicationContext context = new GenericGroovyApplicationContext("services.groovy", "daos.groovy");
+
+```
+
+最灵活的变化就是 `GenericApplicationContext` 和读取代理————例如，使用  `XmlBeanDefinitionReader` 读取 XML 文件中：
+
+```Java
+GenericApplicationContext context = new GenericApplicationContext();
+new XmlBeanDefinitionReader(context).loadBeanDefinitions("services.xml", "daos.xml");
+context.refresh();
+
+```
+
+你也可以使用 `GroovyBeanDefinitionReader` 读取 Groovy 文件：
+
+```Java
+GenericApplicationContext context = new GenericApplicationContext();
+new GroovyBeanDefinitionReader(context).loadBeanDefinitions("services.groovy", "daos.groovy");
+context.refresh();
+
+```
+
+你可以在 `ApplicationContext` 中混合匹配这样的读取代理，来分别兑取不同的配置文件源里面的 bean 定义。
+
+你也可以使用 `getBean` 来获取你的 bean 实例对象。`ApplicationContext` 接口有一些其他的方法用来获取 bean。但是，理想情况下，你的应用代码不会用到它。确实，你的应用代码如果没有对 Spring API 的任何依赖，就不应该调用 `getBean()` 方法。例如，Spring 和 Web 框架的整合提供了对各种 web 框架元组件的依赖注入，例如 Controller 和 JSF 的bean，这些都可以让你能够通过元数据（例如自动装配）来声明依赖。
+

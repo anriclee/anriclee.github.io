@@ -108,21 +108,120 @@ Spring IoC 容器几乎可以操作任何你想操作的类。并不仅限于操
 
 ```
 
-
-
-
-
-
 # 通过静态方法实例化
+
+当定义一个你想通过静态工厂方法创建的 bean 时，需要使用 `class` 属性指定包含这个静态工厂方法的类，使用 `factory-method` 属性，指定这个工厂方法本身。你能够调用这个方法（通过可选参数，这个待马上会讲到）返回一个对象，随后，这个对象看做是通过构造函数创建的。这样定义 bean 的一个使用场景就是调用遗留代码中的静态工厂。
+
+下面的 bean 定义，指定了将要通过工厂方法创建的 bean。这个定义不会指定返回对象的类型，而是指定包含静态方法的类。在这个例子中，`createInstance()` 方法必须是一个静态方法。下面的例子展示了怎么去指定一个工厂方法。
+
+```XML
+<bean id="clientService"
+	class="examples.ClientService"
+	factory-method="createInstance"/>
+
+```
+
+下面的例子展示了一个上面 bean 定义用到的类：
+
+```Java
+public class ClientService {
+	private static ClientService clientService = new ClientService();
+	private ClientService() {}
+
+	public static ClientService createInstance() {
+		return clientService;
+	}
+}
+
+```
+
+想了解关于如何给工厂方法传参并且在工厂返回的对象中设置对象实例的属性的细节，可以参考 [Dependencies and Configuration in Detail.](https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-properties-detailed.html)。
+
 
 
 # 通过实例的工厂方法
 
+与通过静态工厂方法实例化相似，通过实例的工厂方法调用一个容器中一个现有 bean 的非静态方法来创建一个新的 bean。要想使用这个机制，需要将 `class` 属性置空并且在 `factory-bean` 属性指定当前容器（父容器或者祖父容器）中的 bean 的名称，此 bean 包含创建对象实例的方法。在 `factory-method` 属性中设置工厂方法本身的名字。下面的例子展示了如何配置这样一个 bean：
+
+```XML
+<!-- the factory bean, which contains a method called createInstance() -->
+<bean id="serviceLocator" class="examples.DefaultServiceLocator">
+	<!-- inject any dependencies required by this locator bean -->
+</bean>
+
+<!-- the bean to be created via the factory bean -->
+<bean id="clientService"
+	factory-bean="serviceLocator"
+	factory-method="createClientServiceInstance"/>
+
+```
+
+下面的例子展示了与之相应的类：
+
+```Java
+
+public class DefaultServiceLocator {
+
+	private static ClientService clientService = new ClientServiceImpl();
+
+	public ClientService createClientServiceInstance() {
+		return clientService;
+	}
+}
+
+```
+
+一个工厂类，同样也可以包含更多的工厂方法，如下面的例子所示：
+
+```XML
+<bean id="serviceLocator" class="examples.DefaultServiceLocator">
+	<!-- inject any dependencies required by this locator bean -->
+</bean>
+
+<bean id="clientService"
+	factory-bean="serviceLocator"
+	factory-method="createClientServiceInstance"/>
+
+<bean id="accountService"
+	factory-bean="serviceLocator"
+	factory-method="createAccountServiceInstance"/>
+
+```
+
+下面的例子展示了与之相对应的类：
+
+```Java
+public class DefaultServiceLocator {
+
+	private static ClientService clientService = new ClientServiceImpl();
+
+	private static AccountService accountService = new AccountServiceImpl();
+
+	public ClientService createClientServiceInstance() {
+		return clientService;
+	}
+
+	public AccountService createAccountServiceInstance() {
+		return accountService;
+	}
+}
+
+```
+
+这个方法展示了工厂 bean 本身是可以通过依赖注入机制被设置和配置的。
+
+Note：在 Spring 的文档中，"factory bean" 指的是一个在 Spring 容器中配置好并且通过实例或者静态工厂方法创建好的 bean。与之相对比，`FactoryBean`（注意首字母），指的是一个 Spring 特定的 `FactoryBean` 的实现类。
+
+
+
 
 # 确定一个 bean 的运行时类名
 
+确定一个特定的bean的运行时类型并非易事。一个在 bean 元数据定义中指定的类仅仅是一个可能与一个声明的工厂方法组合的初始类引用，或者是一个会
+让此 bean 的运行时类型完全不同的 FactoryBean 类，或者在实例级别的工厂方法（通过指定的 factory-bean 来解决）什么也不做。此外，AOP 代理也会通过bean 接口代理来包装一个bean实例，此接口代理会有限地暴露目标bean的实际类型（仅仅是已经实现的接口）。
+
+找出一个特定 bean 的实际运行时类型的推荐的方法是通过指定 bean 名字，调用 `BeanFactory.getType` 方法。这种方法将上面所有的情形考虑在内，并且返回对象的类型，此对象也是在相同名称下，调用 `BeanFactory.getBean` 方法会返回的。
 
 
 
-
-TO BE CONTINUED
+[全文完]

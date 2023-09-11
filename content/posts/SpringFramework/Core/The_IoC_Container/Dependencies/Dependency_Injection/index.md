@@ -1,6 +1,6 @@
 ---
 title: "[译] 依赖注入"
-date: 2023-09-10T23:12:31+08:00
+date: 2023-09-11T20:12:31+08:00
 draft: false
 tags:
   - Spring
@@ -190,11 +190,141 @@ Spring 容器在其被创建时，会对所有的bean的配置进行有效性验
 >
 > 与典型的例子（没有循环依赖）不同，一个bean A 和 bean B 的循环依赖，迫使其中的一个 bean 在自己完全初始化之前注入另外一个优先级更高的 bean（一个典型的鸡生蛋蛋生鸡问题）。
 
+你通常可以相信 Spring 会做正确的事情。它可以在容器加载的时候检测到配置问题，比如引用不存在的 bean 和循环依赖。Spring 会在 bean 被实际上创建后，尽可能晚地设置属性和解决依赖。当你请求一个对象，如果在创建这个对象或者它的依赖有问题时，一个被正确加载的 Spring 容器可以在稍后抛出异常。 —— 例如，bean 会因为属性丢失或者无效引发异常。这些配置问题的延迟出现就是为什么 `ApplicationContext` 的实现默认是预初始化的单例 bean。在 bean 实际需要之前，以前期的时间和内存为代价来创建这些 bean。你会在 ApplicationContext 被创建的时候，发现配置问题。你仍然可以覆盖这个默认的行为，以便单例的 bean 可以被延迟初始化而不是过早的初始化。
 
-通常，你可以相信 Spring 会做正确的事情。它在容器被加载的时候检测例如对于不存在 bean 的引用和循环依赖等配置问题。Spring 会在 bean 被实际上创建后，尽可能晚地时候，设置属性和解决依赖。这意味着一个被正确加载的 Spring 容器可以在晚些时候抛出异常，在你请求一个对象时，如果创建这个对象或者它其中一个依赖有问题 —— 例如，bean 因为错过了或者一个无效的属性而抛出异常。
 
+
+如果没有循环依赖存在，当一个或者多个合作的 bean 被注入到一个需要依赖的 bean 时，每一个协作的 bean 会在注入到依赖的 bean 前被完全配置。这意味着，如果 bean A 对 bean B 有依赖，Spring IoC 容器在调用 bean A 的方法之前，将 bean B 完全配置好。换句话说，bean 被实例化后，它的依赖早已被设置好了，它的生命周期方法也早已被调用了。
 
 
 # 依赖注入的例子
 
-TO BE CONTINUED
+下面的例子使用了基于 XML 的配置元数据，用来做基于 setter 的 DI。Spring XML 配置文件指定了一些 bean 定义如下：
+
+```XML
+<bean id="exampleBean" class="examples.ExampleBean">
+	<!-- setter injection using the nested ref element -->
+	<property name="beanOne">
+		<ref bean="anotherExampleBean"/>
+	</property>
+
+	<!-- setter injection using the neater ref attribute -->
+	<property name="beanTwo" ref="yetAnotherBean"/>
+	<property name="integerProperty" value="1"/>
+</bean>
+
+<bean id="anotherExampleBean" class="examples.AnotherBean"/>
+<bean id="yetAnotherBean" class="examples.YetAnotherBean"/>
+
+```
+下面的例子展示了对应的 `ExampleBean`  类：
+
+```Java
+public class ExampleBean {
+
+	private AnotherBean beanOne;
+
+	private YetAnotherBean beanTwo;
+
+	private int i;
+
+	public void setBeanOne(AnotherBean beanOne) {
+		this.beanOne = beanOne;
+	}
+
+	public void setBeanTwo(YetAnotherBean beanTwo) {
+		this.beanTwo = beanTwo;
+	}
+
+	public void setIntegerProperty(int i) {
+		this.i = i;
+	}
+}
+
+```
+
+在前面的例子中，声明 setter 方法去定义 XML 文件中的属性。下面的例子使用了基于构造函数的 DI：
+
+```XML
+
+<bean id="exampleBean" class="examples.ExampleBean">
+	<!-- constructor injection using the nested ref element -->
+	<constructor-arg>
+		<ref bean="anotherExampleBean"/>
+	</constructor-arg>
+
+	<!-- constructor injection using the neater ref attribute -->
+	<constructor-arg ref="yetAnotherBean"/>
+
+	<constructor-arg type="int" value="1"/>
+</bean>
+
+<bean id="anotherExampleBean" class="examples.AnotherBean"/>
+<bean id="yetAnotherBean" class="examples.YetAnotherBean"/>
+```
+
+
+下面的例子展示了对应的 ExampleBean 类：
+
+```Java
+public class ExampleBean {
+
+	private AnotherBean beanOne;
+
+	private YetAnotherBean beanTwo;
+
+	private int i;
+
+	public ExampleBean(
+		AnotherBean anotherBean, YetAnotherBean yetAnotherBean, int i) {
+		this.beanOne = anotherBean;
+		this.beanTwo = yetAnotherBean;
+		this.i = i;
+	}
+}
+```
+
+bean 定义中指定的构造函数中的参数，被用作 ExampleBean 构造函数中的参数。
+
+现在考虑这个例子的一个变形，而不是使用构造函数。Spring 被告知调用静态工厂方法来返回一个对象的实例。
+
+```XML
+<bean id="exampleBean" class="examples.ExampleBean" factory-method="createInstance">
+	<constructor-arg ref="anotherExampleBean"/>
+	<constructor-arg ref="yetAnotherBean"/>
+	<constructor-arg value="1"/>
+</bean>
+
+<bean id="anotherExampleBean" class="examples.AnotherBean"/>
+<bean id="yetAnotherBean" class="examples.YetAnotherBean"/>
+
+```
+
+下面的例子展示了相应的 ExampleBean 类：
+
+```Java
+public class ExampleBean {
+
+	// a private constructor
+	private ExampleBean(...) {
+		...
+	}
+
+	// a static factory method; the arguments to this method can be
+	// considered the dependencies of the bean that is returned,
+	// regardless of how those arguments are actually used.
+	public static ExampleBean createInstance (
+		AnotherBean anotherBean, YetAnotherBean yetAnotherBean, int i) {
+
+		ExampleBean eb = new ExampleBean (...);
+		// some other operations...
+		return eb;
+	}
+}
+
+```
+
+<constructor-arg/> 元素提供了静态工厂方法中的参数，就如同一个构造函数被实际上使用。工厂方法返回 class 的类型，不一定要和包含静态方法的类是一个类型（尽管在这个例子中相同）。一个实例的（非静态）工厂方法可以以一个相同的方式（除非 factory-bean 属性而不是 class 属性之外），所以我们不在这里讨论这些细节。
+
+
+[全文完]

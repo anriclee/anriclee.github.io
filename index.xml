@@ -5,7 +5,7 @@
     <link>https://anriclee.github.io/</link>
     <description>Recent content on ReadByWord</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 11 Sep 2023 20:12:31 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Sep 2023 21:12:31 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PaperModX New Features</title>
       <link>https://anriclee.github.io/docs/papermodx-new-features/</link>
@@ -104,6 +104,184 @@ to show all the icons, check it out at: <a href="https://reorx.github.io/hugo-Pa
       <guid>https://anriclee.github.io/docs/icons_preview/</guid>
       <description>Index of all icons in PaperModeX</description>
       <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[译] 细谈依赖和配置</title>
+      <link>https://anriclee.github.io/posts/springframework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</link>
+      <pubDate>Mon, 11 Sep 2023 21:12:31 +0800</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/springframework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</guid>
+      <description>依赖项的详细配置
+正如前面所提到的那样，你可以定义 bean 的属性和构造函数参数，去引用其他已经设置好的 bean 或者内联定义的值。 为了达到这个目的，Spring 的基于 XML 配置元数据支持在 和 元素内增加子元素。
+直接值（基本类型，字符串等等） 元素的 value 值，把一个属性值或者构造函数参数定义为一个可读字符串。Spring 的转换服务被用来将这些值从字符串转换为属性或者参数的实际类型。下面的例子展示了可以被设置的多种值：
+&amp;lt;bean id=&amp;#34;myDataSource&amp;#34; class=&amp;#34;org.apache.commons.dbcp.BasicDataSource&amp;#34; destroy-method=&amp;#34;close&amp;#34;&amp;gt; &amp;lt;!-- results in a setDriverClassName(String) call --&amp;gt; &amp;lt;property name=&amp;#34;driverClassName&amp;#34; value=&amp;#34;com.mysql.jdbc.Driver&amp;#34;/&amp;gt; &amp;lt;property name=&amp;#34;url&amp;#34; value=&amp;#34;jdbc:mysql://localhost:3306/mydb&amp;#34;/&amp;gt; &amp;lt;property name=&amp;#34;username&amp;#34; value=&amp;#34;root&amp;#34;/&amp;gt; &amp;lt;property name=&amp;#34;password&amp;#34; value=&amp;#34;misterkaoli&amp;#34;/&amp;gt; &amp;lt;/bean&amp;gt; 下面的例子使用 p-namespace 来让 XML 配置更加简明：
+&amp;lt;beans xmlns=&amp;#34;http://www.springframework.org/schema/beans&amp;#34; xmlns:xsi=&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34; xmlns:p=&amp;#34;http://www.springframework.org/schema/p&amp;#34; xsi:schemaLocation=&amp;#34;http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd&amp;#34;&amp;gt; &amp;lt;bean id=&amp;#34;myDataSource&amp;#34; class=&amp;#34;org.apache.commons.dbcp.BasicDataSource&amp;#34; destroy-method=&amp;#34;close&amp;#34; p:driverClassName=&amp;#34;com.mysql.jdbc.Driver&amp;#34; p:url=&amp;#34;jdbc:mysql://localhost:3306/mydb&amp;#34; p:username=&amp;#34;root&amp;#34; p:password=&amp;#34;misterkaoli&amp;#34;/&amp;gt; &amp;lt;/beans&amp;gt; 上面的 XML 更加的简明。然而，类型是在运行时而不是设计时发现的，除非你在创建 bean 定义的时候，用支持自动属性完成的 IDE（例如 Intellij IDEA 或者 Eclipse 的 Spring 工具）。这些辅助都是高度推荐的。 你同样可以配置 java.</description>
+      <content:encoded><![CDATA[<p>依赖项的详细配置</p>
+<p>正如前面所提到的那样，你可以定义 bean 的属性和构造函数参数，去引用其他已经设置好的 bean 或者内联定义的值。
+为了达到这个目的，Spring 的基于 XML 配置元数据支持在 <property/> 和 <constructor-arg/> 元素内增加子元素。</p>
+<h1 id="直接值基本类型字符串等等">直接值（基本类型，字符串等等）</h1>
+<p><property/> 元素的 value 值，把一个属性值或者构造函数参数定义为一个可读字符串。Spring 的转换服务被用来将这些值从字符串转换为属性或者参数的实际类型。下面的例子展示了可以被设置的多种值：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;myDataSource&#34;</span> <span class="na">class=</span><span class="s">&#34;org.apache.commons.dbcp.BasicDataSource&#34;</span> <span class="na">destroy-method=</span><span class="s">&#34;close&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- results in a setDriverClassName(String) call --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;driverClassName&#34;</span> <span class="na">value=</span><span class="s">&#34;com.mysql.jdbc.Driver&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;url&#34;</span> <span class="na">value=</span><span class="s">&#34;jdbc:mysql://localhost:3306/mydb&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;username&#34;</span> <span class="na">value=</span><span class="s">&#34;root&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;password&#34;</span> <span class="na">value=</span><span class="s">&#34;misterkaoli&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>下面的例子使用 p-namespace 来让 XML 配置更加简明：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&#34;http://www.springframework.org/schema/beans&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">xmlns:p=</span><span class="s">&#34;http://www.springframework.org/schema/p&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://www.springframework.org/schema/beans
+</span></span></span><span class="line"><span class="cl"><span class="s">	https://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;myDataSource&#34;</span> <span class="na">class=</span><span class="s">&#34;org.apache.commons.dbcp.BasicDataSource&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="na">destroy-method=</span><span class="s">&#34;close&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="na">p:driverClassName=</span><span class="s">&#34;com.mysql.jdbc.Driver&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="na">p:url=</span><span class="s">&#34;jdbc:mysql://localhost:3306/mydb&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="na">p:username=</span><span class="s">&#34;root&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="na">p:password=</span><span class="s">&#34;misterkaoli&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/beans&gt;</span>
+</span></span></code></pre></div><p>上面的 XML 更加的简明。然而，类型是在运行时而不是设计时发现的，除非你在创建 bean 定义的时候，用支持自动属性完成的 IDE（例如 Intellij IDEA 或者 Eclipse 的 Spring 工具）。这些辅助都是高度推荐的。
+你同样可以配置 <code>java.util.Properties</code> 的实例，如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;mappings&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">class=</span><span class="s">&#34;org.springframework.context.support.PropertySourcesPlaceholderConfigurer&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- typed as a java.util.Properties --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;properties&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;value&gt;</span>
+</span></span><span class="line"><span class="cl">			jdbc.driver.className=com.mysql.jdbc.Driver
+</span></span><span class="line"><span class="cl">			jdbc.url=jdbc:mysql://localhost:3306/mydb
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;/value&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>Spring 容器可以通过使用 JavaBeans 的 PropertyEditor 机制，转换 <value/> 元素里面的文本值为一个 java.util.Properties 实例。这是一个不错的捷径，也是为数不多的 Spring 团队偏爱嵌套的 <value/> 元素而非 value 属性的风格的地方。</p>
+<h1 id="idref-元素">idref 元素</h1>
+<p>idref 元素就是一个简单的传递容器中另外一个 bean 的 id 到 <constructor-arg/> 或者 <property/> 元素中的防止错误的办法。下面的例子展示了如何去使用它：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;theTargetBean&#34;</span> <span class="na">class=</span><span class="s">&#34;...&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;theClientBean&#34;</span> <span class="na">class=</span><span class="s">&#34;...&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;targetName&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;idref</span> <span class="na">bean=</span><span class="s">&#34;theTargetBean&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>上面的 bean 定义片段等价于下面的片段：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;theTargetBean&#34;</span> <span class="na">class=</span><span class="s">&#34;...&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;client&#34;</span> <span class="na">class=</span><span class="s">&#34;...&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;targetName&#34;</span> <span class="na">value=</span><span class="s">&#34;theTargetBean&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>第一种形式优于第二种，因为使用 idref 标签，可以让容器在部署时验证所引用的有名称的 bean 是否真正存在。在第二种变体中，不会验证传给 client bean 中 targetName 属性的值。当 client bean 被真正创建时，才会真正发现这个类型（很有可能是致命错误）。如果 client bean 是一个属性 bean，在容器被部署很长时间后，类型和结果异常才有可能被发现。</p>
+<p>Note：idref 元素中的 local 属性在 XSD 4.0 bean 中的属性不再支持，因为它不再对一个普通 bean 引用提供值了。当升级到 4.0 Schema 的时候，需要修改你的当前存在的 idref local 引用为 idref bean。</p>
+<p>一个</p>
+<p><idref/> 元素中，</p>
+<p>（早从 Spring 2.0 开始）<idref/> 元素配置值的一个常见位置就是 ProxyFactoryBean bean 定义中的 AOP 拦截器配置值。当你指定拦截器名称时，使用 <idref/> 元素可防止你误拼写一个拦截器的 ID。</p>
+<h1 id="引用其他-bean协作器">引用其他 bean（协作器）</h1>
+<p>ref 元素是 <constructor-arg/> 或者 <property/> 定义元素里面的最后一个元素。在这里，你可以将一个 bean 的具体属性设置为对另外一个被容器管理的 bean 的引用。被引用的 bean 是将被设置属性值 bean 的依赖，而且在属性被设置前，根据需要被初始化。（如果协作者是一个单例的 bean，它也许已经被容器初始化了）。所有的引用最终都是另外一个对象的引用。Scope 和验证取决于你通过 bean 或者 parent 属性指定的另外一个对象的 ID 或者名字。</p>
+<p>通过 <ref/> 标签的 bean 属性指定目标 bean，是最常见的一种形式，并且允许引用相同容器或者父容器内的任何 bean，不论是否在同一个 XML 文件中。bean 属性的值也许和目标 bean 的id属性相同，或者和目标 bean 的 name 属性的其中一个值相同。下面的例子展示了怎么使用 ref 元素：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;ref</span> <span class="na">bean=</span><span class="s">&#34;someBean&#34;</span><span class="nt">/&gt;</span>
+</span></span></code></pre></div><p>通过 parent 属性指定目标 bean 创建了对当前容器父容器内的一个 bean 的引用。parent 属性的值可以和目标 bean 的 id 属性和 name 属性的其中一个值相同。目标 bean 必须在当前容器的一个父容器中。当你有一个容器的继承结构，并且你想要用和父 bean 一样的名字作为代理包装父容器中的一个现有 bean 的时候，你应该使用这种引用变体。下面的例子展示了如何使用 parent 属性：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="c">&lt;!-- in the parent context --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;accountService&#34;</span> <span class="na">class=</span><span class="s">&#34;com.something.SimpleAccountService&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- insert dependencies as required here --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/bean&gt;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="c">&lt;!-- in the child (descendant) context --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;accountService&#34;</span> <span class="err">&lt;!--</span> <span class="err">bean</span> <span class="err">name</span> <span class="err">is</span> <span class="err">the</span> <span class="err">same</span> <span class="err">as</span> <span class="err">the</span> <span class="err">parent</span> <span class="err">bean</span> <span class="err">--</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">	class=&#34;org.springframework.aop.framework.ProxyFactoryBean&#34;&gt;
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;target&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;ref</span> <span class="na">parent=</span><span class="s">&#34;accountService&#34;</span><span class="nt">/&gt;</span> <span class="c">&lt;!-- notice how we refer to the parent bean --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- insert other configuration and dependencies as required here --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>Note：ref 元素中的 local 属性在 XSD 4.0 中的 bean 已经不再支持，因为它不会对一个普通的 bean 引用提供任何值了。升级到 4.0 Schema 时，需要将现有的 ref local 引用改为 ref bean。</p>
+<h1 id="内部-bean">内部 bean</h1>
+<p><property/> 或者 <constructor-arg/> 元素内部的 <bean/> 元素定义了一个内部 bean，如下面的例子所示：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;outer&#34;</span> <span class="na">class=</span><span class="s">&#34;...&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- instead of using a reference to a target bean, simply define the target bean inline --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;target&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&#34;com.example.Person&#34;</span><span class="nt">&gt;</span> <span class="c">&lt;!-- this is the inner bean --&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;name&#34;</span> <span class="na">value=</span><span class="s">&#34;Fiona Apple&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;age&#34;</span> <span class="na">value=</span><span class="s">&#34;25&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;/bean&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>一个内部bean定义不需要定义 ID 和名称。如果指定了，容器也不会用这个值作为标识。容器也会在创建 bean 时忽略 scope 标志，因为内部biean通常是匿名的而且总是与外面的 bean 一起创建。不可能单独只访问内部bean 或者将他们注入到外层嵌套 bean 以外的 bean 中。</p>
+<p>在极端情况下，它会从一个自定义的 scope 接收到销毁的回调 —— 例如，对于一个包含在单例 bean 中的 request scope 的内部 bean。内部 bean 实例的创建于它所在的 bean 绑定在一起，但是销毁回调让它参与到 request 范围的生命周期。这不是一个常见的场景。内部 bean 通常仅仅与它所在的 bean 共享一个 scope。</p>
+<h1 id="集合">集合</h1>
+<p><list/>, <set/>, <map/> 和 <props/> 元素分别设置 Java 的集合类型：List，Set，Map 和 Properties。下面的例子显示了该用法：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;moreComplexObject&#34;</span> <span class="na">class=</span><span class="s">&#34;example.ComplexObject&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- results in a setAdminEmails(java.util.Properties) call --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;adminEmails&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;props&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">&#34;administrator&#34;</span><span class="nt">&gt;</span>administrator@example.org<span class="nt">&lt;/prop&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">&#34;support&#34;</span><span class="nt">&gt;</span>support@example.org<span class="nt">&lt;/prop&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">&#34;development&#34;</span><span class="nt">&gt;</span>development@example.org<span class="nt">&lt;/prop&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;/props&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- results in a setSomeList(java.util.List) call --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;someList&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;list&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;value&gt;</span>a list element followed by a reference<span class="nt">&lt;/value&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;ref</span> <span class="na">bean=</span><span class="s">&#34;myDataSource&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;/list&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- results in a setSomeMap(java.util.Map) call --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;someMap&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;map&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;an entry&#34;</span> <span class="na">value=</span><span class="s">&#34;just some string&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;a ref&#34;</span> <span class="na">value-ref=</span><span class="s">&#34;myDataSource&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;/map&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- results in a setSomeSet(java.util.Set) call --&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;someSet&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;set&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;value&gt;</span>just some string<span class="nt">&lt;/value&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;ref</span> <span class="na">bean=</span><span class="s">&#34;myDataSource&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;/set&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>map 的 key 或者 value，或者一个设置好的 value，也可以使下面元素的任意一种：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl">bean | ref | idref | list | set | map | props | value | null
+</span></span></code></pre></div><h2 id="集合的并集">集合的并集</h2>
+<p>Spring 容器同样支持集合的合并。一个应用的开发者可以定义一个父 <list/>, <map/>, <set/>   或者 <props/> 元素或者有一个子的 <list/>, <map/>, <set/>   或者 <props/> 元素，来继承或者覆盖父集合中的元素。即，子集合中的值是父集合和子集合中元素的并集，同时子集合中的元素会覆盖父集合中的元素。</p>
+<p>这个合并讨论了父子 bean 的机制。不熟悉父子 bean 定义的读者，也许要在继续往下前读一下相关章节。</p>
+<p>下面的例子展示了集合合并的用法：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;beans&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;parent&#34;</span> <span class="na">abstract=</span><span class="s">&#34;true&#34;</span> <span class="na">class=</span><span class="s">&#34;example.ComplexObject&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;adminEmails&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;props&gt;</span>
+</span></span><span class="line"><span class="cl">				<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">&#34;administrator&#34;</span><span class="nt">&gt;</span>administrator@example.com<span class="nt">&lt;/prop&gt;</span>
+</span></span><span class="line"><span class="cl">				<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">&#34;support&#34;</span><span class="nt">&gt;</span>support@example.com<span class="nt">&lt;/prop&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;/props&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/bean&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;child&#34;</span> <span class="na">parent=</span><span class="s">&#34;parent&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;adminEmails&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="c">&lt;!-- the merge is specified on the child collection definition --&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;props</span> <span class="na">merge=</span><span class="s">&#34;true&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">				<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">&#34;sales&#34;</span><span class="nt">&gt;</span>sales@example.com<span class="nt">&lt;/prop&gt;</span>
+</span></span><span class="line"><span class="cl">				<span class="nt">&lt;prop</span> <span class="na">key=</span><span class="s">&#34;support&#34;</span><span class="nt">&gt;</span>support@example.co.uk<span class="nt">&lt;/prop&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="nt">&lt;/props&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;/property&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/bean&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;beans&gt;</span>
+</span></span></code></pre></div><p>注意子 bean 定义中 adminEmails 属性里<props/>  merge=true 属性的用法。当子bean被容器解析和初始化时，最终的实例会有一个包含合并子集合中 adminEmails 和父集合中的 adminEmails 的 adminEmails 和 Properties 集合。下面的列表会展示最终的结果</p>
+<pre tabindex="0"><code>administrator=administrator@example.com
+sales=sales@example.com
+support=support@example.co.uk
+</code></pre><p>子 Properties 集合中设置的值继承了所有父 <props/> 中的属性值，而且子集合中的 support 值覆盖了父集合中的值。</p>
+<p>这个合并的行为同样适用于 <list/>, <map/>, <set/> 类型。在 <list/> 元素的特殊使用中，与 List 集合类型联系的语义（即集合中值的有序性）会一直保持。父集合中的值优先于子集合。在 Map, Set 和 Properties 集合类型中是无序的。因此，容器内部使用的 Map, Set 和 Properties 实现类型中没有有序性的语义生效。</p>
+<h2 id="集合合并的限制">集合合并的限制</h2>
+<h1 id="空串或者-null">空串或者 Null</h1>
+<h1 id="p-namespace-的-xml-简写">p-namespace 的 XML 简写</h1>
+<h1 id="c-namespace-的-xml-简写">c-namespace 的 XML 简写</h1>
+<h1 id="复合属性名称">复合属性名称</h1>
+<p>TO BE CONTINUED &hellip;.</p>
+]]></content:encoded>
     </item>
     
     <item>
@@ -339,7 +517,7 @@ public class SimpleMovieLister { // the SimpleMovieLister has a dependency on a 
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">return</span> <span class="n">eb</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">	<span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></div><p><constructor-arg/> 元素提供了静态工厂方法中的参数，就如同一个构造函数被实际上使用。工厂方法返回 class 的类型，不一定要和包含静态方法的类是一个类型（尽管在这个例子中相同）。一个实例的（非静态）工厂方法可以以一个相同的方式（除非 factory-bean 属性而不是 class 属性之外），所以我们不在这里讨论这些细节。</p>
+</span></span></code></pre></div><p><constructor-arg/> 元素提供了静态工厂方法中的参数，就如同一个构造函数被实际上使用。工厂方法返回 class 的类型，不一定要和包含静态方法的类是一个类型（尽管在这个例子中相同）。一个实例的非静态工厂方法可以用本质上同样的方式来使用（使用 factory-bean 属性代替 class 属性除外），所以我们在这里就不多赘述了。</p>
 <p>[全文完]</p>
 ]]></content:encoded>
     </item>

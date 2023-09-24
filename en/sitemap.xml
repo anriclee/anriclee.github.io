@@ -18,11 +18,8 @@
     <loc>https://anriclee.github.io/docs/icons_preview/</loc>
     <lastmod>2022-04-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</loc>
-    <lastmod>2023-09-11T21:12:31+08:00</lastmod>
-  </url><url>
     <loc>https://anriclee.github.io/posts/</loc>
-    <lastmod>2023-09-11T21:12:31+08:00</lastmod>
+    <lastmod>2023-09-24T10:07:48+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -35,7 +32,7 @@
                 />
   </url><url>
     <loc>https://anriclee.github.io/</loc>
-    <lastmod>2023-09-11T21:12:31+08:00</lastmod>
+    <lastmod>2023-09-24T10:07:48+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -47,11 +44,8 @@
                 href="https://anriclee.github.io/"
                 />
   </url><url>
-    <loc>https://anriclee.github.io/tags/spring/</loc>
-    <lastmod>2023-09-11T21:12:31+08:00</lastmod>
-  </url><url>
     <loc>https://anriclee.github.io/tags/</loc>
-    <lastmod>2023-09-11T21:12:31+08:00</lastmod>
+    <lastmod>2023-09-24T10:07:48+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -62,6 +56,18 @@
                 hreflang="en"
                 href="https://anriclee.github.io/tags/"
                 />
+  </url><url>
+    <loc>https://anriclee.github.io/posts/essays/tech/</loc>
+    <lastmod>2023-09-24T10:07:48+08:00</lastmod>
+  </url><url>
+    <loc>https://anriclee.github.io/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/</loc>
+    <lastmod>2023-09-24T10:07:48+08:00</lastmod>
+  </url><url>
+    <loc>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</loc>
+    <lastmod>2023-09-11T21:12:31+08:00</lastmod>
+  </url><url>
+    <loc>https://anriclee.github.io/tags/spring/</loc>
+    <lastmod>2023-09-11T21:12:31+08:00</lastmod>
   </url><url>
     <loc>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/dependencies/dependency_injection/</loc>
     <lastmod>2023-09-11T20:12:31+08:00</lastmod>

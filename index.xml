@@ -143,6 +143,41 @@ PS：
     </item>
     
     <item>
+      <title>毛选与AI与风水学</title>
+      <link>https://anriclee.github.io/posts/essays/mao/</link>
+      <pubDate>Tue, 26 Sep 2023 22:38:32 +0800</pubDate>
+      
+      <guid>https://anriclee.github.io/posts/essays/mao/</guid>
+      <description>我们离AI越近，就离自己的判断越远。AI 到底会成为人类历史前进的助力还是阻力？这越来越成为在我脑中盘旋的问题。
+AI 的发展，得益于世界上的少数精英对于算法的精进。然而，剩下的大多数，就沦为算法黑盒之外的芸芸众生了。
+当下，开谈不说 AI，读尽诗书也枉然。资本鼓吹大行其道，什么代码会被 AI 代替，艺术会被 AI 代替，一时间，仿佛就差造物主会被 AI 代替了，然而，我们了解自己的痛点么？
+我们以为 AI 可以代替我们做任何事情，实际上，却只能干一小部分事情，剩下的很多事情，AI 并不能替我们做出选择。一句话，因为算法并不是万能的。我们生活中有很多决策，并非是一个公式一个概率所能决定的。比如，婆媳关系，比如，中年危机。
+我们总是倾向于用最省力的办法，解决最复杂的事情。
+先问一下 AI。
+AI 的回答不使我们满意，于是我们请教传统的 AI：风水与命理。
+我们就是不愿意，自己去分析一下当下的处境，调查一下当下所面临的环境，搞清楚当下要解决的事情。
+而这些分析问题的方法、模板以及结论，就在《毛选》中。
+只是，我们从《毛选》中获取到的只是“渔”而非“鱼”。
+在这个快节奏的时代，谁还需要“渔”？即使懂得了“渔”，又有多少时间去实践“渔”？
+思考，是这个时代，最缺乏的东西。
+系统思考，更是稀缺物品。</description>
+      <content:encoded><![CDATA[<p>我们离AI越近，就离自己的判断越远。AI 到底会成为人类历史前进的助力还是阻力？这越来越成为在我脑中盘旋的问题。</p>
+<p>AI 的发展，得益于世界上的少数精英对于算法的精进。然而，剩下的大多数，就沦为算法黑盒之外的芸芸众生了。</p>
+<p>当下，开谈不说 AI，读尽诗书也枉然。资本鼓吹大行其道，什么代码会被 AI 代替，艺术会被 AI 代替，一时间，仿佛就差造物主会被 AI 代替了，然而，我们了解自己的痛点么？</p>
+<p>我们以为 AI 可以代替我们做任何事情，实际上，却只能干一小部分事情，剩下的很多事情，AI 并不能替我们做出选择。一句话，因为算法并不是万能的。我们生活中有很多决策，并非是一个公式一个概率所能决定的。比如，婆媳关系，比如，中年危机。</p>
+<p>我们总是倾向于用最省力的办法，解决最复杂的事情。</p>
+<p>先问一下 AI。</p>
+<p>AI 的回答不使我们满意，于是我们请教传统的 AI：风水与命理。</p>
+<p>我们就是不愿意，自己去分析一下当下的处境，调查一下当下所面临的环境，搞清楚当下要解决的事情。</p>
+<p>而这些分析问题的方法、模板以及结论，就在《毛选》中。</p>
+<p>只是，我们从《毛选》中获取到的只是“渔”而非“鱼”。</p>
+<p>在这个快节奏的时代，谁还需要“渔”？即使懂得了“渔”，又有多少时间去实践“渔”？</p>
+<p>思考，是这个时代，最缺乏的东西。</p>
+<p>系统思考，更是稀缺物品。</p>
+]]></content:encoded>
+    </item>
+    
+    <item>
       <title>乔布斯传</title>
       <link>https://anriclee.github.io/posts/bookreading/jobs/</link>
       <pubDate>Sun, 24 Sep 2023 10:55:41 +0800</pubDate>
@@ -948,6 +983,7 @@ AOP 概念 让我们从一些核心的 AOP 概念和术语出发。这些术语�
 <p>一个号的 pointcut 应该至少包括两个类型（kinded和 scoping）。你可以包含 contextual 指示符来基于 join point 上下文匹配或者在使用 advice 时绑定上下文。假设仅有一种指示符或者仅有一个 contextual 指示符可以起作用，但是会由于额外的处理或者分析影响织入性能（时间或者内存大小）。scoping 指示符匹配非常快，使用他们意味着 AspectJ 可以非常快地忽略无需进一步处理的 join point 组。一个好的 pointcut 应该尽可能地址包含一种。</p>
 <h1 id="声明一个-advice">声明一个 advice</h1>
 <p>TO BE CONTINUED</p>
+<p>curl -H &lsquo;Content-Type: application/json&rsquo; -d &lsquo;{&ldquo;msgtype&rdquo;: &ldquo;text&rdquo;, &ldquo;text&rdquo;: { &ldquo;content&rdquo;: &ldquo;抢到票了！！！！&rdquo; }&rsquo; &lsquo;<a href="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=bbd844f1-f88e-4b6b-87bb-f5a47c78c217'">https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=bbd844f1-f88e-4b6b-87bb-f5a47c78c217'</a></p>
 ]]></content:encoded>
     </item>
     

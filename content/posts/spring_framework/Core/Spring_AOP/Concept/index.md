@@ -389,3 +389,6 @@ execution(modifiers-pattern?
 
 
 TO BE CONTINUED
+
+curl -H 'Content-Type: application/json' -d '{"msgtype": "text", "text": { "content": "抢到票了！！！！" }' 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=bbd844f1-f88e-4b6b-87bb-f5a47c78c217' 
+   

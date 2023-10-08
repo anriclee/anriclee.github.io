@@ -20,6 +20,8 @@ author: 乌江亭长
 	- [《红楼》碎碎念](https://anriclee.github.io/posts/stone/summary)
 - 《金瓶梅》
 	- [一刷]()
+- 《毛泽东选集》
+- 《乔布斯传》
 
 
 ### 读完

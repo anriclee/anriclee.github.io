@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Blogs on ReadByWord</title>
+    <link>https://anriclee.github.io/blog/</link>
+    <description>Recent content in Blogs on ReadByWord</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 07 Apr 2025 22:08:34 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

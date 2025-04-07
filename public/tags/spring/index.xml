@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Spring on ReadByWord</title>
-    <link>http://localhost:1313/tags/spring/</link>
+    <link>https://anriclee.github.io/tags/spring/</link>
     <description>Recent content in Spring on ReadByWord</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 11 Sep 2023 21:12:31 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Sep 2023 21:12:31 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/tags/spring/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[译] 细谈依赖和配置</title>
-      <link>http://localhost:1313/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</link>
       <pubDate>Mon, 11 Sep 2023 21:12:31 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</guid>
       <description>&lt;p&gt;依赖项的详细配置&lt;/p&gt;
 &lt;p&gt;正如前面所提到的那样，你可以定义 bean 的属性和构造函数参数，去引用其他已经设置好的 bean 或者内联定义的值。
 为了达到这个目的，Spring 的基于 XML 配置元数据支持在 &lt;property/&gt; 和 &lt;constructor-arg/&gt; 元素内增加子元素。&lt;/p&gt;
@@ -212,10 +212,10 @@ support=support@example.co.uk
     
     <item>
       <title>[译] 依赖注入</title>
-      <link>http://localhost:1313/posts/spring_framework/core/the_ioc_container/dependencies/dependency_injection/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/dependencies/dependency_injection/</link>
       <pubDate>Mon, 11 Sep 2023 20:12:31 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/core/the_ioc_container/dependencies/dependency_injection/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/dependencies/dependency_injection/</guid>
       <description>&lt;p&gt;在依赖注入（DI）里，对象通过构造函数参数、工厂方法参数或者在
 被工厂方法创建返回的对象中设置的属性定义他们的依赖。然后，容器在创建这些 bean 时，注入依赖。这个过程与 bean 自身使用所需要类的直接构造函数实例化，或者通过 Service Locator 模式来找到所需要的依赖这个过程正好相反。&lt;/p&gt;
 &lt;p&gt;使用 DI 原则的代码更加干净整洁，并且提供给对象的依赖时，解耦也更加高效。对象并不找他们的依赖也并不知道这些依赖的地址或者类。这样的结果就是，你的类变得更易测试，尤其是当依赖是接口或者抽象的父类时，在单元测试可以对这些依赖进行打桩或者mock他们的实现。&lt;/p&gt;
@@ -461,10 +461,10 @@ support=support@example.co.uk
     
     <item>
       <title>[译] Bean 概述</title>
-      <link>http://localhost:1313/posts/spring_framework/core/the_ioc_container/bean_overview/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/bean_overview/</link>
       <pubDate>Sat, 02 Sep 2023 23:12:31 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/core/the_ioc_container/bean_overview/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/bean_overview/</guid>
       <description>&lt;p&gt;一个 Sring IoC 容器可以操作一个或者多个 bean。这些 bean 是通过你提供给容器的配置元数据生成的（例如，以 XML 中的 &lt;code&gt;&amp;lt;bean/&amp;gt;&lt;/code&gt; ）。&lt;/p&gt;
 &lt;p&gt;在容器内，这些 bean 的定义被表示成 &lt;code&gt;BeanDefinition&lt;/code&gt; 对象的形式，包含了下面的元数据：&lt;/p&gt;
 &lt;ul&gt;
@@ -689,10 +689,10 @@ support=support@example.co.uk
     
     <item>
       <title>[译] Spring IOC 容器</title>
-      <link>http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_and_beans/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/container_and_beans/</link>
       <pubDate>Sat, 02 Sep 2023 23:12:31 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_and_beans/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/container_and_beans/</guid>
       <description>&lt;h1 id=&#34;spring-ioc-和-bean-的简介&#34;&gt;Spring IOC 和 bean 的简介&lt;/h1&gt;
 &lt;p&gt;本章涵盖了 SpringFramework 中的控制反转原则（Ioc）的实现。IoC 也被称为依赖注入（DI）。它是这样的一种过程，在此期间对象仅通过构造函数参数、工厂方法的参数或者当对象实例被构造后或者通过工厂方法返回时在它上面设置的属性定义自己的依赖（即对象必须合作的其他对象）。&lt;/p&gt;
 &lt;p&gt;当容器创建这些 bean 后，再注入这些依赖。&lt;/p&gt;
@@ -724,17 +724,17 @@ support=support@example.co.uk
     
     <item>
       <title>[译] 容器概述</title>
-      <link>http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_overview/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/container_overview/</link>
       <pubDate>Sat, 02 Sep 2023 23:12:31 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_overview/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/container_overview/</guid>
       <description>&lt;h1 id=&#34;容器概述&#34;&gt;容器概述&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;org.springframework.context.ApplicationContext&lt;/code&gt; 接口代表了 Spring IoC 容器，它主要负责通过读取配置文件对 bean 进行实例化、配置和组装。
 容器通过读取配置元数据来获知要实例化、配置和组装那些对象。配置的元数据一般为 XML、Java 注解和 Java 代码的形式，它让你能够表达组成你应用程序的对象以及对象之间的丰富的相互依赖关系。&lt;/p&gt;
 &lt;p&gt;Spring 提供了 &lt;code&gt;ApplicationContext&lt;/code&gt; 接口的若干实现。在单体应用中，创建一个 &lt;code&gt;ClassPathXmlApplicationContext&lt;/code&gt; 或者 &lt;code&gt;FileSystemXmlApplicationContext&lt;/code&gt; 是很常见的。虽然 XML 是定义配置元数据的传统形式，但是你还可以通过在 XML 文件里面进行声明配置来告诉容器对于 Java 注解或者Java代码格式的支持。&lt;/p&gt;
 &lt;p&gt;在大多数的应用场景中，并不需要显式的代码来实例化 Spring IoC 容器。例如，在 Web 应用的场景中，在 &lt;code&gt;web.xml&lt;/code&gt; 文件中仅用简单的 8 行代码左右的样板 Web XML 描述符即可满足需要（参考 &lt;a href=&#34;https://docs.spring.io/spring-framework/reference/core/beans/context-introduction.html#context-create&#34;&gt;Convenient ApplicationContext Instantiation for Web Applications&lt;/a&gt;）。如果你使 Eclipse 中的 Spring 工具（在 Eclipse 开发环境中），你可以通过几下鼠标点击或者按键的敲击就能轻松创建这样一个样板配置文件。&lt;/p&gt;
 &lt;p&gt;下图展示了关于 Spring 工作机制的一个全局视角。在 &lt;code&gt;ApplicationContext&lt;/code&gt; 被创建和初始化后，你的应用类和配置元数据已经捆绑在一起了，这样一来，你就有一个充分配置并且可执行的系统或者应用程序。&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_overview/imgs/ioc.png&#34; type=&#34;&#34; alt=&#34;Spring&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/container_overview/imgs/ioc.png&#34; type=&#34;&#34; alt=&#34;Spring&#34;  /&gt;&lt;/p&gt;
 &lt;h1 id=&#34;配置元数据&#34;&gt;配置元数据&lt;/h1&gt;
 &lt;p&gt;如上图所示，Spring Ioc 容器接收到一种格式的配置元数据。这个配置元数据代表了，作为一个应用开发者你告诉 Spring 容器在应用程序中，如何实例化、配置和组装对象。&lt;/p&gt;
 &lt;p&gt;传统的配置元数据是一种简单并且符合直觉的 XML 形式，在本章的大部分地方，也用此来表达关键的概念和 Spring IoC 容器的特性。&lt;/p&gt;</description>
@@ -884,13 +884,13 @@ support=support@example.co.uk
     
     <item>
       <title>[译] SpringFramework 文档</title>
-      <link>http://localhost:1313/posts/spring_framework/directory/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/directory/</link>
       <pubDate>Sat, 02 Sep 2023 11:46:07 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/directory/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/directory/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/spring_framework/overview/&#34;&gt;概述&lt;/a&gt; 历史，设计哲学，反馈，开始&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://anriclee.github.io/posts/spring_framework/overview/&#34;&gt;概述&lt;/a&gt; 历史，设计哲学，反馈，开始&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;&#34;&gt;核心&lt;/a&gt; IoC容器，事件，资源，i18n，验证，数据绑定，类型转换，SpEL，AOP，AOT&lt;/p&gt;
@@ -951,10 +951,10 @@ support=support@example.co.uk
     
     <item>
       <title>[译] SpringFramework 概述</title>
-      <link>http://localhost:1313/posts/spring_framework/overview/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/overview/</link>
       <pubDate>Sat, 02 Sep 2023 11:46:07 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/overview/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/overview/</guid>
       <description>&lt;h1 id=&#34;概述&#34;&gt;概述&lt;/h1&gt;
 &lt;p&gt;Spring 使得创建 Java 企业级应用更加容易。它提供了你在企业环境下拥抱 Java 语言所需要的一切，支持 JVM 平台上的 Groovy 和 Kotlin 作为备选语言，并且提供了根据应用程序的需求创建多种架构的灵活性。从 SpringFramework 6.0 开始，Spring 需要 Java 17 以上的版本。&lt;/p&gt;
 &lt;p&gt;Spring 支持广泛的应用场景。在一个大型企业里，应用程序经常会存在很长时间，并且必须运行在一个开发者不能控制升级周期的 JDK 和应用服务器上。

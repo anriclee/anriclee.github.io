@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Telegram on ReadByWord</title>
-    <link>http://localhost:1313/tags/telegram/</link>
+    <link>https://anriclee.github.io/tags/telegram/</link>
     <description>Recent content in Telegram on ReadByWord</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 11 Jun 2022 11:43:42 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/telegram/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jun 2022 11:43:42 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/tags/telegram/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Telegram bot 入门实践</title>
-      <link>http://localhost:1313/posts/telegram_bot/</link>
+      <link>https://anriclee.github.io/posts/telegram_bot/</link>
       <pubDate>Sat, 11 Jun 2022 11:43:42 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/telegram_bot/</guid>
+      <guid>https://anriclee.github.io/posts/telegram_bot/</guid>
       <description>&lt;h1 id=&#34;什么是-bot&#34;&gt;什么是 Bot&lt;/h1&gt;
 &lt;p&gt;Bot 的概念在官网的介绍稍微有点繁琐和，详细可以了解&lt;a href=&#34;https://core.telegram.org/bots&#34;&gt;官网介绍&lt;/a&gt;，&lt;/p&gt;
 &lt;p&gt;简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。&lt;/p&gt;

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on ReadByWord</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://anriclee.github.io/posts/</link>
     <description>Recent content in Posts on ReadByWord</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 08 Oct 2023 21:17:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Oct 2023 21:17:00 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>英雄与时势</title>
-      <link>http://localhost:1313/posts/essays/sanguo/</link>
+      <link>https://anriclee.github.io/posts/essays/sanguo/</link>
       <pubDate>Sun, 08 Oct 2023 21:17:00 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/essays/sanguo/</guid>
+      <guid>https://anriclee.github.io/posts/essays/sanguo/</guid>
       <description>&lt;p&gt;最近恒大的暴雷，许家印的败落，一时间甚嚣尘上、沸沸扬扬。之前的时间，许家印还是一个英雄，而现在已经成为了狗熊。看了一些介绍许家印的视频，让我对时势和英雄的关系有了一些思考。&lt;/p&gt;
 &lt;p&gt;许家印借着国家发展的东风扶摇直上，凭借敢闯敢干，成为中国首富，又凭借敢闯和敢干，盘子闹得太大，一时无法调头，而致惨淡收场，真是成也萧何，败也萧何。&lt;/p&gt;
 &lt;p&gt;时势造英雄还是英雄造时势，这个问题一直争论不休。但是在我心里，有了初步的答案。&lt;/p&gt;
@@ -46,10 +46,10 @@
     
     <item>
       <title>毛选与AI与风水学</title>
-      <link>http://localhost:1313/posts/essays/mao/</link>
+      <link>https://anriclee.github.io/posts/essays/mao/</link>
       <pubDate>Tue, 26 Sep 2023 22:38:32 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/essays/mao/</guid>
+      <guid>https://anriclee.github.io/posts/essays/mao/</guid>
       <description>&lt;p&gt;我们离AI越近，就离自己的判断越远。AI 到底会成为人类历史前进的助力还是阻力？这越来越成为在我脑中盘旋的问题。&lt;/p&gt;
 &lt;p&gt;AI 的发展，得益于世界上的少数精英对于算法的精进。然而，剩下的大多数，就沦为算法黑盒之外的芸芸众生了。&lt;/p&gt;
 &lt;p&gt;当下，开谈不说 AI，读尽诗书也枉然。资本鼓吹大行其道，什么代码会被 AI 代替，艺术会被 AI 代替，一时间，仿佛就差造物主会被 AI 代替了，然而，我们了解自己的痛点么？&lt;/p&gt;
@@ -81,20 +81,20 @@
     
     <item>
       <title>乔布斯传</title>
-      <link>http://localhost:1313/posts/bookreading/jobs/</link>
+      <link>https://anriclee.github.io/posts/bookreading/jobs/</link>
       <pubDate>Sun, 24 Sep 2023 10:55:41 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/bookreading/jobs/</guid>
+      <guid>https://anriclee.github.io/posts/bookreading/jobs/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>关于技术知识点的战术和战略问题</title>
-      <link>http://localhost:1313/posts/essays/tech/</link>
+      <link>https://anriclee.github.io/posts/essays/tech/</link>
       <pubDate>Sun, 24 Sep 2023 10:07:48 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/essays/tech/</guid>
+      <guid>https://anriclee.github.io/posts/essays/tech/</guid>
       <description>&lt;p&gt;最近有计划做一个系列的技术分享，当然前提是自己需要了解很多东西，去查很多资料。&lt;/p&gt;
 &lt;p&gt;平时也看了很多技术分享视频，坦白说，能带给我收获和启发的寥寥。所以，国内的工程师（对，我希望大家都能称为工程师，而不是码农或者程序员）查资料，能看国外的就不会看国内的。&lt;/p&gt;
 &lt;p&gt;国内的技术，并不是一定落后于国外很多，但是为什么我们很难有高质量的技术文章出来呢？这可能和我们从小的教育模式有关。&lt;/p&gt;
@@ -174,10 +174,10 @@
     
     <item>
       <title>[译] 细谈依赖和配置</title>
-      <link>http://localhost:1313/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</link>
       <pubDate>Mon, 11 Sep 2023 21:12:31 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</guid>
       <description>&lt;p&gt;依赖项的详细配置&lt;/p&gt;
 &lt;p&gt;正如前面所提到的那样，你可以定义 bean 的属性和构造函数参数，去引用其他已经设置好的 bean 或者内联定义的值。
 为了达到这个目的，Spring 的基于 XML 配置元数据支持在 &lt;property/&gt; 和 &lt;constructor-arg/&gt; 元素内增加子元素。&lt;/p&gt;
@@ -377,10 +377,10 @@ support=support@example.co.uk
     
     <item>
       <title>[译] 依赖注入</title>
-      <link>http://localhost:1313/posts/spring_framework/core/the_ioc_container/dependencies/dependency_injection/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/dependencies/dependency_injection/</link>
       <pubDate>Mon, 11 Sep 2023 20:12:31 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/core/the_ioc_container/dependencies/dependency_injection/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/dependencies/dependency_injection/</guid>
       <description>&lt;p&gt;在依赖注入（DI）里，对象通过构造函数参数、工厂方法参数或者在
 被工厂方法创建返回的对象中设置的属性定义他们的依赖。然后，容器在创建这些 bean 时，注入依赖。这个过程与 bean 自身使用所需要类的直接构造函数实例化，或者通过 Service Locator 模式来找到所需要的依赖这个过程正好相反。&lt;/p&gt;
 &lt;p&gt;使用 DI 原则的代码更加干净整洁，并且提供给对象的依赖时，解耦也更加高效。对象并不找他们的依赖也并不知道这些依赖的地址或者类。这样的结果就是，你的类变得更易测试，尤其是当依赖是接口或者抽象的父类时，在单元测试可以对这些依赖进行打桩或者mock他们的实现。&lt;/p&gt;
@@ -626,10 +626,10 @@ support=support@example.co.uk
     
     <item>
       <title>中秋绝句</title>
-      <link>http://localhost:1313/posts/essays/poems/</link>
+      <link>https://anriclee.github.io/posts/essays/poems/</link>
       <pubDate>Wed, 06 Sep 2023 23:14:19 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/essays/poems/</guid>
+      <guid>https://anriclee.github.io/posts/essays/poems/</guid>
       <description>&lt;p&gt;中秋绝句&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;癸卯秋夜，虽炎热潮湿，开窗无月，然心情大好，咏志抒怀，无碍也，是为序。&lt;/p&gt;&lt;/blockquote&gt;
@@ -645,10 +645,10 @@ support=support@example.co.uk
     
     <item>
       <title>[译] Spring AOP 概念</title>
-      <link>http://localhost:1313/posts/spring_framework/core/spring_aop/concept/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/core/spring_aop/concept/</link>
       <pubDate>Tue, 05 Sep 2023 23:01:18 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/core/spring_aop/concept/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/core/spring_aop/concept/</guid>
       <description>&lt;p&gt;AOP 通过提供另外一种关于程序结构的思考方式补充了面向对象编程（OOP ）。在 OOP 中模块的关键单元是 class，而在 AOP 中，模块的关键是 Aspect（切面）。切面支持跨多个对象和类型的关注点模块化（比如事务的管理）。在 AOP 中这种关注点通常被叫做 “跨领域” 关注点。&lt;/p&gt;
 &lt;p&gt;Spring 的一个核心组件就是 AOP 框架。虽然 Spring IoC 容器并不依赖于 AOP（意思是如果不想用 AOP 可以不用），但是 AOP 对 Spring IoC 做了一个补充，提供了一种功能非常强大的中间件解决方案。&lt;/p&gt;
 &lt;blockquote&gt;
@@ -945,21 +945,11 @@ support=support@example.co.uk
     </item>
     
     <item>
-      <title>XXL Job 调度框架源码解析</title>
-      <link>http://localhost:1313/posts/xxl_job/</link>
-      <pubDate>Tue, 05 Sep 2023 23:01:18 +0800</pubDate>
-      
-      <guid>http://localhost:1313/posts/xxl_job/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
       <title>[译] Bean 概述</title>
-      <link>http://localhost:1313/posts/spring_framework/core/the_ioc_container/bean_overview/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/bean_overview/</link>
       <pubDate>Sat, 02 Sep 2023 23:12:31 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/core/the_ioc_container/bean_overview/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/bean_overview/</guid>
       <description>&lt;p&gt;一个 Sring IoC 容器可以操作一个或者多个 bean。这些 bean 是通过你提供给容器的配置元数据生成的（例如，以 XML 中的 &lt;code&gt;&amp;lt;bean/&amp;gt;&lt;/code&gt; ）。&lt;/p&gt;
 &lt;p&gt;在容器内，这些 bean 的定义被表示成 &lt;code&gt;BeanDefinition&lt;/code&gt; 对象的形式，包含了下面的元数据：&lt;/p&gt;
 &lt;ul&gt;
@@ -1184,10 +1174,10 @@ support=support@example.co.uk
     
     <item>
       <title>[译] Spring IOC 容器</title>
-      <link>http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_and_beans/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/container_and_beans/</link>
       <pubDate>Sat, 02 Sep 2023 23:12:31 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_and_beans/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/container_and_beans/</guid>
       <description>&lt;h1 id=&#34;spring-ioc-和-bean-的简介&#34;&gt;Spring IOC 和 bean 的简介&lt;/h1&gt;
 &lt;p&gt;本章涵盖了 SpringFramework 中的控制反转原则（Ioc）的实现。IoC 也被称为依赖注入（DI）。它是这样的一种过程，在此期间对象仅通过构造函数参数、工厂方法的参数或者当对象实例被构造后或者通过工厂方法返回时在它上面设置的属性定义自己的依赖（即对象必须合作的其他对象）。&lt;/p&gt;
 &lt;p&gt;当容器创建这些 bean 后，再注入这些依赖。&lt;/p&gt;
@@ -1219,17 +1209,17 @@ support=support@example.co.uk
     
     <item>
       <title>[译] 容器概述</title>
-      <link>http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_overview/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/container_overview/</link>
       <pubDate>Sat, 02 Sep 2023 23:12:31 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_overview/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/container_overview/</guid>
       <description>&lt;h1 id=&#34;容器概述&#34;&gt;容器概述&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;org.springframework.context.ApplicationContext&lt;/code&gt; 接口代表了 Spring IoC 容器，它主要负责通过读取配置文件对 bean 进行实例化、配置和组装。
 容器通过读取配置元数据来获知要实例化、配置和组装那些对象。配置的元数据一般为 XML、Java 注解和 Java 代码的形式，它让你能够表达组成你应用程序的对象以及对象之间的丰富的相互依赖关系。&lt;/p&gt;
 &lt;p&gt;Spring 提供了 &lt;code&gt;ApplicationContext&lt;/code&gt; 接口的若干实现。在单体应用中，创建一个 &lt;code&gt;ClassPathXmlApplicationContext&lt;/code&gt; 或者 &lt;code&gt;FileSystemXmlApplicationContext&lt;/code&gt; 是很常见的。虽然 XML 是定义配置元数据的传统形式，但是你还可以通过在 XML 文件里面进行声明配置来告诉容器对于 Java 注解或者Java代码格式的支持。&lt;/p&gt;
 &lt;p&gt;在大多数的应用场景中，并不需要显式的代码来实例化 Spring IoC 容器。例如，在 Web 应用的场景中，在 &lt;code&gt;web.xml&lt;/code&gt; 文件中仅用简单的 8 行代码左右的样板 Web XML 描述符即可满足需要（参考 &lt;a href=&#34;https://docs.spring.io/spring-framework/reference/core/beans/context-introduction.html#context-create&#34;&gt;Convenient ApplicationContext Instantiation for Web Applications&lt;/a&gt;）。如果你使 Eclipse 中的 Spring 工具（在 Eclipse 开发环境中），你可以通过几下鼠标点击或者按键的敲击就能轻松创建这样一个样板配置文件。&lt;/p&gt;
 &lt;p&gt;下图展示了关于 Spring 工作机制的一个全局视角。在 &lt;code&gt;ApplicationContext&lt;/code&gt; 被创建和初始化后，你的应用类和配置元数据已经捆绑在一起了，这样一来，你就有一个充分配置并且可执行的系统或者应用程序。&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_overview/imgs/ioc.png&#34; type=&#34;&#34; alt=&#34;Spring&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/container_overview/imgs/ioc.png&#34; type=&#34;&#34; alt=&#34;Spring&#34;  /&gt;&lt;/p&gt;
 &lt;h1 id=&#34;配置元数据&#34;&gt;配置元数据&lt;/h1&gt;
 &lt;p&gt;如上图所示，Spring Ioc 容器接收到一种格式的配置元数据。这个配置元数据代表了，作为一个应用开发者你告诉 Spring 容器在应用程序中，如何实例化、配置和组装对象。&lt;/p&gt;
 &lt;p&gt;传统的配置元数据是一种简单并且符合直觉的 XML 形式，在本章的大部分地方，也用此来表达关键的概念和 Spring IoC 容器的特性。&lt;/p&gt;</description>
@@ -1379,13 +1369,13 @@ support=support@example.co.uk
     
     <item>
       <title>[译] SpringFramework 文档</title>
-      <link>http://localhost:1313/posts/spring_framework/directory/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/directory/</link>
       <pubDate>Sat, 02 Sep 2023 11:46:07 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/directory/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/directory/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/spring_framework/overview/&#34;&gt;概述&lt;/a&gt; 历史，设计哲学，反馈，开始&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://anriclee.github.io/posts/spring_framework/overview/&#34;&gt;概述&lt;/a&gt; 历史，设计哲学，反馈，开始&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;&#34;&gt;核心&lt;/a&gt; IoC容器，事件，资源，i18n，验证，数据绑定，类型转换，SpEL，AOP，AOT&lt;/p&gt;
@@ -1446,10 +1436,10 @@ support=support@example.co.uk
     
     <item>
       <title>[译] SpringFramework 概述</title>
-      <link>http://localhost:1313/posts/spring_framework/overview/</link>
+      <link>https://anriclee.github.io/posts/spring_framework/overview/</link>
       <pubDate>Sat, 02 Sep 2023 11:46:07 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/spring_framework/overview/</guid>
+      <guid>https://anriclee.github.io/posts/spring_framework/overview/</guid>
       <description>&lt;h1 id=&#34;概述&#34;&gt;概述&lt;/h1&gt;
 &lt;p&gt;Spring 使得创建 Java 企业级应用更加容易。它提供了你在企业环境下拥抱 Java 语言所需要的一切，支持 JVM 平台上的 Groovy 和 Kotlin 作为备选语言，并且提供了根据应用程序的需求创建多种架构的灵活性。从 SpringFramework 6.0 开始，Spring 需要 Java 17 以上的版本。&lt;/p&gt;
 &lt;p&gt;Spring 支持广泛的应用场景。在一个大型企业里，应用程序经常会存在很长时间，并且必须运行在一个开发者不能控制升级周期的 JDK 和应用服务器上。
@@ -1531,10 +1521,10 @@ Spring 的编程模型不会拥抱 Jakarta EE 平台的规范，相反，它从�
     
     <item>
       <title>聊点什么</title>
-      <link>http://localhost:1313/posts/essays/saysomething/</link>
+      <link>https://anriclee.github.io/posts/essays/saysomething/</link>
       <pubDate>Wed, 30 Aug 2023 23:26:45 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/essays/saysomething/</guid>
+      <guid>https://anriclee.github.io/posts/essays/saysomething/</guid>
       <description>&lt;p&gt;谈心的文章好久没有写了，初秋的夜晚，键盘的敲击声格外响亮，一时竟然不知道从哪儿说起。我从今年开始，格外的怀旧起来。不只是怀念那个青春的八十年代，质朴的九十年代，而且竟然怀念起仿佛刚刚过去的两千年。也许是现在回看，带着滤镜和光影的原因吧。但我着实相信，过去确实比现在更加美丽一些。试问，现在还有什么歌曲能像过去的八九十年代扣人心弦，还有谁能写出像罗大佑那样充满人文情怀的歌词？我不是一个保守的人，现在的歌曲我也会经常听，但摇滚光是呐喊、嘶吼没有反思，民谣只有情绪没有韵味，流行歌曲更是惨不忍听。现在一首歌有四句比较朗朗上口一些，就能风靡一时，然后人们快速遗忘，寻找下一个。人们没法不遗忘，因为实在没有什么好怀念的。&lt;/p&gt;
 &lt;p&gt;人们在路上疯狂且快速的奔跑着，前面有人但凡有一点点挡道，便会怒从心头起。也许在快速奔跑中，人们才来不及为过去伤怀，风驰电掣，麻木一生。&lt;/p&gt;
 &lt;p&gt;如果我也这样，多好！&lt;/p&gt;
@@ -1663,10 +1653,10 @@ Spring 的编程模型不会拥抱 Jakarta EE 平台的规范，相反，它从�
     
     <item>
       <title>《金瓶梅》</title>
-      <link>http://localhost:1313/posts/gold_bottle/1/</link>
+      <link>https://anriclee.github.io/posts/gold_bottle/1/</link>
       <pubDate>Sun, 07 May 2023 23:38:33 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/gold_bottle/1/</guid>
+      <guid>https://anriclee.github.io/posts/gold_bottle/1/</guid>
       <description>&lt;p&gt;碎碎念。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>碎碎念。</p>
 ]]></content:encoded>
@@ -1674,149 +1664,21 @@ Spring 的编程模型不会拥抱 Jakarta EE 平台的规范，相反，它从�
     
     <item>
       <title>《红楼梦》碎碎念</title>
-      <link>http://localhost:1313/posts/stone/summary/</link>
+      <link>https://anriclee.github.io/posts/stone/summary/</link>
       <pubDate>Sun, 07 May 2023 23:15:53 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/stone/summary/</guid>
+      <guid>https://anriclee.github.io/posts/stone/summary/</guid>
       <description>&lt;p&gt;个人读《红楼梦》之所感所思，想到哪儿，写到哪儿，不拘章法，也无体系，不求闻达，但求深思。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>个人读《红楼梦》之所感所思，想到哪儿，写到哪儿，不拘章法，也无体系，不求闻达，但求深思。</p>
 ]]></content:encoded>
     </item>
     
     <item>
-      <title>GC</title>
-      <link>http://localhost:1313/posts/java/gc/</link>
-      <pubDate>Sat, 13 Aug 2022 20:36:32 +0800</pubDate>
-      
-      <guid>http://localhost:1313/posts/java/gc/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>使用 Socket 创建 TCP 服务器</title>
-      <link>http://localhost:1313/posts/socket/</link>
-      <pubDate>Sun, 17 Jul 2022 17:20:28 +0800</pubDate>
-      
-      <guid>http://localhost:1313/posts/socket/</guid>
-      <description>&lt;p&gt;bind
-listen&lt;/p&gt;
-&lt;p&gt;accept&lt;/p&gt;
-&lt;p&gt;accept 的方法签名如下：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;sys/socket.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;accept&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sockfd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sockaddr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;restrict&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;socklen_t&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;restrict&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;addrlen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;The accept() system call is used with &lt;strong&gt;connection-based&lt;/strong&gt; socket types (SOCK_STREAM, SOCK_SEQPACKET).&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;SOCK_STREAM 代表 TCP 连接方式
-SOCK_SEQPACKET 代表 UDP 连接方式&lt;/p&gt;
-&lt;p&gt;签名中的 sockfd 代表监听的 socket 连接&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;It extracts the &lt;strong&gt;first connection request&lt;/strong&gt; on the queue of pending connections for the listening socket, &lt;code&gt;sockfd&lt;/code&gt;, creates a &lt;strong&gt;new connected socket&lt;/strong&gt;, and returns a &lt;strong&gt;new file descriptor&lt;/strong&gt; referring to that socket.  The newly created socket is not in the listening state.  The original socket sockfd is unaffected by this call.&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>bind
-listen</p>
-<p>accept</p>
-<p>accept 的方法签名如下：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/socket.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">accept</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="kr">restrict</span> <span class="n">addr</span><span class="p">,</span> <span class="kt">socklen_t</span> <span class="o">*</span><span class="kr">restrict</span> <span class="n">addrlen</span><span class="p">);</span>
-</span></span></code></pre></div><blockquote>
-<p>The accept() system call is used with <strong>connection-based</strong> socket types (SOCK_STREAM, SOCK_SEQPACKET).</p></blockquote>
-<p>SOCK_STREAM 代表 TCP 连接方式
-SOCK_SEQPACKET 代表 UDP 连接方式</p>
-<p>签名中的 sockfd 代表监听的 socket 连接</p>
-<blockquote>
-<p>It extracts the <strong>first connection request</strong> on the queue of pending connections for the listening socket, <code>sockfd</code>, creates a <strong>new connected socket</strong>, and returns a <strong>new file descriptor</strong> referring to that socket.  The newly created socket is not in the listening state.  The original socket sockfd is unaffected by this call.</p></blockquote>
-<p>这段话给出的信息较多：</p>
-<ol>
-<li>sockfd 是所监听的 <code>socket</code> 的文件描述符；</li>
-<li>不知道有多少 client 向该 <code>socket</code> 发起请求，但是这些请求都会排到该 <code>socket</code> 的请求队列中，队列的长度最长可以有多长？？？；</li>
-<li>accept 方法每次仅从请求队列中取队头进行处理；</li>
-<li>处理请求时，会创建一个新的 <code>socket</code>，并返回一个指向该 <code>socket</code> 的文件描述符；</li>
-<li>新创建的这个 <code>socket</code> 不在 <code>listen</code> 状态</li>
-<li>此次 <code>accept</code> 调用，不影响原来的 <code>socket</code> 的状态</li>
-</ol>
-<h1 id="reference">Reference</h1>
-<ol>
-<li><a href="https://www.tutorialspoint.com/unix_sockets/socket_server_example.htm">https://www.tutorialspoint.com/unix_sockets/socket_server_example.htm</a></li>
-<li><a href="https://man7.org/linux/man-pages/man2/accept.2.html">https://man7.org/linux/man-pages/man2/accept.2.html</a></li>
-<li><a href="https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/">https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/</a></li>
-<li><a href="https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/#.YtLNMpdBxQJ">https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/#.YtLNMpdBxQJ</a></li>
-<li><a href="https://stevens.netmeister.org/631/09-io-multiplexing.pdf">https://stevens.netmeister.org/631/09-io-multiplexing.pdf</a></li>
-</ol>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Linux 系统中的 Malloc 和 Free 到底是什么</title>
-      <link>http://localhost:1313/posts/malloc/</link>
-      <pubDate>Sun, 10 Jul 2022 10:25:00 +0800</pubDate>
-      
-      <guid>http://localhost:1313/posts/malloc/</guid>
-      <description>&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://jacktang816.github.io/post/mallocandfree/&#34;&gt;https://jacktang816.github.io/post/mallocandfree/&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</description>
-      <content:encoded><![CDATA[<h1 id="reference">Reference</h1>
-<ol>
-<li><a href="https://jacktang816.github.io/post/mallocandfree/">https://jacktang816.github.io/post/mallocandfree/</a></li>
-</ol>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>当我们在谈IO多路复用我们在谈论什么系列之 SELECT</title>
-      <link>http://localhost:1313/posts/io_multiplex/</link>
-      <pubDate>Tue, 05 Jul 2022 08:21:58 +0800</pubDate>
-      
-      <guid>http://localhost:1313/posts/io_multiplex/</guid>
-      <description>&lt;h1 id=&#34;0x00-多路复用是什么&#34;&gt;0x00 多路复用是什么&lt;/h1&gt;
-&lt;h1 id=&#34;0x01-select-官方定义&#34;&gt;0x01 select 官方定义&lt;/h1&gt;
-&lt;h1 id=&#34;0x02&#34;&gt;0x02&lt;/h1&gt;
-&lt;p&gt;视频清晰易懂地介绍了 IO 多路复用中的 select。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=Y5PiHboUctw&#34;&gt;https://www.youtube.com/watch?v=Y5PiHboUctw&lt;/a&gt;&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<h1 id="0x00-多路复用是什么">0x00 多路复用是什么</h1>
-<h1 id="0x01-select-官方定义">0x01 select 官方定义</h1>
-<h1 id="0x02">0x02</h1>
-<p>视频清晰易懂地介绍了 IO 多路复用中的 select。</p>
-<p><a href="https://www.youtube.com/watch?v=Y5PiHboUctw">https://www.youtube.com/watch?v=Y5PiHboUctw</a></p>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Redis_design_ch8</title>
-      <link>http://localhost:1313/posts/redis/redis_design_ch8/</link>
-      <pubDate>Sat, 02 Jul 2022 15:44:36 +0800</pubDate>
-      
-      <guid>http://localhost:1313/posts/redis/redis_design_ch8/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Redis 源码阅读之 AOF 持久化</title>
-      <link>http://localhost:1313/posts/redis/redis_design_ch9/</link>
-      <pubDate>Sat, 02 Jul 2022 15:37:35 +0800</pubDate>
-      
-      <guid>http://localhost:1313/posts/redis/redis_design_ch9/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Group_chat</title>
-      <link>http://localhost:1313/posts/group_chat/</link>
-      <pubDate>Wed, 29 Jun 2022 21:17:20 +0800</pubDate>
-      
-      <guid>http://localhost:1313/posts/group_chat/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
       <title>Telegram bot 入门实践</title>
-      <link>http://localhost:1313/posts/telegram_bot/</link>
+      <link>https://anriclee.github.io/posts/telegram_bot/</link>
       <pubDate>Sat, 11 Jun 2022 11:43:42 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/telegram_bot/</guid>
+      <guid>https://anriclee.github.io/posts/telegram_bot/</guid>
       <description>&lt;h1 id=&#34;什么是-bot&#34;&gt;什么是 Bot&lt;/h1&gt;
 &lt;p&gt;Bot 的概念在官网的介绍稍微有点繁琐和，详细可以了解&lt;a href=&#34;https://core.telegram.org/bots&#34;&gt;官网介绍&lt;/a&gt;，&lt;/p&gt;
 &lt;p&gt;简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。&lt;/p&gt;
@@ -1918,10 +1780,10 @@ SOCK_SEQPACKET 代表 UDP 连接方式</p>
     
     <item>
       <title>基于 PostgreSQL 的群聊搜索实践</title>
-      <link>http://localhost:1313/posts/pg/</link>
+      <link>https://anriclee.github.io/posts/pg/</link>
       <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/pg/</guid>
+      <guid>https://anriclee.github.io/posts/pg/</guid>
       <description>&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
 &lt;p&gt;2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。&lt;/p&gt;
 &lt;p&gt;对于复杂场景的搜索，业界一般使用非常流行的 ElasticSearch。由于我们的群数据较少，截止到目前还没有达到千万级的量级，且搜索场景比较简单，而 PostgreSQL 对全文搜索又支持得比较好，所以选择了 PostgreSQL 来实现群搜索需求。
@@ -2600,10 +2462,10 @@ lixuehan=# SELECT levenshtein_less_equal(&#39;extensive&#39;, &#39;exhaustive&#3
     
     <item>
       <title>Hugo 中的命令行模式</title>
-      <link>http://localhost:1313/posts/hugo_cmd_pattern/</link>
+      <link>https://anriclee.github.io/posts/hugo_cmd_pattern/</link>
       <pubDate>Fri, 26 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/hugo_cmd_pattern/</guid>
+      <guid>https://anriclee.github.io/posts/hugo_cmd_pattern/</guid>
       <description>&lt;p&gt;最近在用 hugo 构建了个人博客之后，便有兴趣想研究下其源码。但是源码的体量之大，逻辑之复杂出乎我的意料。不过好在源码的结构比较清晰，有许多地方值得借鉴。&lt;/p&gt;
 &lt;p&gt;比如它的程序入口，非常简洁：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Golang&#34; data-lang=&#34;Golang&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;

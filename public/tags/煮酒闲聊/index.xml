@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>煮酒闲聊 on ReadByWord</title>
-    <link>http://localhost:1313/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/</link>
+    <link>https://anriclee.github.io/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/</link>
     <description>Recent content in 煮酒闲聊 on ReadByWord</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 08 Oct 2023 21:17:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Oct 2023 21:17:00 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>英雄与时势</title>
-      <link>http://localhost:1313/posts/essays/sanguo/</link>
+      <link>https://anriclee.github.io/posts/essays/sanguo/</link>
       <pubDate>Sun, 08 Oct 2023 21:17:00 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/essays/sanguo/</guid>
+      <guid>https://anriclee.github.io/posts/essays/sanguo/</guid>
       <description>&lt;p&gt;最近恒大的暴雷，许家印的败落，一时间甚嚣尘上、沸沸扬扬。之前的时间，许家印还是一个英雄，而现在已经成为了狗熊。看了一些介绍许家印的视频，让我对时势和英雄的关系有了一些思考。&lt;/p&gt;
 &lt;p&gt;许家印借着国家发展的东风扶摇直上，凭借敢闯敢干，成为中国首富，又凭借敢闯和敢干，盘子闹得太大，一时无法调头，而致惨淡收场，真是成也萧何，败也萧何。&lt;/p&gt;
 &lt;p&gt;时势造英雄还是英雄造时势，这个问题一直争论不休。但是在我心里，有了初步的答案。&lt;/p&gt;
@@ -46,10 +46,10 @@
     
     <item>
       <title>毛选与AI与风水学</title>
-      <link>http://localhost:1313/posts/essays/mao/</link>
+      <link>https://anriclee.github.io/posts/essays/mao/</link>
       <pubDate>Tue, 26 Sep 2023 22:38:32 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/essays/mao/</guid>
+      <guid>https://anriclee.github.io/posts/essays/mao/</guid>
       <description>&lt;p&gt;我们离AI越近，就离自己的判断越远。AI 到底会成为人类历史前进的助力还是阻力？这越来越成为在我脑中盘旋的问题。&lt;/p&gt;
 &lt;p&gt;AI 的发展，得益于世界上的少数精英对于算法的精进。然而，剩下的大多数，就沦为算法黑盒之外的芸芸众生了。&lt;/p&gt;
 &lt;p&gt;当下，开谈不说 AI，读尽诗书也枉然。资本鼓吹大行其道，什么代码会被 AI 代替，艺术会被 AI 代替，一时间，仿佛就差造物主会被 AI 代替了，然而，我们了解自己的痛点么？&lt;/p&gt;
@@ -81,10 +81,10 @@
     
     <item>
       <title>关于技术知识点的战术和战略问题</title>
-      <link>http://localhost:1313/posts/essays/tech/</link>
+      <link>https://anriclee.github.io/posts/essays/tech/</link>
       <pubDate>Sun, 24 Sep 2023 10:07:48 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/essays/tech/</guid>
+      <guid>https://anriclee.github.io/posts/essays/tech/</guid>
       <description>&lt;p&gt;最近有计划做一个系列的技术分享，当然前提是自己需要了解很多东西，去查很多资料。&lt;/p&gt;
 &lt;p&gt;平时也看了很多技术分享视频，坦白说，能带给我收获和启发的寥寥。所以，国内的工程师（对，我希望大家都能称为工程师，而不是码农或者程序员）查资料，能看国外的就不会看国内的。&lt;/p&gt;
 &lt;p&gt;国内的技术，并不是一定落后于国外很多，但是为什么我们很难有高质量的技术文章出来呢？这可能和我们从小的教育模式有关。&lt;/p&gt;
@@ -164,10 +164,10 @@
     
     <item>
       <title>聊点什么</title>
-      <link>http://localhost:1313/posts/essays/saysomething/</link>
+      <link>https://anriclee.github.io/posts/essays/saysomething/</link>
       <pubDate>Wed, 30 Aug 2023 23:26:45 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/essays/saysomething/</guid>
+      <guid>https://anriclee.github.io/posts/essays/saysomething/</guid>
       <description>&lt;p&gt;谈心的文章好久没有写了，初秋的夜晚，键盘的敲击声格外响亮，一时竟然不知道从哪儿说起。我从今年开始，格外的怀旧起来。不只是怀念那个青春的八十年代，质朴的九十年代，而且竟然怀念起仿佛刚刚过去的两千年。也许是现在回看，带着滤镜和光影的原因吧。但我着实相信，过去确实比现在更加美丽一些。试问，现在还有什么歌曲能像过去的八九十年代扣人心弦，还有谁能写出像罗大佑那样充满人文情怀的歌词？我不是一个保守的人，现在的歌曲我也会经常听，但摇滚光是呐喊、嘶吼没有反思，民谣只有情绪没有韵味，流行歌曲更是惨不忍听。现在一首歌有四句比较朗朗上口一些，就能风靡一时，然后人们快速遗忘，寻找下一个。人们没法不遗忘，因为实在没有什么好怀念的。&lt;/p&gt;
 &lt;p&gt;人们在路上疯狂且快速的奔跑着，前面有人但凡有一点点挡道，便会怒从心头起。也许在快速奔跑中，人们才来不及为过去伤怀，风驰电掣，麻木一生。&lt;/p&gt;
 &lt;p&gt;如果我也这样，多好！&lt;/p&gt;

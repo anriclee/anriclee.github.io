@@ -2,261 +2,222 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/docs/papermodx-new-features/</loc>
+    <loc>https://anriclee.github.io/docs/papermodx-new-features/</loc>
     <lastmod>2022-04-12T23:37:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/zh/docs/papermodx-new-features/"
+                href="https://anriclee.github.io/zh/docs/papermodx-new-features/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/docs/papermodx-new-features/"
+                href="https://anriclee.github.io/docs/papermodx-new-features/"
                 />
   </url><url>
-    <loc>http://localhost:1313/docs/icons_preview/</loc>
+    <loc>https://anriclee.github.io/docs/icons_preview/</loc>
     <lastmod>2022-04-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://anriclee.github.io/posts/</loc>
     <lastmod>2023-10-08T21:17:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/zh/posts/"
+                href="https://anriclee.github.io/zh/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/posts/"
+                href="https://anriclee.github.io/posts/"
                 />
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://anriclee.github.io/</loc>
     <lastmod>2023-10-08T21:17:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/zh/"
+                href="https://anriclee.github.io/zh/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/"
+                href="https://anriclee.github.io/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://anriclee.github.io/tags/</loc>
     <lastmod>2023-10-08T21:17:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/zh/tags/"
+                href="https://anriclee.github.io/zh/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tags/"
+                href="https://anriclee.github.io/tags/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/</loc>
+    <loc>https://anriclee.github.io/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/</loc>
     <lastmod>2023-10-08T21:17:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/essays/sanguo/</loc>
+    <loc>https://anriclee.github.io/posts/essays/sanguo/</loc>
     <lastmod>2023-10-08T21:17:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/%E6%AF%9B%E9%80%89/</loc>
+    <loc>https://anriclee.github.io/tags/%E6%AF%9B%E9%80%89/</loc>
     <lastmod>2023-09-26T22:38:32+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/essays/mao/</loc>
+    <loc>https://anriclee.github.io/posts/essays/mao/</loc>
     <lastmod>2023-09-26T22:38:32+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/bookreading/jobs/</loc>
+    <loc>https://anriclee.github.io/posts/bookreading/jobs/</loc>
     <lastmod>2023-09-24T10:55:41+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/essays/tech/</loc>
+    <loc>https://anriclee.github.io/posts/essays/tech/</loc>
     <lastmod>2023-09-24T10:07:48+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</loc>
+    <loc>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</loc>
     <lastmod>2023-09-11T21:12:31+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/spring/</loc>
+    <loc>https://anriclee.github.io/tags/spring/</loc>
     <lastmod>2023-09-11T21:12:31+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/spring_framework/core/the_ioc_container/dependencies/dependency_injection/</loc>
+    <loc>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/dependencies/dependency_injection/</loc>
     <lastmod>2023-09-11T20:12:31+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/essays/poems/</loc>
+    <loc>https://anriclee.github.io/posts/essays/poems/</loc>
     <lastmod>2023-09-06T23:14:19+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/spring_framework/core/spring_aop/concept/</loc>
+    <loc>https://anriclee.github.io/posts/spring_framework/core/spring_aop/concept/</loc>
     <lastmod>2023-09-05T23:01:18+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/xxl_job/</loc>
-    <lastmod>2023-09-05T23:01:18+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/spring_framework/core/the_ioc_container/bean_overview/</loc>
+    <loc>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/bean_overview/</loc>
     <lastmod>2023-09-02T23:12:31+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_and_beans/</loc>
+    <loc>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/container_and_beans/</loc>
     <lastmod>2023-09-02T23:12:31+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_overview/</loc>
+    <loc>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/container_overview/</loc>
     <lastmod>2023-09-02T23:12:31+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/spring_framework/directory/</loc>
+    <loc>https://anriclee.github.io/posts/spring_framework/directory/</loc>
     <lastmod>2023-09-02T11:46:07+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/spring_framework/overview/</loc>
+    <loc>https://anriclee.github.io/posts/spring_framework/overview/</loc>
     <lastmod>2023-09-02T11:46:07+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/essays/saysomething/</loc>
+    <loc>https://anriclee.github.io/posts/essays/saysomething/</loc>
     <lastmod>2023-08-30T23:26:45+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/gold_bottle/1/</loc>
+    <loc>https://anriclee.github.io/posts/gold_bottle/1/</loc>
     <lastmod>2023-05-07T23:38:33+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/stone/summary/</loc>
+    <loc>https://anriclee.github.io/posts/stone/summary/</loc>
     <lastmod>2023-05-07T23:15:53+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/booklist/</loc>
+    <loc>https://anriclee.github.io/booklist/</loc>
     <lastmod>2022-08-21T12:46:41+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/java/gc/</loc>
-    <lastmod>2022-08-13T20:36:32+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/socket/</loc>
-    <lastmod>2022-07-17T17:20:28+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/tcp/ip/</loc>
-    <lastmod>2022-07-17T17:20:28+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/socket/</loc>
-    <lastmod>2022-07-17T17:20:28+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/malloc/</loc>
-    <lastmod>2022-07-10T10:25:00+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/io/</loc>
-    <lastmod>2022-07-05T08:21:58+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/io_multiplex/</loc>
-    <lastmod>2022-07-05T08:21:58+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/redis/redis_design_ch8/</loc>
-    <lastmod>2022-07-02T15:44:36+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/redis/redis_design_ch9/</loc>
-    <lastmod>2022-07-02T15:37:35+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/group_chat/</loc>
-    <lastmod>2022-06-29T21:17:20+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/telegram/</loc>
+    <loc>https://anriclee.github.io/tags/telegram/</loc>
     <lastmod>2022-06-11T11:43:42+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/telegram_bot/</loc>
+    <loc>https://anriclee.github.io/posts/telegram_bot/</loc>
     <lastmod>2022-06-11T11:43:42+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/example/</loc>
+    <loc>https://anriclee.github.io/tags/example/</loc>
     <lastmod>2022-04-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/docs/</loc>
+    <loc>https://anriclee.github.io/docs/</loc>
     <lastmod>2022-04-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/zh/docs/"
+                href="https://anriclee.github.io/zh/docs/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/docs/"
+                href="https://anriclee.github.io/docs/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tags/postgresql/</loc>
+    <loc>https://anriclee.github.io/tags/postgresql/</loc>
     <lastmod>2022-01-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/pg/</loc>
+    <loc>https://anriclee.github.io/posts/pg/</loc>
     <lastmod>2022-01-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/docs/faq/</loc>
+    <loc>https://anriclee.github.io/docs/icons/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/docs/icons/</loc>
+    <loc>https://anriclee.github.io/tags/icons/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/icons/</loc>
+    <loc>https://anriclee.github.io/docs/installation/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/docs/installation/</loc>
+    <loc>https://anriclee.github.io/docs/features/</loc>
     <lastmod>2021-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/docs/features/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/docs/variables/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/hugo_cmd_pattern/</loc>
+    <loc>https://anriclee.github.io/posts/hugo_cmd_pattern/</loc>
     <lastmod>2020-06-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/math/</loc>
+    <loc>https://anriclee.github.io/tags/math/</loc>
     <lastmod>2019-03-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/docs/math-typesetting/</loc>
+    <loc>https://anriclee.github.io/docs/math-typesetting/</loc>
     <lastmod>2019-03-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/syntax/</loc>
+    <loc>https://anriclee.github.io/tags/syntax/</loc>
     <lastmod>2019-03-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/docs/emoji-support/</loc>
+    <loc>https://anriclee.github.io/docs/emoji-support/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/archives/</loc>
+    <loc>https://anriclee.github.io/archives/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/zh/archives/"
+                href="https://anriclee.github.io/zh/archives/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/archives/"
+                href="https://anriclee.github.io/archives/"
                 />
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://anriclee.github.io/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/zh/categories/"
+                href="https://anriclee.github.io/zh/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/categories/"
+                href="https://anriclee.github.io/categories/"
                 />
   </url><url>
-    <loc>http://localhost:1313/search/</loc>
+    <loc>https://anriclee.github.io/search/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/zh/search/"
+                href="https://anriclee.github.io/zh/search/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/search/"
+                href="https://anriclee.github.io/search/"
                 />
   </url><url>
-    <loc>http://localhost:1313/series/</loc>
+    <loc>https://anriclee.github.io/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:1313/zh/series/"
+                href="https://anriclee.github.io/zh/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/series/"
+                href="https://anriclee.github.io/series/"
                 />
   </url>
 </urlset>

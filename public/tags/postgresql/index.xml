@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>PostgreSQL on ReadByWord</title>
-    <link>http://localhost:1313/tags/postgresql/</link>
+    <link>https://anriclee.github.io/tags/postgresql/</link>
     <description>Recent content in PostgreSQL on ReadByWord</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 13 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 13 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://anriclee.github.io/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于 PostgreSQL 的群聊搜索实践</title>
-      <link>http://localhost:1313/posts/pg/</link>
+      <link>https://anriclee.github.io/posts/pg/</link>
       <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/pg/</guid>
+      <guid>https://anriclee.github.io/posts/pg/</guid>
       <description>&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
 &lt;p&gt;2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。&lt;/p&gt;
 &lt;p&gt;对于复杂场景的搜索，业界一般使用非常流行的 ElasticSearch。由于我们的群数据较少，截止到目前还没有达到千万级的量级，且搜索场景比较简单，而 PostgreSQL 对全文搜索又支持得比较好，所以选择了 PostgreSQL 来实现群搜索需求。

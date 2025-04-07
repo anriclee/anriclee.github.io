@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Example on ReadByWord</title>
-    <link>http://localhost:1313/tags/example/</link>
+    <link>https://anriclee.github.io/tags/example/</link>
     <description>Recent content in Example on ReadByWord</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 13 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/example/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://anriclee.github.io/tags/example/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Icons Preview</title>
-      <link>http://localhost:1313/docs/icons_preview/</link>
+      <link>https://anriclee.github.io/docs/icons_preview/</link>
       <pubDate>Wed, 13 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/docs/icons_preview/</guid>
+      <guid>https://anriclee.github.io/docs/icons_preview/</guid>
       <description>Index of all icons in PaperModeX</description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>Math Typesetting</title>
-      <link>http://localhost:1313/docs/math-typesetting/</link>
+      <link>https://anriclee.github.io/docs/math-typesetting/</link>
       <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/docs/math-typesetting/</guid>
+      <guid>https://anriclee.github.io/docs/math-typesetting/</guid>
       <description>A brief guide to setup KaTeX</description>
       <content:encoded><![CDATA[<p>Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.</p>
 <p>In this example we will be using <a href="https://katex.org/">KaTeX</a></p>
@@ -64,10 +64,10 @@ $$</p>]]></content:encoded>
     
     <item>
       <title>Emoji Support</title>
-      <link>http://localhost:1313/docs/emoji-support/</link>
+      <link>https://anriclee.github.io/docs/emoji-support/</link>
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/docs/emoji-support/</guid>
+      <guid>https://anriclee.github.io/docs/emoji-support/</guid>
       <description>Guide to emoji usage in Hugo</description>
       <content:encoded><![CDATA[<p>Emoji can be enabled in a Hugo project in a number of ways.</p>
 <p>The <a href="https://gohugo.io/functions/emojify/"><code>emojify</code></a> function can be called directly in templates or <a href="https://gohugo.io/templates/shortcode-templates/#inline-shortcodes">Inline Shortcodes</a>.</p>

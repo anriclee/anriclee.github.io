@@ -2,77 +2,127 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on ReadByWord</title>
-    <link>https://anriclee.github.io/tags/</link>
+    <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on ReadByWord</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 11 Jun 2022 11:43:42 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Oct 2023 21:17:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>telegram</title>
-      <link>https://anriclee.github.io/tags/telegram/</link>
-      <pubDate>Sat, 11 Jun 2022 11:43:42 +0800</pubDate>
+      <title>煮酒闲聊</title>
+      <link>http://localhost:1313/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/</link>
+      <pubDate>Sun, 08 Oct 2023 21:17:00 +0800</pubDate>
       
-      <guid>https://anriclee.github.io/tags/telegram/</guid>
+      <guid>http://localhost:1313/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
-      <title>example</title>
-      <link>https://anriclee.github.io/tags/example/</link>
+      <title>毛选</title>
+      <link>http://localhost:1313/tags/%E6%AF%9B%E9%80%89/</link>
+      <pubDate>Tue, 26 Sep 2023 22:38:32 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/%E6%AF%9B%E9%80%89/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Spring</title>
+      <link>http://localhost:1313/tags/spring/</link>
+      <pubDate>Mon, 11 Sep 2023 21:12:31 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/spring/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Socket</title>
+      <link>http://localhost:1313/tags/socket/</link>
+      <pubDate>Sun, 17 Jul 2022 17:20:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/socket/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>TCP/IP</title>
+      <link>http://localhost:1313/tags/tcp/ip/</link>
+      <pubDate>Sun, 17 Jul 2022 17:20:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/tcp/ip/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>IO</title>
+      <link>http://localhost:1313/tags/io/</link>
+      <pubDate>Tue, 05 Jul 2022 08:21:58 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/io/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Telegram</title>
+      <link>http://localhost:1313/tags/telegram/</link>
+      <pubDate>Sat, 11 Jun 2022 11:43:42 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/telegram/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Example</title>
+      <link>http://localhost:1313/tags/example/</link>
       <pubDate>Wed, 13 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://anriclee.github.io/tags/example/</guid>
+      <guid>http://localhost:1313/tags/example/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
       <title>PostgreSQL</title>
-      <link>https://anriclee.github.io/tags/postgresql/</link>
+      <link>http://localhost:1313/tags/postgresql/</link>
       <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://anriclee.github.io/tags/postgresql/</guid>
+      <guid>http://localhost:1313/tags/postgresql/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
-      <title>icons</title>
-      <link>https://anriclee.github.io/tags/icons/</link>
+      <title>Icons</title>
+      <link>http://localhost:1313/tags/icons/</link>
       <pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://anriclee.github.io/tags/icons/</guid>
+      <guid>http://localhost:1313/tags/icons/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     
     <item>
-      <title>markdown</title>
-      <link>https://anriclee.github.io/tags/markdown/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://anriclee.github.io/tags/markdown/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>syntax</title>
-      <link>https://anriclee.github.io/tags/syntax/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://anriclee.github.io/tags/syntax/</guid>
-      <description></description>
-      <content:encoded><![CDATA[]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>math</title>
-      <link>https://anriclee.github.io/tags/math/</link>
+      <title>Math</title>
+      <link>http://localhost:1313/tags/math/</link>
       <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://anriclee.github.io/tags/math/</guid>
+      <guid>http://localhost:1313/tags/math/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Syntax</title>
+      <link>http://localhost:1313/tags/syntax/</link>
+      <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/syntax/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>

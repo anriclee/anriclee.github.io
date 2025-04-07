@@ -9,7 +9,7 @@ tags:
 
 # 什么是 Bot
 
-Bot 的概念在官网的介绍稍微有点繁琐和复杂，详细可以了解[官网介绍](https://core.telegram.org/bots)，
+Bot 的概念在官网的介绍稍微有点繁琐和，详细可以了解[官网介绍](https://core.telegram.org/bots)，
 
 简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。
 

@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>[译] Bean 概述 | ReadByWord</title>
+<meta name="keywords" content="Spring">
+<meta name="description" content="一个 Sring IoC 容器可以操作一个或者多个 bean。这些 bean 是通过你提供给容器的配置元数据生成的（例如，以 XML 中的 &lt;bean/&gt; ）。
+在容器内，这些 bean 的定义被表示成 BeanDefinition 对象的形式，包含了下面的元数据：
+
+包定义的类名：通常是定义的 bean 的真正实现类
+bean 行为配置元素，表明了 bean 在 container 中的行为（scope，生命周期回调等等）。
+对其他需要的 bean 的引用。这些引用也被称作协作器和依赖。
+在一个新创建的对象中的其他配置设置 - 例如，池的数量限制或者一个操作连接池 bean 中的连接数量
+
+这些元数据转换为构成这些 bean 定义的一系列属性。下表表示了这些属性值：
+
+  
+      
+          属性
+          含义
+      
+  
+  
+      
+          Class
+          正在实例化的bean
+      
+      
+          Name
+          bean的名字
+      
+      
+          Scope
+          Bean的Scope
+      
+      
+          构造函数参数
+          依赖注入
+      
+      
+          自动装配模式
+          装配的协作对象
+      
+      
+          懒加载模式
+          懒加载 Bean
+      
+      
+          初始化方法
+          初始化回调
+      
+      
+          析构方法
+          析构回调
+      
+  
+
+除了包含怎么创建一个特定的 bean 的信息之外， ApplicationContext 的实现同样允许在容器外面已经创建好的对象注册到其中（用户创建）。这是通过 getBeanFactory 方法获取到 ApplicationContext 的 BeanFactory，得到 DefaultListableBeanFactory 实现来做到的。DefaultListableBeanFactory 支持通过调用 registerSingleton(..)  和 registerBeanDefinition(..) 方法来实现这样的注册。然而，典型的应用程序仅仅使用常规的 bean 定义元数据。">
+<meta name="author" content="anriclee">
+<link rel="canonical" href="http://localhost:1313/posts/spring_framework/core/the_ioc_container/bean_overview/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.7da7716a1f2d0725f74c6ae7f8d6adafc43aabe2b366b65bfbf433448e2a2001.css" integrity="sha256-fadxah8tByX3TGrn&#43;Natr8Q6q&#43;KzZrZb&#43;/QzRI4qIAE=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/spring_framework/core/the_ioc_container/bean_overview/">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="[译] Bean 概述 | ReadByWord" />
+<meta name="twitter:description" content="一个 Sring IoC 容器可以操作一个或者多个 bean。这些 bean 是通过你提供给容器的配置元数据生成的（例如，以 XML 中的 &lt;bean/&gt; ）。
+在容器内，这些 bean 的定义被表示成 BeanDefinition 对象的形式，包含了下面的元数据：
+
+包定义的类名：通常是定义的 bean 的真正实现类
+bean 行为配置元素，表明了 bean 在 container 中的行为（scope，生命周期回调等等）。
+对其他需要的 bean 的引用。这些引用也被称作协作器和依赖。
+在一个新创建的对象中的其他配置设置 - 例如，池的数量限制或者一个操作连接池 bean 中的连接数量
+
+这些元数据转换为构成这些 bean 定义的一系列属性。下表表示了这些属性值：
+
+  
+      
+          属性
+          含义
+      
+  
+  
+      
+          Class
+          正在实例化的bean
+      
+      
+          Name
+          bean的名字
+      
+      
+          Scope
+          Bean的Scope
+      
+      
+          构造函数参数
+          依赖注入
+      
+      
+          自动装配模式
+          装配的协作对象
+      
+      
+          懒加载模式
+          懒加载 Bean
+      
+      
+          初始化方法
+          初始化回调
+      
+      
+          析构方法
+          析构回调
+      
+  
+
+除了包含怎么创建一个特定的 bean 的信息之外， ApplicationContext 的实现同样允许在容器外面已经创建好的对象注册到其中（用户创建）。这是通过 getBeanFactory 方法获取到 ApplicationContext 的 BeanFactory，得到 DefaultListableBeanFactory 实现来做到的。DefaultListableBeanFactory 支持通过调用 registerSingleton(..)  和 registerBeanDefinition(..) 方法来实现这样的注册。然而，典型的应用程序仅仅使用常规的 bean 定义元数据。" />
+<meta property="og:title" content="[译] Bean 概述 | ReadByWord" />
+<meta property="og:description" content="一个 Sring IoC 容器可以操作一个或者多个 bean。这些 bean 是通过你提供给容器的配置元数据生成的（例如，以 XML 中的 &lt;bean/&gt; ）。
+在容器内，这些 bean 的定义被表示成 BeanDefinition 对象的形式，包含了下面的元数据：
+
+包定义的类名：通常是定义的 bean 的真正实现类
+bean 行为配置元素，表明了 bean 在 container 中的行为（scope，生命周期回调等等）。
+对其他需要的 bean 的引用。这些引用也被称作协作器和依赖。
+在一个新创建的对象中的其他配置设置 - 例如，池的数量限制或者一个操作连接池 bean 中的连接数量
+
+这些元数据转换为构成这些 bean 定义的一系列属性。下表表示了这些属性值：
+
+  
+      
+          属性
+          含义
+      
+  
+  
+      
+          Class
+          正在实例化的bean
+      
+      
+          Name
+          bean的名字
+      
+      
+          Scope
+          Bean的Scope
+      
+      
+          构造函数参数
+          依赖注入
+      
+      
+          自动装配模式
+          装配的协作对象
+      
+      
+          懒加载模式
+          懒加载 Bean
+      
+      
+          初始化方法
+          初始化回调
+      
+      
+          析构方法
+          析构回调
+      
+  
+
+除了包含怎么创建一个特定的 bean 的信息之外， ApplicationContext 的实现同样允许在容器外面已经创建好的对象注册到其中（用户创建）。这是通过 getBeanFactory 方法获取到 ApplicationContext 的 BeanFactory，得到 DefaultListableBeanFactory 实现来做到的。DefaultListableBeanFactory 支持通过调用 registerSingleton(..)  和 registerBeanDefinition(..) 方法来实现这样的注册。然而，典型的应用程序仅仅使用常规的 bean 定义元数据。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/spring_framework/core/the_ioc_container/bean_overview/" />
+    <meta property="og:image" content="http://localhost:1313/cover.png"/>
+<meta property="article:section" content="posts" />
+  <meta property="article:published_time" content="2023-09-02T23:12:31&#43;08:00" />
+  <meta property="article:modified_time" content="2023-09-02T23:12:31&#43;08:00" />
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "[译] Bean 概述",
+      "item": "http://localhost:1313/posts/spring_framework/core/the_ioc_container/bean_overview/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "[译] Bean 概述 | ReadByWord",
+  "name": "[译] Bean 概述",
+  "description": "一个 Sring IoC 容器可以操作一个或者多个 bean。这些 bean 是通过你提供给容器的配置元数据生成的（例如，以 XML 中的 \u0026lt;bean/\u0026gt; ）。\n在容器内，这些 bean 的定义被表示成 BeanDefinition 对象的形式，包含了下面的元数据：\n包定义的类名：通常是定义的 bean 的真正实现类 bean 行为配置元素，表明了 bean 在 container 中的行为（scope，生命周期回调等等）。 对其他需要的 bean 的引用。这些引用也被称作协作器和依赖。 在一个新创建的对象中的其他配置设置 - 例如，池的数量限制或者一个操作连接池 bean 中的连接数量 这些元数据转换为构成这些 bean 定义的一系列属性。下表表示了这些属性值：\n属性 含义 Class 正在实例化的bean Name bean的名字 Scope Bean的Scope 构造函数参数 依赖注入 自动装配模式 装配的协作对象 懒加载模式 懒加载 Bean 初始化方法 初始化回调 析构方法 析构回调 除了包含怎么创建一个特定的 bean 的信息之外， ApplicationContext 的实现同样允许在容器外面已经创建好的对象注册到其中（用户创建）。这是通过 getBeanFactory 方法获取到 ApplicationContext 的 BeanFactory，得到 DefaultListableBeanFactory 实现来做到的。DefaultListableBeanFactory 支持通过调用 registerSingleton(..) 和 registerBeanDefinition(..) 方法来实现这样的注册。然而，典型的应用程序仅仅使用常规的 bean 定义元数据。\n",
+  "keywords": [
+    "Spring"
+  ],
+  "wordCount" : "559",
+  "inLanguage": "en",
+  "datePublished": "2023-09-02T23:12:31+08:00",
+  "dateModified": "2023-09-02T23:12:31+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "anriclee"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/spring_framework/core/the_ioc_container/bean_overview/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ReadByWord",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary-bg: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list-page {
+                background: var(--theme);
+            }
+
+            .list-page:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list-page:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+</head>
+
+<body class=" type-posts kind-page layout-" id="top"><script data-no-instant>
+function switchTheme(theme) {
+  switch (theme) {
+    case 'light':
+      document.body.classList.remove('dark');
+      break;
+    case 'dark':
+      document.body.classList.add('dark');
+      break;
+    
+    default:
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+      }
+  }
+}
+
+function isDarkTheme() {
+  return document.body.className.includes("dark");
+}
+
+function getPrefTheme() {
+  return localStorage.getItem("pref-theme");
+}
+
+function setPrefTheme(theme) {
+  switchTheme(theme)
+  localStorage.setItem("pref-theme", theme);
+}
+
+const toggleThemeCallbacks = {}
+toggleThemeCallbacks['main'] = (isDark) => {
+  
+  if (isDark) {
+    setPrefTheme('light');
+  } else {
+    setPrefTheme('dark');
+  }
+}
+
+
+
+
+window.addEventListener('toggle-theme', function() {
+  
+  const isDark = isDarkTheme()
+  for (const key in toggleThemeCallbacks) {
+    toggleThemeCallbacks[key](isDark)
+  }
+});
+
+
+function toggleThemeListener() {
+  
+  window.dispatchEvent(new CustomEvent('toggle-theme'));
+}
+
+</script>
+<script>
+  
+  (function() {
+    const defaultTheme = 'auto';
+    const prefTheme = getPrefTheme();
+    const theme = prefTheme ? prefTheme : defaultTheme;
+
+    switchTheme(theme);
+  })();
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="ReadByWord (Alt + H)">ReadByWord</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/docs/" title="Docs"
+                >Docs
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags"
+                >Tags
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="Archive"
+                >Archive
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)"data-no-instant accesskey=/
+                >Search
+                </a>
+            </li>
+            <li>
+                <a href="https://anriclee.github.io/" title="@Author" target="_blank"
+                >@Author<span class="external-link"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M11 7h-5a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-5" />
+  <line x1="10" y1="14" x2="20" y2="4" />
+  <polyline points="15 4 20 4 20 9" />
+</svg>
+</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main post">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div><h1 class="post-title">[译] Bean 概述</h1>
+    <div class="post-meta"><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select: text;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select: text;"></rect><line x1="16" y1="2" x2="16" y2="6" style="user-select: text;"></line><line x1="8" y1="2" x2="8" y2="6" style="user-select: text;"></line><line x1="3" y1="10" x2="21" y2="10" style="user-select: text;"></line></svg>
+  <span>2023-09-02</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select: text;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" style="user-select: text;"></path><line x1="7" y1="7" x2="7" y2="7" style="user-select: text;"></line></svg>
+  <span class="post-tags"><a href="http://localhost:1313/tags/spring/">Spring</a></span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select: text;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" style="user-select: text;"></path><polyline points="14 2 14 8 20 8" style="user-select: text;"></polyline><line x1="16" y1="13" x2="8" y2="13" style="user-select: text;"></line><line x1="16" y1="17" x2="8" y2="17" style="user-select: text;"></line><polyline points="10 9 9 9 8 9" style="user-select: text;"></polyline></svg>
+  <span>559 words</span></span><span class="meta-item">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 15"></polyline></svg>
+  <span>3 min</span></span>
+
+      
+      
+    </div>
+  </header> <div class="toc side right">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#bean-%e5%91%bd%e5%90%8d" aria-label="Bean 命名">Bean 命名</a></li>
+                <li>
+                    <a href="#%e5%af%b9%e5%9c%a8-beandefinition-%e4%b9%8b%e5%a4%96%e7%9a%84-bean-%e8%b5%b7%e5%88%ab%e5%90%8d" aria-label="对在 BeanDefinition 之外的 bean 起别名">对在 BeanDefinition 之外的 bean 起别名</a></li>
+                <li>
+                    <a href="#bean-%e7%9a%84%e5%ae%9e%e4%be%8b%e5%8c%96" aria-label="Bean 的实例化">Bean 的实例化</a></li>
+                <li>
+                    <a href="#%e9%80%9a%e8%bf%87%e6%9e%84%e9%80%a0%e5%99%a8%e5%ae%9e%e4%be%8b%e5%8c%96" aria-label="通过构造器实例化">通过构造器实例化</a></li>
+                <li>
+                    <a href="#%e9%80%9a%e8%bf%87%e9%9d%99%e6%80%81%e6%96%b9%e6%b3%95%e5%ae%9e%e4%be%8b%e5%8c%96" aria-label="通过静态方法实例化">通过静态方法实例化</a></li>
+                <li>
+                    <a href="#%e9%80%9a%e8%bf%87%e5%ae%9e%e4%be%8b%e7%9a%84%e5%b7%a5%e5%8e%82%e6%96%b9%e6%b3%95" aria-label="通过实例的工厂方法">通过实例的工厂方法</a></li>
+                <li>
+                    <a href="#%e7%a1%ae%e5%ae%9a%e4%b8%80%e4%b8%aa-bean-%e7%9a%84%e8%bf%90%e8%a1%8c%e6%97%b6%e7%b1%bb%e5%90%8d" aria-label="确定一个 bean 的运行时类名">确定一个 bean 的运行时类名</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>一个 Sring IoC 容器可以操作一个或者多个 bean。这些 bean 是通过你提供给容器的配置元数据生成的（例如，以 XML 中的 <code>&lt;bean/&gt;</code> ）。</p>
+<p>在容器内，这些 bean 的定义被表示成 <code>BeanDefinition</code> 对象的形式，包含了下面的元数据：</p>
+<ul>
+<li>包定义的类名：通常是定义的 bean 的真正实现类</li>
+<li>bean 行为配置元素，表明了 bean 在 container 中的行为（scope，生命周期回调等等）。</li>
+<li>对其他需要的 bean 的引用。这些引用也被称作协作器和依赖。</li>
+<li>在一个新创建的对象中的其他配置设置 - 例如，池的数量限制或者一个操作连接池 bean 中的连接数量</li>
+</ul>
+<p>这些元数据转换为构成这些 bean 定义的一系列属性。下表表示了这些属性值：</p>
+<table>
+  <thead>
+      <tr>
+          <th>属性</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Class</td>
+          <td>正在实例化的bean</td>
+      </tr>
+      <tr>
+          <td>Name</td>
+          <td>bean的名字</td>
+      </tr>
+      <tr>
+          <td>Scope</td>
+          <td>Bean的Scope</td>
+      </tr>
+      <tr>
+          <td>构造函数参数</td>
+          <td>依赖注入</td>
+      </tr>
+      <tr>
+          <td>自动装配模式</td>
+          <td>装配的协作对象</td>
+      </tr>
+      <tr>
+          <td>懒加载模式</td>
+          <td>懒加载 Bean</td>
+      </tr>
+      <tr>
+          <td>初始化方法</td>
+          <td>初始化回调</td>
+      </tr>
+      <tr>
+          <td>析构方法</td>
+          <td>析构回调</td>
+      </tr>
+  </tbody>
+</table>
+<p>除了包含怎么创建一个特定的 bean 的信息之外， <code>ApplicationContext</code> 的实现同样允许在容器外面已经创建好的对象注册到其中（用户创建）。这是通过 <code>getBeanFactory</code> 方法获取到 <code>ApplicationContext</code> 的 <code>BeanFactory</code>，得到 <code>DefaultListableBeanFactory</code> 实现来做到的。<code>DefaultListableBeanFactory</code> 支持通过调用 <code>registerSingleton(..)</code>  和 <code>registerBeanDefinition(..)</code> 方法来实现这样的注册。然而，典型的应用程序仅仅使用常规的 bean 定义元数据。</p>
+<p>Note：bean 的元数据和手工提供的单例对象，需要被尽可能早地注册，以便容器在自动装配期间和其他内省的步骤中，可以对他们做出合理的推断。尽管覆盖现有的元数据和单例对象在某种程度上可以支持，但是官方并不支持在运行时注册新的 bean，这很可能会导致并发获取的异常，bean 容器中不一致的状态，或者两者都有。</p>
+<h1 id="bean-命名">Bean 命名</h1>
+<p>每个 bean 都有至少一个标识。这些标识必须在持有 bean 的容器中保持唯一。一个 bean 通常仅有一个标识。然而，如果需要不止一个，额外的可以被认为是别名。</p>
+<p>在基于 XML 的配置元数据中，你可以使用 id 属性，name 属性或者两者一起确定唯一的 bean。id 属性让你确定唯一的一个 id。按照习惯，这些名字都由字母或者数字组成，但是他们也可以包含特殊字符。如果你想对这些 bean 引入其他的别名，你也可以通过使用 <code>,</code> <code>;</code> <code>空格</code> 作为分隔符的 name 属性。尽管 id属性已经被定义为 xsd:string 类型，容器中还是bean 的 id 唯一性是由容器强制执行的，而不是通过 XML 解析器。</p>
+<p>对一个 bean 提供 name 或者 id 属性并不是必须的。如果你不希望显式地提供 name 或者 id，容器会对这个 bean 生成一个唯一的名字。但是，如果你想通过名字引用这个 bean，通过 ref 元素或者 Service Locator 的模式来找，你必须提供 name 属性。在使用内部的 bean 或者自动装配时，可以不提供 name 属性。</p>
+<blockquote>
+<p>Bean 名字惯例</p>
+<p>当给一个 bean 命名时，惯例是使用标准 Java 实例中对成员变量名。这也就是 bean 的名字必须以一个小写字母开始，并且是驼峰的形式。这样的例子如：<code>accountManager</code>，<code>accountService</code>，<code>userDao</code>，<code>loginController</code> 等等。</p>
+<p>对 bean 命名的一致性，可以使你的配置更易读且易懂。而且，如果你使用 Spring 的 AOP 机制，当通过名字来对一系列 bean 提供一个 bean 是非常有用的。</p></blockquote>
+<p>Note：当在 classpath 下进行 component 扫描时，Spring 会遵循前面描述的规则对没有命名的 component 生成名字：实质上，就是采用一个简单的类名，并且把首字母变为小写。然而，在不止包含一个字母并且首字母和第二个字母都大写的特殊情形下，原来的就会被继续保留。这些规则与 <code>java.beans.Introspector.decapitalize</code> 中定义的相同（Spring 把他们用在这里了）。</p>
+<h1 id="对在-beandefinition-之外的-bean-起别名">对在 BeanDefinition 之外的 bean 起别名</h1>
+<p>在 bean 定义自身中个，你可以通过使用 id 属性和在 name 属性中定义任意数量的名字对 bean 提供不止一个名字。这些名字相当于 bean 的别名，在某些情况下比较有用，例如，让应用程序中的每一个 component 都通过使用相对于这个 component 中的特定的 bean 名称来引用一个相同的依赖。</p>
+<p>但是，在 bean 实际上被定义的地方里设置所有的别名，并不总是合适的。当这个 bean 在别的地方也定义的时候，有时候需要引入这个 bean 的别名。这在一个配置文件跨越多个子系统的大系统时且每个子系统都有自己的一套 bean 定义时，是非常常见的。在基于 XML 的配置元数据中，你可以使用 <code>&lt;alias/&gt;</code> 元素来完成这项任务。下面的例子表示了怎么使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;alias</span> <span class="na">name=</span><span class="s">&#34;fromName&#34;</span> <span class="na">alias=</span><span class="s">&#34;toName&#34;</span><span class="nt">/&gt;</span>
+</span></span></code></pre></div><p>在这个例子中，一个叫 <code>fromName</code> 的 bean，在使用这个别名定义后，也可以通过 <code>toName</code> 来引用到。</p>
+<p>例如，对子系统 A 中的配置元数据，可以通过 <code>subsystemA-dataSource</code> 引用到 DataSrouce。在子系统 B 中也可以通过使用 <code>subsystemB-dataSource</code> 引用到。当构成一个同时使用到这两个子系统的主应用程序时，主应用程序可以通过 <code>myApp-dataSource</code> 名字来引用到 DataSource。你可以在配置元数据中增加下面的别名定义，来使所有三个名字引用到相同的对象：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;alias</span> <span class="na">name=</span><span class="s">&#34;myApp-dataSource&#34;</span> <span class="na">alias=</span><span class="s">&#34;subsystemA-dataSource&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;alias</span> <span class="na">name=</span><span class="s">&#34;myApp-dataSource&#34;</span> <span class="na">alias=</span><span class="s">&#34;subsystemB-dataSource&#34;</span><span class="nt">/&gt;</span>
+</span></span></code></pre></div><p>现在每一个 component 和主应用都可以通过一个唯一且不与其他 bean 定义冲突的名字引用到dataSource。，但他们都指向同一个 bean。</p>
+<blockquote>
+<p>Java 配置</p>
+<p>如果你使用 Java 配置，@Bean 注解同样也可以用来提供别名。</p></blockquote>
+<h1 id="bean-的实例化">Bean 的实例化</h1>
+<p>一个 bean 定义本质上就是创建一个或者对个对象的菜谱。当容器被索要 bean 的时候，容器查看这个 bean 的菜谱，使用被 bean 定义封装好的配置元数据来创建一个真正的对象。</p>
+<p>如果你使用 XML 配置元数据，你可以在 <bean/> 元素的 class 属性中，指定要实例化对象的类型或者（类名）。这个 class 属性通常是强制的（通常是 BeanDefinition 实例中的 Class 属性）。你可以使用下面两种方法之一来使用 Class 属性：</p>
+<ul>
+<li>
+<p>通常，在容器本身直接通过反射调用构造函数创建 bean 的地方，直接指定要被构建的类，在某种程度上相当于在 Java 代码中使用new 操作符</p>
+</li>
+<li>
+<p>通过指定包含创建这个对象静态工厂方法的类，容器调用这个类的静态工厂方法创建 bean，这是一个不太常见的用法。静态工厂方法返回的对象类型也许和此类相同或者完全不同</p>
+</li>
+</ul>
+<blockquote>
+<p>嵌套的类名</p>
+<p>如果你想对一个嵌套类定义配置 bean 定义，你可以使用这个嵌套类的二进制名或者源文件名</p>
+<p>例如，如果在 <code>com.example</code> 包里有一个类叫 <code>SomeThing</code>，并且这个 <code>SomeThing</code> 类有一个叫 <code>OtherThing</code> 的静态嵌套类，他们可以通过 <code>$</code> 或者 <code>.</code> 符号分割，所以 bean 定义中的 <code>class</code> 属性值会是：<code>com.example.SomeThing$OtherThing</code> 或者 <code>com.example.SomeThing.OtherThing</code>.</p></blockquote>
+<h1 id="通过构造器实例化">通过构造器实例化</h1>
+<p>当你通过构造器的方式来创建 bean，所有普通类都可以被使用并且与 Spring 兼容。也就是说，正在被开发的类没必要实现任何特殊的接口或者用一种特殊的方式编码。只需要指定 bean 的类就足够了。然而，根据你为了创建特定 bean 选择的 IoC类型，你也许会需要一个默认（空的）构造器。</p>
+<p>Spring IoC 容器几乎可以操作任何你想操作的类。并不仅限于操作真正的 JavaBean。大部分 Spring 的用户更偏爱使用只包含一个无参构造器，合适的 setter 和 getter 建模的 JavaBean。你也可以在你的容器中使用更多的非 bean 风格的类。例如，如果你需要使用一个遗留下来的绝对没有遵循  JavaBean 规范的连接池，Spring 同样操作它。</p>
+<p>在下面的基于 XML 配置元数据例子中，你可以指定你的 bean 类：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;exampleBean&#34;</span> <span class="na">class=</span><span class="s">&#34;examples.ExampleBean&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">&#34;anotherExample&#34;</span> <span class="na">class=</span><span class="s">&#34;examples.ExampleBeanTwo&#34;</span><span class="nt">/&gt;</span>
+</span></span></code></pre></div><h1 id="通过静态方法实例化">通过静态方法实例化</h1>
+<p>当定义一个你想通过静态工厂方法创建的 bean 时，需要使用 <code>class</code> 属性指定包含这个静态工厂方法的类，使用 <code>factory-method</code> 属性，指定这个工厂方法本身。你能够调用这个方法（通过可选参数，这个待马上会讲到）返回一个对象，随后，这个对象看做是通过构造函数创建的。这样定义 bean 的一个使用场景就是调用遗留代码中的静态工厂。</p>
+<p>下面的 bean 定义，指定了将要通过工厂方法创建的 bean。这个定义不会指定返回对象的类型，而是指定包含静态方法的类。在这个例子中，<code>createInstance()</code> 方法必须是一个静态方法。下面的例子展示了怎么去指定一个工厂方法。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;clientService&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">class=</span><span class="s">&#34;examples.ClientService&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">factory-method=</span><span class="s">&#34;createInstance&#34;</span><span class="nt">/&gt;</span>
+</span></span></code></pre></div><p>下面的例子展示了一个上面 bean 定义用到的类：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ClientService</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientService</span><span class="w"> </span><span class="n">clientService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientService</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="nf">ClientService</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientService</span><span class="w"> </span><span class="nf">createInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">clientService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>想了解关于如何给工厂方法传参并且在工厂返回的对象中设置对象实例的属性的细节，可以参考 <a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-properties-detailed.html">Dependencies and Configuration in Detail.</a>。</p>
+<h1 id="通过实例的工厂方法">通过实例的工厂方法</h1>
+<p>与通过静态工厂方法实例化相似，通过实例的工厂方法调用一个容器中一个现有 bean 的非静态方法来创建一个新的 bean。要想使用这个机制，需要将 <code>class</code> 属性置空并且在 <code>factory-bean</code> 属性指定当前容器（父容器或者祖父容器）中的 bean 的名称，此 bean 包含创建对象实例的方法。在 <code>factory-method</code> 属性中设置工厂方法本身的名字。下面的例子展示了如何配置这样一个 bean：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="c">&lt;!-- the factory bean, which contains a method called createInstance() --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;serviceLocator&#34;</span> <span class="na">class=</span><span class="s">&#34;examples.DefaultServiceLocator&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- inject any dependencies required by this locator bean --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/bean&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- the bean to be created via the factory bean --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;clientService&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">factory-bean=</span><span class="s">&#34;serviceLocator&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">factory-method=</span><span class="s">&#34;createClientServiceInstance&#34;</span><span class="nt">/&gt;</span>
+</span></span></code></pre></div><p>下面的例子展示了与之相应的类：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DefaultServiceLocator</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientService</span><span class="w"> </span><span class="n">clientService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientServiceImpl</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">ClientService</span><span class="w"> </span><span class="nf">createClientServiceInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">clientService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>一个工厂类，同样也可以包含更多的工厂方法，如下面的例子所示：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-XML" data-lang="XML"><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;serviceLocator&#34;</span> <span class="na">class=</span><span class="s">&#34;examples.DefaultServiceLocator&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="c">&lt;!-- inject any dependencies required by this locator bean --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/bean&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;clientService&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">factory-bean=</span><span class="s">&#34;serviceLocator&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">factory-method=</span><span class="s">&#34;createClientServiceInstance&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;accountService&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">factory-bean=</span><span class="s">&#34;serviceLocator&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="na">factory-method=</span><span class="s">&#34;createAccountServiceInstance&#34;</span><span class="nt">/&gt;</span>
+</span></span></code></pre></div><p>下面的例子展示了与之相对应的类：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DefaultServiceLocator</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientService</span><span class="w"> </span><span class="n">clientService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientServiceImpl</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">AccountService</span><span class="w"> </span><span class="n">accountService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AccountServiceImpl</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">ClientService</span><span class="w"> </span><span class="nf">createClientServiceInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">clientService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">AccountService</span><span class="w"> </span><span class="nf">createAccountServiceInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">accountService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>这个方法展示了工厂 bean 本身是可以通过依赖注入机制被设置和配置的。</p>
+<p>Note：在 Spring 的文档中，&ldquo;factory bean&rdquo; 指的是一个在 Spring 容器中配置好并且通过实例或者静态工厂方法创建好的 bean。与之相对比，<code>FactoryBean</code>（注意首字母），指的是一个 Spring 特定的 <code>FactoryBean</code> 的实现类。</p>
+<h1 id="确定一个-bean-的运行时类名">确定一个 bean 的运行时类名</h1>
+<p>确定一个特定的bean的运行时类型并非易事。一个在 bean 元数据定义中指定的类仅仅是一个可能与一个声明的工厂方法组合的初始类引用，或者是一个会
+让此 bean 的运行时类型完全不同的 FactoryBean 类，或者在实例级别的工厂方法（通过指定的 factory-bean 来解决）什么也不做。此外，AOP 代理也会通过bean 接口代理来包装一个bean实例，此接口代理会有限地暴露目标bean的实际类型（仅仅是已经实现的接口）。</p>
+<p>找出一个特定 bean 的实际运行时类型的推荐的方法是通过指定 bean 名字，调用 <code>BeanFactory.getType</code> 方法。这种方法将上面所有的情形考虑在内，并且返回对象的类型，此对象也是在相同名称下，调用 <code>BeanFactory.getBean</code> 方法会返回的。</p>
+<p>[全文完]</p>
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/xxl_job/">
+    <span class="title">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left" style="user-select: text;"><line x1="19" y1="12" x2="5" y2="12" style="user-select: text;"></line><polyline points="12 19 5 12 12 5" style="user-select: text;"></polyline></svg>&nbsp;Prev Page</span>
+    <br>
+    <span>XXL Job 调度框架源码解析</span>
+  </a>
+  <a class="next" href="http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_and_beans/">
+    <span class="title">Next Page&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right" style="user-select: text;"><line x1="5" y1="12" x2="19" y2="12" style="user-select: text;"></line><polyline points="12 5 19 12 12 19" style="user-select: text;"></polyline></svg>
+    </span>
+    <br>
+    <span>[译] Spring IOC 容器</span>
+  </a>
+</nav>
+
+  </footer>
+    <div class="comments-separator"></div><div class="comments-box telegram-widget">
+  <div id="telegram-widget-container"></div>
+</div>
+
+<script>
+  (function() {
+    
+    const key = 'telegram-widget'
+    if (!toggleThemeCallbacks.hasOwnProperty(key)) {
+      toggleThemeCallbacks[key] = (isDark) => {
+        
+        const telegram = window.Telegram
+        if (!telegram || !document.querySelector('#telegram-widget-container')) {
+          return;
+        }
+        if (isDark) {
+          telegram.setWidgetOptions({'nodark': 1})
+        } else {
+          telegram.setWidgetOptions({'dark': 1})
+        }
+      }
+    }
+
+    
+    const attrs = {
+      'data-telegram-discussion': "anricleeblog\/10",
+      'data-comments-limit': "20",
+      
+      'data-no-instant': '',
+    }
+    const accentColor = '9077e1';
+    if (accentColor) {
+      attrs['data-color'] = accentColor;
+    }
+    if (isDarkTheme()) {
+      attrs['data-dark'] = '1'
+    }
+
+    
+    
+    var d = document, s = d.createElement('script');
+    s.src = "https://telegram.org/js/telegram-widget.js?19";
+    for (const key in attrs) {
+      s.setAttribute(key, attrs[key]);
+    }
+
+    const container = document.querySelector('#telegram-widget-container')
+    container.innerHTML = '';
+    
+    container.appendChild(s);
+  })();
+</script>
+
+</article>
+    </main>
+    
+<footer class="footer">
+  <span>&copy; 2025 <a href="http://localhost:1313/">ReadByWord</a></span><span style="display: inline-block; margin-left: 1em;">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
+  </span>
+  <span style="display: inline-block; margin-left: 1em;">
+    Powered by
+    <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+    <a href="https://github.com/reorx/hugo-PaperModX/" rel="noopener" target="_blank">PaperModX</a>
+  </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+    <path d="M12 6H0l6-6z" />
+  </svg>
+</a>
+
+<script>
+  (function() {
+     
+    const disableThemeToggle = '' == '1';
+    if (disableThemeToggle) {
+      return;
+    }
+
+    let button = document.getElementById("theme-toggle")
+    
+    button.removeEventListener('click', toggleThemeListener)
+    
+    button.addEventListener('click', toggleThemeListener)
+  })();
+</script>
+
+<script>
+  (function () {
+    let menu = document.getElementById('menu')
+    if (menu) {
+      menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+      menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+      }
+    }
+
+    const disableSmoothScroll = '' == '1';
+    const enableInstantClick = '1' == '1';
+    
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || disableSmoothScroll || enableInstantClick) {
+      return;
+    }
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        var id = this.getAttribute("href").substr(1);
+        document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+          behavior: "smooth"
+        });
+        if (id === "top") {
+          history.replaceState(null, null, " ");
+        } else {
+          history.pushState(null, null, `#${id}`);
+        }
+      });
+    });
+  })();
+</script>
+<script>
+  var mybutton = document.getElementById("top-link");
+  window.onscroll = function () {
+    if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+      mybutton.style.visibility = "visible";
+      mybutton.style.opacity = "1";
+    } else {
+      mybutton.style.visibility = "hidden";
+      mybutton.style.opacity = "0";
+    }
+  };
+</script>
+<script>
+  if (window.scrollListeners) {
+    
+    for (const listener of scrollListeners) {
+      window.removeEventListener('scroll', listener)
+    }
+  }
+  window.scrollListeners = []
+</script>
+
+
+
+<script src="/js/medium-zoom.min.js" data-no-instant
+></script>
+<script>
+  document.querySelectorAll('pre > code').forEach((codeblock) => {
+    const container = codeblock.parentNode.parentNode;
+
+    const copybutton = document.createElement('button');
+    copybutton.classList.add('copy-code');
+    copybutton.innerText = 'copy';
+
+    function copyingDone() {
+      copybutton.innerText = 'copied!';
+      setTimeout(() => {
+        copybutton.innerText = 'copy';
+      }, 2000);
+    }
+
+    copybutton.addEventListener('click', (cb) => {
+      if ('clipboard' in navigator) {
+        navigator.clipboard.writeText(codeblock.textContent);
+        copyingDone();
+        return;
+      }
+
+      const range = document.createRange();
+      range.selectNodeContents(codeblock);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      try {
+        document.execCommand('copy');
+        copyingDone();
+      } catch (e) { };
+      selection.removeRange(range);
+    });
+
+    if (container.classList.contains("highlight")) {
+      container.appendChild(copybutton);
+    } else if (container.parentNode.firstChild == container) {
+      
+    } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+      
+      codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+    } else {
+      
+      codeblock.parentNode.appendChild(copybutton);
+    }
+  });
+</script>
+
+
+
+
+<script>
+  
+  
+  (function() {
+    const enableTocScroll = '1' == '1'
+    if (!enableTocScroll) {
+      return
+    }
+    if (!document.querySelector('.toc')) {
+      console.log('no toc found, ignore toc scroll')
+      return
+    }
+    
+
+    
+    const scrollListeners = window.scrollListeners
+    const headings = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id]');
+    const activeClass = 'active';
+
+    
+    let activeHeading = headings[0];
+    getLinkByHeading(activeHeading).classList.add(activeClass);
+
+    const onScroll = () => {
+      const passedHeadings = [];
+      for (const h of headings) {
+        
+        if (getOffsetTop(h) < 5) {
+          passedHeadings.push(h)
+        } else {
+          break;
+        }
+      }
+      if (passedHeadings.length > 0) {
+        newActiveHeading = passedHeadings[passedHeadings.length - 1];
+      } else {
+        newActiveHeading = headings[0];
+      }
+      if (activeHeading != newActiveHeading) {
+        getLinkByHeading(activeHeading).classList.remove(activeClass);
+        activeHeading = newActiveHeading;
+        getLinkByHeading(activeHeading).classList.add(activeClass);
+      }
+    }
+
+    let timer = null;
+    const scrollListener = () => {
+      if (timer !== null) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(onScroll, 50)
+    }
+    window.addEventListener('scroll', scrollListener, false);
+    scrollListeners.push(scrollListener)
+
+    function getLinkByHeading(heading) {
+      const id = encodeURI(heading.getAttribute('id')).toLowerCase();
+      return document.querySelector(`.toc ul li a[href="#${id}"]`);
+    }
+
+    function getOffsetTop(heading) {
+      if (!heading.getClientRects().length) {
+        return 0;
+      }
+      let rect = heading.getBoundingClientRect();
+      return rect.top
+    }
+  })();
+  </script>
+<script>
+  mediumZoom('.entry-cover img');
+  mediumZoom('.post-content img:not([no-zoom])');
+</script>
+
+<script src="/js/instantclick.js" data-no-instant
+></script>
+<script data-no-instant>
+  
+  
+  
+  
+  
+  
+  InstantClick.init();
+</script>
+</body>
+
+</html>

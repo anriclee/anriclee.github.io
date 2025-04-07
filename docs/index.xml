@@ -5,6 +5,7 @@
     <link>https://anriclee.github.io/docs/</link>
     <description>Recent content in PaperModX Docs on ReadByWord</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
     <lastBuildDate>Wed, 13 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://anriclee.github.io/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PaperModX New Features</title>
@@ -114,7 +115,7 @@ to show all the icons, check it out at: <a href="https://reorx.github.io/hugo-Pa
       <guid>https://anriclee.github.io/docs/icons/</guid>
       <description>Explain how to use icons in PaperModX</description>
       <content:encoded><![CDATA[<h2 id="social-icons">Social Icons</h2>
-<p>Go to <a href="icons_preview">Icons Preview</a> to see a complete list of icons</p>
+<p>Go to <a href="/docs/icons_preview/">Icons Preview</a> to see a complete list of icons</p>
 <p>Usage :</p>
 <pre tabindex="0"><code>socialIcons:
     - name: &#34;kofi&#34;
@@ -124,38 +125,38 @@ to show all the icons, check it out at: <a href="https://reorx.github.io/hugo-Pa
 </code></pre><hr>
 <h2 id="share-icons">Share Icons</h2>
 <table>
-<thead>
-<tr>
-<th>No.</th>
-<th>Platform</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><code>twitter</code> (also generates hash tags from tags linked with post)</td>
-</tr>
-<tr>
-<td>2</td>
-<td><code>linkedin</code></td>
-</tr>
-<tr>
-<td>3</td>
-<td><code>reddit</code></td>
-</tr>
-<tr>
-<td>4</td>
-<td><code>facebook</code></td>
-</tr>
-<tr>
-<td>5</td>
-<td><code>whatsapp</code></td>
-</tr>
-<tr>
-<td>6</td>
-<td><code>telegram</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>No.</th>
+          <th>Platform</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td><code>twitter</code> (also generates hash tags from tags linked with post)</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td><code>linkedin</code></td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td><code>reddit</code></td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td><code>facebook</code></td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td><code>whatsapp</code></td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td><code>telegram</code></td>
+      </tr>
+  </tbody>
 </table>
 <p>Usage:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">params</span><span class="p">:</span><span class="w">
@@ -173,15 +174,14 @@ to show all the icons, check it out at: <a href="https://reorx.github.io/hugo-Pa
       <content:encoded><![CDATA[<h2 id="intro">Intro</h2>
 <ul>
 <li><strong>We&rsquo;ll be using <code>yml/yaml</code> format for all examples down below, I recommend using <code>yml</code> over <code>toml</code> as it is easier to read.</strong></li>
-<li>You can find any <a href="https://www.google.com/search?q=yml+to+toml">YML to TOML</a> converters if necessary.</li>
+<li>You can find any <a href="https://www.google.com/search?q=yml&#43;to&#43;toml">YML to TOML</a> converters if necessary.</li>
 </ul>
 <hr>
 <h2 id="guide">Guide</h2>
 <p>Follow <a href="https://gohugo.io/getting-started/quick-start/">Quick Start</a> guide to setup hugo and create a new site.</p>
 <blockquote>
 <p>Note: Use -f to select yml format</p>
-<p><code>hugo new site &lt;name of site&gt; -f yml</code></p>
-</blockquote>
+<p><code>hugo new site &lt;name of site&gt; -f yml</code></p></blockquote>
 <p>Make sure you install latest version of <strong><code>hugo(&gt;=0.83.0)</code></strong>.</p>
 <p>After you have created a new site, at <a href="https://gohugo.io/getting-started/quick-start/#step-3-add-a-theme">Step 3</a> follow the steps:</p>
 <h3 id="method-1">Method 1</h3>
@@ -240,26 +240,25 @@ to show all the icons, check it out at: <a href="https://reorx.github.io/hugo-Pa
 <h2 id="quick-links">Quick Links</h2>
 <ul>
 <li>
-<h3 id="papermod---featuresfeatures"><a href="../features">Papermod - Features</a></h3>
+<h3 id="papermod---features"><a href="../features">Papermod - Features</a></h3>
 </li>
 <li>
-<h3 id="papermod---faqsfaq"><a href="../faq">Papermod - FAQs</a></h3>
+<h3 id="papermod---faqs"><a href="../faq">Papermod - FAQs</a></h3>
 </li>
 <li>
-<h3 id="papermod---variablesvariables"><a href="../variables">Papermod - Variables</a></h3>
+<h3 id="papermod---variables"><a href="../variables">Papermod - Variables</a></h3>
 </li>
 <li>
-<h3 id="papermod---iconsicons"><a href="../icons">Papermod - Icons</a></h3>
+<h3 id="papermod---icons"><a href="../icons">Papermod - Icons</a></h3>
 </li>
 <li>
-<h3 id="changeloghttpsgithubcomreorxhugo-papermodxreleases"><a href="https://github.com/reorx/hugo-PaperModX/releases">ChangeLog</a></h3>
+<h3 id="changelog"><a href="https://github.com/reorx/hugo-PaperModX/releases">ChangeLog</a></h3>
 </li>
 </ul>
 <hr>
 <h2 id="sample-configyml">Sample <code>config.yml</code></h2>
 <blockquote>
-<p><strong>Example Site Structure is present here</strong>: <a href="https://github.com/reorx/hugo-PaperModX/tree/exampleSite/">exampleSite</a></p>
-</blockquote>
+<p><strong>Example Site Structure is present here</strong>: <a href="https://github.com/reorx/hugo-PaperModX/tree/exampleSite/">exampleSite</a></p></blockquote>
 <p><strong>Use appropriately</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">baseURL</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;https://examplesite.com/&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">ExampleSite</span><span class="w">
@@ -443,15 +442,14 @@ to show all the icons, check it out at: <a href="https://reorx.github.io/hugo-Pa
       <guid>https://anriclee.github.io/docs/features/</guid>
       <description>Learn About All Features in original PaperMod</description>
       <content:encoded><![CDATA[<blockquote>
-<p>source: <a href="https://adityatelange.github.io/hugo-PaperMod/posts/papermod/papermod-features/">https://adityatelange.github.io/hugo-PaperMod/posts/papermod/papermod-features/</a></p>
-</blockquote>
+<p>source: <a href="https://adityatelange.github.io/hugo-PaperMod/posts/papermod/papermod-features/">https://adityatelange.github.io/hugo-PaperMod/posts/papermod/papermod-features/</a></p></blockquote>
 <h3 id="intro">Intro</h3>
 <ul>
 <li>
 <p><strong>We&rsquo;ll be using <code>yml/yaml</code> format for all examples down below, I recommend using <code>yml</code> over <code>toml</code> as it is easier to read.</strong></p>
 </li>
 <li>
-<p>You can find any <a href="https://www.google.com/search?q=yml+to+toml">YML to TOML</a> converters if necessary.</p>
+<p>You can find any <a href="https://www.google.com/search?q=yml&#43;to&#43;toml">YML to TOML</a> converters if necessary.</p>
 </li>
 </ul>
 <hr>
@@ -476,59 +474,59 @@ to show all the icons, check it out at: <a href="https://reorx.github.io/hugo-Pa
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">disableThemeToggle</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span></code></pre></div><p>You can refer following table for better understanding&hellip;</p>
 <table>
-<thead>
-<tr>
-<th><code>defaultTheme</code></th>
-<th><code>disableThemeToggle</code></th>
-<th>checks local storage?</th>
-<th>checks system theme?</th>
-<th>Info</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>auto</code></td>
-<td>true</td>
-<td>No</td>
-<td>Yes</td>
-<td>only system theme</td>
-</tr>
-<tr>
-<td></td>
-<td>false</td>
-<td>Yes (if not-&gt;2)</td>
-<td>Yes (2)</td>
-<td><em>switch present</em></td>
-</tr>
-<tr>
-<td><code>dark</code></td>
-<td>true</td>
-<td>No</td>
-<td>No</td>
-<td>force dark only</td>
-</tr>
-<tr>
-<td></td>
-<td>false</td>
-<td>Yes</td>
-<td>No</td>
-<td><em>switch present</em></td>
-</tr>
-<tr>
-<td><code>light</code></td>
-<td>true</td>
-<td>No</td>
-<td>No</td>
-<td>force light only</td>
-</tr>
-<tr>
-<td></td>
-<td>false</td>
-<td>Yes</td>
-<td>No</td>
-<td><em>switch present</em></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th><code>defaultTheme</code></th>
+          <th><code>disableThemeToggle</code></th>
+          <th>checks local storage?</th>
+          <th>checks system theme?</th>
+          <th>Info</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>auto</code></td>
+          <td>true</td>
+          <td>No</td>
+          <td>Yes</td>
+          <td>only system theme</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>false</td>
+          <td>Yes (if not-&gt;2)</td>
+          <td>Yes (2)</td>
+          <td><em>switch present</em></td>
+      </tr>
+      <tr>
+          <td><code>dark</code></td>
+          <td>true</td>
+          <td>No</td>
+          <td>No</td>
+          <td>force dark only</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>false</td>
+          <td>Yes</td>
+          <td>No</td>
+          <td><em>switch present</em></td>
+      </tr>
+      <tr>
+          <td><code>light</code></td>
+          <td>true</td>
+          <td>No</td>
+          <td>No</td>
+          <td>force light only</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>false</td>
+          <td>Yes</td>
+          <td>No</td>
+          <td><em>switch present</em></td>
+      </tr>
+  </tbody>
 </table>
 <hr>
 <h3 id="archives-layout">Archives Layout</h3>
@@ -618,8 +616,7 @@ to show all the icons, check it out at: <a href="https://reorx.github.io/hugo-Pa
 <li>Arrow keys to move up/down the list</li>
 <li>Enter key (return) or Right Arrow key to Go to highlighted page</li>
 <li>Escape key to clear searchbox and results</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <p>For Multilingual use <code>search.&lt;lang&gt;.md</code> ex. <code>search.es.md</code>.</p>
 <p><strong>Note:</strong> Search will work only on current language, user is currently on !</p>
 <p><strong>Customizing Fusejs Options</strong></p>
@@ -702,30 +699,30 @@ to show all the icons, check it out at: <a href="https://reorx.github.io/hugo-Pa
 </span></span></span></code></pre></div><p>The example above would yield the following link for the post file <code>posts/post-name.md</code>:
 <a href="https://github.com/">https://github.com/</a>&lt;path_to_repo&gt;/content/posts/post-name.md</p>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Default Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>editPost.URL</td>
-<td>true</td>
-<td>-</td>
-</tr>
-<tr>
-<td>editPost.appendFilePath</td>
-<td>false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>editPost.Text</td>
-<td>false</td>
-<td>&ldquo;Edit&rdquo;</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Parameter</th>
+          <th>Required</th>
+          <th>Default Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>editPost.URL</td>
+          <td>true</td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td>editPost.appendFilePath</td>
+          <td>false</td>
+          <td>false</td>
+      </tr>
+      <tr>
+          <td>editPost.Text</td>
+          <td>false</td>
+          <td>&ldquo;Edit&rdquo;</td>
+      </tr>
+  </tbody>
 </table>
 <p>Since the link generated is a regular HTML anchor tag <code>&lt;a href=...&gt;</code>, you can
 also use other URL schemas like <code>mailto://</code>, e.g.
@@ -772,7 +769,7 @@ also use other URL schemas like <code>mailto://</code>, e.g.
 <li>The Twitter Cards metadata, except <code>twitter:image</code> should not require
 additional configuration, since it is generated from metadata that
 you should already have (for instance the page title and description).</li>
-<li>The <code>twitter:image</code> uses the <a href="#post-cover-image">Post Cover Image</a>, if present.</li>
+<li>The <code>twitter:image</code> uses the <a href="/docs/features/#post-cover-image">Post Cover Image</a>, if present.</li>
 <li>In the absence of a cover images, the first image from the <code>images</code>
 frontmatter (a list) is used.
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">images</span><span class="p">:</span><span class="w">
@@ -789,7 +786,7 @@ image with <code>feature</code> in the name, with a fallback to the first image 
 <li>The OpenGraph metadata, except <code>og:image</code> should not require
 additional configuration, since it is generated from metadata that
 you should already have (for instance the page title and description).</li>
-<li>The <code>og:image</code> uses the <a href="#post-cover-image">Post Cover Image</a>, if present.</li>
+<li>The <code>og:image</code> uses the <a href="/docs/features/#post-cover-image">Post Cover Image</a>, if present.</li>
 <li>In the absence of a cover images, the first image from the <code>images</code>
 frontmatter (a list) is used.
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">images</span><span class="p">:</span><span class="w">
@@ -876,7 +873,7 @@ $$</p>]]></content:encoded>
       <content:encoded><![CDATA[<p>Emoji can be enabled in a Hugo project in a number of ways.</p>
 <p>The <a href="https://gohugo.io/functions/emojify/"><code>emojify</code></a> function can be called directly in templates or <a href="https://gohugo.io/templates/shortcode-templates/#inline-shortcodes">Inline Shortcodes</a>.</p>
 <p>To enable emoji globally, set <code>enableEmoji</code> to <code>true</code> in your site&rsquo;s <a href="https://gohugo.io/getting-started/configuration/">configuration</a> and then you can type emoji shorthand codes directly in content files; e.g.</p>
-<p><span class="nowrap"><span class="emojify">🙈</span> <code>🙈</code></span>  <span class="nowrap"><span class="emojify">🙉</span> <code>🙉</code></span>  <span class="nowrap"><span class="emojify">🙊</span> <code>🙊</code></span></p>
+<p><span class="nowrap"><span class="emojify">🙈</span> <code>:see_no_evil:</code></span>  <span class="nowrap"><span class="emojify">🙉</span> <code>:hear_no_evil:</code></span>  <span class="nowrap"><span class="emojify">🙊</span> <code>:speak_no_evil:</code></span></p>
 <br>
 <p>The <a href="http://www.emoji-cheat-sheet.com/">Emoji cheat sheet</a> is a useful reference for emoji shorthand codes.</p>
 <hr>

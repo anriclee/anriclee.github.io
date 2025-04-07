@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>telegram on ReadByWord</title>
+    <title>Telegram on ReadByWord</title>
     <link>https://anriclee.github.io/tags/telegram/</link>
-    <description>Recent content in telegram on ReadByWord</description>
+    <description>Recent content in Telegram on ReadByWord</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
     <lastBuildDate>Sat, 11 Jun 2022 11:43:42 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/tags/telegram/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Telegram bot 入门实践</title>
@@ -12,29 +13,41 @@
       <pubDate>Sat, 11 Jun 2022 11:43:42 +0800</pubDate>
       
       <guid>https://anriclee.github.io/posts/telegram_bot/</guid>
-      <description>什么是 Bot Bot 的概念在官网的介绍稍微有点繁琐和复杂，详细可以了解官网介绍，
-简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。
-申请 bot 需要找 BotFather（名字起的很形象），具体过程官网说的比较详细，此处不赘言。但是需要强调的一点是，bot 仅仅是你的代理人而已，真正执行你指令的是你自己部署的脚本，如果你不部署自己的脚本，在 bot 中输入指令，是没有任何响应的。
-你、bot和你部署的脚本关系如下:
-脚本 上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。
-接受指令 对于如何让脚本接受指令，官方提供了两种思路：推模式 、拉模式。
-拉模式 这种模式，官方不太推荐。简单而言，就是自己部署一个脚本，不断执行 get 请求，获取自己 bot 的更新信息，就好比一个仆人一直在问你：
-有没有需要我做的？
-有没有需要我做的？
-有没有需要我做的？
-询问的方式也比较简单：
-curl -X GET https://api.telegram.org/bot[token]/getUpdates 这里的 token，就是上面申请 bot 完毕后，得到的 token， 出于脱敏，我使用 [token] 代替，下同。这种方法比较笨拙，轮询的频次太高和太低都不行，而且你在 bot 中发布一条指令后，可能并不能够马上得到执行，会有延迟。
-这种方式的好处是：可以让 bot 启在本地，不需要部署到服务器上，因为 telegram 不知道你的存在，他也不需要知道你的存在。
-推模式 这种方式是官方比较推荐的一种方式，这种类似事件驱动的原理。只有有任务了，才会通知脚本去做。但前提是：在向 bot 发号施令前，需要在 bot 中注册一个 callback url。
-bot 在接受你的指令后，会调用此 url，通知你的脚本，让他执行任务。
-注册方式也比较简单：</description>
+      <description>&lt;h1 id=&#34;什么是-bot&#34;&gt;什么是 Bot&lt;/h1&gt;
+&lt;p&gt;Bot 的概念在官网的介绍稍微有点繁琐和，详细可以了解&lt;a href=&#34;https://core.telegram.org/bots&#34;&gt;官网介绍&lt;/a&gt;，&lt;/p&gt;
+&lt;p&gt;简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。&lt;/p&gt;
+&lt;p&gt;申请 bot 需要找 BotFather（名字起的很形象），具体过程官网说的比较详细，此处不赘言。但是需要强调的一点是，bot 仅仅是你的代理人而已，真正执行你指令的是你自己部署的脚本，如果你不部署自己的脚本，在 bot 中输入指令，是没有任何响应的。&lt;/p&gt;
+&lt;p&gt;你、bot和你部署的脚本关系如下:&lt;/p&gt;
+&lt;p&gt;
+  &lt;img loading=&#34;lazy&#34; src=&#34;https://raw.githubusercontent.com/anriclee/diagramStorage/master/telegram.drawio.png&#34; alt=&#34;&amp;ldquo;你、bot和你部署的脚本&amp;rdquo;&#34;  /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;脚本&#34;&gt;脚本&lt;/h1&gt;
+&lt;p&gt;上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。&lt;/p&gt;
+&lt;h2 id=&#34;接受指令&#34;&gt;接受指令&lt;/h2&gt;
+&lt;p&gt;对于如何让脚本接受指令，官方提供了两种思路：推模式 、拉模式。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;拉模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种模式，官方不太推荐。简单而言，就是自己部署一个脚本，不断执行 get 请求，获取自己 bot 的更新信息，就好比一个仆人一直在问你：&lt;/p&gt;
+&lt;p&gt;有没有需要我做的？&lt;/p&gt;
+&lt;p&gt;有没有需要我做的？&lt;/p&gt;
+&lt;p&gt;有没有需要我做的？&lt;/p&gt;
+&lt;p&gt;询问的方式也比较简单：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl -X GET https://api.telegram.org/bot[token]/getUpdates
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这里的 token，就是上面申请 bot 完毕后，得到的 token， 出于脱敏，我使用 [token] 代替，下同。这种方法比较笨拙，轮询的频次太高和太低都不行，而且你在 bot 中发布一条指令后，可能并不能够马上得到执行，会有延迟。&lt;/p&gt;
+&lt;p&gt;这种方式的好处是：可以让 bot 启在本地，不需要部署到服务器上，因为 telegram 不知道你的存在，他也不需要知道你的存在。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;推模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种方式是官方比较推荐的一种方式，这种类似事件驱动的原理。只有有任务了，才会通知脚本去做。但前提是：在向 bot 发号施令前，需要在 bot 中注册一个 callback url。&lt;/p&gt;
+&lt;p&gt;bot 在接受你的指令后，会调用此 url，通知你的脚本，让他执行任务。&lt;/p&gt;
+&lt;p&gt;注册方式也比较简单：&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h1 id="什么是-bot">什么是 Bot</h1>
-<p>Bot 的概念在官网的介绍稍微有点繁琐和复杂，详细可以了解<a href="https://core.telegram.org/bots">官网介绍</a>，</p>
+<p>Bot 的概念在官网的介绍稍微有点繁琐和，详细可以了解<a href="https://core.telegram.org/bots">官网介绍</a>，</p>
 <p>简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。</p>
 <p>申请 bot 需要找 BotFather（名字起的很形象），具体过程官网说的比较详细，此处不赘言。但是需要强调的一点是，bot 仅仅是你的代理人而已，真正执行你指令的是你自己部署的脚本，如果你不部署自己的脚本，在 bot 中输入指令，是没有任何响应的。</p>
 <p>你、bot和你部署的脚本关系如下:</p>
 <p>
-  <img loading="lazy" src="https://raw.githubusercontent.com/anriclee/diagramStorage/master/telegram.drawio.png" alt="&amp;ldquo;你、bot和你部署的脚本&amp;rdquo;"  /></p>
+  <img loading="lazy" src="https://raw.githubusercontent.com/anriclee/diagramStorage/master/telegram.drawio.png" alt="&ldquo;你、bot和你部署的脚本&rdquo;"  /></p>
 <h1 id="脚本">脚本</h1>
 <p>上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。</p>
 <h2 id="接受指令">接受指令</h2>
@@ -68,8 +81,8 @@ bot 在接受你的指令后，会调用此 url，通知你的脚本，让他执
 </span></span><span class="line"><span class="cl">	<span class="nx">body</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">GetBody</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">bytes</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">io</span><span class="p">.</span><span class="nf">ReadAll</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">msg</span> <span class="o">:=</span> <span class="nb">string</span><span class="p">(</span><span class="nx">bytes</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// ...... 读取到 query 参数和 body 后，可以进行各种逻辑操作
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// ...... 读取到 query 参数和 body 后，可以进行各种逻辑操作</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;result:&#34;</span><span class="o">+</span><span class="nx">content</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>上面的代码使用到了一个<a href="https://github.com/go-telegram-bot-api/telegram-bot-api">开源库</a>，他替我们封装好了api（当然也可以自己按照 telegram 的协议组装消息）。</p>
@@ -93,7 +106,7 @@ bot 在接受你的指令后，会调用此 url，通知你的脚本，让他执
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">   <span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>这是利用了官方提供的重定向的特性，详细可以参考<a href="https://vercel.com/docs/project-configuration#">官网</a></p>
+</span></span></code></pre></div><p>这是利用了官方提供的重定向的特性，详细可以参考<a href="https://vercel.com/docs/project-configuration">官网</a></p>
 <h1 id="reference">reference</h1>
 <p>1.<a href="https://www.marclittlemore.com/serverless-telegram-chatbot-vercel/">Build a serverless Telegram chatbot deployed using Vercel</a></p>
 ]]></content:encoded>

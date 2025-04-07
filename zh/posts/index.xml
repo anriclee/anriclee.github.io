@@ -4,6 +4,7 @@
     <title>文章列表 on PaperModX</title>
     <link>https://anriclee.github.io/zh/posts/</link>
     <description>Recent content in 文章列表 on PaperModX</description>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="https://anriclee.github.io/zh/posts/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language><atom:link href="https://anriclee.github.io/zh/posts/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

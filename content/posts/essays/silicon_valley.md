@@ -10,7 +10,7 @@ The years have been a mix of highs and lows. There were moments when motivation 
 
 But let’s return to the title.
 
-I can’t recall exactly when I first watched The Big Bang Theory. Perhaps seven years ago? What matters is this: every rewatch reignites my passion for technology. It reminds me how cool tech truly is—how it tangibly transforms lives.
+I can’t recall exactly when I first watched *The Silicon Valley*. Perhaps seven years ago? What matters is this: every rewatch reignites my passion for technology. It reminds me how cool tech truly is—how it tangibly transforms lives. The first two seasons are full of humors that only IT workes can get. 
 
 Now, with LLMs (large language models) at our fingertips, curiosity and persistent questioning seem to unlock mastery of almost anything. This excites me. I firmly believe public knowledge is on the brink of a massive leap forward, and the coming revolution is worth anticipating.
 

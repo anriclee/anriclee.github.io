@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="http://localhost:1313/images/favicon.png" />
+<title>[译] Spring IOC 容器 | ReadTinyWord</title>
+<meta name="title" content="[译] Spring IOC 容器" />
+<meta name="description" content="Spring IOC 和 bean 的简介
+本章涵盖了 SpringFramework 中的控制反转原则（Ioc）的实现。IoC 也被称为依赖注入（DI）。它是这样的一种过程，在此期间对象仅通过构造函数参数、工厂方法的参数或者当对象实例被构造后或者通过工厂方法返回时在它上面设置的属性定义自己的依赖（即对象必须合作的其他对象）。
+当容器创建这些 bean 后，再注入这些依赖。
+这个过程本质上与bean 通过使用直接的类构造函数进行直接实例化或者通过类似 Service Locator模式来寻找依赖的位置是相反的（这也是 IoC 名字的由来）。
+org.springframework.beans 和 org.springframework.context 包是 SpringFramework IoC 容器的基石。BeanFactory 接口提供了一种更先进的能够控制人已类型对象的配置机制。ApplicationContext 是 BeanFactory 的子接口。它增加了下面的特性：
+
+与 Spring 的 AOP 特性更容易整合
+消息资源处理（在国际化场景的使用）
+事件发布
+例如用于 Web 应用的 WebApplicationContext 应用层特定的上下文
+
+总而言之，BeanFactory 提供了配置的框架和基本的功能。ApplicationContext 增加了更多的企业特定的功能。ApplicationContext 完全是 BeanFactory 的超集。在本章关于 Spring IoC 容器做专门描述时会用到。想要获取更多的关于使用 ApplicationContext 而非 BeanFactory 的信息，参见介绍 BeanFactory API 的部分。
+在 Spring 中，作为你应用基石同时可以被 Spring IoC 容器所操控的对象就被称之为 bean。bean 就是被 Spring IoC 容器实例化、组装和设置的对象。否则，一个 bean 就是你应用程序中诸多对象中的一个。 Beans 以及他们依赖关系，反映在容器使用的配置元数据中。" />
+<meta name="keywords" content="Spring," />
+
+<link rel="canonical" href="http://localhost:1313/2023/09/%E8%AF%91-spring-ioc-%E5%AE%B9%E5%99%A8/">
+
+
+<meta property="og:url" content="http://localhost:1313/2023/09/%E8%AF%91-spring-ioc-%E5%AE%B9%E5%99%A8/">
+  <meta property="og:site_name" content="ReadTinyWord">
+  <meta property="og:title" content="[译] Spring IOC 容器">
+  <meta property="og:description" content="Spring IOC 和 bean 的简介 本章涵盖了 SpringFramework 中的控制反转原则（Ioc）的实现。IoC 也被称为依赖注入（DI）。它是这样的一种过程，在此期间对象仅通过构造函数参数、工厂方法的参数或者当对象实例被构造后或者通过工厂方法返回时在它上面设置的属性定义自己的依赖（即对象必须合作的其他对象）。
+当容器创建这些 bean 后，再注入这些依赖。
+这个过程本质上与bean 通过使用直接的类构造函数进行直接实例化或者通过类似 Service Locator模式来寻找依赖的位置是相反的（这也是 IoC 名字的由来）。
+org.springframework.beans 和 org.springframework.context 包是 SpringFramework IoC 容器的基石。BeanFactory 接口提供了一种更先进的能够控制人已类型对象的配置机制。ApplicationContext 是 BeanFactory 的子接口。它增加了下面的特性：
+与 Spring 的 AOP 特性更容易整合 消息资源处理（在国际化场景的使用） 事件发布 例如用于 Web 应用的 WebApplicationContext 应用层特定的上下文 总而言之，BeanFactory 提供了配置的框架和基本的功能。ApplicationContext 增加了更多的企业特定的功能。ApplicationContext 完全是 BeanFactory 的超集。在本章关于 Spring IoC 容器做专门描述时会用到。想要获取更多的关于使用 ApplicationContext 而非 BeanFactory 的信息，参见介绍 BeanFactory API 的部分。
+在 Spring 中，作为你应用基石同时可以被 Spring IoC 容器所操控的对象就被称之为 bean。bean 就是被 Spring IoC 容器实例化、组装和设置的对象。否则，一个 bean 就是你应用程序中诸多对象中的一个。 Beans 以及他们依赖关系，反映在容器使用的配置元数据中。">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-09-02T23:12:31+08:00">
+    <meta property="article:modified_time" content="2023-09-02T23:12:31+08:00">
+    <meta property="article:tag" content="Spring">
+    <meta property="og:image" content="http://localhost:1313/images/share.png">
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/share.png">
+  <meta name="twitter:title" content="[译] Spring IOC 容器">
+  <meta name="twitter:description" content="Spring IOC 和 bean 的简介 本章涵盖了 SpringFramework 中的控制反转原则（Ioc）的实现。IoC 也被称为依赖注入（DI）。它是这样的一种过程，在此期间对象仅通过构造函数参数、工厂方法的参数或者当对象实例被构造后或者通过工厂方法返回时在它上面设置的属性定义自己的依赖（即对象必须合作的其他对象）。
+当容器创建这些 bean 后，再注入这些依赖。
+这个过程本质上与bean 通过使用直接的类构造函数进行直接实例化或者通过类似 Service Locator模式来寻找依赖的位置是相反的（这也是 IoC 名字的由来）。
+org.springframework.beans 和 org.springframework.context 包是 SpringFramework IoC 容器的基石。BeanFactory 接口提供了一种更先进的能够控制人已类型对象的配置机制。ApplicationContext 是 BeanFactory 的子接口。它增加了下面的特性：
+与 Spring 的 AOP 特性更容易整合 消息资源处理（在国际化场景的使用） 事件发布 例如用于 Web 应用的 WebApplicationContext 应用层特定的上下文 总而言之，BeanFactory 提供了配置的框架和基本的功能。ApplicationContext 增加了更多的企业特定的功能。ApplicationContext 完全是 BeanFactory 的超集。在本章关于 Spring IoC 容器做专门描述时会用到。想要获取更多的关于使用 ApplicationContext 而非 BeanFactory 的信息，参见介绍 BeanFactory API 的部分。
+在 Spring 中，作为你应用基石同时可以被 Spring IoC 容器所操控的对象就被称之为 bean。bean 就是被 Spring IoC 容器实例化、组装和设置的对象。否则，一个 bean 就是你应用程序中诸多对象中的一个。 Beans 以及他们依赖关系，反映在容器使用的配置元数据中。">
+
+
+
+
+  <meta itemprop="name" content="[译] Spring IOC 容器">
+  <meta itemprop="description" content="Spring IOC 和 bean 的简介 本章涵盖了 SpringFramework 中的控制反转原则（Ioc）的实现。IoC 也被称为依赖注入（DI）。它是这样的一种过程，在此期间对象仅通过构造函数参数、工厂方法的参数或者当对象实例被构造后或者通过工厂方法返回时在它上面设置的属性定义自己的依赖（即对象必须合作的其他对象）。
+当容器创建这些 bean 后，再注入这些依赖。
+这个过程本质上与bean 通过使用直接的类构造函数进行直接实例化或者通过类似 Service Locator模式来寻找依赖的位置是相反的（这也是 IoC 名字的由来）。
+org.springframework.beans 和 org.springframework.context 包是 SpringFramework IoC 容器的基石。BeanFactory 接口提供了一种更先进的能够控制人已类型对象的配置机制。ApplicationContext 是 BeanFactory 的子接口。它增加了下面的特性：
+与 Spring 的 AOP 特性更容易整合 消息资源处理（在国际化场景的使用） 事件发布 例如用于 Web 应用的 WebApplicationContext 应用层特定的上下文 总而言之，BeanFactory 提供了配置的框架和基本的功能。ApplicationContext 增加了更多的企业特定的功能。ApplicationContext 完全是 BeanFactory 的超集。在本章关于 Spring IoC 容器做专门描述时会用到。想要获取更多的关于使用 ApplicationContext 而非 BeanFactory 的信息，参见介绍 BeanFactory API 的部分。
+在 Spring 中，作为你应用基石同时可以被 Spring IoC 容器所操控的对象就被称之为 bean。bean 就是被 Spring IoC 容器实例化、组装和设置的对象。否则，一个 bean 就是你应用程序中诸多对象中的一个。 Beans 以及他们依赖关系，反映在容器使用的配置元数据中。">
+  <meta itemprop="datePublished" content="2023-09-02T23:12:31+08:00">
+  <meta itemprop="dateModified" content="2023-09-02T23:12:31+08:00">
+  <meta itemprop="wordCount" content="72">
+  <meta itemprop="image" content="http://localhost:1313/images/share.png">
+  <meta itemprop="keywords" content="Spring">
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+   
+  :root {
+    --width-max: 720px;
+    --font-primary: Verdana, sans-serif;
+    --font-secondary: monospace;
+    --font-size-primary: 1em;
+    --font-size-secondary: 0.8em;
+    --body-bg-color: #fcfcfc;
+    --bold-text-color: #222;
+    --body-text-color: #444;
+    --link-color: #3273dc;
+    --link-visited-color: #8b6fcb;
+    --table-border-color: #f2f2f2;
+    --table-th-bg-color: #f2f2f2;
+    --img-border-color: #f2f2f2;
+    --code-bg-color: #f2f2f2;
+    --code-text-color: #222;
+    --blockquote-border-color: #666;
+    --blockquote-text-color: #666;
+    --upvoted-color: #FA8072;
+  }
+
+  @media (prefers-color-scheme: dark) {
+     
+    :root {
+      --body-bg-color: #1c1c1c;
+      --bold-text-color: #eee;
+      --body-text-color: #ddd;
+      --link-color: #8cc2dd;
+      --link-visited-color: #c3b1ee;
+      --table-border-color: #999;
+      --table-th-bg-color: #999;
+      --img-border-color: #999;
+      --code-bg-color: #555;
+      --code-text-color: #ddd;
+      --blockquote-border-color: #ccc;
+      --blockquote-text-color: #ccc;
+    }
+  }
+
+  body {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-primary);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width-max);
+    text-align: left;
+    background-color: var(--body-bg-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    color: var(--body-text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong,
+  b {
+    color: var(--bold-text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 16px 0;
+  }
+
+  a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .title {
+    text-decoration: none;
+    border: 0;
+  }
+
+  .title:hover {
+    text-decoration: none;
+  }
+
+  .title span {
+    font-weight: 400;
+  }
+
+  nav a {
+    margin-right: 8px;
+  }
+
+  textarea {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  content {
+    line-height: 1.6;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--table-border-color);
+    border-radius: 4px;
+  }
+
+  th,
+  td {
+    border: 1px solid var(--table-border-color);
+    padding: 4px;
+  }
+
+  th {
+    background-color: var(--table-th-bg-color);
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid var(--img-border-color);
+    border-radius: 4px;
+    content-visibility: auto;
+    loading: lazy;
+  }
+
+  img[src*="#minipic"] {
+    max-width: 50%;
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  i {
+    font-style: normal;
+  }
+
+  time {
+    font-family: var(--font-secondary);
+    font-size: 15px;
+  }
+
+  code {
+    font-family: var(--font-secondary);
+    background-color: var(--code-bg-color);
+    color: var(--code-text-color);
+    padding: 2px;
+    border-radius: 4px;
+  }
+
+  pre code {
+    display: block;
+    padding: 16px;
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+
+  div.highlight pre {
+    border-radius: 4px;
+  }
+
+  div.highlight code {
+    background-color: var(--code-bg-color);
+    color: var(--code-text-color);
+  }
+
+  blockquote {
+    border-left: 2px solid var(--blockquote-border-color);
+    color: var(--blockquote-text-color);
+    margin: 0;
+    padding-left: 16px;
+    font-style: normal;
+  }
+
+  blockquote p {
+    margin: 0;
+  }
+
+  footer {
+    padding: 25px 0;
+    text-align: center;
+    font-size: var(--font-size-secondary);
+  }
+
+  ul li:has(input) {
+    list-style-type: none;
+    margin-left: -25.5px;
+  }
+
+   
+  ul.blog-posts {
+    list-style-type: none;
+    padding: unset;
+  }
+
+  ul.blog-posts li {
+    display: flex;
+  }
+
+  ul.blog-posts li span {
+    flex: 0 0 130px;
+  }
+
+  ul.blog-posts li span.grouped {
+    flex: 0 0 80px;
+  }
+
+  ul.blog-posts li a:visited {
+    color: var(--link-visited-color);
+  }
+
+   
+  div.toc {
+    position: fixed;
+    top: 50%;
+    left: calc((100vw + var(--width-max)) / 2);
+    transform: translateY(-50%);
+    width: calc((90vw - var(--width-max)) / 2);
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px 8px;
+    z-index: 99;
+
+     
+    &::-webkit-scrollbar {
+        display: none;  
+    }
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+  }
+
+  div.toc ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  div.toc ul li {
+    margin: 8px 0;
+  }
+
+  div.toc ul li a {
+    text-decoration: none;
+    color: var(--blockquote-text-color);
+  }
+
+  div.toc ul li a:hover {
+    color: var(--link-color);
+  }
+
+   
+  button.upvote-btn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--body-text-color);
+  }
+
+  button.upvoted {
+    color: var(--upvoted-color);
+  }
+
+  span.upvote-count {
+    margin-top: -4px;
+    font-size: smaller;
+  }
+
+  @media (max-width: 500px) {
+    img[src*="#minipic"] {
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    div.toc {
+      display: none;
+    }
+  }
+</style>
+
+</head>
+
+<body>
+  <header><a href="/" class="title">
+  <h1>ReadTinyWord</h1>
+</a>
+<nav><a href="/">Home</a>
+
+
+</nav>
+</header>
+  <main>
+ 
+
+<content> <h1 id="spring-ioc-和-bean-的简介">Spring IOC 和 bean 的简介</h1>
+<p>本章涵盖了 SpringFramework 中的控制反转原则（Ioc）的实现。IoC 也被称为依赖注入（DI）。它是这样的一种过程，在此期间对象仅通过构造函数参数、工厂方法的参数或者当对象实例被构造后或者通过工厂方法返回时在它上面设置的属性定义自己的依赖（即对象必须合作的其他对象）。</p>
+<p>当容器创建这些 bean 后，再注入这些依赖。</p>
+<p>这个过程本质上与bean 通过使用直接的类构造函数进行直接实例化或者通过类似 Service Locator模式来寻找依赖的位置是相反的（这也是 IoC 名字的由来）。</p>
+<p><code>org.springframework.beans</code> 和 <code>org.springframework.context</code> 包是 SpringFramework IoC 容器的基石。<code>BeanFactory</code> 接口提供了一种更先进的能够控制人已类型对象的配置机制。<code>ApplicationContext</code> 是 <code>BeanFactory</code> 的子接口。它增加了下面的特性：</p>
+<ul>
+<li>与 Spring 的 AOP 特性更容易整合</li>
+<li>消息资源处理（在国际化场景的使用）</li>
+<li>事件发布</li>
+<li>例如用于 Web 应用的 <code>WebApplicationContext</code> 应用层特定的上下文</li>
+</ul>
+<p>总而言之，<code>BeanFactory</code> 提供了配置的框架和基本的功能。<code>ApplicationContext</code> 增加了更多的企业特定的功能。<code>ApplicationContext</code> 完全是 <code>BeanFactory</code> 的超集。在本章关于 Spring IoC 容器做专门描述时会用到。想要获取更多的关于使用 <code>ApplicationContext</code> 而非 <code>BeanFactory</code> 的信息，参见介绍 <a href="https://docs.spring.io/spring-framework/reference/core/beans/beanfactory.html">BeanFactory</a> API 的部分。</p>
+<p>在 Spring 中，作为你应用基石同时可以被 Spring IoC 容器所操控的对象就被称之为 bean。bean 就是被 Spring IoC 容器实例化、组装和设置的对象。否则，一个 bean 就是你应用程序中诸多对象中的一个。 Beans 以及他们依赖关系，反映在容器使用的配置元数据中。</p>
+ </content>
+
+<p>
+  
+  <a href="http://localhost:1313/posts/tags/">#Spring</a>
+  
+</p>
+
+
+
+
+
+
+ 
+<div class="toc">
+<nav id="TableOfContents"></nav>
+</div>
+
+
+
+  </main>
+  <footer>
+
+
+Subscribe via <a href="/index.xml">RSS</a> or just <a href="mailto:anriclee@gmail.com">say hello</a>.
+<br />
+
+
+
+
+
+
+
+
+Made with
+<a href="https://github.com/rokcso/hugo-bearblog-neo/">Hugo Bear Neo</a>.
+<br />
+
+
+
+
+Copyright © 2024-2025, Rokcso.
+
+
+🗺️ <a href="/sitemap.xml">Sitemap</a>.
+
+</footer>
+
+    
+
+
+</body>
+
+</html>

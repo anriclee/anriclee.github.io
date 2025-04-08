@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IO on ReadTinyWord</title>
+    <link>http://localhost:1313/blog/io/</link>
+    <description>Recent content in IO on ReadTinyWord</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    
+      <managingEditor>anriclee@gmail.com (anriclee)</managingEditor>
+    
+    
+      <webMaster>anriclee@gmail.com (anriclee)</webMaster>
+    
+    
+    <copyright>Copyright © 2024-2025, Rokcso.</copyright>
+    
+    
+    <lastBuildDate>Tue, 05 Jul 2022 08:21:58 +0800</lastBuildDate>
+    
+    
+    <follow_challenge>
+        <feedId>00000000000000000</feedId>
+        <userId>00000000000000000</userId>
+    </follow_challenge>
+    
+    <atom:link href="http://localhost:1313/blog/io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>当我们在谈IO多路复用我们在谈论什么系列之 SELECT</title>
+      <link>http://localhost:1313/posts/io_multiplex/</link>
+      <pubDate>Tue, 05 Jul 2022 08:21:58 +0800</pubDate><author>anriclee@gmail.com (anriclee)</author>
+      <guid>http://localhost:1313/posts/io_multiplex/</guid>
+      <description>&lt;h1 id=&#34;0x00-多路复用是什么&#34;&gt;0x00 多路复用是什么&lt;/h1&gt;&#xA;&lt;h1 id=&#34;0x01-select-官方定义&#34;&gt;0x01 select 官方定义&lt;/h1&gt;&#xA;&lt;h1 id=&#34;0x02&#34;&gt;0x02&lt;/h1&gt;&#xA;&lt;p&gt;视频清晰易懂地介绍了 IO 多路复用中的 select。&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=Y5PiHboUctw&#34;&gt;https://www.youtube.com/watch?v=Y5PiHboUctw&lt;/a&gt;&lt;/p&gt;&#xA;</description>
+    </item>
+  </channel>
+</rss>

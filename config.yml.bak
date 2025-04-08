@@ -1,7 +1,7 @@
 baseURL: "https://anriclee.github.io"
 title: ReadByWord
 pagination.pagerSize: 5
-theme: hugo-PaperModX
+theme: "rusty-typewriter"
 
 enableInlineShortcodes: true
 enableRobotsTXT: true

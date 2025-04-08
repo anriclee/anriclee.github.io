@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>关于技术知识点的战术和战略问题 - LoveIt</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:url" content="http://localhost:1313/tech/">
+  <meta property="og:site_name" content="LoveIt">
+  <meta property="og:title" content="关于技术知识点的战术和战略问题">
+  <meta property="og:description" content="最近有计划做一个系列的技术分享，当然前提是自己需要了解很多东西，去查很多资料。
+平时也看了很多技术分享视频，坦白说，能带给我收获和启发的寥寥。所以，国内的工程师（对，我希望大家都能称为工程师，而不是码农或者程序员）查资料，能看国外的就不会看国内的。
+国内的技术，并不是一定落后于国外很多，但是为什么我们很难有高质量的技术文章出来呢？这可能和我们从小的教育模式有关。
+国内的技术人做的分享，干货最多的，我推左耳朵耗子。前段时间听说他走了的消息，我还一度很悲伤。我的很多技术观念的转变，对于技术人的看法，都是从他的文章受到的启发。他的文章总能带给你不一样的启发，总是能够做到 干货满满。可惜，这么一位我认为纯粹的技术人，就这么走了。健康果然永远是第一位的。不知怎么，我总感觉从这几年开始，一切精致的、理想主义的好的东西，都逐渐在远离我们。
+对于在探探的三年，我学到的技术方面比较硬核的东西不算多，但是，在这段经历中，我受到的一个最大的启发就是，如何去思考技术（这是一位96年的同事带给我的启发）。当今的技术新名词、概念、框架、编程语言等等，层出不穷， 大家都在感叹，要学的东西太多了，自己学不动了。
+出现这种情况的原因，就在于我们永远是被动的接受知识。
+出现一个新的东西，我们总在亦步亦趋地跟学，而很少去主动思考，为什么出现这个东西，这个东西的出现能够解决什么问题？比如最近 Java 21 版本发布，有一个史诗级的更新就是 Java 协程。我们如果不去想，Java 到底出现什么瓶颈 为什么要引入协程的概念，当时设计语言的时候为什么不考虑协程，或者为什么现在才引入，引入后对原来的语言架构有什么破坏性影响等等问题。这些问题没有考虑清楚，就一头扎到协程的实现细节中，我们必然会疲于奔命。
+个人以为学一个新技术需要从以下步骤入手：
+一、搞清楚解决的问题。
+先把这个技术点的前世今生搞清楚，如果这个技术点的引入，只是为了炫技，只是为了蹭热点，那我宁可不学，吾生也有涯，要学的东西实在太多，我才没有必要为此浪费时间呢！而这一层分析，是好多技术文章或者技术视频里面 缺乏的。
+二、如何解决
+搞清楚要解决的现实痛点之后，接着就是要想如果是我们遇到了这个问题，我们该怎么办，它又是怎么做得？这一点可能比第一点更重要。思考这一点的好处多多。
+首先，它能够帮你对这个技术点有个宏观的把握，之后研究这个技术点的时候，你永远有一个明确地导向，你不再会被里面天花乱坠的细节所误导和迷惑。 这就跟交朋友一样，你知道这个人所处的立场后，无论这个人怎么对你施加糖衣炮弹，你都不会为其所展现的表象所迷惑。你永远能够认清楚这个人的本质。用老毛的话来说，就是抓住事务的主要矛盾，透过现象看本质。
+其次，如果我们冥思苦想也想不出更好的方案，然后看人家的实现，觉得既优雅，又简单，这个时候，你就会被它的设计所吸引。你的技术水平便会在无形中有所提高。下次你遇到类似的问题，或者别的问题时，你就会将此想法从此处迁移到彼处。 这就好比写文章一样，给到一个命题，我们自己写一篇，然后再看人家是怎么写的。二者一对比，高下立判。他和你实现的肯定有不同的地方，那么这些不同的地方，不外乎三种情形：
+它不如你 这个时候一定不能傲慢，认为它这样做，就一定不如你。需要慎重考虑为什么这里出现一个表面看起来很明显的不太好的设计（这种情况，往往是因为一些历史原因或者有其特殊的需求背景）。
+如果反复考虑之后，确实没有想出来更好的理由，那么你就可以理解你的设计比他的要高明（它的设计，并不一定都是最优方案，所谓战略上藐视，战术上重视），可以小小地得意一下。
+你不如它 这个时候，你要暗自欣喜，因为你挖到矿了。这个技术点，没有白花时间研究。这就好比，你跟高手过招后，学到了几招新的武功，这是能够提升你的战力的。
+殊途同归 你们的实现方案，各有利弊，各有其明显的缺点或者优点。
+情形 2 和情形 3，都能在很大程度上拓宽你的视野，让你的技术品味升级。
+最后，当前的技术点可能和你的工作没有太直接的关系（比如研究操作系统内核和写业务CRUD），但是里面的一些精髓的设计理念，其实完全可以迁移到业务中去（比如缓存、异步）。操作系统在有些时候，是追求极致的准确和性能的，这一点要求是比 99% 的业务高的。
+三、总结和梳理
+在前两步完成之后，基本上你对这个技术点，算是完全吃透了。这个时候别忘记及时梳理和总结，梳理过后的才会有条理的放在你的技能仓库中，不至遗忘或者记忆错乱。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-09-24T10:07:48+08:00">
+    <meta property="article:modified_time" content="2023-10-08T21:37:13+08:00">
+    <meta property="article:tag" content="煮酒闲聊">
+    <meta property="og:image" content="http://localhost:1313/logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/logo.png">
+  <meta name="twitter:title" content="关于技术知识点的战术和战略问题">
+  <meta name="twitter:description" content="最近有计划做一个系列的技术分享，当然前提是自己需要了解很多东西，去查很多资料。
+平时也看了很多技术分享视频，坦白说，能带给我收获和启发的寥寥。所以，国内的工程师（对，我希望大家都能称为工程师，而不是码农或者程序员）查资料，能看国外的就不会看国内的。
+国内的技术，并不是一定落后于国外很多，但是为什么我们很难有高质量的技术文章出来呢？这可能和我们从小的教育模式有关。
+国内的技术人做的分享，干货最多的，我推左耳朵耗子。前段时间听说他走了的消息，我还一度很悲伤。我的很多技术观念的转变，对于技术人的看法，都是从他的文章受到的启发。他的文章总能带给你不一样的启发，总是能够做到 干货满满。可惜，这么一位我认为纯粹的技术人，就这么走了。健康果然永远是第一位的。不知怎么，我总感觉从这几年开始，一切精致的、理想主义的好的东西，都逐渐在远离我们。
+对于在探探的三年，我学到的技术方面比较硬核的东西不算多，但是，在这段经历中，我受到的一个最大的启发就是，如何去思考技术（这是一位96年的同事带给我的启发）。当今的技术新名词、概念、框架、编程语言等等，层出不穷， 大家都在感叹，要学的东西太多了，自己学不动了。
+出现这种情况的原因，就在于我们永远是被动的接受知识。
+出现一个新的东西，我们总在亦步亦趋地跟学，而很少去主动思考，为什么出现这个东西，这个东西的出现能够解决什么问题？比如最近 Java 21 版本发布，有一个史诗级的更新就是 Java 协程。我们如果不去想，Java 到底出现什么瓶颈 为什么要引入协程的概念，当时设计语言的时候为什么不考虑协程，或者为什么现在才引入，引入后对原来的语言架构有什么破坏性影响等等问题。这些问题没有考虑清楚，就一头扎到协程的实现细节中，我们必然会疲于奔命。
+个人以为学一个新技术需要从以下步骤入手：
+一、搞清楚解决的问题。
+先把这个技术点的前世今生搞清楚，如果这个技术点的引入，只是为了炫技，只是为了蹭热点，那我宁可不学，吾生也有涯，要学的东西实在太多，我才没有必要为此浪费时间呢！而这一层分析，是好多技术文章或者技术视频里面 缺乏的。
+二、如何解决
+搞清楚要解决的现实痛点之后，接着就是要想如果是我们遇到了这个问题，我们该怎么办，它又是怎么做得？这一点可能比第一点更重要。思考这一点的好处多多。
+首先，它能够帮你对这个技术点有个宏观的把握，之后研究这个技术点的时候，你永远有一个明确地导向，你不再会被里面天花乱坠的细节所误导和迷惑。 这就跟交朋友一样，你知道这个人所处的立场后，无论这个人怎么对你施加糖衣炮弹，你都不会为其所展现的表象所迷惑。你永远能够认清楚这个人的本质。用老毛的话来说，就是抓住事务的主要矛盾，透过现象看本质。
+其次，如果我们冥思苦想也想不出更好的方案，然后看人家的实现，觉得既优雅，又简单，这个时候，你就会被它的设计所吸引。你的技术水平便会在无形中有所提高。下次你遇到类似的问题，或者别的问题时，你就会将此想法从此处迁移到彼处。 这就好比写文章一样，给到一个命题，我们自己写一篇，然后再看人家是怎么写的。二者一对比，高下立判。他和你实现的肯定有不同的地方，那么这些不同的地方，不外乎三种情形：
+它不如你 这个时候一定不能傲慢，认为它这样做，就一定不如你。需要慎重考虑为什么这里出现一个表面看起来很明显的不太好的设计（这种情况，往往是因为一些历史原因或者有其特殊的需求背景）。
+如果反复考虑之后，确实没有想出来更好的理由，那么你就可以理解你的设计比他的要高明（它的设计，并不一定都是最优方案，所谓战略上藐视，战术上重视），可以小小地得意一下。
+你不如它 这个时候，你要暗自欣喜，因为你挖到矿了。这个技术点，没有白花时间研究。这就好比，你跟高手过招后，学到了几招新的武功，这是能够提升你的战力的。
+殊途同归 你们的实现方案，各有利弊，各有其明显的缺点或者优点。
+情形 2 和情形 3，都能在很大程度上拓宽你的视野，让你的技术品味升级。
+最后，当前的技术点可能和你的工作没有太直接的关系（比如研究操作系统内核和写业务CRUD），但是里面的一些精髓的设计理念，其实完全可以迁移到业务中去（比如缓存、异步）。操作系统在有些时候，是追求极致的准确和性能的，这一点要求是比 99% 的业务高的。
+三、总结和梳理
+在前两步完成之后，基本上你对这个技术点，算是完全吃透了。这个时候别忘记及时梳理和总结，梳理过后的才会有条理的放在你的技能仓库中，不至遗忘或者记忆错乱。">
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/tech/" /><link rel="prev" href="http://localhost:1313/dependencies_configuration_in_detail/" /><link rel="next" href="http://localhost:1313/jobs/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "关于技术知识点的战术和战略问题",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/tech\/"
+        },"image": ["http:\/\/localhost:1313\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "煮酒闲聊","wordcount":  42 ,
+        "url": "http:\/\/localhost:1313\/tech\/","datePublished": "2023-09-24T10:07:48+08:00","dateModified": "2023-10-08T21:37:13+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "anriclee","logo": "http:\/\/localhost:1313\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "anriclee"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="LoveIt"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/categories/documentation/"> Docs </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/dillonzq/LoveIt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/tech/" selected>English</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="LoveIt"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw' aria-hidden='true'></i></span>LoveIt</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/categories/documentation/" title="">Docs</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/dillonzq/LoveIt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/tech/" selected>English</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">关于技术知识点的战术和战略问题</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>anriclee</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-24">2023-09-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;42 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>最近有计划做一个系列的技术分享，当然前提是自己需要了解很多东西，去查很多资料。</p>
+<p>平时也看了很多技术分享视频，坦白说，能带给我收获和启发的寥寥。所以，国内的工程师（对，我希望大家都能称为工程师，而不是码农或者程序员）查资料，能看国外的就不会看国内的。</p>
+<p>国内的技术，并不是一定落后于国外很多，但是为什么我们很难有高质量的技术文章出来呢？这可能和我们从小的教育模式有关。</p>
+<p>国内的技术人做的分享，干货最多的，我推左耳朵耗子。前段时间听说他走了的消息，我还一度很悲伤。我的很多技术观念的转变，对于技术人的看法，都是从他的文章受到的启发。他的文章总能带给你不一样的启发，总是能够做到
+干货满满。可惜，这么一位我认为纯粹的技术人，就这么走了。健康果然永远是第一位的。不知怎么，我总感觉从这几年开始，一切精致的、理想主义的好的东西，都逐渐在远离我们。</p>
+<p>对于在探探的三年，我学到的技术方面比较硬核的东西不算多，但是，在这段经历中，我受到的一个最大的启发就是，如何去思考技术（这是一位96年的同事带给我的启发）。当今的技术新名词、概念、框架、编程语言等等，层出不穷，
+大家都在感叹，要学的东西太多了，自己学不动了。</p>
+<p>出现这种情况的原因，就在于我们永远是被动的接受知识。</p>
+<p>出现一个新的东西，我们总在亦步亦趋地跟学，而很少去主动思考，为什么出现这个东西，这个东西的出现能够解决什么问题？比如最近 Java 21 版本发布，有一个史诗级的更新就是 Java 协程。我们如果不去想，Java 到底出现什么瓶颈
+为什么要引入协程的概念，当时设计语言的时候为什么不考虑协程，或者为什么现在才引入，引入后对原来的语言架构有什么破坏性影响等等问题。这些问题没有考虑清楚，就一头扎到协程的实现细节中，我们必然会疲于奔命。</p>
+<p>个人以为学一个新技术需要从以下步骤入手：</p>
+<p>一、搞清楚解决的问题。</p>
+<p>先把这个技术点的前世今生搞清楚，如果这个技术点的引入，只是为了炫技，只是为了蹭热点，那我宁可不学，吾生也有涯，要学的东西实在太多，我才没有必要为此浪费时间呢！而这一层分析，是好多技术文章或者技术视频里面
+缺乏的。</p>
+<p>二、如何解决</p>
+<p>搞清楚要解决的现实痛点之后，接着就是要想如果是我们遇到了这个问题，我们该怎么办，它又是怎么做得？这一点可能比第一点更重要。思考这一点的好处多多。</p>
+<p>首先，它能够帮你对这个技术点有个宏观的把握，之后研究这个技术点的时候，你永远有一个明确地导向，你不再会被里面天花乱坠的细节所误导和迷惑。
+这就跟交朋友一样，你知道这个人所处的立场后，无论这个人怎么对你施加糖衣炮弹，你都不会为其所展现的表象所迷惑。你永远能够认清楚这个人的本质。用老毛的话来说，就是抓住事务的主要矛盾，透过现象看本质。</p>
+<p>其次，如果我们冥思苦想也想不出更好的方案，然后看人家的实现，觉得既优雅，又简单，这个时候，你就会被它的设计所吸引。你的技术水平便会在无形中有所提高。下次你遇到类似的问题，或者别的问题时，你就会将此想法从此处迁移到彼处。
+这就好比写文章一样，给到一个命题，我们自己写一篇，然后再看人家是怎么写的。二者一对比，高下立判。他和你实现的肯定有不同的地方，那么这些不同的地方，不外乎三种情形：</p>
+<ol>
+<li>它不如你</li>
+</ol>
+<p>这个时候一定不能傲慢，认为它这样做，就一定不如你。需要慎重考虑为什么这里出现一个表面看起来很明显的不太好的设计（这种情况，往往是因为一些历史原因或者有其特殊的需求背景）。</p>
+<p>如果反复考虑之后，确实没有想出来更好的理由，那么你就可以理解你的设计比他的要高明（它的设计，并不一定都是最优方案，所谓战略上藐视，战术上重视），可以小小地得意一下。</p>
+<ol>
+<li>你不如它</li>
+</ol>
+<p>这个时候，你要暗自欣喜，因为你挖到矿了。这个技术点，没有白花时间研究。这就好比，你跟高手过招后，学到了几招新的武功，这是能够提升你的战力的。</p>
+<ol start="3">
+<li>殊途同归</li>
+</ol>
+<p>你们的实现方案，各有利弊，各有其明显的缺点或者优点。</p>
+<p>情形 2 和情形 3，都能在很大程度上拓宽你的视野，让你的技术品味升级。</p>
+<p>最后，当前的技术点可能和你的工作没有太直接的关系（比如研究操作系统内核和写业务CRUD），但是里面的一些精髓的设计理念，其实完全可以迁移到业务中去（比如缓存、异步）。操作系统在有些时候，是追求极致的准确和性能的，这一点要求是比 99% 的业务高的。</p>
+<p>三、总结和梳理</p>
+<p>在前两步完成之后，基本上你对这个技术点，算是完全吃透了。这个时候别忘记及时梳理和总结，梳理过后的才会有条理的放在你的技能仓库中，不至遗忘或者记忆错乱。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-10-08&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/a04bfae9f52d3eeb50b9a3d303f9a0fc76ebb042" target="_blank" title="commit by anriclee(anriclee@gmail.com) a04bfae9f52d3eeb50b9a3d303f9a0fc76ebb042: sanguo">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a04bfae</a></span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/tech/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on X" data-sharer="x" data-url="http://localhost:1313/tech/" data-title="关于技术知识点的战术和战略问题" data-via="xxxx" data-hashtags="煮酒闲聊"><i class="fab fa-x-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Threads" data-sharer="threads" data-url="http://localhost:1313/tech/" data-title="关于技术知识点的战术和战略问题"><i class="fab fa-threads fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/tech/" data-hashtag="煮酒闲聊"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://localhost:1313/tech/" data-title="关于技术知识点的战术和战略问题"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://localhost:1313/tech/" data-title="关于技术知识点的战术和战略问题"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/tech/" data-title="关于技术知识点的战术和战略问题"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Diaspora" data-sharer="diaspora" data-url="http://localhost:1313/tech/" data-title="关于技术知识点的战术和战略问题" data-description=""><i class="fab fa-diaspora fa-fw" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=http%3a%2f%2flocalhost%3a1313%2ftech%2f&amp;text=%e5%85%b3%e4%ba%8e%e6%8a%80%e6%9c%af%e7%9f%a5%e8%af%86%e7%82%b9%e7%9a%84%e6%88%98%e6%9c%af%e5%92%8c%e6%88%98%e7%95%a5%e9%97%ae%e9%a2%98" target="_blank" title="Share on Telegram"><i class="fab fa-telegram fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/">煮酒闲聊</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/dependencies_configuration_in_detail/" class="prev" rel="prev" title="[译] 细谈依赖和配置"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>[译] 细谈依赖和配置</a>
+            <a href="/jobs/" class="next" rel="next" title="乔布斯传">乔布斯传<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.3.1-DEV"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">anriclee</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden"><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script src="/lib/autocomplete/autocomplete.min.js"></script><script src="/lib/algoliasearch/lite/browser.umd.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"search":{"algoliaAppID":"4D1IDY8JU6","algoliaIndex":"index","algoliaSearchKey":"05332ac5ed76655a511f0da583a9afac","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"}};</script><script src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="http://localhost:1313/images/favicon.png" />
+<title>Telegram bot 入门实践 | ReadTinyWord</title>
+<meta name="title" content="Telegram bot 入门实践" />
+<meta name="description" content="什么是 Bot
+Bot 的概念在官网的介绍稍微有点繁琐和，详细可以了解官网介绍，
+简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。
+申请 bot 需要找 BotFather（名字起的很形象），具体过程官网说的比较详细，此处不赘言。但是需要强调的一点是，bot 仅仅是你的代理人而已，真正执行你指令的是你自己部署的脚本，如果你不部署自己的脚本，在 bot 中输入指令，是没有任何响应的。
+你、bot和你部署的脚本关系如下:
+
+脚本
+上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。
+接受指令
+对于如何让脚本接受指令，官方提供了两种思路：推模式 、拉模式。
+
+拉模式
+
+这种模式，官方不太推荐。简单而言，就是自己部署一个脚本，不断执行 get 请求，获取自己 bot 的更新信息，就好比一个仆人一直在问你：
+有没有需要我做的？
+有没有需要我做的？
+有没有需要我做的？
+询问的方式也比较简单：
+curl -X GET https://api.telegram.org/bot[token]/getUpdates
+这里的 token，就是上面申请 bot 完毕后，得到的 token， 出于脱敏，我使用 [token] 代替，下同。这种方法比较笨拙，轮询的频次太高和太低都不行，而且你在 bot 中发布一条指令后，可能并不能够马上得到执行，会有延迟。
+这种方式的好处是：可以让 bot 启在本地，不需要部署到服务器上，因为 telegram 不知道你的存在，他也不需要知道你的存在。
+
+推模式
+
+这种方式是官方比较推荐的一种方式，这种类似事件驱动的原理。只有有任务了，才会通知脚本去做。但前提是：在向 bot 发号施令前，需要在 bot 中注册一个 callback url。
+bot 在接受你的指令后，会调用此 url，通知你的脚本，让他执行任务。
+注册方式也比较简单：" />
+<meta name="keywords" content="telegram," />
+
+<link rel="canonical" href="http://localhost:1313/2022/06/telegram-bot-%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/">
+
+
+<meta property="og:url" content="http://localhost:1313/2022/06/telegram-bot-%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/">
+  <meta property="og:site_name" content="ReadTinyWord">
+  <meta property="og:title" content="Telegram bot 入门实践">
+  <meta property="og:description" content="什么是 Bot Bot 的概念在官网的介绍稍微有点繁琐和，详细可以了解官网介绍，
+简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。
+申请 bot 需要找 BotFather（名字起的很形象），具体过程官网说的比较详细，此处不赘言。但是需要强调的一点是，bot 仅仅是你的代理人而已，真正执行你指令的是你自己部署的脚本，如果你不部署自己的脚本，在 bot 中输入指令，是没有任何响应的。
+你、bot和你部署的脚本关系如下:
+脚本 上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。
+接受指令 对于如何让脚本接受指令，官方提供了两种思路：推模式 、拉模式。
+拉模式 这种模式，官方不太推荐。简单而言，就是自己部署一个脚本，不断执行 get 请求，获取自己 bot 的更新信息，就好比一个仆人一直在问你：
+有没有需要我做的？
+有没有需要我做的？
+有没有需要我做的？
+询问的方式也比较简单：
+curl -X GET https://api.telegram.org/bot[token]/getUpdates 这里的 token，就是上面申请 bot 完毕后，得到的 token， 出于脱敏，我使用 [token] 代替，下同。这种方法比较笨拙，轮询的频次太高和太低都不行，而且你在 bot 中发布一条指令后，可能并不能够马上得到执行，会有延迟。
+这种方式的好处是：可以让 bot 启在本地，不需要部署到服务器上，因为 telegram 不知道你的存在，他也不需要知道你的存在。
+推模式 这种方式是官方比较推荐的一种方式，这种类似事件驱动的原理。只有有任务了，才会通知脚本去做。但前提是：在向 bot 发号施令前，需要在 bot 中注册一个 callback url。
+bot 在接受你的指令后，会调用此 url，通知你的脚本，让他执行任务。
+注册方式也比较简单：">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-06-11T11:43:42+08:00">
+    <meta property="article:modified_time" content="2022-06-11T11:43:42+08:00">
+    <meta property="article:tag" content="Telegram">
+    <meta property="og:image" content="http://localhost:1313/images/share.png">
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/share.png">
+  <meta name="twitter:title" content="Telegram bot 入门实践">
+  <meta name="twitter:description" content="什么是 Bot Bot 的概念在官网的介绍稍微有点繁琐和，详细可以了解官网介绍，
+简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。
+申请 bot 需要找 BotFather（名字起的很形象），具体过程官网说的比较详细，此处不赘言。但是需要强调的一点是，bot 仅仅是你的代理人而已，真正执行你指令的是你自己部署的脚本，如果你不部署自己的脚本，在 bot 中输入指令，是没有任何响应的。
+你、bot和你部署的脚本关系如下:
+脚本 上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。
+接受指令 对于如何让脚本接受指令，官方提供了两种思路：推模式 、拉模式。
+拉模式 这种模式，官方不太推荐。简单而言，就是自己部署一个脚本，不断执行 get 请求，获取自己 bot 的更新信息，就好比一个仆人一直在问你：
+有没有需要我做的？
+有没有需要我做的？
+有没有需要我做的？
+询问的方式也比较简单：
+curl -X GET https://api.telegram.org/bot[token]/getUpdates 这里的 token，就是上面申请 bot 完毕后，得到的 token， 出于脱敏，我使用 [token] 代替，下同。这种方法比较笨拙，轮询的频次太高和太低都不行，而且你在 bot 中发布一条指令后，可能并不能够马上得到执行，会有延迟。
+这种方式的好处是：可以让 bot 启在本地，不需要部署到服务器上，因为 telegram 不知道你的存在，他也不需要知道你的存在。
+推模式 这种方式是官方比较推荐的一种方式，这种类似事件驱动的原理。只有有任务了，才会通知脚本去做。但前提是：在向 bot 发号施令前，需要在 bot 中注册一个 callback url。
+bot 在接受你的指令后，会调用此 url，通知你的脚本，让他执行任务。
+注册方式也比较简单：">
+
+
+
+
+  <meta itemprop="name" content="Telegram bot 入门实践">
+  <meta itemprop="description" content="什么是 Bot Bot 的概念在官网的介绍稍微有点繁琐和，详细可以了解官网介绍，
+简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。
+申请 bot 需要找 BotFather（名字起的很形象），具体过程官网说的比较详细，此处不赘言。但是需要强调的一点是，bot 仅仅是你的代理人而已，真正执行你指令的是你自己部署的脚本，如果你不部署自己的脚本，在 bot 中输入指令，是没有任何响应的。
+你、bot和你部署的脚本关系如下:
+脚本 上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。
+接受指令 对于如何让脚本接受指令，官方提供了两种思路：推模式 、拉模式。
+拉模式 这种模式，官方不太推荐。简单而言，就是自己部署一个脚本，不断执行 get 请求，获取自己 bot 的更新信息，就好比一个仆人一直在问你：
+有没有需要我做的？
+有没有需要我做的？
+有没有需要我做的？
+询问的方式也比较简单：
+curl -X GET https://api.telegram.org/bot[token]/getUpdates 这里的 token，就是上面申请 bot 完毕后，得到的 token， 出于脱敏，我使用 [token] 代替，下同。这种方法比较笨拙，轮询的频次太高和太低都不行，而且你在 bot 中发布一条指令后，可能并不能够马上得到执行，会有延迟。
+这种方式的好处是：可以让 bot 启在本地，不需要部署到服务器上，因为 telegram 不知道你的存在，他也不需要知道你的存在。
+推模式 这种方式是官方比较推荐的一种方式，这种类似事件驱动的原理。只有有任务了，才会通知脚本去做。但前提是：在向 bot 发号施令前，需要在 bot 中注册一个 callback url。
+bot 在接受你的指令后，会调用此 url，通知你的脚本，让他执行任务。
+注册方式也比较简单：">
+  <meta itemprop="datePublished" content="2022-06-11T11:43:42+08:00">
+  <meta itemprop="dateModified" content="2022-06-11T11:43:42+08:00">
+  <meta itemprop="wordCount" content="216">
+  <meta itemprop="image" content="http://localhost:1313/images/share.png">
+  <meta itemprop="keywords" content="Telegram">
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+   
+  :root {
+    --width-max: 720px;
+    --font-primary: Verdana, sans-serif;
+    --font-secondary: monospace;
+    --font-size-primary: 1em;
+    --font-size-secondary: 0.8em;
+    --body-bg-color: #fcfcfc;
+    --bold-text-color: #222;
+    --body-text-color: #444;
+    --link-color: #3273dc;
+    --link-visited-color: #8b6fcb;
+    --table-border-color: #f2f2f2;
+    --table-th-bg-color: #f2f2f2;
+    --img-border-color: #f2f2f2;
+    --code-bg-color: #f2f2f2;
+    --code-text-color: #222;
+    --blockquote-border-color: #666;
+    --blockquote-text-color: #666;
+    --upvoted-color: #FA8072;
+  }
+
+  @media (prefers-color-scheme: dark) {
+     
+    :root {
+      --body-bg-color: #1c1c1c;
+      --bold-text-color: #eee;
+      --body-text-color: #ddd;
+      --link-color: #8cc2dd;
+      --link-visited-color: #c3b1ee;
+      --table-border-color: #999;
+      --table-th-bg-color: #999;
+      --img-border-color: #999;
+      --code-bg-color: #555;
+      --code-text-color: #ddd;
+      --blockquote-border-color: #ccc;
+      --blockquote-text-color: #ccc;
+    }
+  }
+
+  body {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-primary);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width-max);
+    text-align: left;
+    background-color: var(--body-bg-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    color: var(--body-text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong,
+  b {
+    color: var(--bold-text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 16px 0;
+  }
+
+  a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .title {
+    text-decoration: none;
+    border: 0;
+  }
+
+  .title:hover {
+    text-decoration: none;
+  }
+
+  .title span {
+    font-weight: 400;
+  }
+
+  nav a {
+    margin-right: 8px;
+  }
+
+  textarea {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  content {
+    line-height: 1.6;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--table-border-color);
+    border-radius: 4px;
+  }
+
+  th,
+  td {
+    border: 1px solid var(--table-border-color);
+    padding: 4px;
+  }
+
+  th {
+    background-color: var(--table-th-bg-color);
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid var(--img-border-color);
+    border-radius: 4px;
+    content-visibility: auto;
+    loading: lazy;
+  }
+
+  img[src*="#minipic"] {
+    max-width: 50%;
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  i {
+    font-style: normal;
+  }
+
+  time {
+    font-family: var(--font-secondary);
+    font-size: 15px;
+  }
+
+  code {
+    font-family: var(--font-secondary);
+    background-color: var(--code-bg-color);
+    color: var(--code-text-color);
+    padding: 2px;
+    border-radius: 4px;
+  }
+
+  pre code {
+    display: block;
+    padding: 16px;
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+
+  div.highlight pre {
+    border-radius: 4px;
+  }
+
+  div.highlight code {
+    background-color: var(--code-bg-color);
+    color: var(--code-text-color);
+  }
+
+  blockquote {
+    border-left: 2px solid var(--blockquote-border-color);
+    color: var(--blockquote-text-color);
+    margin: 0;
+    padding-left: 16px;
+    font-style: normal;
+  }
+
+  blockquote p {
+    margin: 0;
+  }
+
+  footer {
+    padding: 25px 0;
+    text-align: center;
+    font-size: var(--font-size-secondary);
+  }
+
+  ul li:has(input) {
+    list-style-type: none;
+    margin-left: -25.5px;
+  }
+
+   
+  ul.blog-posts {
+    list-style-type: none;
+    padding: unset;
+  }
+
+  ul.blog-posts li {
+    display: flex;
+  }
+
+  ul.blog-posts li span {
+    flex: 0 0 130px;
+  }
+
+  ul.blog-posts li span.grouped {
+    flex: 0 0 80px;
+  }
+
+  ul.blog-posts li a:visited {
+    color: var(--link-visited-color);
+  }
+
+   
+  div.toc {
+    position: fixed;
+    top: 50%;
+    left: calc((100vw + var(--width-max)) / 2);
+    transform: translateY(-50%);
+    width: calc((90vw - var(--width-max)) / 2);
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px 8px;
+    z-index: 99;
+
+     
+    &::-webkit-scrollbar {
+        display: none;  
+    }
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+  }
+
+  div.toc ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  div.toc ul li {
+    margin: 8px 0;
+  }
+
+  div.toc ul li a {
+    text-decoration: none;
+    color: var(--blockquote-text-color);
+  }
+
+  div.toc ul li a:hover {
+    color: var(--link-color);
+  }
+
+   
+  button.upvote-btn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--body-text-color);
+  }
+
+  button.upvoted {
+    color: var(--upvoted-color);
+  }
+
+  span.upvote-count {
+    margin-top: -4px;
+    font-size: smaller;
+  }
+
+  @media (max-width: 500px) {
+    img[src*="#minipic"] {
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    div.toc {
+      display: none;
+    }
+  }
+</style>
+
+</head>
+
+<body>
+  <header><a href="/" class="title">
+  <h1>ReadTinyWord</h1>
+</a>
+<nav><a href="/">Home</a>
+
+
+</nav>
+</header>
+  <main>
+ 
+
+<content> <h1 id="什么是-bot">什么是 Bot</h1>
+<p>Bot 的概念在官网的介绍稍微有点繁琐和，详细可以了解<a href="https://core.telegram.org/bots">官网介绍</a>，</p>
+<p>简单来说，bot 就是你在 telegram 中的一个特殊账号，你申请了 bot，这个 bot 就是你的代理人，你发号施令到 bot，bot 会响应你的指令，仅此而已。</p>
+<p>申请 bot 需要找 BotFather（名字起的很形象），具体过程官网说的比较详细，此处不赘言。但是需要强调的一点是，bot 仅仅是你的代理人而已，真正执行你指令的是你自己部署的脚本，如果你不部署自己的脚本，在 bot 中输入指令，是没有任何响应的。</p>
+<p>你、bot和你部署的脚本关系如下:</p>
+<p><img src="https://raw.githubusercontent.com/anriclee/diagramStorage/master/telegram.drawio.png" alt="&ldquo;你、bot和你部署的脚本&rdquo;"></p>
+<h1 id="脚本">脚本</h1>
+<p>上面说过了，bot 只是你在 telegram 的一个代理，真正干活的是你的脚本。既然自己写脚本，就会存在两个问题：接受指令、做出响应。</p>
+<h2 id="接受指令">接受指令</h2>
+<p>对于如何让脚本接受指令，官方提供了两种思路：推模式 、拉模式。</p>
+<ul>
+<li>拉模式</li>
+</ul>
+<p>这种模式，官方不太推荐。简单而言，就是自己部署一个脚本，不断执行 get 请求，获取自己 bot 的更新信息，就好比一个仆人一直在问你：</p>
+<p>有没有需要我做的？</p>
+<p>有没有需要我做的？</p>
+<p>有没有需要我做的？</p>
+<p>询问的方式也比较简单：</p>
+<pre tabindex="0"><code>curl -X GET https://api.telegram.org/bot[token]/getUpdates
+</code></pre><p>这里的 token，就是上面申请 bot 完毕后，得到的 token， 出于脱敏，我使用 [token] 代替，下同。这种方法比较笨拙，轮询的频次太高和太低都不行，而且你在 bot 中发布一条指令后，可能并不能够马上得到执行，会有延迟。</p>
+<p>这种方式的好处是：可以让 bot 启在本地，不需要部署到服务器上，因为 telegram 不知道你的存在，他也不需要知道你的存在。</p>
+<ul>
+<li>推模式</li>
+</ul>
+<p>这种方式是官方比较推荐的一种方式，这种类似事件驱动的原理。只有有任务了，才会通知脚本去做。但前提是：在向 bot 发号施令前，需要在 bot 中注册一个 callback url。</p>
+<p>bot 在接受你的指令后，会调用此 url，通知你的脚本，让他执行任务。</p>
+<p>注册方式也比较简单：</p>
+<pre tabindex="0"><code>curl -X POST https://api.telegram.org/bot[token]/setWebhook -H &#34;Content-type: application/json&#34; -d &#39;{&#34;url&#34;: &#34;[YOUR_URL]&#34;}
+</code></pre><p>使用这种方式，会比上一种稍微麻烦一点，需要你部署的服务能够支持 https（这也是为了安全起见）。</p>
+<h3 id="响应指令">响应指令</h3>
+<p>收到 telegram 的指令后，如何发送消息到 telegram 频道呢？笔者对 golang 较为熟悉，所以采用了 golang 的方式进行响应。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Golang" data-lang="Golang"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Handler</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">ParseForm</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;parse form values failed:%+v&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">body</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">GetBody</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">bytes</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">body</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">msg</span> <span style="color:#f92672">:=</span> string(<span style="color:#a6e22e">bytes</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ...... 读取到 query 参数和 body 后，可以进行各种逻辑操作</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">w</span>, <span style="color:#e6db74">&#34;result:&#34;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">content</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>上面的代码使用到了一个<a href="https://github.com/go-telegram-bot-api/telegram-bot-api">开源库</a>，他替我们封装好了api（当然也可以自己按照 telegram 的协议组装消息）。</p>
+<h2 id="部署脚本">部署脚本</h2>
+<p>现在有了 bot，也有了响应 bot 的脚本逻辑，只剩部署脚本到服务器了。我们当然不能仅仅为了响应一条指令租一个个人服务器吧（土豪除外）。</p>
+<p>笔者用的是 Vercel 平台，使用 Vercel 部署 ServeLess 的 Function 还是比较方便的，部署过程，跟随步骤指导一步一步来比较容易。</p>
+<p><a href="https://vercel.com/">https://vercel.com/</a></p>
+<p>部署好之后，可以先在本地执行下 curl 请求，测试没问题后，将该 url 设置为 telegram bot 的 callback 函数即可。</p>
+<h2 id="使用">使用</h2>
+<p>学会一个东西的主要方法，就是疯狂的使用它。本人出入办公单位，都需要扫门禁二维码，不胜其烦，需要关注微信小程序，然后点击门禁二维码，全程既慢且麻烦。</p>
+<p>在一次偶然抓包之后，发现获取二维码的请求是一个简单的 http post 请求，且密码为明文。</p>
+<p>这次体验到了 Serveless 的方便，出于 bot 练习之故，可以将该请求封装到 script 中，部署到 vercel 平台上，在 telegram 申请一个门禁机器人，打开之后，发送指令到 script，script 发起 post 调用，获取到结果后，渲染为二维码即可。</p>
+<p>渲染二维码使用到的<a href="https://github.com/skip2/go-qrcode">开源包</a></p>
+<h2 id="请求安全性校验">请求安全性校验</h2>
+<p>为了安全起见，有人恶意调用你的脚本 url，可以将自己脚本服务的 api 的前缀设置为 token（token 没有人知道，所以也无法知道的 api）。vercel 平台支持通过 vercel.json 进行请求的重定向，可以通过正则表达式，将 <code>randomwdocd23123123[token 示例]/api</code> 转发到 <code>/api</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Json" data-lang="Json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">&#34;routes&#34;</span>:[
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">&#34;src&#34;</span>:<span style="color:#e6db74">&#34;/random/(?&lt;id&gt;[^/]*)/api/hello/&#34;</span>,
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">&#34;dest&#34;</span>:<span style="color:#e6db74">&#34;/api/hello.go?id=$id&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>   ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这是利用了官方提供的重定向的特性，详细可以参考<a href="https://vercel.com/docs/project-configuration#">官网</a></p>
+<h1 id="reference">reference</h1>
+<p>1.<a href="https://www.marclittlemore.com/serverless-telegram-chatbot-vercel/">Build a serverless Telegram chatbot deployed using Vercel</a></p>
+ </content>
+
+<p>
+  
+  <a href="http://localhost:1313/posts/tags/">#Telegram</a>
+  
+</p>
+
+
+
+
+
+
+ 
+<div class="toc">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#接受指令">接受指令</a>
+      <ul>
+        <li><a href="#响应指令">响应指令</a></li>
+      </ul>
+    </li>
+    <li><a href="#部署脚本">部署脚本</a></li>
+    <li><a href="#使用">使用</a></li>
+    <li><a href="#请求安全性校验">请求安全性校验</a></li>
+  </ul>
+</nav>
+</div>
+
+
+
+  </main>
+  <footer>
+
+
+Subscribe via <a href="/index.xml">RSS</a> or just <a href="mailto:anriclee@gmail.com">say hello</a>.
+<br />
+
+
+
+
+
+
+
+
+Made with
+<a href="https://github.com/rokcso/hugo-bearblog-neo/">Hugo Bear Neo</a>.
+<br />
+
+
+
+
+Copyright © 2024-2025, Rokcso.
+
+
+🗺️ <a href="/sitemap.xml">Sitemap</a>.
+
+</footer>
+
+    
+
+
+</body>
+
+</html>

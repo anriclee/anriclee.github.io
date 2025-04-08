@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Series on ReadByWord</title>
-    <link>https://anriclee.github.io/series/</link>
-    <description>Recent content in Series on ReadByWord</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://anriclee.github.io/series/index.xml" rel="self" type="application/rss+xml" />
+    <title>Series on Rusty Typewriter</title>
+    <link>http://localhost:1313/series/</link>
+    <description>Recent content in Series on Rusty Typewriter</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <atom:link href="http://localhost:1313/series/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

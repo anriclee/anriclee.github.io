@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="http://localhost:1313/images/favicon.png" />
+<title>[译] 细谈依赖和配置 | ReadTinyWord</title>
+<meta name="title" content="[译] 细谈依赖和配置" />
+<meta name="description" content="依赖项的详细配置
+正如前面所提到的那样，你可以定义 bean 的属性和构造函数参数，去引用其他已经设置好的 bean 或者内联定义的值。
+为了达到这个目的，Spring 的基于 XML 配置元数据支持在  和  元素内增加子元素。
+直接值（基本类型，字符串等等）
+ 元素的 value 值，把一个属性值或者构造函数参数定义为一个可读字符串。Spring 的转换服务被用来将这些值从字符串转换为属性或者参数的实际类型。下面的例子展示了可以被设置的多种值：
+&lt;bean id=&#34;myDataSource&#34; class=&#34;org.apache.commons.dbcp.BasicDataSource&#34; destroy-method=&#34;close&#34;&gt;
+	&lt;!-- results in a setDriverClassName(String) call --&gt;
+	&lt;property name=&#34;driverClassName&#34; value=&#34;com.mysql.jdbc.Driver&#34;/&gt;
+	&lt;property name=&#34;url&#34; value=&#34;jdbc:mysql://localhost:3306/mydb&#34;/&gt;
+	&lt;property name=&#34;username&#34; value=&#34;root&#34;/&gt;
+	&lt;property name=&#34;password&#34; value=&#34;misterkaoli&#34;/&gt;
+&lt;/bean&gt;
+下面的例子使用 p-namespace 来让 XML 配置更加简明：
+
+&lt;beans xmlns=&#34;http://www.springframework.org/schema/beans&#34;
+	xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;
+	xmlns:p=&#34;http://www.springframework.org/schema/p&#34;
+	xsi:schemaLocation=&#34;http://www.springframework.org/schema/beans
+	https://www.springframework.org/schema/beans/spring-beans.xsd&#34;&gt;
+
+	&lt;bean id=&#34;myDataSource&#34; class=&#34;org.apache.commons.dbcp.BasicDataSource&#34;
+		destroy-method=&#34;close&#34;
+		p:driverClassName=&#34;com.mysql.jdbc.Driver&#34;
+		p:url=&#34;jdbc:mysql://localhost:3306/mydb&#34;
+		p:username=&#34;root&#34;
+		p:password=&#34;misterkaoli&#34;/&gt;
+
+&lt;/beans&gt;
+上面的 XML 更加的简明。然而，类型是在运行时而不是设计时发现的，除非你在创建 bean 定义的时候，用支持自动属性完成的 IDE（例如 Intellij IDEA 或者 Eclipse 的 Spring 工具）。这些辅助都是高度推荐的。
+你同样可以配置 java.util.Properties 的实例，如下：" />
+<meta name="keywords" content="Spring," />
+
+<link rel="canonical" href="http://localhost:1313/2023/09/%E8%AF%91-%E7%BB%86%E8%B0%88%E4%BE%9D%E8%B5%96%E5%92%8C%E9%85%8D%E7%BD%AE/">
+
+
+<meta property="og:url" content="http://localhost:1313/2023/09/%E8%AF%91-%E7%BB%86%E8%B0%88%E4%BE%9D%E8%B5%96%E5%92%8C%E9%85%8D%E7%BD%AE/">
+  <meta property="og:site_name" content="ReadTinyWord">
+  <meta property="og:title" content="[译] 细谈依赖和配置">
+  <meta property="og:description" content="依赖项的详细配置
+正如前面所提到的那样，你可以定义 bean 的属性和构造函数参数，去引用其他已经设置好的 bean 或者内联定义的值。 为了达到这个目的，Spring 的基于 XML 配置元数据支持在 和 元素内增加子元素。
+直接值（基本类型，字符串等等） 元素的 value 值，把一个属性值或者构造函数参数定义为一个可读字符串。Spring 的转换服务被用来将这些值从字符串转换为属性或者参数的实际类型。下面的例子展示了可以被设置的多种值：
+&lt;bean id=&#34;myDataSource&#34; class=&#34;org.apache.commons.dbcp.BasicDataSource&#34; destroy-method=&#34;close&#34;&gt; &lt;!-- results in a setDriverClassName(String) call --&gt; &lt;property name=&#34;driverClassName&#34; value=&#34;com.mysql.jdbc.Driver&#34;/&gt; &lt;property name=&#34;url&#34; value=&#34;jdbc:mysql://localhost:3306/mydb&#34;/&gt; &lt;property name=&#34;username&#34; value=&#34;root&#34;/&gt; &lt;property name=&#34;password&#34; value=&#34;misterkaoli&#34;/&gt; &lt;/bean&gt; 下面的例子使用 p-namespace 来让 XML 配置更加简明：
+&lt;beans xmlns=&#34;http://www.springframework.org/schema/beans&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xmlns:p=&#34;http://www.springframework.org/schema/p&#34; xsi:schemaLocation=&#34;http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd&#34;&gt; &lt;bean id=&#34;myDataSource&#34; class=&#34;org.apache.commons.dbcp.BasicDataSource&#34; destroy-method=&#34;close&#34; p:driverClassName=&#34;com.mysql.jdbc.Driver&#34; p:url=&#34;jdbc:mysql://localhost:3306/mydb&#34; p:username=&#34;root&#34; p:password=&#34;misterkaoli&#34;/&gt; &lt;/beans&gt; 上面的 XML 更加的简明。然而，类型是在运行时而不是设计时发现的，除非你在创建 bean 定义的时候，用支持自动属性完成的 IDE（例如 Intellij IDEA 或者 Eclipse 的 Spring 工具）。这些辅助都是高度推荐的。 你同样可以配置 java.util.Properties 的实例，如下：">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-09-11T21:12:31+08:00">
+    <meta property="article:modified_time" content="2023-09-11T21:12:31+08:00">
+    <meta property="article:tag" content="Spring">
+    <meta property="og:image" content="http://localhost:1313/images/share.png">
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/share.png">
+  <meta name="twitter:title" content="[译] 细谈依赖和配置">
+  <meta name="twitter:description" content="依赖项的详细配置
+正如前面所提到的那样，你可以定义 bean 的属性和构造函数参数，去引用其他已经设置好的 bean 或者内联定义的值。 为了达到这个目的，Spring 的基于 XML 配置元数据支持在 和 元素内增加子元素。
+直接值（基本类型，字符串等等） 元素的 value 值，把一个属性值或者构造函数参数定义为一个可读字符串。Spring 的转换服务被用来将这些值从字符串转换为属性或者参数的实际类型。下面的例子展示了可以被设置的多种值：
+&lt;bean id=&#34;myDataSource&#34; class=&#34;org.apache.commons.dbcp.BasicDataSource&#34; destroy-method=&#34;close&#34;&gt; &lt;!-- results in a setDriverClassName(String) call --&gt; &lt;property name=&#34;driverClassName&#34; value=&#34;com.mysql.jdbc.Driver&#34;/&gt; &lt;property name=&#34;url&#34; value=&#34;jdbc:mysql://localhost:3306/mydb&#34;/&gt; &lt;property name=&#34;username&#34; value=&#34;root&#34;/&gt; &lt;property name=&#34;password&#34; value=&#34;misterkaoli&#34;/&gt; &lt;/bean&gt; 下面的例子使用 p-namespace 来让 XML 配置更加简明：
+&lt;beans xmlns=&#34;http://www.springframework.org/schema/beans&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xmlns:p=&#34;http://www.springframework.org/schema/p&#34; xsi:schemaLocation=&#34;http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd&#34;&gt; &lt;bean id=&#34;myDataSource&#34; class=&#34;org.apache.commons.dbcp.BasicDataSource&#34; destroy-method=&#34;close&#34; p:driverClassName=&#34;com.mysql.jdbc.Driver&#34; p:url=&#34;jdbc:mysql://localhost:3306/mydb&#34; p:username=&#34;root&#34; p:password=&#34;misterkaoli&#34;/&gt; &lt;/beans&gt; 上面的 XML 更加的简明。然而，类型是在运行时而不是设计时发现的，除非你在创建 bean 定义的时候，用支持自动属性完成的 IDE（例如 Intellij IDEA 或者 Eclipse 的 Spring 工具）。这些辅助都是高度推荐的。 你同样可以配置 java.util.Properties 的实例，如下：">
+
+
+
+
+  <meta itemprop="name" content="[译] 细谈依赖和配置">
+  <meta itemprop="description" content="依赖项的详细配置
+正如前面所提到的那样，你可以定义 bean 的属性和构造函数参数，去引用其他已经设置好的 bean 或者内联定义的值。 为了达到这个目的，Spring 的基于 XML 配置元数据支持在 和 元素内增加子元素。
+直接值（基本类型，字符串等等） 元素的 value 值，把一个属性值或者构造函数参数定义为一个可读字符串。Spring 的转换服务被用来将这些值从字符串转换为属性或者参数的实际类型。下面的例子展示了可以被设置的多种值：
+&lt;bean id=&#34;myDataSource&#34; class=&#34;org.apache.commons.dbcp.BasicDataSource&#34; destroy-method=&#34;close&#34;&gt; &lt;!-- results in a setDriverClassName(String) call --&gt; &lt;property name=&#34;driverClassName&#34; value=&#34;com.mysql.jdbc.Driver&#34;/&gt; &lt;property name=&#34;url&#34; value=&#34;jdbc:mysql://localhost:3306/mydb&#34;/&gt; &lt;property name=&#34;username&#34; value=&#34;root&#34;/&gt; &lt;property name=&#34;password&#34; value=&#34;misterkaoli&#34;/&gt; &lt;/bean&gt; 下面的例子使用 p-namespace 来让 XML 配置更加简明：
+&lt;beans xmlns=&#34;http://www.springframework.org/schema/beans&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xmlns:p=&#34;http://www.springframework.org/schema/p&#34; xsi:schemaLocation=&#34;http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd&#34;&gt; &lt;bean id=&#34;myDataSource&#34; class=&#34;org.apache.commons.dbcp.BasicDataSource&#34; destroy-method=&#34;close&#34; p:driverClassName=&#34;com.mysql.jdbc.Driver&#34; p:url=&#34;jdbc:mysql://localhost:3306/mydb&#34; p:username=&#34;root&#34; p:password=&#34;misterkaoli&#34;/&gt; &lt;/beans&gt; 上面的 XML 更加的简明。然而，类型是在运行时而不是设计时发现的，除非你在创建 bean 定义的时候，用支持自动属性完成的 IDE（例如 Intellij IDEA 或者 Eclipse 的 Spring 工具）。这些辅助都是高度推荐的。 你同样可以配置 java.util.Properties 的实例，如下：">
+  <meta itemprop="datePublished" content="2023-09-11T21:12:31+08:00">
+  <meta itemprop="dateModified" content="2023-09-11T21:12:31+08:00">
+  <meta itemprop="wordCount" content="653">
+  <meta itemprop="image" content="http://localhost:1313/images/share.png">
+  <meta itemprop="keywords" content="Spring">
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+   
+  :root {
+    --width-max: 720px;
+    --font-primary: Verdana, sans-serif;
+    --font-secondary: monospace;
+    --font-size-primary: 1em;
+    --font-size-secondary: 0.8em;
+    --body-bg-color: #fcfcfc;
+    --bold-text-color: #222;
+    --body-text-color: #444;
+    --link-color: #3273dc;
+    --link-visited-color: #8b6fcb;
+    --table-border-color: #f2f2f2;
+    --table-th-bg-color: #f2f2f2;
+    --img-border-color: #f2f2f2;
+    --code-bg-color: #f2f2f2;
+    --code-text-color: #222;
+    --blockquote-border-color: #666;
+    --blockquote-text-color: #666;
+    --upvoted-color: #FA8072;
+  }
+
+  @media (prefers-color-scheme: dark) {
+     
+    :root {
+      --body-bg-color: #1c1c1c;
+      --bold-text-color: #eee;
+      --body-text-color: #ddd;
+      --link-color: #8cc2dd;
+      --link-visited-color: #c3b1ee;
+      --table-border-color: #999;
+      --table-th-bg-color: #999;
+      --img-border-color: #999;
+      --code-bg-color: #555;
+      --code-text-color: #ddd;
+      --blockquote-border-color: #ccc;
+      --blockquote-text-color: #ccc;
+    }
+  }
+
+  body {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-primary);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width-max);
+    text-align: left;
+    background-color: var(--body-bg-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    color: var(--body-text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong,
+  b {
+    color: var(--bold-text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 16px 0;
+  }
+
+  a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .title {
+    text-decoration: none;
+    border: 0;
+  }
+
+  .title:hover {
+    text-decoration: none;
+  }
+
+  .title span {
+    font-weight: 400;
+  }
+
+  nav a {
+    margin-right: 8px;
+  }
+
+  textarea {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  content {
+    line-height: 1.6;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--table-border-color);
+    border-radius: 4px;
+  }
+
+  th,
+  td {
+    border: 1px solid var(--table-border-color);
+    padding: 4px;
+  }
+
+  th {
+    background-color: var(--table-th-bg-color);
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid var(--img-border-color);
+    border-radius: 4px;
+    content-visibility: auto;
+    loading: lazy;
+  }
+
+  img[src*="#minipic"] {
+    max-width: 50%;
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  i {
+    font-style: normal;
+  }
+
+  time {
+    font-family: var(--font-secondary);
+    font-size: 15px;
+  }
+
+  code {
+    font-family: var(--font-secondary);
+    background-color: var(--code-bg-color);
+    color: var(--code-text-color);
+    padding: 2px;
+    border-radius: 4px;
+  }
+
+  pre code {
+    display: block;
+    padding: 16px;
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+
+  div.highlight pre {
+    border-radius: 4px;
+  }
+
+  div.highlight code {
+    background-color: var(--code-bg-color);
+    color: var(--code-text-color);
+  }
+
+  blockquote {
+    border-left: 2px solid var(--blockquote-border-color);
+    color: var(--blockquote-text-color);
+    margin: 0;
+    padding-left: 16px;
+    font-style: normal;
+  }
+
+  blockquote p {
+    margin: 0;
+  }
+
+  footer {
+    padding: 25px 0;
+    text-align: center;
+    font-size: var(--font-size-secondary);
+  }
+
+  ul li:has(input) {
+    list-style-type: none;
+    margin-left: -25.5px;
+  }
+
+   
+  ul.blog-posts {
+    list-style-type: none;
+    padding: unset;
+  }
+
+  ul.blog-posts li {
+    display: flex;
+  }
+
+  ul.blog-posts li span {
+    flex: 0 0 130px;
+  }
+
+  ul.blog-posts li span.grouped {
+    flex: 0 0 80px;
+  }
+
+  ul.blog-posts li a:visited {
+    color: var(--link-visited-color);
+  }
+
+   
+  div.toc {
+    position: fixed;
+    top: 50%;
+    left: calc((100vw + var(--width-max)) / 2);
+    transform: translateY(-50%);
+    width: calc((90vw - var(--width-max)) / 2);
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px 8px;
+    z-index: 99;
+
+     
+    &::-webkit-scrollbar {
+        display: none;  
+    }
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+  }
+
+  div.toc ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  div.toc ul li {
+    margin: 8px 0;
+  }
+
+  div.toc ul li a {
+    text-decoration: none;
+    color: var(--blockquote-text-color);
+  }
+
+  div.toc ul li a:hover {
+    color: var(--link-color);
+  }
+
+   
+  button.upvote-btn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--body-text-color);
+  }
+
+  button.upvoted {
+    color: var(--upvoted-color);
+  }
+
+  span.upvote-count {
+    margin-top: -4px;
+    font-size: smaller;
+  }
+
+  @media (max-width: 500px) {
+    img[src*="#minipic"] {
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    div.toc {
+      display: none;
+    }
+  }
+</style>
+
+</head>
+
+<body>
+  <header><a href="/" class="title">
+  <h1>ReadTinyWord</h1>
+</a>
+<nav><a href="/">Home</a>
+
+
+</nav>
+</header>
+  <main>
+ 
+
+<content> <p>依赖项的详细配置</p>
+<p>正如前面所提到的那样，你可以定义 bean 的属性和构造函数参数，去引用其他已经设置好的 bean 或者内联定义的值。
+为了达到这个目的，Spring 的基于 XML 配置元数据支持在 <!-- raw HTML omitted --> 和 <!-- raw HTML omitted --> 元素内增加子元素。</p>
+<h1 id="直接值基本类型字符串等等">直接值（基本类型，字符串等等）</h1>
+<p><!-- raw HTML omitted --> 元素的 value 值，把一个属性值或者构造函数参数定义为一个可读字符串。Spring 的转换服务被用来将这些值从字符串转换为属性或者参数的实际类型。下面的例子展示了可以被设置的多种值：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;myDataSource&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;org.apache.commons.dbcp.BasicDataSource&#34;</span> <span style="color:#a6e22e">destroy-method=</span><span style="color:#e6db74">&#34;close&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">&lt;!-- results in a setDriverClassName(String) call --&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;driverClassName&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;com.mysql.jdbc.Driver&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;url&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;jdbc:mysql://localhost:3306/mydb&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;username&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;root&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;password&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;misterkaoli&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>下面的例子使用 p-namespace 来让 XML 配置更加简明：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;beans</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">xmlns:p=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/p&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://www.springframework.org/schema/beans
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">	https://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;myDataSource&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;org.apache.commons.dbcp.BasicDataSource&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">destroy-method=</span><span style="color:#e6db74">&#34;close&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">p:driverClassName=</span><span style="color:#e6db74">&#34;com.mysql.jdbc.Driver&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">p:url=</span><span style="color:#e6db74">&#34;jdbc:mysql://localhost:3306/mydb&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">p:username=</span><span style="color:#e6db74">&#34;root&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">p:password=</span><span style="color:#e6db74">&#34;misterkaoli&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/beans&gt;</span>
+</span></span></code></pre></div><p>上面的 XML 更加的简明。然而，类型是在运行时而不是设计时发现的，除非你在创建 bean 定义的时候，用支持自动属性完成的 IDE（例如 Intellij IDEA 或者 Eclipse 的 Spring 工具）。这些辅助都是高度推荐的。
+你同样可以配置 <code>java.util.Properties</code> 的实例，如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;mappings&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;org.springframework.context.support.PropertySourcesPlaceholderConfigurer&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">&lt;!-- typed as a java.util.Properties --&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;properties&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;value&gt;</span>
+</span></span><span style="display:flex;"><span>			jdbc.driver.className=com.mysql.jdbc.Driver
+</span></span><span style="display:flex;"><span>			jdbc.url=jdbc:mysql://localhost:3306/mydb
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>Spring 容器可以通过使用 JavaBeans 的 PropertyEditor 机制，转换 <!-- raw HTML omitted --> 元素里面的文本值为一个 java.util.Properties 实例。这是一个不错的捷径，也是为数不多的 Spring 团队偏爱嵌套的 <!-- raw HTML omitted --> 元素而非 value 属性的风格的地方。</p>
+<h1 id="idref-元素">idref 元素</h1>
+<p>idref 元素就是一个简单的传递容器中另外一个 bean 的 id 到 <!-- raw HTML omitted --> 或者 <!-- raw HTML omitted --> 元素中的防止错误的办法。下面的例子展示了如何去使用它：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;theTargetBean&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;...&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;theClientBean&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;...&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;targetName&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;idref</span> <span style="color:#a6e22e">bean=</span><span style="color:#e6db74">&#34;theTargetBean&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>上面的 bean 定义片段等价于下面的片段：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;theTargetBean&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;...&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;client&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;...&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;targetName&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;theTargetBean&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>第一种形式优于第二种，因为使用 idref 标签，可以让容器在部署时验证所引用的有名称的 bean 是否真正存在。在第二种变体中，不会验证传给 client bean 中 targetName 属性的值。当 client bean 被真正创建时，才会真正发现这个类型（很有可能是致命错误）。如果 client bean 是一个属性 bean，在容器被部署很长时间后，类型和结果异常才有可能被发现。</p>
+<p>Note：idref 元素中的 local 属性在 XSD 4.0 bean 中的属性不再支持，因为它不再对一个普通 bean 引用提供值了。当升级到 4.0 Schema 的时候，需要修改你的当前存在的 idref local 引用为 idref bean。</p>
+<p>一个</p>
+<p><!-- raw HTML omitted --> 元素中，</p>
+<p>（早从 Spring 2.0 开始）<!-- raw HTML omitted --> 元素配置值的一个常见位置就是 ProxyFactoryBean bean 定义中的 AOP 拦截器配置值。当你指定拦截器名称时，使用 <!-- raw HTML omitted --> 元素可防止你误拼写一个拦截器的 ID。</p>
+<h1 id="引用其他-bean协作器">引用其他 bean（协作器）</h1>
+<p>ref 元素是 <!-- raw HTML omitted --> 或者 <!-- raw HTML omitted --> 定义元素里面的最后一个元素。在这里，你可以将一个 bean 的具体属性设置为对另外一个被容器管理的 bean 的引用。被引用的 bean 是将被设置属性值 bean 的依赖，而且在属性被设置前，根据需要被初始化。（如果协作者是一个单例的 bean，它也许已经被容器初始化了）。所有的引用最终都是另外一个对象的引用。Scope 和验证取决于你通过 bean 或者 parent 属性指定的另外一个对象的 ID 或者名字。</p>
+<p>通过 <!-- raw HTML omitted --> 标签的 bean 属性指定目标 bean，是最常见的一种形式，并且允许引用相同容器或者父容器内的任何 bean，不论是否在同一个 XML 文件中。bean 属性的值也许和目标 bean 的id属性相同，或者和目标 bean 的 name 属性的其中一个值相同。下面的例子展示了怎么使用 ref 元素：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;ref</span> <span style="color:#a6e22e">bean=</span><span style="color:#e6db74">&#34;someBean&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>通过 parent 属性指定目标 bean 创建了对当前容器父容器内的一个 bean 的引用。parent 属性的值可以和目标 bean 的 id 属性和 name 属性的其中一个值相同。目标 bean 必须在当前容器的一个父容器中。当你有一个容器的继承结构，并且你想要用和父 bean 一样的名字作为代理包装父容器中的一个现有 bean 的时候，你应该使用这种引用变体。下面的例子展示了如何使用 parent 属性：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- in the parent context --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;accountService&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;com.something.SimpleAccountService&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">&lt;!-- insert dependencies as required here --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/bean&gt;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- in the child (descendant) context --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;accountService&#34;</span> <span style="color:#960050;background-color:#1e0010">&lt;!--</span> <span style="color:#960050;background-color:#1e0010">bean</span> <span style="color:#960050;background-color:#1e0010">name</span> <span style="color:#960050;background-color:#1e0010">is</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">same</span> <span style="color:#960050;background-color:#1e0010">as</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">parent</span> <span style="color:#960050;background-color:#1e0010">bean</span> <span style="color:#960050;background-color:#1e0010">--</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>	class=&#34;org.springframework.aop.framework.ProxyFactoryBean&#34;&gt;
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;target&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;ref</span> <span style="color:#a6e22e">parent=</span><span style="color:#e6db74">&#34;accountService&#34;</span><span style="color:#f92672">/&gt;</span> <span style="color:#75715e">&lt;!-- notice how we refer to the parent bean --&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">&lt;!-- insert other configuration and dependencies as required here --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>Note：ref 元素中的 local 属性在 XSD 4.0 中的 bean 已经不再支持，因为它不会对一个普通的 bean 引用提供任何值了。升级到 4.0 Schema 时，需要将现有的 ref local 引用改为 ref bean。</p>
+<h1 id="内部-bean">内部 bean</h1>
+<p><!-- raw HTML omitted --> 或者 <!-- raw HTML omitted --> 元素内部的 <!-- raw HTML omitted --> 元素定义了一个内部 bean，如下面的例子所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;outer&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;...&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">&lt;!-- instead of using a reference to a target bean, simply define the target bean inline --&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;target&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;com.example.Person&#34;</span><span style="color:#f92672">&gt;</span> <span style="color:#75715e">&lt;!-- this is the inner bean --&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;name&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;Fiona Apple&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;age&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;25&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;/bean&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>一个内部bean定义不需要定义 ID 和名称。如果指定了，容器也不会用这个值作为标识。容器也会在创建 bean 时忽略 scope 标志，因为内部biean通常是匿名的而且总是与外面的 bean 一起创建。不可能单独只访问内部bean 或者将他们注入到外层嵌套 bean 以外的 bean 中。</p>
+<p>在极端情况下，它会从一个自定义的 scope 接收到销毁的回调 —— 例如，对于一个包含在单例 bean 中的 request scope 的内部 bean。内部 bean 实例的创建于它所在的 bean 绑定在一起，但是销毁回调让它参与到 request 范围的生命周期。这不是一个常见的场景。内部 bean 通常仅仅与它所在的 bean 共享一个 scope。</p>
+<h1 id="集合">集合</h1>
+<p><!-- raw HTML omitted -->, <!-- raw HTML omitted -->, <!-- raw HTML omitted --> 和 <!-- raw HTML omitted --> 元素分别设置 Java 的集合类型：List，Set，Map 和 Properties。下面的例子显示了该用法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;moreComplexObject&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;example.ComplexObject&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">&lt;!-- results in a setAdminEmails(java.util.Properties) call --&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;adminEmails&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;props&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;prop</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;administrator&#34;</span><span style="color:#f92672">&gt;</span>administrator@example.org<span style="color:#f92672">&lt;/prop&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;prop</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;support&#34;</span><span style="color:#f92672">&gt;</span>support@example.org<span style="color:#f92672">&lt;/prop&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;prop</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;development&#34;</span><span style="color:#f92672">&gt;</span>development@example.org<span style="color:#f92672">&lt;/prop&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;/props&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">&lt;!-- results in a setSomeList(java.util.List) call --&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;someList&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;list&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;value&gt;</span>a list element followed by a reference<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;ref</span> <span style="color:#a6e22e">bean=</span><span style="color:#e6db74">&#34;myDataSource&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;/list&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">&lt;!-- results in a setSomeMap(java.util.Map) call --&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;someMap&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;map&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;entry</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;an entry&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;just some string&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;entry</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;a ref&#34;</span> <span style="color:#a6e22e">value-ref=</span><span style="color:#e6db74">&#34;myDataSource&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;/map&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">&lt;!-- results in a setSomeSet(java.util.Set) call --&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;someSet&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;set&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;value&gt;</span>just some string<span style="color:#f92672">&lt;/value&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;ref</span> <span style="color:#a6e22e">bean=</span><span style="color:#e6db74">&#34;myDataSource&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;/set&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/bean&gt;</span>
+</span></span></code></pre></div><p>map 的 key 或者 value，或者一个设置好的 value，也可以使下面元素的任意一种：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span>bean | ref | idref | list | set | map | props | value | null
+</span></span></code></pre></div><h2 id="集合的并集">集合的并集</h2>
+<p>Spring 容器同样支持集合的合并。一个应用的开发者可以定义一个父 <!-- raw HTML omitted -->, <!-- raw HTML omitted -->, <!-- raw HTML omitted -->   或者 <!-- raw HTML omitted --> 元素或者有一个子的 <!-- raw HTML omitted -->, <!-- raw HTML omitted -->, <!-- raw HTML omitted -->   或者 <!-- raw HTML omitted --> 元素，来继承或者覆盖父集合中的元素。即，子集合中的值是父集合和子集合中元素的并集，同时子集合中的元素会覆盖父集合中的元素。</p>
+<p>这个合并讨论了父子 bean 的机制。不熟悉父子 bean 定义的读者，也许要在继续往下前读一下相关章节。</p>
+<p>下面的例子展示了集合合并的用法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;beans&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;parent&#34;</span> <span style="color:#a6e22e">abstract=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;example.ComplexObject&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;adminEmails&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;props&gt;</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#f92672">&lt;prop</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;administrator&#34;</span><span style="color:#f92672">&gt;</span>administrator@example.com<span style="color:#f92672">&lt;/prop&gt;</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#f92672">&lt;prop</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;support&#34;</span><span style="color:#f92672">&gt;</span>support@example.com<span style="color:#f92672">&lt;/prop&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;/props&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;/bean&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;bean</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;child&#34;</span> <span style="color:#a6e22e">parent=</span><span style="color:#e6db74">&#34;parent&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;adminEmails&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">&lt;!-- the merge is specified on the child collection definition --&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;props</span> <span style="color:#a6e22e">merge=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#f92672">&lt;prop</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;sales&#34;</span><span style="color:#f92672">&gt;</span>sales@example.com<span style="color:#f92672">&lt;/prop&gt;</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#f92672">&lt;prop</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;support&#34;</span><span style="color:#f92672">&gt;</span>support@example.co.uk<span style="color:#f92672">&lt;/prop&gt;</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&lt;/props&gt;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&lt;/property&gt;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&lt;/bean&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;beans&gt;</span>
+</span></span></code></pre></div><p>注意子 bean 定义中 adminEmails 属性里<!-- raw HTML omitted -->  merge=true 属性的用法。当子bean被容器解析和初始化时，最终的实例会有一个包含合并子集合中 adminEmails 和父集合中的 adminEmails 的 adminEmails 和 Properties 集合。下面的列表会展示最终的结果</p>
+<pre tabindex="0"><code>administrator=administrator@example.com
+sales=sales@example.com
+support=support@example.co.uk
+</code></pre><p>子 Properties 集合中设置的值继承了所有父 <!-- raw HTML omitted --> 中的属性值，而且子集合中的 support 值覆盖了父集合中的值。</p>
+<p>这个合并的行为同样适用于 <!-- raw HTML omitted -->, <!-- raw HTML omitted -->, <!-- raw HTML omitted --> 类型。在 <!-- raw HTML omitted --> 元素的特殊使用中，与 List 集合类型联系的语义（即集合中值的有序性）会一直保持。父集合中的值优先于子集合。在 Map, Set 和 Properties 集合类型中是无序的。因此，容器内部使用的 Map, Set 和 Properties 实现类型中没有有序性的语义生效。</p>
+<h2 id="集合合并的限制">集合合并的限制</h2>
+<h1 id="空串或者-null">空串或者 Null</h1>
+<h1 id="p-namespace-的-xml-简写">p-namespace 的 XML 简写</h1>
+<h1 id="c-namespace-的-xml-简写">c-namespace 的 XML 简写</h1>
+<h1 id="复合属性名称">复合属性名称</h1>
+<p>TO BE CONTINUED &hellip;.</p>
+ </content>
+
+<p>
+  
+  <a href="http://localhost:1313/posts/tags/">#Spring</a>
+  
+</p>
+
+
+
+
+
+
+ 
+<div class="toc">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#集合的并集">集合的并集</a></li>
+    <li><a href="#集合合并的限制">集合合并的限制</a></li>
+  </ul>
+</nav>
+</div>
+
+
+
+  </main>
+  <footer>
+
+
+Subscribe via <a href="/index.xml">RSS</a> or just <a href="mailto:anriclee@gmail.com">say hello</a>.
+<br />
+
+
+
+
+
+
+
+
+Made with
+<a href="https://github.com/rokcso/hugo-bearblog-neo/">Hugo Bear Neo</a>.
+<br />
+
+
+
+
+Copyright © 2024-2025, Rokcso.
+
+
+🗺️ <a href="/sitemap.xml">Sitemap</a>.
+
+</footer>
+
+    
+
+
+</body>
+
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="http://localhost:1313/images/favicon.png" />
+<title>[译] SpringFramework 概述 | ReadTinyWord</title>
+<meta name="title" content="[译] SpringFramework 概述" />
+<meta name="description" content="概述
+Spring 使得创建 Java 企业级应用更加容易。它提供了你在企业环境下拥抱 Java 语言所需要的一切，支持 JVM 平台上的 Groovy 和 Kotlin 作为备选语言，并且提供了根据应用程序的需求创建多种架构的灵活性。从 SpringFramework 6.0 开始，Spring 需要 Java 17 以上的版本。
+Spring 支持广泛的应用场景。在一个大型企业里，应用程序经常会存在很长时间，并且必须运行在一个开发者不能控制升级周期的 JDK 和应用服务器上。
+另外一些可能会作为一个内嵌服务器的单独 jar 包，运行在一个云环境里，还有一些可能是一个不需要服务器的独立应用程序（例如批处理或者集成处理工作）。
+Spring 是开源的。它有一个庞大而活跃的社群，基于各种实际用例，提供持续反馈。这也帮助了 Spring 在相当长一段时间内成功发展。。
+当我们在谈 Spring 时我们在谈什么
+“Spring” 这个术语在不同的语境下有着不同的含义。它可以用来表示 SpringFramework 这个项目自身，一切都是从这里开始的（-译者按：梦开始的地方）。随着时间的推移，又构建了一些以 SpringFramework 为基础的 Spring 项目。大部分情况下，当人们谈论 Spring，他们的意思是 Spring 整个系列（-译者按：俗称全家桶）。本参考文档只针对这个基础进行介绍：SpringFramework 本身。
+SpringFramework 被分成不同的模块。应用程序可以根据他们所需要的模块进行选择。这些模块中处于核心的是 core container，包括配置模型和依赖注入机制。除此之外，SpringFramework 还对于不同应用架构提供基础支持，包括消息传递、事务以及持久化和 web。它同时也包含了基于 Servlet 的 SpringMVC web 框架以及Spring WebFlux 响应式web框架。
+关于这些模块需要注意的是：
+Spring 的框架，允许部署到 JDK 9 的模块路径（&ldquo;Jigsaw&rdquo;）。对于在支持 “Jigsaw” 的应用程序中的使用，Spring Framework 5 的 jar 包里面，携带了 “Automatic-Module-Name” 的 manifest entries，它定义了稳定的语言级别模块名（例如：“spring.core”，“spring.context” 等等），它与 jar 的 artifact 名字独立（ 这些 jar 遵循同样的模式，例如 “spring-core” 和 “spring-context”。 “-” 代替 “.”" />
+<meta name="keywords" content="Spring," />
+
+<link rel="canonical" href="http://localhost:1313/2023/09/%E8%AF%91-springframework-%E6%A6%82%E8%BF%B0/">
+
+
+<meta property="og:url" content="http://localhost:1313/2023/09/%E8%AF%91-springframework-%E6%A6%82%E8%BF%B0/">
+  <meta property="og:site_name" content="ReadTinyWord">
+  <meta property="og:title" content="[译] SpringFramework 概述">
+  <meta property="og:description" content="概述 Spring 使得创建 Java 企业级应用更加容易。它提供了你在企业环境下拥抱 Java 语言所需要的一切，支持 JVM 平台上的 Groovy 和 Kotlin 作为备选语言，并且提供了根据应用程序的需求创建多种架构的灵活性。从 SpringFramework 6.0 开始，Spring 需要 Java 17 以上的版本。
+Spring 支持广泛的应用场景。在一个大型企业里，应用程序经常会存在很长时间，并且必须运行在一个开发者不能控制升级周期的 JDK 和应用服务器上。 另外一些可能会作为一个内嵌服务器的单独 jar 包，运行在一个云环境里，还有一些可能是一个不需要服务器的独立应用程序（例如批处理或者集成处理工作）。
+Spring 是开源的。它有一个庞大而活跃的社群，基于各种实际用例，提供持续反馈。这也帮助了 Spring 在相当长一段时间内成功发展。。
+当我们在谈 Spring 时我们在谈什么 “Spring” 这个术语在不同的语境下有着不同的含义。它可以用来表示 SpringFramework 这个项目自身，一切都是从这里开始的（-译者按：梦开始的地方）。随着时间的推移，又构建了一些以 SpringFramework 为基础的 Spring 项目。大部分情况下，当人们谈论 Spring，他们的意思是 Spring 整个系列（-译者按：俗称全家桶）。本参考文档只针对这个基础进行介绍：SpringFramework 本身。
+SpringFramework 被分成不同的模块。应用程序可以根据他们所需要的模块进行选择。这些模块中处于核心的是 core container，包括配置模型和依赖注入机制。除此之外，SpringFramework 还对于不同应用架构提供基础支持，包括消息传递、事务以及持久化和 web。它同时也包含了基于 Servlet 的 SpringMVC web 框架以及Spring WebFlux 响应式web框架。
+关于这些模块需要注意的是：
+Spring 的框架，允许部署到 JDK 9 的模块路径（“Jigsaw”）。对于在支持 “Jigsaw” 的应用程序中的使用，Spring Framework 5 的 jar 包里面，携带了 “Automatic-Module-Name” 的 manifest entries，它定义了稳定的语言级别模块名（例如：“spring.core”，“spring.context” 等等），它与 jar 的 artifact 名字独立（ 这些 jar 遵循同样的模式，例如 “spring-core” 和 “spring-context”。 “-” 代替 “.”">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-09-02T11:46:07+08:00">
+    <meta property="article:modified_time" content="2023-09-02T11:46:07+08:00">
+    <meta property="article:tag" content="Spring">
+    <meta property="og:image" content="http://localhost:1313/images/share.png">
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/share.png">
+  <meta name="twitter:title" content="[译] SpringFramework 概述">
+  <meta name="twitter:description" content="概述 Spring 使得创建 Java 企业级应用更加容易。它提供了你在企业环境下拥抱 Java 语言所需要的一切，支持 JVM 平台上的 Groovy 和 Kotlin 作为备选语言，并且提供了根据应用程序的需求创建多种架构的灵活性。从 SpringFramework 6.0 开始，Spring 需要 Java 17 以上的版本。
+Spring 支持广泛的应用场景。在一个大型企业里，应用程序经常会存在很长时间，并且必须运行在一个开发者不能控制升级周期的 JDK 和应用服务器上。 另外一些可能会作为一个内嵌服务器的单独 jar 包，运行在一个云环境里，还有一些可能是一个不需要服务器的独立应用程序（例如批处理或者集成处理工作）。
+Spring 是开源的。它有一个庞大而活跃的社群，基于各种实际用例，提供持续反馈。这也帮助了 Spring 在相当长一段时间内成功发展。。
+当我们在谈 Spring 时我们在谈什么 “Spring” 这个术语在不同的语境下有着不同的含义。它可以用来表示 SpringFramework 这个项目自身，一切都是从这里开始的（-译者按：梦开始的地方）。随着时间的推移，又构建了一些以 SpringFramework 为基础的 Spring 项目。大部分情况下，当人们谈论 Spring，他们的意思是 Spring 整个系列（-译者按：俗称全家桶）。本参考文档只针对这个基础进行介绍：SpringFramework 本身。
+SpringFramework 被分成不同的模块。应用程序可以根据他们所需要的模块进行选择。这些模块中处于核心的是 core container，包括配置模型和依赖注入机制。除此之外，SpringFramework 还对于不同应用架构提供基础支持，包括消息传递、事务以及持久化和 web。它同时也包含了基于 Servlet 的 SpringMVC web 框架以及Spring WebFlux 响应式web框架。
+关于这些模块需要注意的是：
+Spring 的框架，允许部署到 JDK 9 的模块路径（“Jigsaw”）。对于在支持 “Jigsaw” 的应用程序中的使用，Spring Framework 5 的 jar 包里面，携带了 “Automatic-Module-Name” 的 manifest entries，它定义了稳定的语言级别模块名（例如：“spring.core”，“spring.context” 等等），它与 jar 的 artifact 名字独立（ 这些 jar 遵循同样的模式，例如 “spring-core” 和 “spring-context”。 “-” 代替 “.”">
+
+
+
+
+  <meta itemprop="name" content="[译] SpringFramework 概述">
+  <meta itemprop="description" content="概述 Spring 使得创建 Java 企业级应用更加容易。它提供了你在企业环境下拥抱 Java 语言所需要的一切，支持 JVM 平台上的 Groovy 和 Kotlin 作为备选语言，并且提供了根据应用程序的需求创建多种架构的灵活性。从 SpringFramework 6.0 开始，Spring 需要 Java 17 以上的版本。
+Spring 支持广泛的应用场景。在一个大型企业里，应用程序经常会存在很长时间，并且必须运行在一个开发者不能控制升级周期的 JDK 和应用服务器上。 另外一些可能会作为一个内嵌服务器的单独 jar 包，运行在一个云环境里，还有一些可能是一个不需要服务器的独立应用程序（例如批处理或者集成处理工作）。
+Spring 是开源的。它有一个庞大而活跃的社群，基于各种实际用例，提供持续反馈。这也帮助了 Spring 在相当长一段时间内成功发展。。
+当我们在谈 Spring 时我们在谈什么 “Spring” 这个术语在不同的语境下有着不同的含义。它可以用来表示 SpringFramework 这个项目自身，一切都是从这里开始的（-译者按：梦开始的地方）。随着时间的推移，又构建了一些以 SpringFramework 为基础的 Spring 项目。大部分情况下，当人们谈论 Spring，他们的意思是 Spring 整个系列（-译者按：俗称全家桶）。本参考文档只针对这个基础进行介绍：SpringFramework 本身。
+SpringFramework 被分成不同的模块。应用程序可以根据他们所需要的模块进行选择。这些模块中处于核心的是 core container，包括配置模型和依赖注入机制。除此之外，SpringFramework 还对于不同应用架构提供基础支持，包括消息传递、事务以及持久化和 web。它同时也包含了基于 Servlet 的 SpringMVC web 框架以及Spring WebFlux 响应式web框架。
+关于这些模块需要注意的是：
+Spring 的框架，允许部署到 JDK 9 的模块路径（“Jigsaw”）。对于在支持 “Jigsaw” 的应用程序中的使用，Spring Framework 5 的 jar 包里面，携带了 “Automatic-Module-Name” 的 manifest entries，它定义了稳定的语言级别模块名（例如：“spring.core”，“spring.context” 等等），它与 jar 的 artifact 名字独立（ 这些 jar 遵循同样的模式，例如 “spring-core” 和 “spring-context”。 “-” 代替 “.”">
+  <meta itemprop="datePublished" content="2023-09-02T11:46:07+08:00">
+  <meta itemprop="dateModified" content="2023-09-02T11:46:07+08:00">
+  <meta itemprop="wordCount" content="300">
+  <meta itemprop="image" content="http://localhost:1313/images/share.png">
+  <meta itemprop="keywords" content="Spring">
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+   
+  :root {
+    --width-max: 720px;
+    --font-primary: Verdana, sans-serif;
+    --font-secondary: monospace;
+    --font-size-primary: 1em;
+    --font-size-secondary: 0.8em;
+    --body-bg-color: #fcfcfc;
+    --bold-text-color: #222;
+    --body-text-color: #444;
+    --link-color: #3273dc;
+    --link-visited-color: #8b6fcb;
+    --table-border-color: #f2f2f2;
+    --table-th-bg-color: #f2f2f2;
+    --img-border-color: #f2f2f2;
+    --code-bg-color: #f2f2f2;
+    --code-text-color: #222;
+    --blockquote-border-color: #666;
+    --blockquote-text-color: #666;
+    --upvoted-color: #FA8072;
+  }
+
+  @media (prefers-color-scheme: dark) {
+     
+    :root {
+      --body-bg-color: #1c1c1c;
+      --bold-text-color: #eee;
+      --body-text-color: #ddd;
+      --link-color: #8cc2dd;
+      --link-visited-color: #c3b1ee;
+      --table-border-color: #999;
+      --table-th-bg-color: #999;
+      --img-border-color: #999;
+      --code-bg-color: #555;
+      --code-text-color: #ddd;
+      --blockquote-border-color: #ccc;
+      --blockquote-text-color: #ccc;
+    }
+  }
+
+  body {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-primary);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width-max);
+    text-align: left;
+    background-color: var(--body-bg-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    color: var(--body-text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong,
+  b {
+    color: var(--bold-text-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 16px 0;
+  }
+
+  a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .title {
+    text-decoration: none;
+    border: 0;
+  }
+
+  .title:hover {
+    text-decoration: none;
+  }
+
+  .title span {
+    font-weight: 400;
+  }
+
+  nav a {
+    margin-right: 8px;
+  }
+
+  textarea {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  content {
+    line-height: 1.6;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--table-border-color);
+    border-radius: 4px;
+  }
+
+  th,
+  td {
+    border: 1px solid var(--table-border-color);
+    padding: 4px;
+  }
+
+  th {
+    background-color: var(--table-th-bg-color);
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px dashed;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid var(--img-border-color);
+    border-radius: 4px;
+    content-visibility: auto;
+    loading: lazy;
+  }
+
+  img[src*="#minipic"] {
+    max-width: 50%;
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  i {
+    font-style: normal;
+  }
+
+  time {
+    font-family: var(--font-secondary);
+    font-size: 15px;
+  }
+
+  code {
+    font-family: var(--font-secondary);
+    background-color: var(--code-bg-color);
+    color: var(--code-text-color);
+    padding: 2px;
+    border-radius: 4px;
+  }
+
+  pre code {
+    display: block;
+    padding: 16px;
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+
+  div.highlight pre {
+    border-radius: 4px;
+  }
+
+  div.highlight code {
+    background-color: var(--code-bg-color);
+    color: var(--code-text-color);
+  }
+
+  blockquote {
+    border-left: 2px solid var(--blockquote-border-color);
+    color: var(--blockquote-text-color);
+    margin: 0;
+    padding-left: 16px;
+    font-style: normal;
+  }
+
+  blockquote p {
+    margin: 0;
+  }
+
+  footer {
+    padding: 25px 0;
+    text-align: center;
+    font-size: var(--font-size-secondary);
+  }
+
+  ul li:has(input) {
+    list-style-type: none;
+    margin-left: -25.5px;
+  }
+
+   
+  ul.blog-posts {
+    list-style-type: none;
+    padding: unset;
+  }
+
+  ul.blog-posts li {
+    display: flex;
+  }
+
+  ul.blog-posts li span {
+    flex: 0 0 130px;
+  }
+
+  ul.blog-posts li span.grouped {
+    flex: 0 0 80px;
+  }
+
+  ul.blog-posts li a:visited {
+    color: var(--link-visited-color);
+  }
+
+   
+  div.toc {
+    position: fixed;
+    top: 50%;
+    left: calc((100vw + var(--width-max)) / 2);
+    transform: translateY(-50%);
+    width: calc((90vw - var(--width-max)) / 2);
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 20px 8px;
+    z-index: 99;
+
+     
+    &::-webkit-scrollbar {
+        display: none;  
+    }
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+  }
+
+  div.toc ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  div.toc ul li {
+    margin: 8px 0;
+  }
+
+  div.toc ul li a {
+    text-decoration: none;
+    color: var(--blockquote-text-color);
+  }
+
+  div.toc ul li a:hover {
+    color: var(--link-color);
+  }
+
+   
+  button.upvote-btn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--body-text-color);
+  }
+
+  button.upvoted {
+    color: var(--upvoted-color);
+  }
+
+  span.upvote-count {
+    margin-top: -4px;
+    font-size: smaller;
+  }
+
+  @media (max-width: 500px) {
+    img[src*="#minipic"] {
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    div.toc {
+      display: none;
+    }
+  }
+</style>
+
+</head>
+
+<body>
+  <header><a href="/" class="title">
+  <h1>ReadTinyWord</h1>
+</a>
+<nav><a href="/">Home</a>
+
+
+</nav>
+</header>
+  <main>
+ 
+
+<content> <h1 id="概述">概述</h1>
+<p>Spring 使得创建 Java 企业级应用更加容易。它提供了你在企业环境下拥抱 Java 语言所需要的一切，支持 JVM 平台上的 Groovy 和 Kotlin 作为备选语言，并且提供了根据应用程序的需求创建多种架构的灵活性。从 SpringFramework 6.0 开始，Spring 需要 Java 17 以上的版本。</p>
+<p>Spring 支持广泛的应用场景。在一个大型企业里，应用程序经常会存在很长时间，并且必须运行在一个开发者不能控制升级周期的 JDK 和应用服务器上。
+另外一些可能会作为一个内嵌服务器的单独 jar 包，运行在一个云环境里，还有一些可能是一个不需要服务器的独立应用程序（例如批处理或者集成处理工作）。</p>
+<p>Spring 是开源的。它有一个庞大而活跃的社群，基于各种实际用例，提供持续反馈。这也帮助了 Spring 在相当长一段时间内成功发展。。</p>
+<h1 id="当我们在谈-spring-时我们在谈什么">当我们在谈 Spring 时我们在谈什么</h1>
+<p>“Spring” 这个术语在不同的语境下有着不同的含义。它可以用来表示 SpringFramework 这个项目自身，一切都是从这里开始的（-译者按：梦开始的地方）。随着时间的推移，又构建了一些以 SpringFramework 为基础的 Spring 项目。大部分情况下，当人们谈论 Spring，他们的意思是 Spring 整个系列（-译者按：俗称全家桶）。本参考文档只针对这个基础进行介绍：SpringFramework 本身。</p>
+<p>SpringFramework 被分成不同的模块。应用程序可以根据他们所需要的模块进行选择。这些模块中处于核心的是 core container，包括配置模型和依赖注入机制。除此之外，SpringFramework 还对于不同应用架构提供基础支持，包括消息传递、事务以及持久化和 web。它同时也包含了基于 Servlet 的 SpringMVC web 框架以及Spring WebFlux 响应式web框架。</p>
+<p>关于这些模块需要注意的是：</p>
+<p>Spring 的框架，允许部署到 JDK 9 的模块路径（&ldquo;Jigsaw&rdquo;）。对于在支持 “Jigsaw” 的应用程序中的使用，Spring Framework 5 的 jar 包里面，携带了 “Automatic-Module-Name” 的 manifest entries，它定义了稳定的语言级别模块名（例如：“spring.core”，“spring.context” 等等），它与 jar 的 artifact 名字独立（ 这些 jar 遵循同样的模式，例如 “spring-core” 和 “spring-context”。 “-” 代替 “.”</p>
+<blockquote>
+<p>译者按：本人对于 Jigsaw 不太熟悉，等后面熟悉了，再过来修正这一段的翻译。目前，是不知道这段说了什么的。</p></blockquote>
+<p>当然，Spring 框架中的 jar 包，在 JDK 9 和 JDK 9+ 的 classpath 中，可以继续正常工作。</p>
+<h1 id="spring-和-spring-framework-的历史">Spring 和 Spring Framework 的历史</h1>
+<p>在 2003 年，为了应对 J2EE 早期规范的复杂性，Spring 应运而生。
+虽然一些人认为 Java EE 和他的现代继承者 Jakarta EE 与 Spring 势不两立，但是他们实际上是互为补充的。
+Spring 的编程模型不会拥抱 Jakarta EE 平台的规范，相反，它从传统的 EE 的笼罩下面，精心挑选了一些规范，并与之整合：</p>
+<ul>
+<li>
+<p>Servlet API (JSR 340)</p>
+</li>
+<li>
+<p>WebSocket API (JSR 356)</p>
+</li>
+<li>
+<p>Concurrency Utilities (JSR 236)</p>
+</li>
+<li>
+<p>JSON Binding API (JSR 367)</p>
+</li>
+<li>
+<p>Bean Validation (JSR 303)</p>
+</li>
+<li>
+<p>JPA (JSR 338)</p>
+</li>
+<li>
+<p>JMS (JSR 914)</p>
+</li>
+<li>
+<p>如果有必要的话，还有 JTA/JCA 用于事务协商的设置</p>
+</li>
+</ul>
+<p>SpringFramework 还支持应用开发者使用依赖注入规范（JSR 330）和通用注解规范（JSR 250），代替 SpringFramework 提供的 Spring 规范机制。最初，他们都是基于 javax 包的。</p>
+<blockquote>
+<p>译者按：自由即长久。</p></blockquote>
+<p>SpringFramework 6.0 里，Spring 已经升级到 Jakarta EE 9（例如：Servlet 5.0+，JPA 3.0+），基于 Jakarta 名称空间，而非传统的 javax 包。
+从 EE 9 开始到现在已经支持的 EE 10，Spring 准备对 Jakarta EE 接口的进一步发展提供开箱即用的支持。</p>
+<p>SpringFramework 6.0 已经完全兼容 Tomcat 10.1，Jetty 11 和 Undertow 2.3 作为 web 服务器，这其中也抱愧 Hibernate ORM 6.1.</p>
+<p>随着时间的推移，Java/Jakarta EE 在应用开发中的角色在不断演进。在 J2EE 和 Spring 的早期，应用被创建后，部署到一个应用服务器上。</p>
+<p>今天，在 Spring Boot 的帮助下，应用可以以一种 devops 和云友好的方式创建，内嵌 Servlet 容器，并且易于修改。从 SpringFramework 5 开始，WebFlux 应用甚至不直接使用 Servlet API 就可以在非 Servlet 的服务器上运行起来（例如 Netty）</p>
+<p>Spring 持续创新和演进。除了 SpringFramework 之外，还有很多项目，例如 Spring Boot，Spring Security，Spring Data，Spring Cloud，Spring Batch。
+值得记住的是：每一个项目都有它自己的源码仓库，问题追踪和发版节奏。可以在 <a href="https://spring.io/projects">spring.io/projects</a> 看到 Spring 项目的完整清单。</p>
+<h1 id="设计哲学">设计哲学</h1>
+<p>当你了解一个框架时，重要的不是知道它做了什么而是它遵循什么样的准则。SpringFramework 的指导准则如下：</p>
+<ul>
+<li>在每一个级别上提供选择。Spring 可以让你尽可能晚地推迟做出设计决策。比如，你可以在不更改代码的情况下，改变你的持久化方案。对于其他的基础设施问题，整合其他第三方的 API，这一点同样适用。</li>
+<li>兼容并包。Spring 拥抱灵活性，并不介意事情是怎么被完成的。它提供了在不同观念下的诸多需要。</li>
+<li>保持较强的向后兼容性。Spring 的演进经过精心管理，在版本之间，几乎没有特别大的变化。Spring 精心挑选 JDK 版本号范围以及第三方库，以方便维护依赖于 Spring 的应用以及库。</li>
+<li>精心设计 API。Spring 团队投入了较多的时间和精力设计 API，目的是让 API 更加符合直觉，可以使用很多年，跨越多个版本。</li>
+<li>对代码质量设置较高的标准。SpringFramework 重点强调有意义的、及时、精确的 javadoc。它是为数不多的声称拥有干净的代码架构且在不同的包之间没有循环引用的项目之一。</li>
+</ul>
+<h1 id="开始">开始</h1>
+<p>如果你刚开始接触 Spring，你也许会从创建一个基于 SpringBoot 应用开始使用 SpringFramework。SpringBoot 提供了一个快速（固定）的方式来创建可部署生产环境的基于 Spring 的应用。它基于 SpringFramework，喜欢约定优于配置的风格，设计它就是为了让你能够尽可能快地启动和运行。</p>
+<p>你可以使用<a href="https://start.spring.io/">start.spring.io</a>来生成一个基本的项目，或者遵循<a href="https://spring.io/guides">&ldquo;Getting Started&rdquo; 指南</a> 例如 <a href="https://spring.io/guides/gs/rest-service/">Getting Started Building a RESTful Web Service</a>。</p>
+<p>这些指南都是任务导向且易于理解的，他们中的大部分是基于 SpringBoot。它同时也涵盖了 Spring 产品中的其他项目，这些你可能会在解决某个具体的问题时会使用到。</p>
+ </content>
+
+<p>
+  
+  <a href="http://localhost:1313/posts/tags/">#Spring</a>
+  
+</p>
+
+
+
+
+
+
+ 
+<div class="toc">
+<nav id="TableOfContents"></nav>
+</div>
+
+
+
+  </main>
+  <footer>
+
+
+Subscribe via <a href="/index.xml">RSS</a> or just <a href="mailto:anriclee@gmail.com">say hello</a>.
+<br />
+
+
+
+
+
+
+
+
+Made with
+<a href="https://github.com/rokcso/hugo-bearblog-neo/">Hugo Bear Neo</a>.
+<br />
+
+
+
+
+Copyright © 2024-2025, Rokcso.
+
+
+🗺️ <a href="/sitemap.xml">Sitemap</a>.
+
+</footer>
+
+    
+
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Syntax on ReadTinyWord</title>
+    <link>http://localhost:1313/posts/syntax/</link>
+    <description>Recent content in Syntax on ReadTinyWord</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    
+      <managingEditor>anriclee@gmail.com (anriclee)</managingEditor>
+    
+    
+      <webMaster>anriclee@gmail.com (anriclee)</webMaster>
+    
+    
+    <copyright>Copyright © 2024-2025, Rokcso.</copyright>
+    
+    
+    <lastBuildDate>Fri, 08 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+    
+    <follow_challenge>
+        <feedId>00000000000000000</feedId>
+        <userId>00000000000000000</userId>
+    </follow_challenge>
+    
+    <atom:link href="http://localhost:1313/posts/syntax/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Math Typesetting</title>
+      <link>http://localhost:1313/docs/math-typesetting/</link>
+      <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate><author>anriclee@gmail.com (anriclee)</author>
+      <guid>http://localhost:1313/docs/math-typesetting/</guid>
+      <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;&#xA;&lt;p&gt;In this example we will be using &lt;a href=&#34;https://katex.org/&#34;&gt;KaTeX&lt;/a&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Create a partial under &lt;code&gt;/layouts/partials/math.html&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Within this partial reference the &lt;a href=&#34;https://katex.org/docs/autorender.html&#34;&gt;Auto-render Extension&lt;/a&gt; or host these scripts locally.&lt;/li&gt;&#xA;&lt;li&gt;Include the partial in your templates (&lt;a href=&#34;../faq/#custom-head--footer&#34;&gt;&lt;code&gt;extend_head.html&lt;/code&gt;&lt;/a&gt;) like so:&lt;/li&gt;&#xA;&lt;li&gt;refer &lt;a href=&#34;https://github.com/adityatelange/hugo-PaperMod/issues/236&#34;&gt;ISSUE #236&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; or .Params.math .Site.Params.math &lt;span style=&#34;color:#f92672&#34;&gt;}}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;{{&lt;/span&gt; partial &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;math.html&amp;#34;&lt;/span&gt; . &lt;span style=&#34;color:#f92672&#34;&gt;}}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;{{&lt;/span&gt; end &lt;span style=&#34;color:#f92672&#34;&gt;}}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;&#xA;&lt;li&gt;To enable KaTex globally set the parameter &lt;code&gt;math&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; in a project&amp;rsquo;s configuration&lt;/li&gt;&#xA;&lt;li&gt;To enable KaTex on a per page basis include the parameter &lt;code&gt;math: true&lt;/code&gt; in content files&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Use the online reference of &lt;a href=&#34;https://katex.org/docs/supported.html&#34;&gt;Supported TeX Functions&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;h3 id=&#34;examples&#34;&gt;Examples&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;Block math:&lt;/p&gt;&#xA;&lt;p&gt;$$&#xA;\varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } }&#xA;$$&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

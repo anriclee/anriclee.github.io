@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TCP/IP on ReadTinyWord</title>
+    <link>http://localhost:1313/blog/tcp/ip/</link>
+    <description>Recent content in TCP/IP on ReadTinyWord</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    
+      <managingEditor>anriclee@gmail.com (anriclee)</managingEditor>
+    
+    
+      <webMaster>anriclee@gmail.com (anriclee)</webMaster>
+    
+    
+    <copyright>Copyright © 2024-2025, Rokcso.</copyright>
+    
+    
+    <lastBuildDate>Sun, 17 Jul 2022 17:20:28 +0800</lastBuildDate>
+    
+    
+    <follow_challenge>
+        <feedId>00000000000000000</feedId>
+        <userId>00000000000000000</userId>
+    </follow_challenge>
+    
+    <atom:link href="http://localhost:1313/blog/tcp/ip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 Socket 创建 TCP 服务器</title>
+      <link>http://localhost:1313/posts/socket/</link>
+      <pubDate>Sun, 17 Jul 2022 17:20:28 +0800</pubDate><author>anriclee@gmail.com (anriclee)</author>
+      <guid>http://localhost:1313/posts/socket/</guid>
+      <description>&lt;p&gt;bind&#xA;listen&lt;/p&gt;&#xA;&lt;p&gt;accept&lt;/p&gt;&#xA;&lt;p&gt;accept 的方法签名如下：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;sys/socket.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;accept&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; sockfd, &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; sockaddr &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;restrict&lt;/span&gt; addr, &lt;span style=&#34;color:#66d9ef&#34;&gt;socklen_t&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;restrict&lt;/span&gt; addrlen);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;&#xA;&lt;p&gt;The accept() system call is used with &lt;strong&gt;connection-based&lt;/strong&gt; socket types (SOCK_STREAM, SOCK_SEQPACKET).&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;SOCK_STREAM 代表 TCP 连接方式&#xA;SOCK_SEQPACKET 代表 UDP 连接方式&lt;/p&gt;&#xA;&lt;p&gt;签名中的 sockfd 代表监听的 socket 连接&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;It extracts the &lt;strong&gt;first connection request&lt;/strong&gt; on the queue of pending connections for the listening socket, &lt;code&gt;sockfd&lt;/code&gt;, creates a &lt;strong&gt;new connected socket&lt;/strong&gt;, and returns a &lt;strong&gt;new file descriptor&lt;/strong&gt; referring to that socket.  The newly created socket is not in the listening state.  The original socket sockfd is unaffected by this call.&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;这段话给出的信息较多：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;sockfd 是所监听的 &lt;code&gt;socket&lt;/code&gt; 的文件描述符；&lt;/li&gt;&#xA;&lt;li&gt;不知道有多少 client 向该 &lt;code&gt;socket&lt;/code&gt; 发起请求，但是这些请求都会排到该 &lt;code&gt;socket&lt;/code&gt; 的请求队列中，队列的长度最长可以有多长？？？；&lt;/li&gt;&#xA;&lt;li&gt;accept 方法每次仅从请求队列中取队头进行处理；&lt;/li&gt;&#xA;&lt;li&gt;处理请求时，会创建一个新的 &lt;code&gt;socket&lt;/code&gt;，并返回一个指向该 &lt;code&gt;socket&lt;/code&gt; 的文件描述符；&lt;/li&gt;&#xA;&lt;li&gt;新创建的这个 &lt;code&gt;socket&lt;/code&gt; 不在 &lt;code&gt;listen&lt;/code&gt; 状态&lt;/li&gt;&#xA;&lt;li&gt;此次 &lt;code&gt;accept&lt;/code&gt; 调用，不影响原来的 &lt;code&gt;socket&lt;/code&gt; 的状态&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.tutorialspoint.com/unix_sockets/socket_server_example.htm&#34;&gt;https://www.tutorialspoint.com/unix_sockets/socket_server_example.htm&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man2/accept.2.html&#34;&gt;https://man7.org/linux/man-pages/man2/accept.2.html&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/&#34;&gt;https://www.geeksforgeeks.org/tcp-server-client-implementation-in-c/&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/#.YtLNMpdBxQJ&#34;&gt;https://devarea.com/linux-io-multiplexing-select-vs-poll-vs-epoll/#.YtLNMpdBxQJ&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://stevens.netmeister.org/631/09-io-multiplexing.pdf&#34;&gt;https://stevens.netmeister.org/631/09-io-multiplexing.pdf&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;</description>
+    </item>
+  </channel>
+</rss>

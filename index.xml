@@ -1,4 +1,8 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>ReadTinyWords</title><link>https://anriclee.github.io/</link><description>Hugo theme - LoveIt</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Apr 2025 21:43:07 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>The Silicon Valley</title><link>https://anriclee.github.io/posts/essays/silicon_valley/</link><pubDate>Mon, 07 Apr 2025 22:09:24 +0800</pubDate><author>anriclee</author><guid>https://anriclee.github.io/posts/essays/silicon_valley/</guid><description><![CDATA[<p>It’s been years since I last wrote a blog—not even one in Chinese. I’d almost forgotten how to generate a new post with Hugo. So much has changed, and life’s pressures have piled up in ways words can hardly capture. Maybe that line from Friends rings true: &ldquo;Life sucks, but you’re gonna love it.&rdquo;</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>ReadTinyWords</title><link>https://anriclee.github.io/</link><description>Hugo theme - LoveIt</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Apr 2025 22:43:34 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>A new Hugo theme switched on my blog</title><link>https://anriclee.github.io/posts/essays/switchtheme/</link><pubDate>Tue, 08 Apr 2025 22:43:34 +0800</pubDate><author>anriclee</author><guid>https://anriclee.github.io/posts/essays/switchtheme/</guid><description><![CDATA[<p>This is probably my last time <em>switching to a theme made by others</em>. That&rsquo;s my commitment.</p>
+<p>Moving forward, I plan to create my own theme using my frontend knowledge and build it entirely from scratch.</p>
+<p>I have to admit that choosing a blog theme can be quite anxiety-inducing.</p>
+<p>From now on, I will focus on my first source code reading series about <em>Prometheus</em>.</p>
+<p>I plan to share my understanding through a series of articles.</p>]]></description></item><item><title>The Silicon Valley</title><link>https://anriclee.github.io/posts/essays/silicon_valley/</link><pubDate>Mon, 07 Apr 2025 22:09:24 +0800</pubDate><author>anriclee</author><guid>https://anriclee.github.io/posts/essays/silicon_valley/</guid><description><![CDATA[<p>It’s been years since I last wrote a blog—not even one in Chinese. I’d almost forgotten how to generate a new post with Hugo. So much has changed, and life’s pressures have piled up in ways words can hardly capture. Maybe that line from Friends rings true: &ldquo;Life sucks, but you’re gonna love it.&rdquo;</p>
 <p>The years have been a mix of highs and lows. There were moments when motivation vanished entirely, leaving me silent, unable to articulate even the simplest feelings.</p>]]></description></item><item><title>英雄与时势</title><link>https://anriclee.github.io/posts/essays/sanguo/</link><pubDate>Sun, 08 Oct 2023 21:17:00 +0800</pubDate><author>anriclee</author><guid>https://anriclee.github.io/posts/essays/sanguo/</guid><description><![CDATA[<p>最近恒大的暴雷，许家印的败落，一时间甚嚣尘上、沸沸扬扬。之前的时间，许家印还是一个英雄，而现在已经成为了狗熊。看了一些介绍许家印的视频，让我对时势和英雄的关系有了一些思考。</p>
 <p>许家印借着国家发展的东风扶摇直上，凭借敢闯敢干，成为中国首富，又凭借敢闯和敢干，盘子闹得太大，一时无法调头，而致惨淡收场，真是成也萧何，败也萧何。</p>
 <p>时势造英雄还是英雄造时势，这个问题一直争论不休。但是在我心里，有了初步的答案。</p>
@@ -138,55 +142,4 @@
 </ul>
 <p>Note：如果你对通用的声明式服务或者其他预先打包的声明式中间件服务感兴趣，你不用直接和 Spring AOP 直接打交道，可以跳过本章的大部分地方。</p>
 <h1 id="aop-概念">AOP 概念</h1>
-<p>让我们从一些核心的 AOP 概念和术语出发。这些术语并不只是 Spring 特有的。不幸地是，AOP 术语并不符合直觉。然而，如果 Spring 使用它自己的术语，或许会更加令人迷惑。</p>]]></description></item><item><title>[译] Bean 概述</title><link>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/bean_overview/</link><pubDate>Sat, 02 Sep 2023 23:12:31 +0800</pubDate><author>anriclee</author><guid>https://anriclee.github.io/posts/spring_framework/core/the_ioc_container/bean_overview/</guid><description><![CDATA[<p>一个 Sring IoC 容器可以操作一个或者多个 bean。这些 bean 是通过你提供给容器的配置元数据生成的（例如，以 XML 中的 <code>&lt;bean/&gt;</code> ）。</p>
-<p>在容器内，这些 bean 的定义被表示成 <code>BeanDefinition</code> 对象的形式，包含了下面的元数据：</p>
-<ul>
-<li>包定义的类名：通常是定义的 bean 的真正实现类</li>
-<li>bean 行为配置元素，表明了 bean 在 container 中的行为（scope，生命周期回调等等）。</li>
-<li>对其他需要的 bean 的引用。这些引用也被称作协作器和依赖。</li>
-<li>在一个新创建的对象中的其他配置设置 - 例如，池的数量限制或者一个操作连接池 bean 中的连接数量</li>
-</ul>
-<p>这些元数据转换为构成这些 bean 定义的一系列属性。下表表示了这些属性值：</p>
-<table>
-  <thead>
-      <tr>
-          <th>属性</th>
-          <th>含义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Class</td>
-          <td>正在实例化的bean</td>
-      </tr>
-      <tr>
-          <td>Name</td>
-          <td>bean的名字</td>
-      </tr>
-      <tr>
-          <td>Scope</td>
-          <td>Bean的Scope</td>
-      </tr>
-      <tr>
-          <td>构造函数参数</td>
-          <td>依赖注入</td>
-      </tr>
-      <tr>
-          <td>自动装配模式</td>
-          <td>装配的协作对象</td>
-      </tr>
-      <tr>
-          <td>懒加载模式</td>
-          <td>懒加载 Bean</td>
-      </tr>
-      <tr>
-          <td>初始化方法</td>
-          <td>初始化回调</td>
-      </tr>
-      <tr>
-          <td>析构方法</td>
-          <td>析构回调</td>
-      </tr>
-  </tbody>
-</table>
-<p>除了包含怎么创建一个特定的 bean 的信息之外， <code>ApplicationContext</code> 的实现同样允许在容器外面已经创建好的对象注册到其中（用户创建）。这是通过 <code>getBeanFactory</code> 方法获取到 <code>ApplicationContext</code> 的 <code>BeanFactory</code>，得到 <code>DefaultListableBeanFactory</code> 实现来做到的。<code>DefaultListableBeanFactory</code> 支持通过调用 <code>registerSingleton(..)</code>  和 <code>registerBeanDefinition(..)</code> 方法来实现这样的注册。然而，典型的应用程序仅仅使用常规的 bean 定义元数据。</p>]]></description></item></channel></rss>
+<p>让我们从一些核心的 AOP 概念和术语出发。这些术语并不只是 Spring 特有的。不幸地是，AOP 术语并不符合直觉。然而，如果 Spring 使用它自己的术语，或许会更加令人迷惑。</p>]]></description></item></channel></rss>

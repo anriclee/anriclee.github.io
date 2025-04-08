@@ -3,15 +3,7 @@
         <title>Icons - tag - ReadTinyWords</title>
         <link>http://localhost:1313/tags/icons/</link>
         <description>Icons - tag - ReadTinyWords</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Apr 2025 21:43:07 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/icons/" rel="self" type="application/rss+xml" /><item>
-    <title>My New Post</title>
-    <link>http://localhost:1313/blog/my-new-post/</link>
-    <pubDate>Tue, 08 Apr 2025 21:43:07 &#43;0800</pubDate>
-    <author>anriclee</author>
-    <guid>http://localhost:1313/blog/my-new-post/</guid>
-    <description><![CDATA[<p>This is a page about »My New Post«.</p>]]></description>
-</item>
-<item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 20 Jan 2021 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/icons/" rel="self" type="application/rss+xml" /><item>
     <title>Icons</title>
     <link>http://localhost:1313/docs/icons/</link>
     <pubDate>Wed, 20 Jan 2021 00:00:00 &#43;0000</pubDate>

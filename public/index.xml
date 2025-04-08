@@ -3,9 +3,21 @@
         <title>ReadTinyWords</title>
         <link>http://localhost:1313/</link>
         <description>Hugo theme - LoveIt</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Apr 2025 21:43:07 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Apr 2025 22:43:34 &#43;0800</lastBuildDate>
             <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>A new Hugo theme switched on my blog</title>
+    <link>http://localhost:1313/posts/essays/switchtheme/</link>
+    <pubDate>Tue, 08 Apr 2025 22:43:34 &#43;0800</pubDate>
+    <author>anriclee</author>
+    <guid>http://localhost:1313/posts/essays/switchtheme/</guid>
+    <description><![CDATA[<p>This is probably my last time <em>switching to a theme made by others</em>. That&rsquo;s my commitment.</p>
+<p>Moving forward, I plan to create my own theme using my frontend knowledge and build it entirely from scratch.</p>
+<p>I have to admit that choosing a blog theme can be quite anxiety-inducing.</p>
+<p>From now on, I will focus on my first source code reading series about <em>Prometheus</em>.</p>
+<p>I plan to share my understanding through a series of articles.</p>]]></description>
+</item>
+<item>
     <title>The Silicon Valley</title>
     <link>http://localhost:1313/posts/essays/silicon_valley/</link>
     <pubDate>Mon, 07 Apr 2025 22:09:24 &#43;0800</pubDate>
@@ -165,7 +177,7 @@
 <p>使用 DI 原则的代码更加干净整洁，并且提供给对象的依赖时，解耦也更加高效。对象并不找他们的依赖也并不知道这些依赖的地址或者类。这样的结果就是，你的类变得更易测试，尤其是当依赖是接口或者抽象的父类时，在单元测试可以对这些依赖进行打桩或者mock他们的实现。</p>
 <h1 id="基于构造函数的依赖注入">基于构造函数的依赖注入</h1>
 <p>基于构造函数的依赖注入，是通过容器调用构造函数，并且传入若干参数来实现的，每一个参数都代表了一个依赖。调用静态工厂方法并传入特定的参数来构造一个 bean 也是一样的，在本讨论中，对待构造函数的参数和静态方法的参数也是相似的。下面的这里展示了一个之能通过构造函数来进行依赖注入的类：</p>
-<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
     <div class="code-header language-Java">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -216,14 +228,6 @@
 <p>Note：如果你对通用的声明式服务或者其他预先打包的声明式中间件服务感兴趣，你不用直接和 Spring AOP 直接打交道，可以跳过本章的大部分地方。</p>
 <h1 id="aop-概念">AOP 概念</h1>
 <p>让我们从一些核心的 AOP 概念和术语出发。这些术语并不只是 Spring 特有的。不幸地是，AOP 术语并不符合直觉。然而，如果 Spring 使用它自己的术语，或许会更加令人迷惑。</p>]]></description>
-</item>
-<item>
-    <title>XXL Job 调度框架源码解析</title>
-    <link>http://localhost:1313/posts/xxl_job/</link>
-    <pubDate>Tue, 05 Sep 2023 23:01:18 &#43;0800</pubDate>
-    <author>anriclee</author>
-    <guid>http://localhost:1313/posts/xxl_job/</guid>
-    <description><![CDATA[]]></description>
 </item>
 </channel>
 </rss>

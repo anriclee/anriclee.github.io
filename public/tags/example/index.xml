@@ -3,21 +3,13 @@
         <title>Example - tag - ReadTinyWords</title>
         <link>http://localhost:1313/tags/example/</link>
         <description>Example - tag - ReadTinyWords</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Apr 2025 21:43:07 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/example/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 13 Apr 2022 00:00:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/example/" rel="self" type="application/rss+xml" /><item>
     <title>Icons Preview</title>
     <link>http://localhost:1313/docs/icons_preview/</link>
     <pubDate>Wed, 13 Apr 2022 00:00:00 &#43;0000</pubDate>
     <author>anriclee</author>
     <guid>http://localhost:1313/docs/icons_preview/</guid>
     <description><![CDATA[Index of all icons in PaperModeX]]></description>
-</item>
-<item>
-    <title>My New Post</title>
-    <link>http://localhost:1313/blog/my-new-post/</link>
-    <pubDate>Tue, 08 Apr 2025 21:43:07 &#43;0800</pubDate>
-    <author>anriclee</author>
-    <guid>http://localhost:1313/blog/my-new-post/</guid>
-    <description><![CDATA[<p>This is a page about »My New Post«.</p>]]></description>
 </item>
 <item>
     <title>Math Typesetting</title>

@@ -37,7 +37,7 @@ AOP 概念 让我们从一些核心的 AOP 概念和术语出发。这些术语�
 <meta name="apple-mobile-web-app-title" content="My cool site">
 <meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/spring_framework/core/spring_aop/concept/" /><link rel="prev" href="http://localhost:1313/posts/xxl_job/" /><link rel="next" href="http://localhost:1313/posts/essays/poems/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/spring_framework/core/spring_aop/concept/" /><link rel="prev" href="http://localhost:1313/posts/spring_framework/core/the_ioc_container/bean_overview/" /><link rel="next" href="http://localhost:1313/posts/essays/poems/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -251,7 +251,7 @@ AOP 概念 让我们从一些核心的 AOP 概念和术语出发。这些术语�
 <p>bean PCD 在实例级别进行操作（在 Spring bean 命名概念上构建），而非仅在类级别。基于实例的 pointcut 指示符是一个基于 Spring 代理的 AOP 框架与 Spring bean 工厂之间的特殊能力，在此中，通过名字标识具体的 bean 非常自然和直观。</p>
 <h2 id="pointcut-表达式之间的组合">Pointcut 表达式之间的组合</h2>
 <p>你可以使用 &amp;&amp;,||,! 组合 pointcut 表达式，你也可以通过名字来引用 pointcut 表达式。下面的例子展示了三种 pointcut 表达式</p>
-<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
     <div class="code-header language-Java">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -277,7 +277,7 @@ AOP 概念 让我们从一些核心的 AOP 概念和术语出发。这些术语�
 <p>在小的有名字的 pointcuts 的基础上构建更加复杂的 pointcut 表达式，是最佳实践。当通过名字引用 pointcut 时，普通的 Java 可见性规则同样适用（你可以看到同类型里的 private pointcut，继承关系中的 protected pointcut，任何地方的 public pointcuts 等等）。可见性并不影响 pointcut 的匹配。</p>
 <h2 id="共享命名的-pointcut-定义">共享命名的 pointcut 定义</h2>
 <p>在使用企业级应用时，开发者经常需要引用应用的模块和在若干 aspects 中的特定的操作集合。出于此目的，我们建议定义一个能够包含常用的有名字的 pointcut 表达式专门的类。这样的一个类通常组合了下面的 CommonPointcuts 示例（怎么命名这个类取决于你）。</p>
-<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
     <div class="code-header language-Java">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -328,7 +328,7 @@ AOP 概念 让我们从一些核心的 AOP 概念和术语出发。这些术语�
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></div></div>
 <p>在任意你需要一个 pointcut 表达式的地方，你可以通过引用一个 class 的全限定名与 @Pointcut 方法名的组合引用定义在这样的类里面的 pointcut。例如，为了使你的服务层是事务的，你可以写下面的引用了 com.xyz.CommonPointcuts.businessService() 中的命名的 pointcut：</p>
-<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
     <div class="code-header language-Java">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>
@@ -456,7 +456,7 @@ AOP 概念 让我们从一些核心的 AOP 概念和术语出发。这些术语�
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/xxl_job/" class="prev" rel="prev" title="XXL Job 调度框架源码解析"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>XXL Job 调度框架源码解析</a>
+    <div class="post-nav"><a href="/posts/spring_framework/core/the_ioc_container/bean_overview/" class="prev" rel="prev" title="[译] Bean 概述"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>[译] Bean 概述</a>
             <a href="/posts/essays/poems/" class="next" rel="next" title="中秋绝句">中秋绝句<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>

@@ -5,29 +5,23 @@
             <loc>http://localhost:1313/docs/papermodx-new-features/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/docs/papermodx-new-features.zh/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/docs/icons_preview/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/blog/</loc><lastmod>2025-04-07T22:33:48&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/tags/example/</loc><lastmod>2025-04-07T22:33:48&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/tags/icons/</loc><lastmod>2025-04-07T22:33:48&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/tags/math/</loc><lastmod>2025-04-07T22:33:48&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/blog/my-new-post/</loc><lastmod>2025-04-07T22:33:48&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/tags/postgresql/</loc><lastmod>2025-04-07T22:33:48&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/</loc><lastmod>2025-04-07T22:35:34&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/tags/spring/</loc><lastmod>2025-04-07T22:33:48&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/tags/syntax/</loc><lastmod>2025-04-07T22:33:48&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/tags/</loc><lastmod>2025-04-07T22:33:48&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/tags/telegram/</loc><lastmod>2025-04-07T22:33:48&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/tags/%E6%AF%9B%E9%80%89/</loc><lastmod>2025-04-07T22:33:48&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/</loc><lastmod>2025-04-07T22:33:48&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/posts/essays/switchtheme/</loc><lastmod>2025-04-08T22:43:34&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/tags/prometheus/</loc><lastmod>2025-04-08T22:43:34&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/</loc><lastmod>2025-04-08T22:43:34&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/tags/source-code/</loc><lastmod>2025-04-08T22:43:34&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/tags/</loc><lastmod>2025-04-08T22:43:34&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/essays/silicon_valley/</loc><lastmod>2025-04-07T22:35:34&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/</loc><lastmod>2023-10-08T22:27:26&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/essays/sanguo/</loc><lastmod>2023-10-08T22:27:26&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/tags/%E6%AF%9B%E9%80%89/</loc><lastmod>2023-10-08T22:27:26&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/essays/mao/</loc><lastmod>2023-10-08T22:27:26&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/bookreading/jobs/</loc><lastmod>2025-04-07T21:28:53&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/essays/tech/</loc><lastmod>2023-10-08T21:37:13&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</loc><lastmod>2023-09-19T22:17:32&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/tags/spring/</loc><lastmod>2023-09-19T22:17:32&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/spring_framework/core/the_ioc_container/dependencies/dependency_injection/</loc><lastmod>2023-09-19T22:17:32&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/essays/poems/</loc><lastmod>2023-09-07T23:23:43&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/spring_framework/core/spring_aop/concept/</loc><lastmod>2023-10-08T22:27:26&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/posts/xxl_job/</loc><lastmod>2023-09-06T23:17:17&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/spring_framework/core/the_ioc_container/bean_overview/</loc><lastmod>2023-09-19T22:17:32&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_and_beans/</loc><lastmod>2023-09-19T22:17:32&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/spring_framework/core/the_ioc_container/container_overview/</loc><lastmod>2023-09-19T22:17:32&#43;08:00</lastmod></url><url>
@@ -37,25 +31,19 @@
             <loc>http://localhost:1313/posts/gold_bottle/1/</loc><lastmod>2023-05-07T23:39:06&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/stone/summary/</loc><lastmod>2023-05-08T21:14:17&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/booklist/</loc><lastmod>2023-10-08T21:41:13&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/posts/java/gc/</loc><lastmod>2025-04-07T21:28:53&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/tags/socket/</loc><lastmod>2022-08-21T13:12:41&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/tags/tcp/ip/</loc><lastmod>2022-08-21T13:12:41&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/posts/socket/</loc><lastmod>2022-08-21T13:12:41&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/posts/malloc/</loc><lastmod>2023-05-07T23:09:40&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/tags/io/</loc><lastmod>2022-08-21T13:12:41&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/posts/io_multiplex/</loc><lastmod>2022-08-21T13:12:41&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/posts/redis/redis_design_ch8/</loc><lastmod>2022-08-21T13:12:41&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/posts/redis/redis_design_ch9/</loc><lastmod>2022-08-21T13:12:41&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/posts/group_chat/</loc><lastmod>2022-08-21T13:12:41&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/tags/telegram/</loc><lastmod>2025-04-07T21:28:53&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/telegram_bot/</loc><lastmod>2025-04-07T21:28:53&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/tags/example/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/tags/postgresql/</loc><lastmod>2022-06-19T15:41:22&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/pg/</loc><lastmod>2022-06-19T15:41:22&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/docs/faq/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/docs/icons/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/tags/icons/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/docs/installation/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/docs/features/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/docs/variables/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/hugo_cmd_pattern/</loc><lastmod>2022-06-19T15:41:22&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/tags/math/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/docs/math-typesetting/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/tags/syntax/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/docs/emoji-support/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/archives/</loc><lastmod>2022-06-18T12:18:21&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/categories/</loc></url><url>

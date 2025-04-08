@@ -1,0 +1,19 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Prometheus - tag - ReadTinyWords</title>
+        <link>http://localhost:1313/tags/prometheus/</link>
+        <description>Prometheus - tag - ReadTinyWords</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Apr 2025 22:43:34 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/prometheus/" rel="self" type="application/rss+xml" /><item>
+    <title>A new Hugo theme switched on my blog</title>
+    <link>http://localhost:1313/posts/essays/switchtheme/</link>
+    <pubDate>Tue, 08 Apr 2025 22:43:34 &#43;0800</pubDate>
+    <author>anriclee</author>
+    <guid>http://localhost:1313/posts/essays/switchtheme/</guid>
+    <description><![CDATA[<p>This is probably my last time <em>switching to a theme made by others</em>. That&rsquo;s my commitment.</p>
+<p>Moving forward, I plan to create my own theme using my frontend knowledge and build it entirely from scratch.</p>
+<p>I have to admit that choosing a blog theme can be quite anxiety-inducing.</p>
+<p>From now on, I will focus on my first source code reading series about <em>Prometheus</em>.</p>
+<p>I plan to share my understanding through a series of articles.</p>]]></description>
+</item>
+</channel>
+</rss>

@@ -3,15 +3,7 @@
         <title>Telegram - tag - ReadTinyWords</title>
         <link>http://localhost:1313/tags/telegram/</link>
         <description>Telegram - tag - ReadTinyWords</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Apr 2025 21:43:07 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/telegram/" rel="self" type="application/rss+xml" /><item>
-    <title>My New Post</title>
-    <link>http://localhost:1313/blog/my-new-post/</link>
-    <pubDate>Tue, 08 Apr 2025 21:43:07 &#43;0800</pubDate>
-    <author>anriclee</author>
-    <guid>http://localhost:1313/blog/my-new-post/</guid>
-    <description><![CDATA[<p>This is a page about »My New Post«.</p>]]></description>
-</item>
-<item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 11 Jun 2022 11:43:42 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/telegram/" rel="self" type="application/rss+xml" /><item>
     <title>Telegram bot 入门实践</title>
     <link>http://localhost:1313/posts/telegram_bot/</link>
     <pubDate>Sat, 11 Jun 2022 11:43:42 &#43;0800</pubDate>

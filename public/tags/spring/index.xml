@@ -3,15 +3,7 @@
         <title>Spring - tag - ReadTinyWords</title>
         <link>http://localhost:1313/tags/spring/</link>
         <description>Spring - tag - ReadTinyWords</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Apr 2025 21:43:07 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/spring/" rel="self" type="application/rss+xml" /><item>
-    <title>My New Post</title>
-    <link>http://localhost:1313/blog/my-new-post/</link>
-    <pubDate>Tue, 08 Apr 2025 21:43:07 &#43;0800</pubDate>
-    <author>anriclee</author>
-    <guid>http://localhost:1313/blog/my-new-post/</guid>
-    <description><![CDATA[<p>This is a page about »My New Post«.</p>]]></description>
-</item>
-<item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 11 Sep 2023 21:12:31 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/spring/" rel="self" type="application/rss+xml" /><item>
     <title>[译] 细谈依赖和配置</title>
     <link>http://localhost:1313/posts/spring_framework/core/the_ioc_container/dependencies/dependencies_configuration_in_detail/</link>
     <pubDate>Mon, 11 Sep 2023 21:12:31 &#43;0800</pubDate>
@@ -69,7 +61,7 @@
 <p>使用 DI 原则的代码更加干净整洁，并且提供给对象的依赖时，解耦也更加高效。对象并不找他们的依赖也并不知道这些依赖的地址或者类。这样的结果就是，你的类变得更易测试，尤其是当依赖是接口或者抽象的父类时，在单元测试可以对这些依赖进行打桩或者mock他们的实现。</p>
 <h1 id="基于构造函数的依赖注入">基于构造函数的依赖注入</h1>
 <p>基于构造函数的依赖注入，是通过容器调用构造函数，并且传入若干参数来实现的，每一个参数都代表了一个依赖。调用静态工厂方法并传入特定的参数来构造一个 bean 也是一样的，在本讨论中，对待构造函数的参数和静态方法的参数也是相似的。下面的这里展示了一个之能通过构造函数来进行依赖注入的类：</p>
-<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
     <div class="code-header language-Java">
         <span class="code-title"><i class="arrow fas fa-angle-right fa-fw" aria-hidden="true"></i></span>
         <span class="ellipses"><i class="fas fa-ellipsis-h fa-fw" aria-hidden="true"></i></span>

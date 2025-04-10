@@ -1,4 +1,9 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>ReadTinyWords</title><link>https://anriclee.github.io/</link><description>Hugo theme - LoveIt</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Apr 2025 22:43:34 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>A new Hugo theme switched on my blog</title><link>https://anriclee.github.io/posts/essays/switchtheme/</link><pubDate>Tue, 08 Apr 2025 22:43:34 +0800</pubDate><author>anriclee</author><guid>https://anriclee.github.io/posts/essays/switchtheme/</guid><description><![CDATA[<p>This is probably my last time <em>switching to a theme made by others</em>. That&rsquo;s my commitment.</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>ReadTinyWords</title><link>https://anriclee.github.io/</link><description>Hugo theme - LoveIt</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 10 Apr 2025 20:57:06 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Maybe English is more likely to make me think more</title><link>https://anriclee.github.io/posts/essays/english_expression/</link><pubDate>Thu, 10 Apr 2025 20:57:06 +0800</pubDate><author>anriclee</author><guid>https://anriclee.github.io/posts/essays/english_expression/</guid><description><![CDATA[<p>Initially, due to issues with my Visual Studio Code IDE, I couldn&rsquo;t type Chinese. I was forced to write my thoughts in English, which led to the birth of these English blog posts.</p>
+<p>As time went on, I discovered that using a language I&rsquo;m less familiar with compelled me to express ideas more simply and organize my thoughts more carefully. Additionally, I noticed that the most readable technical books I&rsquo;ve read were predominantly in English. Furthermore, LLMs seem to handle English queries more efficiently and effectively.</p>]]></description></item><item><title>Some thoughts about tools ideas</title><link>https://anriclee.github.io/posts/essays/some_thoughts/</link><pubDate>Wed, 09 Apr 2025 22:05:24 +0800</pubDate><author>anriclee</author><guid>https://anriclee.github.io/posts/essays/some_thoughts/</guid><description><![CDATA[<p>Not even a good shell tools found under windows for now. This leads me to think that if I can develop it in Rust or Golang.</p>
+<p>My demands are simple, a beautiful GUI , a tool for transfer files, uploading or downloading.</p>
+<p>Maybe I will try electron, but the size is so big, I am hesitating about it.</p>
+<p>And probably fyne.io or Wails are also alternatives I would choose.</p>
+<p>As I want to grasp Rust programming language, sometimes I want to develop one by Rust language either.</p>]]></description></item><item><title>A new Hugo theme switched on my blog</title><link>https://anriclee.github.io/posts/essays/switchtheme/</link><pubDate>Tue, 08 Apr 2025 22:43:34 +0800</pubDate><author>anriclee</author><guid>https://anriclee.github.io/posts/essays/switchtheme/</guid><description><![CDATA[<p>This is probably my last time <em>switching to a theme made by others</em>. That&rsquo;s my commitment.</p>
 <p>Moving forward, I plan to create my own theme using my frontend knowledge and build it entirely from scratch.</p>
 <p>I have to admit that choosing a blog theme can be quite anxiety-inducing.</p>
 <p>From now on, I will focus on my first source code reading series about <em>Prometheus</em>.</p>
@@ -125,21 +130,4 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c1">// business logic that actually uses the injected MovieFinder is omitted...</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></div></div>
-<p>注意，对于这个类没有更多特殊的地方。它仅仅是一个POJO，并且对容器特定接口、父类或者注解没有任何依赖。【译者按：没有任何代码侵入性】</p>]]></description></item><item><title>中秋绝句</title><link>https://anriclee.github.io/posts/essays/poems/</link><pubDate>Wed, 06 Sep 2023 23:14:19 +0800</pubDate><author>anriclee</author><guid>https://anriclee.github.io/posts/essays/poems/</guid><description><![CDATA[<p>中秋绝句</p>
-<blockquote>
-<p>癸卯秋夜，虽炎热潮湿，开窗无月，然心情大好，咏志抒怀，无碍也，是为序。</p></blockquote>
-<p>自来霜雪映吴钩，半生浮云半生幽</p>
-<p>未有三旬寂寞守，何能一夜照清秋</p>]]></description></item><item><title>[译] Spring AOP 概念</title><link>https://anriclee.github.io/posts/spring_framework/core/spring_aop/concept/</link><pubDate>Tue, 05 Sep 2023 23:01:18 +0800</pubDate><author>anriclee</author><guid>https://anriclee.github.io/posts/spring_framework/core/spring_aop/concept/</guid><description><![CDATA[<p>AOP 通过提供另外一种关于程序结构的思考方式补充了面向对象编程（OOP ）。在 OOP 中模块的关键单元是 class，而在 AOP 中，模块的关键是 Aspect（切面）。切面支持跨多个对象和类型的关注点模块化（比如事务的管理）。在 AOP 中这种关注点通常被叫做 “跨领域” 关注点。</p>
-<p>Spring 的一个核心组件就是 AOP 框架。虽然 Spring IoC 容器并不依赖于 AOP（意思是如果不想用 AOP 可以不用），但是 AOP 对 Spring IoC 做了一个补充，提供了一种功能非常强大的中间件解决方案。</p>
-<blockquote>
-<p>Spring AOP 和 切面切点</p>
-<p>Spring 提供了简单而高效的方式来自定义切面，可以通过基于 schema 的方法也可以通过 @AspectJ 注解的风格。当使用 Spring AOP 来织入时，这两种风格都提供了充分类型的 advice 和 AspectJ 的切点语言。</p>
-<p>这张主要讨论 schema 和 @Aspect 的 AOP 支持。AOP 底层的支持在下面的一章节会讨论到。</p></blockquote>
-<p>AOP 在 Spring 框架中的用途：</p>
-<ul>
-<li>提供声明式的企业级服务。最重要的就是声明式事务管理</li>
-<li>让用户实现自定义的切面作为他们用 AOP 实现 OOP 的补充。</li>
-</ul>
-<p>Note：如果你对通用的声明式服务或者其他预先打包的声明式中间件服务感兴趣，你不用直接和 Spring AOP 直接打交道，可以跳过本章的大部分地方。</p>
-<h1 id="aop-概念">AOP 概念</h1>
-<p>让我们从一些核心的 AOP 概念和术语出发。这些术语并不只是 Spring 特有的。不幸地是，AOP 术语并不符合直觉。然而，如果 Spring 使用它自己的术语，或许会更加令人迷惑。</p>]]></description></item></channel></rss>
+<p>注意，对于这个类没有更多特殊的地方。它仅仅是一个POJO，并且对容器特定接口、父类或者注解没有任何依赖。【译者按：没有任何代码侵入性】</p>]]></description></item></channel></rss>

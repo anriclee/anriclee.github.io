@@ -1,5 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Prometheus on ReadTinyWords</title><link>https://anriclee.github.io/tags/prometheus/</link><description>Recent content in Prometheus on ReadTinyWords</description><generator>Hugo</generator><language>en</language><lastBuildDate>Tue, 08 Apr 2025 22:52:07 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/tags/prometheus/index.xml" rel="self" type="application/rss+xml"/><item><title>A new Hugo theme switched on my blog</title><link>https://anriclee.github.io/posts/essays/switchtheme/</link><pubDate>Tue, 08 Apr 2025 22:43:34 +0800</pubDate><guid>https://anriclee.github.io/posts/essays/switchtheme/</guid><description>&lt;p>This is probably my last time &lt;em>switching to a theme made by others&lt;/em>. That&amp;rsquo;s my commitment.&lt;/p>
-&lt;p>Moving forward, I plan to create my own theme using my frontend knowledge and build it entirely from scratch.&lt;/p>
-&lt;p>I have to admit that choosing a blog theme can be quite anxiety-inducing.&lt;/p>
-&lt;p>From now on, I will focus on my first source code reading series about &lt;em>Prometheus&lt;/em>.&lt;/p>
-&lt;p>I plan to share my understanding through a series of articles.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Prometheus on ReadTinyWords</title>
+    <link>https://anriclee.github.io/tags/prometheus/</link>
+    <description>Recent content in Prometheus on ReadTinyWords</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 08 Apr 2025 22:52:07 +0800</lastBuildDate>
+    <atom:link href="https://anriclee.github.io/tags/prometheus/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A new Hugo theme switched on my blog</title>
+      <link>https://anriclee.github.io/posts/essays/switchtheme/</link>
+      <pubDate>Tue, 08 Apr 2025 22:43:34 +0800</pubDate>
+      <guid>https://anriclee.github.io/posts/essays/switchtheme/</guid>
+      <description>&lt;p&gt;This is probably my last time &lt;em&gt;switching to a theme made by others&lt;/em&gt;. That&amp;rsquo;s my commitment.&lt;/p&gt;&#xA;&lt;p&gt;Moving forward, I plan to create my own theme using my frontend knowledge and build it entirely from scratch.&lt;/p&gt;&#xA;&lt;p&gt;I have to admit that choosing a blog theme can be quite anxiety-inducing.&lt;/p&gt;&#xA;&lt;p&gt;From now on, I will focus on my first source code reading series about &lt;em&gt;Prometheus&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I plan to share my understanding through a series of articles.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

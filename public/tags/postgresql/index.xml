@@ -1,30 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PostgreSQL on ReadTinyWords</title><link>https://anriclee.github.io/tags/postgresql/</link><description>Recent content in PostgreSQL on ReadTinyWords</description><generator>Hugo</generator><language>en</language><lastBuildDate>Sun, 19 Jun 2022 15:41:22 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/tags/postgresql/index.xml" rel="self" type="application/rss+xml"/><item><title>基于 PostgreSQL 的群聊搜索实践</title><link>https://anriclee.github.io/posts/pg/</link><pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate><guid>https://anriclee.github.io/posts/pg/</guid><description>&lt;h2 id="背景">背景&lt;/h2>
-&lt;p>2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。&lt;/p>
-&lt;p>对于复杂场景的搜索，业界一般使用非常流行的 ElasticSearch。由于我们的群数据较少，截止到目前还没有达到千万级的量级，且搜索场景比较简单，而 PostgreSQL 对全文搜索又支持得比较好，所以选择了 PostgreSQL 来实现群搜索需求。
-在使用 PostgreSQL 做群搜索的过程中，也经历了由简单到复杂的迭代过程，中间也踩了不少坑。 下面的几个例子说明了方案的演进过程和我们的优化思路，希望能够对大家有所帮助。&lt;/p>
-&lt;h2 id="like-模糊查询">LIKE 模糊查询&lt;/h2>
-&lt;p>提到模糊搜索，最简单的办法就是对搜索列进行 like 匹配： 在输入词的前后加上 &lt;code>%&lt;/code> 即可,如下所示:&lt;/p>
-&lt;pre tabindex="0">&lt;code>SELECT * FROM groups WHERE name LIKE &amp;#39;%探探%&amp;#39;;
-&lt;/code>&lt;/pre>&lt;p>这种方案可行是可行了，但是实现过于简单粗暴。对此方案进行测试：&lt;/p>
-&lt;p>建一张简单的表进行测试，表结构如下：&lt;/p>
-&lt;pre tabindex="0">&lt;code>lixuehan=# \d groups;
- Table &amp;#34;public.groups&amp;#34;
- Column | Type | Collation | Nullable | Default
---------+-----------------------+-----------+----------+------------------------------------
- id | bigint | | not null | nextval(&amp;#39;groups_id_seq&amp;#39;::regclass)
- name | character varying(50) | | |
-Indexes:
- &amp;#34;groups_pkey&amp;#34; PRIMARY KEY, btree (id)
-&lt;/code>&lt;/pre>&lt;p>表中只有两列：主键 &lt;code>id&lt;/code> 以及群名 &lt;code>name&lt;/code>。&lt;/p>
-&lt;pre tabindex="0">&lt;code>create or replace function gen_hanzi(int) returns text as $$
-declare
- res text;
-begin
- if $1 &amp;gt;=1 then
- select string_agg(chr(19968+(random()*20901)::int), &amp;#39;&amp;#39;) into res from generate_series(1,$1);
- return res;
- end if;
- return null;
-end;
-$$ language plpgsql strict;
-&lt;/code>&lt;/pre>&lt;p>&lt;code>gen_hanzi&lt;/code> 是一个随机生成汉字的函数，我们使用一个该函数构造 100w 条数据，插入到该表中。&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PostgreSQL on ReadTinyWords</title>
+    <link>https://anriclee.github.io/tags/postgresql/</link>
+    <description>Recent content in PostgreSQL on ReadTinyWords</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 19 Jun 2022 15:41:22 +0800</lastBuildDate>
+    <atom:link href="https://anriclee.github.io/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于 PostgreSQL 的群聊搜索实践</title>
+      <link>https://anriclee.github.io/posts/pg/</link>
+      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://anriclee.github.io/posts/pg/</guid>
+      <description>&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;&#xA;&lt;p&gt;2021年年初，探探上线了群聊功能，并且支持按照群名进行模糊搜索。&lt;/p&gt;&#xA;&lt;p&gt;对于复杂场景的搜索，业界一般使用非常流行的 ElasticSearch。由于我们的群数据较少，截止到目前还没有达到千万级的量级，且搜索场景比较简单，而 PostgreSQL 对全文搜索又支持得比较好，所以选择了 PostgreSQL 来实现群搜索需求。&#xA;在使用 PostgreSQL 做群搜索的过程中，也经历了由简单到复杂的迭代过程，中间也踩了不少坑。 下面的几个例子说明了方案的演进过程和我们的优化思路，希望能够对大家有所帮助。&lt;/p&gt;&#xA;&lt;h2 id=&#34;like-模糊查询&#34;&gt;LIKE 模糊查询&lt;/h2&gt;&#xA;&lt;p&gt;提到模糊搜索，最简单的办法就是对搜索列进行 like 匹配： 在输入词的前后加上 &lt;code&gt;%&lt;/code&gt; 即可,如下所示:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;SELECT * FROM groups WHERE name LIKE &amp;#39;%探探%&amp;#39;;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这种方案可行是可行了，但是实现过于简单粗暴。对此方案进行测试：&lt;/p&gt;&#xA;&lt;p&gt;建一张简单的表进行测试，表结构如下：&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;lixuehan=# \d groups;&#xD;&#xA;                                   Table &amp;#34;public.groups&amp;#34;&#xD;&#xA; Column |         Type          | Collation | Nullable |              Default&#xD;&#xA;--------+-----------------------+-----------+----------+------------------------------------&#xD;&#xA; id     | bigint                |           | not null | nextval(&amp;#39;groups_id_seq&amp;#39;::regclass)&#xD;&#xA; name   | character varying(50) |           |          |&#xD;&#xA;Indexes:&#xD;&#xA;    &amp;#34;groups_pkey&amp;#34; PRIMARY KEY, btree (id)&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;表中只有两列：主键 &lt;code&gt;id&lt;/code&gt; 以及群名 &lt;code&gt;name&lt;/code&gt;。&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;create or replace function gen_hanzi(int) returns text as $$&#xD;&#xA;declare&#xD;&#xA;    res text;&#xD;&#xA;begin&#xD;&#xA;    if $1 &amp;gt;=1 then&#xD;&#xA;        select string_agg(chr(19968+(random()*20901)::int), &amp;#39;&amp;#39;) into res from generate_series(1,$1);&#xD;&#xA;        return res;&#xD;&#xA;    end if;&#xD;&#xA;    return null;&#xD;&#xA;end;&#xD;&#xA;$$ language plpgsql strict;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;gen_hanzi&lt;/code&gt; 是一个随机生成汉字的函数，我们使用一个该函数构造 100w 条数据，插入到该表中。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

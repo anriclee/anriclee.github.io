@@ -1,1 +1,89 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tags on ReadTinyWords</title><link>https://anriclee.github.io/tags/</link><description>Recent content in Tags on ReadTinyWords</description><generator>Hugo</generator><language>en</language><lastBuildDate>Tue, 08 Apr 2025 22:52:07 +0800</lastBuildDate><atom:link href="https://anriclee.github.io/tags/index.xml" rel="self" type="application/rss+xml"/><item><title>Prometheus</title><link>https://anriclee.github.io/tags/prometheus/</link><pubDate>Tue, 08 Apr 2025 22:43:34 +0800</pubDate><guid>https://anriclee.github.io/tags/prometheus/</guid><description/></item><item><title>Source Code</title><link>https://anriclee.github.io/tags/source-code/</link><pubDate>Tue, 08 Apr 2025 22:43:34 +0800</pubDate><guid>https://anriclee.github.io/tags/source-code/</guid><description/></item><item><title>煮酒闲聊</title><link>https://anriclee.github.io/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/</link><pubDate>Sun, 08 Oct 2023 21:17:00 +0800</pubDate><guid>https://anriclee.github.io/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/</guid><description/></item><item><title>毛选</title><link>https://anriclee.github.io/tags/%E6%AF%9B%E9%80%89/</link><pubDate>Tue, 26 Sep 2023 22:38:32 +0800</pubDate><guid>https://anriclee.github.io/tags/%E6%AF%9B%E9%80%89/</guid><description/></item><item><title>Spring</title><link>https://anriclee.github.io/tags/spring/</link><pubDate>Mon, 11 Sep 2023 21:12:31 +0800</pubDate><guid>https://anriclee.github.io/tags/spring/</guid><description/></item><item><title>Telegram</title><link>https://anriclee.github.io/tags/telegram/</link><pubDate>Sat, 11 Jun 2022 11:43:42 +0800</pubDate><guid>https://anriclee.github.io/tags/telegram/</guid><description/></item><item><title>Example</title><link>https://anriclee.github.io/tags/example/</link><pubDate>Wed, 13 Apr 2022 00:00:00 +0000</pubDate><guid>https://anriclee.github.io/tags/example/</guid><description/></item><item><title>PostgreSQL</title><link>https://anriclee.github.io/tags/postgresql/</link><pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate><guid>https://anriclee.github.io/tags/postgresql/</guid><description/></item><item><title>Icons</title><link>https://anriclee.github.io/tags/icons/</link><pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate><guid>https://anriclee.github.io/tags/icons/</guid><description/></item><item><title>Math</title><link>https://anriclee.github.io/tags/math/</link><pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate><guid>https://anriclee.github.io/tags/math/</guid><description/></item><item><title>Syntax</title><link>https://anriclee.github.io/tags/syntax/</link><pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate><guid>https://anriclee.github.io/tags/syntax/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on ReadTinyWords</title>
+    <link>https://anriclee.github.io/tags/</link>
+    <description>Recent content in Tags on ReadTinyWords</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 08 Apr 2025 22:52:07 +0800</lastBuildDate>
+    <atom:link href="https://anriclee.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prometheus</title>
+      <link>https://anriclee.github.io/tags/prometheus/</link>
+      <pubDate>Tue, 08 Apr 2025 22:43:34 +0800</pubDate>
+      <guid>https://anriclee.github.io/tags/prometheus/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Source Code</title>
+      <link>https://anriclee.github.io/tags/source-code/</link>
+      <pubDate>Tue, 08 Apr 2025 22:43:34 +0800</pubDate>
+      <guid>https://anriclee.github.io/tags/source-code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>煮酒闲聊</title>
+      <link>https://anriclee.github.io/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/</link>
+      <pubDate>Sun, 08 Oct 2023 21:17:00 +0800</pubDate>
+      <guid>https://anriclee.github.io/tags/%E7%85%AE%E9%85%92%E9%97%B2%E8%81%8A/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>毛选</title>
+      <link>https://anriclee.github.io/tags/%E6%AF%9B%E9%80%89/</link>
+      <pubDate>Tue, 26 Sep 2023 22:38:32 +0800</pubDate>
+      <guid>https://anriclee.github.io/tags/%E6%AF%9B%E9%80%89/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Spring</title>
+      <link>https://anriclee.github.io/tags/spring/</link>
+      <pubDate>Mon, 11 Sep 2023 21:12:31 +0800</pubDate>
+      <guid>https://anriclee.github.io/tags/spring/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Telegram</title>
+      <link>https://anriclee.github.io/tags/telegram/</link>
+      <pubDate>Sat, 11 Jun 2022 11:43:42 +0800</pubDate>
+      <guid>https://anriclee.github.io/tags/telegram/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Example</title>
+      <link>https://anriclee.github.io/tags/example/</link>
+      <pubDate>Wed, 13 Apr 2022 00:00:00 +0000</pubDate>
+      <guid>https://anriclee.github.io/tags/example/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PostgreSQL</title>
+      <link>https://anriclee.github.io/tags/postgresql/</link>
+      <pubDate>Thu, 13 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://anriclee.github.io/tags/postgresql/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Icons</title>
+      <link>https://anriclee.github.io/tags/icons/</link>
+      <pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://anriclee.github.io/tags/icons/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Math</title>
+      <link>https://anriclee.github.io/tags/math/</link>
+      <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>https://anriclee.github.io/tags/math/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Syntax</title>
+      <link>https://anriclee.github.io/tags/syntax/</link>
+      <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>https://anriclee.github.io/tags/syntax/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

@@ -1,1 +1,1 @@
-Here are my [blogs](https://anriclee.github.io)!
+Here are my [blogs](https://anriclee.github.io)

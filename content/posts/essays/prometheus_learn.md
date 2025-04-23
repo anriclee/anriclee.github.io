@@ -1,5 +1,5 @@
 ---
-title: "Prometheus_learn"
+title: "Learning Prometheus maybe an effective way"
 date: 2025-04-23T22:43:36+08:00
 draft: false
 ---
